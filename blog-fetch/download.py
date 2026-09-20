@@ -7,6 +7,12 @@ from urllib.parse import urlparse
 import requests
 import trafilatura
 
+try:
+    from curl_cffi import requests as cffi_requests
+    _HAS_CFFI = True
+except ImportError:
+    _HAS_CFFI = False
+
 SCRIPT_DIR = Path(__file__).resolve().parent
 SEED_FILE = SCRIPT_DIR / "seed_links.txt"
 RAW_DIR = SCRIPT_DIR / "store" / "raw"
@@ -22,6 +28,16 @@ def generate_slug(url: str) -> str:
     clean_domain = re.sub(r'[^\w\.-]', '_', domain)
     sha1_hash = hashlib.sha1(url.encode('utf-8')).hexdigest()[:10]
     return f"{clean_domain}+{sha1_hash}"
+
+def fetch_url(url: str):
+    # Chrome-impersonating TLS first (defeats Cloudflare/WordPress 403 on datacenter IPs), then plain requests.
+    if _HAS_CFFI:
+        for _ in range(2):
+            try:
+                return cffi_requests.get(url, impersonate="chrome", timeout=25, allow_redirects=True)
+            except Exception:
+                continue
+    return requests.get(url, headers=HEADERS, timeout=25, allow_redirects=True)
 
 def write_index_record(record: dict):
     with open(INDEX_FILE, "a", encoding="utf-8") as f:
@@ -77,7 +93,7 @@ def main():
             continue
 
         try:
-            response = requests.get(url, headers=HEADERS, timeout=25, allow_redirects=True)
+            response = fetch_url(url)
             status_code = response.status_code
             html_content = response.text
 
