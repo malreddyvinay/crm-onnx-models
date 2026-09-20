@@ -1,0 +1,1450 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Mind Over Messaging | Musings on BizTalk, Azure, and Enterprise Integration</title>
+	<link rel="pingback" href="https://mindovermessaging.com/xmlrpc.php" />
+	<meta name='robots' content='max-image-preview:large' />
+<meta name="google-site-verification" content="HLKBaO8SUPrVnM2lzPmc6SL8bKD0Ty-v3s22TYAJAJo" />
+<meta name="msvalidate.01" content="1968584960B38E61B265D6C5F7169E33" />
+
+<!-- Async WordPress.com Remote Login -->
+<script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.parentNode.removeChild( dom_node ); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[ i ].parentNode.removeChild( dom_nodes[ i ] );
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+					+ '//' + window.location.hostname
+					+ '&postid=1207'
+					+ '&is_singular=';
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9taW5kb3Zlcm1lc3NhZ2luZy5jb20%3D"
+		+ "&wpcomid=46851543"
+		+ "&time=" + Math.floor( Date.now() / 1000 );
+	document.body.appendChild( iframe );
+}, false );
+</script>
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel="alternate" type="application/rss+xml" title="Mind Over Messaging &raquo; Feed" href="https://mindovermessaging.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Mind Over Messaging &raquo; Comments Feed" href="https://mindovermessaging.com/comments/feed/" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+	<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-2-1' href='/wp-content/mu-plugins/jetpack-plugin/sun/modules/infinite-scroll/infinity.css?m=1777406400i&cssminify=yes' type='text/css' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v24.0.0/build/styles/block-library/common.min.css */
+</style>
+<style id="wp-block-image-inline-css">
+.wp-block-image>a,.wp-block-image>figure>a{display:inline-block}.wp-block-image img{box-sizing:border-box;height:auto;max-width:100%;vertical-align:bottom}@media not (prefers-reduced-motion){.wp-block-image img.hide{visibility:hidden}.wp-block-image img.show{animation:show-content-image .4s}}.wp-block-image[style*=border-radius] img,.wp-block-image[style*=border-radius]>a{border-radius:inherit}.wp-block-image.has-custom-border img{box-sizing:border-box}.wp-block-image.aligncenter{text-align:center}.wp-block-image.alignfull>a,.wp-block-image.alignwide>a{width:100%}.wp-block-image.alignfull img,.wp-block-image.alignwide img{height:auto;width:100%}.wp-block-image .aligncenter,.wp-block-image .alignleft,.wp-block-image .alignright,.wp-block-image.aligncenter,.wp-block-image.alignleft,.wp-block-image.alignright{display:table}.wp-block-image .aligncenter>figcaption,.wp-block-image .alignleft>figcaption,.wp-block-image .alignright>figcaption,.wp-block-image.aligncenter>figcaption,.wp-block-image.alignleft>figcaption,.wp-block-image.alignright>figcaption{caption-side:bottom;display:table-caption}.wp-block-image .alignleft{float:left;margin:.5em 1em .5em 0}.wp-block-image .alignright{float:right;margin:.5em 0 .5em 1em}.wp-block-image .aligncenter{margin-left:auto;margin-right:auto}.wp-block-image :where(figcaption){margin-bottom:1em;margin-top:.5em}.wp-block-image.is-style-circle-mask img{border-radius:9999px}@supports ((-webkit-mask-image:none) or (mask-image:none)) or (-webkit-mask-image:none){.wp-block-image.is-style-circle-mask img{border-radius:0;-webkit-mask-image:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50"/></svg>');mask-image:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50"/></svg>');mask-mode:alpha;-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:contain;mask-size:contain}}:root :where(.wp-block-image.is-style-rounded img,.wp-block-image .is-style-rounded img){border-radius:9999px}.wp-block-image figure{margin:0}.wp-lightbox-container{display:flex;flex-direction:column;position:relative}.wp-lightbox-container img{cursor:zoom-in}.wp-lightbox-container img:hover+button{opacity:1}.wp-lightbox-container button{align-items:center;backdrop-filter:blur(16px) saturate(180%);background-color:rgba(90,90,90,.25);border:none;border-radius:4px;cursor:zoom-in;display:flex;height:20px;justify-content:center;opacity:0;padding:0;position:absolute;right:16px;text-align:center;top:16px;width:20px;z-index:100}@media not (prefers-reduced-motion){.wp-lightbox-container button{transition:opacity .2s ease}}.wp-lightbox-container button:focus-visible{outline:3px auto rgba(90,90,90,.25);outline:3px auto -webkit-focus-ring-color;outline-offset:3px}.wp-lightbox-container button:hover{cursor:pointer;opacity:1}.wp-lightbox-container button:focus{opacity:1}.wp-lightbox-container button:focus,.wp-lightbox-container button:hover,.wp-lightbox-container button:not(:hover):not(:active):not(.has-background){background-color:rgba(90,90,90,.25);border:none}.wp-lightbox-overlay{box-sizing:border-box;cursor:zoom-out;height:100vh;left:0;overflow:hidden;position:fixed;top:0;visibility:hidden;width:100%;z-index:100000}.wp-lightbox-overlay .wp-lightbox-close-button{align-items:center;cursor:pointer;display:flex;font-family:inherit;gap:8px;justify-content:center;line-height:1;min-height:40px;min-width:40px;padding:0 4px;position:absolute;right:calc(env(safe-area-inset-right) + 16px);top:calc(env(safe-area-inset-top) + 16px);z-index:5000000}.wp-lightbox-overlay .wp-lightbox-close-button:focus,.wp-lightbox-overlay .wp-lightbox-close-button:hover,.wp-lightbox-overlay .wp-lightbox-close-button:not(:hover):not(:active):not(.has-background){background:none;border:none}.wp-lightbox-overlay .wp-lightbox-close-button:has(.wp-lightbox-close-text:not([hidden])) .wp-lightbox-close-icon svg{height:1em;width:1em}.wp-lightbox-overlay .wp-lightbox-close-icon svg{display:block}.wp-lightbox-overlay .wp-lightbox-navigation-button-next,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev{align-items:center;bottom:16px;cursor:pointer;display:flex;font-family:inherit;gap:4px;justify-content:center;line-height:1;min-height:40px;min-width:40px;padding:0 8px;position:absolute;z-index:2000002}.wp-lightbox-overlay .wp-lightbox-navigation-button-next[hidden],.wp-lightbox-overlay .wp-lightbox-navigation-button-prev[hidden]{display:none}@media (min-width:960px){.wp-lightbox-overlay .wp-lightbox-navigation-button-next,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev{bottom:50%;transform:translateY(-50%)}}.wp-lightbox-overlay .wp-lightbox-navigation-button-next:focus,.wp-lightbox-overlay .wp-lightbox-navigation-button-next:hover,.wp-lightbox-overlay .wp-lightbox-navigation-button-next:not(:hover):not(:active):not(.has-background),.wp-lightbox-overlay .wp-lightbox-navigation-button-prev:focus,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev:hover,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev:not(:hover):not(:active):not(.has-background){background:none;border:none;padding:0 8px}.wp-lightbox-overlay .wp-lightbox-navigation-button-next:has(.wp-lightbox-navigation-text:not([hidden])) .wp-lightbox-navigation-icon svg,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev:has(.wp-lightbox-navigation-text:not([hidden])) .wp-lightbox-navigation-icon svg{display:block;height:1.5em;width:1.5em}.wp-lightbox-overlay .wp-lightbox-navigation-button-prev{left:calc(env(safe-area-inset-left) + 16px)}.wp-lightbox-overlay .wp-lightbox-navigation-button-next{right:calc(env(safe-area-inset-right) + 16px)}.wp-lightbox-overlay .wp-lightbox-navigation-icon svg{vertical-align:middle}.wp-lightbox-overlay .lightbox-image-container{height:var(--wp--lightbox-container-height);left:50%;overflow:hidden;position:absolute;top:50%;transform:translate(-50%,-50%);transform-origin:top left;width:var(--wp--lightbox-container-width);z-index:2000001}.wp-lightbox-overlay .wp-block-image{align-items:center;box-sizing:border-box;display:flex;height:100%;justify-content:center;margin:0;position:relative;transform-origin:0 0;width:100%;z-index:3000000}.wp-lightbox-overlay .wp-block-image img{height:var(--wp--lightbox-image-height);min-height:var(--wp--lightbox-image-height);min-width:var(--wp--lightbox-image-width);width:var(--wp--lightbox-image-width)}.wp-lightbox-overlay .wp-block-image figcaption{display:none}.wp-lightbox-overlay button{background:none;border:none}.wp-lightbox-overlay .scrim{background-color:#fff;height:100%;opacity:.9;position:absolute;width:100%;z-index:2000000}.wp-lightbox-overlay.active{visibility:visible}@media not (prefers-reduced-motion){.wp-lightbox-overlay.active{animation:turn-on-visibility .25s both}.wp-lightbox-overlay.active img{animation:turn-on-visibility .35s both}.wp-lightbox-overlay.show-closing-animation:not(.active){animation:turn-off-visibility .35s both}.wp-lightbox-overlay.show-closing-animation:not(.active) img{animation:turn-off-visibility .25s both}.wp-lightbox-overlay.zoom.active{animation:none;opacity:1;visibility:visible}.wp-lightbox-overlay.zoom.active .lightbox-image-container{animation:lightbox-zoom-in .4s}.wp-lightbox-overlay.zoom.active .lightbox-image-container img{animation:none}.wp-lightbox-overlay.zoom.active .scrim{animation:turn-on-visibility .4s forwards}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active){animation:none}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active) .lightbox-image-container{animation:lightbox-zoom-out .4s}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active) .lightbox-image-container img{animation:none}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active) .scrim{animation:turn-off-visibility .4s forwards}}@keyframes show-content-image{0%{visibility:hidden}99%{visibility:hidden}to{visibility:visible}}@keyframes turn-on-visibility{0%{opacity:0}to{opacity:1}}@keyframes turn-off-visibility{0%{opacity:1;visibility:visible}99%{opacity:0;visibility:visible}to{opacity:0;visibility:hidden}}@keyframes lightbox-zoom-in{0%{transform:translate(calc((-100vw + var(--wp--lightbox-scrollbar-width))/2 + var(--wp--lightbox-initial-left-position)),calc(-50vh + var(--wp--lightbox-initial-top-position))) scale(var(--wp--lightbox-scale))}to{transform:translate(-50%,-50%) scale(1)}}@keyframes lightbox-zoom-out{0%{transform:translate(-50%,-50%) scale(1);visibility:visible}99%{visibility:visible}to{transform:translate(calc((-100vw + var(--wp--lightbox-scrollbar-width))/2 + var(--wp--lightbox-initial-left-position)),calc(-50vh + var(--wp--lightbox-initial-top-position))) scale(var(--wp--lightbox-scale));visibility:hidden}}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v24.0.0/build/styles/block-library/image/style.min.css */
+</style>
+<style id="wp-block-paragraph-inline-css">
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:var(--wp--style--block-background-padding,1.25em 2.375em)}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v24.0.0/build/styles/block-library/paragraph/style.min.css */
+</style>
+<style id="wp-block-library-inline-css-extra">
+.has-text-align-justify {
+	text-align:justify;
+}
+.has-text-align-justify{text-align:justify;}
+/*# sourceURL=wp-block-library-inline-css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+.wp-block-button__link{background-color:#32373c;border-radius:9999px;box-shadow:none;color:#fff;font-size:1.125em;padding:calc(.667em + 2px) calc(1.333em + 2px);text-decoration:none}.wp-block-file__button{background:#32373c;color:#fff}.wp-block-accordion-heading{margin:0}.wp-block-accordion-heading__toggle{background-color:inherit!important;color:inherit!important}.wp-block-accordion-heading__toggle:not(:focus-visible){outline:none}.wp-block-accordion-heading__toggle:focus,.wp-block-accordion-heading__toggle:hover{background-color:inherit!important;border:none;box-shadow:none;color:inherit;padding:var(--wp--preset--spacing--20,1em) 0;text-decoration:none}.wp-block-accordion-heading__toggle:focus-visible{outline:auto;outline-offset:0}.wp-block-tab:not(.has-text-color){color:inherit!important}.wp-block-tab:not(.has-background){background-color:inherit!important}.wp-block-tab:focus,.wp-block-tab:hover{text-decoration:none}.wp-block-tab:focus-visible{outline:auto;outline-offset:0}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v24.0.0/build/styles/block-library/classic.min.css */
+</style>
+
+<style id="coblocks-inline-format-inline-css">
+.uppercase{text-transform:uppercase}
+/*# sourceURL=coblocks-inline-format-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-12-1' href='/_static/??-eJx9jUsOwjAMRC+EY6UgCAvEWZrEKoG4jWq3hduTLvisurFG1nszuBQIQ6/UK5Y8dakXDIPPQ3gINsY6Y0ESl0ww0mwOGJPolwDRVyYTRHb4V8QT/LpGqn8ura4EU0wtZeKKbWlLih1p1eWTQem5rZQ6A96XkUSgXk4Tg97qlqzelS/26KzbN835dH8DjlpbIA==&cssminify=yes' type='text/css' media='all' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-family--albert-sans: 'Albert Sans', sans-serif;--wp--preset--font-family--alegreya: Alegreya, serif;--wp--preset--font-family--arvo: Arvo, serif;--wp--preset--font-family--bodoni-moda: 'Bodoni Moda', serif;--wp--preset--font-family--bricolage-grotesque: 'Bricolage Grotesque', sans-serif;--wp--preset--font-family--cabin: Cabin, sans-serif;--wp--preset--font-family--chivo: Chivo, sans-serif;--wp--preset--font-family--commissioner: Commissioner, sans-serif;--wp--preset--font-family--cormorant: Cormorant, serif;--wp--preset--font-family--courier-prime: 'Courier Prime', monospace;--wp--preset--font-family--crimson-pro: 'Crimson Pro', serif;--wp--preset--font-family--dm-mono: 'DM Mono', monospace;--wp--preset--font-family--dm-sans: 'DM Sans', sans-serif;--wp--preset--font-family--dm-serif-display: 'DM Serif Display', serif;--wp--preset--font-family--domine: Domine, serif;--wp--preset--font-family--eb-garamond: 'EB Garamond', serif;--wp--preset--font-family--epilogue: Epilogue, sans-serif;--wp--preset--font-family--fahkwang: Fahkwang, sans-serif;--wp--preset--font-family--figtree: Figtree, sans-serif;--wp--preset--font-family--fira-sans: 'Fira Sans', sans-serif;--wp--preset--font-family--fjalla-one: 'Fjalla One', sans-serif;--wp--preset--font-family--fraunces: Fraunces, serif;--wp--preset--font-family--gabarito: Gabarito, system-ui;--wp--preset--font-family--ibm-plex-mono: 'IBM Plex Mono', monospace;--wp--preset--font-family--ibm-plex-sans: 'IBM Plex Sans', sans-serif;--wp--preset--font-family--ibarra-real-nova: 'Ibarra Real Nova', serif;--wp--preset--font-family--instrument-serif: 'Instrument Serif', serif;--wp--preset--font-family--inter: Inter, sans-serif;--wp--preset--font-family--josefin-sans: 'Josefin Sans', sans-serif;--wp--preset--font-family--jost: Jost, sans-serif;--wp--preset--font-family--libre-baskerville: 'Libre Baskerville', serif;--wp--preset--font-family--libre-franklin: 'Libre Franklin', sans-serif;--wp--preset--font-family--literata: Literata, serif;--wp--preset--font-family--lora: Lora, serif;--wp--preset--font-family--merriweather: Merriweather, serif;--wp--preset--font-family--montserrat: Montserrat, sans-serif;--wp--preset--font-family--newsreader: Newsreader, serif;--wp--preset--font-family--noto-sans-mono: 'Noto Sans Mono', sans-serif;--wp--preset--font-family--nunito: Nunito, sans-serif;--wp--preset--font-family--open-sans: 'Open Sans', sans-serif;--wp--preset--font-family--overpass: Overpass, sans-serif;--wp--preset--font-family--pt-serif: 'PT Serif', serif;--wp--preset--font-family--petrona: Petrona, serif;--wp--preset--font-family--piazzolla: Piazzolla, serif;--wp--preset--font-family--playfair-display: 'Playfair Display', serif;--wp--preset--font-family--plus-jakarta-sans: 'Plus Jakarta Sans', sans-serif;--wp--preset--font-family--poppins: Poppins, sans-serif;--wp--preset--font-family--raleway: Raleway, sans-serif;--wp--preset--font-family--roboto: Roboto, sans-serif;--wp--preset--font-family--roboto-slab: 'Roboto Slab', serif;--wp--preset--font-family--rubik: Rubik, sans-serif;--wp--preset--font-family--rufina: Rufina, serif;--wp--preset--font-family--sora: Sora, sans-serif;--wp--preset--font-family--source-sans-3: 'Source Sans 3', sans-serif;--wp--preset--font-family--source-serif-4: 'Source Serif 4', serif;--wp--preset--font-family--space-mono: 'Space Mono', monospace;--wp--preset--font-family--syne: Syne, sans-serif;--wp--preset--font-family--texturina: Texturina, serif;--wp--preset--font-family--urbanist: Urbanist, sans-serif;--wp--preset--font-family--work-sans: 'Work Sans', sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-albert-sans-font-family{font-family: var(--wp--preset--font-family--albert-sans) !important;}.has-alegreya-font-family{font-family: var(--wp--preset--font-family--alegreya) !important;}.has-arvo-font-family{font-family: var(--wp--preset--font-family--arvo) !important;}.has-bodoni-moda-font-family{font-family: var(--wp--preset--font-family--bodoni-moda) !important;}.has-bricolage-grotesque-font-family{font-family: var(--wp--preset--font-family--bricolage-grotesque) !important;}.has-cabin-font-family{font-family: var(--wp--preset--font-family--cabin) !important;}.has-chivo-font-family{font-family: var(--wp--preset--font-family--chivo) !important;}.has-commissioner-font-family{font-family: var(--wp--preset--font-family--commissioner) !important;}.has-cormorant-font-family{font-family: var(--wp--preset--font-family--cormorant) !important;}.has-courier-prime-font-family{font-family: var(--wp--preset--font-family--courier-prime) !important;}.has-crimson-pro-font-family{font-family: var(--wp--preset--font-family--crimson-pro) !important;}.has-dm-mono-font-family{font-family: var(--wp--preset--font-family--dm-mono) !important;}.has-dm-sans-font-family{font-family: var(--wp--preset--font-family--dm-sans) !important;}.has-dm-serif-display-font-family{font-family: var(--wp--preset--font-family--dm-serif-display) !important;}.has-domine-font-family{font-family: var(--wp--preset--font-family--domine) !important;}.has-eb-garamond-font-family{font-family: var(--wp--preset--font-family--eb-garamond) !important;}.has-epilogue-font-family{font-family: var(--wp--preset--font-family--epilogue) !important;}.has-fahkwang-font-family{font-family: var(--wp--preset--font-family--fahkwang) !important;}.has-figtree-font-family{font-family: var(--wp--preset--font-family--figtree) !important;}.has-fira-sans-font-family{font-family: var(--wp--preset--font-family--fira-sans) !important;}.has-fjalla-one-font-family{font-family: var(--wp--preset--font-family--fjalla-one) !important;}.has-fraunces-font-family{font-family: var(--wp--preset--font-family--fraunces) !important;}.has-gabarito-font-family{font-family: var(--wp--preset--font-family--gabarito) !important;}.has-ibm-plex-mono-font-family{font-family: var(--wp--preset--font-family--ibm-plex-mono) !important;}.has-ibm-plex-sans-font-family{font-family: var(--wp--preset--font-family--ibm-plex-sans) !important;}.has-ibarra-real-nova-font-family{font-family: var(--wp--preset--font-family--ibarra-real-nova) !important;}.has-instrument-serif-font-family{font-family: var(--wp--preset--font-family--instrument-serif) !important;}.has-inter-font-family{font-family: var(--wp--preset--font-family--inter) !important;}.has-josefin-sans-font-family{font-family: var(--wp--preset--font-family--josefin-sans) !important;}.has-jost-font-family{font-family: var(--wp--preset--font-family--jost) !important;}.has-libre-baskerville-font-family{font-family: var(--wp--preset--font-family--libre-baskerville) !important;}.has-libre-franklin-font-family{font-family: var(--wp--preset--font-family--libre-franklin) !important;}.has-literata-font-family{font-family: var(--wp--preset--font-family--literata) !important;}.has-lora-font-family{font-family: var(--wp--preset--font-family--lora) !important;}.has-merriweather-font-family{font-family: var(--wp--preset--font-family--merriweather) !important;}.has-montserrat-font-family{font-family: var(--wp--preset--font-family--montserrat) !important;}.has-newsreader-font-family{font-family: var(--wp--preset--font-family--newsreader) !important;}.has-noto-sans-mono-font-family{font-family: var(--wp--preset--font-family--noto-sans-mono) !important;}.has-nunito-font-family{font-family: var(--wp--preset--font-family--nunito) !important;}.has-open-sans-font-family{font-family: var(--wp--preset--font-family--open-sans) !important;}.has-overpass-font-family{font-family: var(--wp--preset--font-family--overpass) !important;}.has-pt-serif-font-family{font-family: var(--wp--preset--font-family--pt-serif) !important;}.has-petrona-font-family{font-family: var(--wp--preset--font-family--petrona) !important;}.has-piazzolla-font-family{font-family: var(--wp--preset--font-family--piazzolla) !important;}.has-playfair-display-font-family{font-family: var(--wp--preset--font-family--playfair-display) !important;}.has-plus-jakarta-sans-font-family{font-family: var(--wp--preset--font-family--plus-jakarta-sans) !important;}.has-poppins-font-family{font-family: var(--wp--preset--font-family--poppins) !important;}.has-raleway-font-family{font-family: var(--wp--preset--font-family--raleway) !important;}.has-roboto-font-family{font-family: var(--wp--preset--font-family--roboto) !important;}.has-roboto-slab-font-family{font-family: var(--wp--preset--font-family--roboto-slab) !important;}.has-rubik-font-family{font-family: var(--wp--preset--font-family--rubik) !important;}.has-rufina-font-family{font-family: var(--wp--preset--font-family--rufina) !important;}.has-sora-font-family{font-family: var(--wp--preset--font-family--sora) !important;}.has-source-sans-3-font-family{font-family: var(--wp--preset--font-family--source-sans-3) !important;}.has-source-serif-4-font-family{font-family: var(--wp--preset--font-family--source-serif-4) !important;}.has-space-mono-font-family{font-family: var(--wp--preset--font-family--space-mono) !important;}.has-syne-font-family{font-family: var(--wp--preset--font-family--syne) !important;}.has-texturina-font-family{font-family: var(--wp--preset--font-family--texturina) !important;}.has-urbanist-font-family{font-family: var(--wp--preset--font-family--urbanist) !important;}.has-work-sans-font-family{font-family: var(--wp--preset--font-family--work-sans) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-14-1' href='/_static/??-eJyFjkEOwjAMBD9EsEoQiAPiLU3kpkFOHNlJK35PeiuXcvNIs7uGtRjPuWKuUGdMqFCag44oRaIiaP0Qnr3qCXZuaqZQCzEraHPqJZYaudPERLwe+TMvKMY156iv/a0XdMShnwG6tcOjUEA2xH7cfvoBM9EYZYu+0nO4X4fbw1p7eX8BW2BjCA==&cssminify=yes' type='text/css' media='all' />
+<link crossorigin='anonymous' rel='stylesheet' id='print-css-15-1' href='/wp-content/mu-plugins/global-print/global-print.css?m=1465851035i&cssminify=yes' type='text/css' media='print' />
+<style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+/*# sourceURL=jetpack-global-styles-frontend-style-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-18-1' href='/_static/??-eJyNjEEOgkAMRS9kbdAxwYXxLMAMpaYzJbZkrg8kLAwrd+8n7z+sMwxaPBVHn1JOhlNAEu07uQ5mF/wR8gKzLMTFsHKk5IabcjDQlyN0JYKw+T/fXpQMGEYV0Xqae+CdX014PENo29v9swJiAz5G&cssminify=yes' type='text/css' media='all' />
+<script id="wpcom-actionbar-placeholder-js-extra">
+var actionbardata = {"siteID":"46851543","postID":"0","siteURL":"https://mindovermessaging.com","xhrURL":"https://mindovermessaging.com/wp-admin/admin-ajax.php","nonce":"f31965d2a7","isLoggedIn":"","statusMessage":"","subsEmailDefault":"instantly","proxyScriptUrl":"https://s0.wp.com/wp-content/js/wpcom-proxy-request.js?m=1513050504i&amp;ver=20211021","i18n":{"followedText":"New posts from this site will now appear in your \u003Ca href=\"https://wordpress.com/reader\"\u003EReader\u003C/a\u003E","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","shortLinkCopied":"Shortlink copied to clipboard."}};
+//# sourceURL=wpcom-actionbar-placeholder-js-extra
+</script>
+<script id="jetpack-mu-wpcom-settings-js-before">
+var JETPACK_MU_WPCOM_SETTINGS = {"assetsUrl":"https://s0.wp.com/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/sun/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/"};
+//# sourceURL=jetpack-mu-wpcom-settings-js-before
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??/wp-content/js/rlt-proxy.js,/wp-content/mu-plugins/subscriptions/follow.js,/wp-content/mu-plugins/widgets/js/widget-bump-view.js?m=1738766797j'></script>
+<script id="rlt-proxy-js-after">
+	rltInitialize( {"token":null,"iframeOrigins":["https:\/\/widgets.wp.com"]} );
+//# sourceURL=rlt-proxy-js-after
+</script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://mindovermessaging.wordpress.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress.com" />
+<link rel='shortlink' href='https://wp.me/3aAe3' />
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Mind Over Messaging" />
+<meta property="og:description" content="Musings on BizTalk, Azure, and Enterprise Integration" />
+<meta property="og:url" content="https://mindovermessaging.com/" />
+<meta property="og:site_name" content="Mind Over Messaging" />
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg?m=1383295312i" />
+<meta property="og:image:width" content="200" />
+<meta property="og:image:height" content="200" />
+<meta property="og:image:alt" content="" />
+<meta property="og:locale" content="en_US" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="shortcut icon" type="image/x-icon" href="https://s0.wp.com/i/favicon.ico?m=1713425267i" sizes="16x16 24x24 32x32 48x48" />
+<link rel="icon" type="image/x-icon" href="https://s0.wp.com/i/favicon.ico?m=1713425267i" sizes="16x16 24x24 32x32 48x48" />
+<link rel="apple-touch-icon" href="https://s0.wp.com/i/webclip.png?m=1713868326i" />
+<link rel='openid.server' href='https://mindovermessaging.com/?openidserver=1' />
+<link rel='openid.delegate' href='https://mindovermessaging.com/' />
+<link rel="search" type="application/opensearchdescription+xml" href="https://mindovermessaging.com/osd.xml" title="Mind Over Messaging" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+		<style id="wpcom-hotfix-masterbar-style">
+			@media screen and (min-width: 783px) {
+				#wpadminbar .quicklinks li#wp-admin-bar-my-account.with-avatar > a img {
+					margin-top: 5px;
+				}
+			}
+		</style>
+		<meta name="description" content="Musings on BizTalk, Azure, and Enterprise Integration" />
+		<style type="text/css">
+			#header {
+				background: transparent url(https://mindovermessaging.com/wp-content/uploads/2013/02/photo_cropped2.jpg) no-repeat;
+				border: none;
+			}
+		</style>
+		<style type="text/css">
+			#header h1,
+			#header h1 a,
+			#header h1 a:visited,
+			#header h4,
+			#header h4 a,
+			#header h4 a:visited,
+			.header-left {
+				color: #5b5b5b;
+			}
+		</style>
+			<link rel="stylesheet" id="custom-css-css" type="text/css" href="https://s0.wp.com/?custom-css=1&#038;csblog=3aAe3&#038;cscache=6&#038;csrev=15" />
+			<style id="jetpack-subscriptions-inline-css">
+#subscribe-email input {
+	width: 95%;
+}
+
+.comment-subscription-form {
+	margin-bottom: 1em;
+}
+
+.comment-subscription-form .subscribe-label {
+	display: inline !important;
+}
+
+/*
+Text meant only for screen readers.
+Provides support for themes that do not bundle this CSS yet.
+@see https://make.wordpress.org/accessibility/2015/02/09/hiding-text-for-screen-readers-with-wordpress-core/
+***********************************/
+.screen-reader-text {
+	border: 0;
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	overflow-wrap: normal !important;
+}
+
+/*# sourceURL=/wp-content/mu-plugins/jetpack-plugin/sun/_inc/build/subscriptions/subscriptions.min.css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-2-5' href='/_static/??-eJydzNEKwjAMheEXsmYTdbsZPorULIxuaVqahrG3F0F3KeLlfzh8sGaHSSpJhWgus01BFGaq2ePyblATuAdBeHDCRUHXkKkcUfUAPwMxjcakgL4kU+L98xn+9GpgGt3kmals3+rl3+LQdv3l1J6b/jo/AVGyX1w=&cssminify=yes' type='text/css' media='all' />
+
+</head>
+
+<body class="home blog wp-theme-pubenterprise customizer-styles-applied jetpack-reblog-enabled">
+
+<div id="header">
+	<div class="header-left">
+					<h1><a href="https://mindovermessaging.com/">Mind Over Messaging</a></h1>
+				<p id="description">Musings on BizTalk, Azure, and Enterprise Integration</p>
+	</div>
+	<div class="header-right">
+		<form method="get" id="searchform" action="https://mindovermessaging.com/" >
+			<div><label class="hidden" for="s">Search:</label>
+			<input type="text" value="" name="s" id="s" />
+			<input type="submit" id="searchsubmit" value="Go" /></div>
+		</form>
+	</div>
+</div>
+<div id="access">
+	<div id="nav">
+		<div id="supernav" class="navleft nav">
+			<div class="menu"><ul>
+<li class="current_page_item"><a href="https://mindovermessaging.com/">Home</a></li><li class="page_item page-item-1"><a href="https://mindovermessaging.com/about-dan-toomey/">About</a></li>
+<li class="page_item page-item-39"><a href="https://mindovermessaging.com/disclaimer/">Disclaimer</a></li>
+</ul></div>
+		</div>
+		<div class="navright">
+			<a class="rsslink" rel="nofollow" href="https://mindovermessaging.com/feed/">Posts</a>
+			<a class="rsslink" rel="nofollow" href="https://mindovermessaging.com/comments/feed/">Comments</a>
+		</div>
+	</div>
+
+	<div id="subnav" class="subnav nav">
+		<div class="menu-categories-container"><ul id="menu-categories" class="menu"><li id="menu-item-46" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-46"><a href="https://mindovermessaging.com/category/azure/">Azure</a></li>
+<li id="menu-item-45" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-45"><a href="https://mindovermessaging.com/category/biztalk/">BizTalk</a></li>
+<li id="menu-item-886" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-886"><a href="https://mindovermessaging.com/category/events/">Events</a></li>
+<li id="menu-item-47" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-47"><a href="https://mindovermessaging.com/category/uncategorized/">Uncategorized</a></li>
+</ul></div>	</div>
+</div>
+
+<div id="wrap">
+<div id="content">
+
+	<div id="content-left">
+
+		
+			<div class="post-1207 post type-post status-publish format-standard hentry category-azure tag-ai tag-ai-search tag-artificial-intelligence tag-azure tag-llm tag-logic-apps tag-openai tag-rag">
+
+				<div class="entry">
+
+					<h2><a href="https://mindovermessaging.com/2025/03/28/building-a-complete-rag-application-in-azure-with-no-code/">Building a Complete RAG Application in Azure with No&nbsp;Code</a></h2>
+
+					<div class="post-info">
+						<p>
+							<span class="time">March 28, 2025</span>
+																						<span class="post-comments"><a href="https://mindovermessaging.com/2025/03/28/building-a-complete-rag-application-in-azure-with-no-code/#comments">1 Comment</a></span>
+																				</p>
+					</div>
+
+					<p><strong>Retrieval-Augmented Generation (RAG) </strong>is a hot item in the AI world right now as organisations are finding it a useful pattern for building LLM-based chat applications against an easily updateable knowledge store, without the expense of re-training the LLM. The pattern provides a base for AI generated responses that are as reliable, context-bounded, and current as the data in the knowledge store (which can be as simple as a collection of documents). Even better, RAG provides a means for the LLM to respond with citations so you can be confident of where the answer is sourced from:</p>
+<p><a href="https://mindovermessaging.com/wp-content/uploads/2025/03/image.png"><img style="display: inline;background-image: none" title="image" src="https://mindovermessaging.com/wp-content/uploads/2025/03/image_thumb.png?w=644&#038;h=364" alt="image" width="644" height="364" border="0" /></a></p>
+<p>Two things are critical to making a RAG application possible:</p>
+<ul>
+<li style="list-style-type: none">
+<ul>
+<li>Reliable and high-quality components (especially the LLM and the search capability over the knowledge store)</li>
+<li>Carefully constructed workflow solutions for handling both the ingestion of data and the chat interface</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://mindovermessaging.com/wp-content/uploads/2025/03/image-1.png"><img style="display: inline;background-image: none" title="image" src="https://mindovermessaging.com/wp-content/uploads/2025/03/image_thumb-1.png?w=644&#038;h=364" alt="image" width="644" height="364" border="0" /></a></p>
+<p>Both of these requirements can be met using Microsoft Azure services – and best of all, with no coding required!</p>
+<p>As for the ingestion workflow, <a href="https://www.linkedin.com/in/stephen-w-thomas/"><strong>Stephen W. Thomas</strong></a> already has provided an <a href="https://www.youtube.com/watch?v=aV1vaIM5Cvg&amp;t=438s">excellent video guide</a> for building this using <strong>Azure OpenAI</strong>, <strong>Azure AI Search</strong>, and <strong>Azure Logic Apps</strong>. He takes you through the process step-by-step, including the provisioning of all the necessary services and the permissions required.</p>
+<p><a href="https://www.youtube.com/watch?v=aV1vaIM5Cvg&amp;t=438s"><img style="display: inline;background-image: none" title="image" src="https://mindovermessaging.com/wp-content/uploads/2025/03/image-2.png?w=244&#038;h=139" alt="image" width="244" height="139" border="0" /></a></p>
+<p>Because Stephen’s guide is so thorough, I don’t need to repeat any of it here. However, the video does not cover how to build the <em>chat workflow</em>, which is worth a discussion – especially because I found a couple of potential traps with the Microsoft provided template.</p>
+<h3>Building the Chat Workflow</h3>
+<p> <a href="https://mindovermessaging.com/2025/03/28/building-a-complete-rag-application-in-azure-with-no-code/#more-1207" class="more-link">Read more of this post</a></p>
+<div class="clear"></div>
+
+				</div>
+
+				<div class="post-meta">
+					<p>
+						<span class="categories">Filed under <a href="https://mindovermessaging.com/category/azure/" rel="category tag">Azure</a></span>
+						<span class="tags">Tagged with <a href="https://mindovermessaging.com/tag/ai/" rel="tag">AI</a>, <a href="https://mindovermessaging.com/tag/ai-search/" rel="tag">AI Search</a>, <a href="https://mindovermessaging.com/tag/artificial-intelligence/" rel="tag">artificial-intelligence</a>, <a href="https://mindovermessaging.com/tag/azure/" rel="tag">Azure</a>, <a href="https://mindovermessaging.com/tag/llm/" rel="tag">llm</a>, <a href="https://mindovermessaging.com/tag/logic-apps/" rel="tag">Logic Apps</a>, <a href="https://mindovermessaging.com/tag/openai/" rel="tag">OpenAI</a>, <a href="https://mindovermessaging.com/tag/rag/" rel="tag">RAG</a></span>					</p>
+				</div>
+
+			</div>
+
+		
+			<div class="post-1176 post type-post status-publish format-standard hentry category-azure tag-ai tag-copilot tag-logic-apps">
+
+				<div class="entry">
+
+					<h2><a href="https://mindovermessaging.com/2024/03/13/copilot-for-azure-logic-apps-standard/">Copilot for Azure Logic Apps&nbsp;Standard</a></h2>
+
+					<div class="post-info">
+						<p>
+							<span class="time">March 13, 2024</span>
+																						<span class="post-comments"><a href="https://mindovermessaging.com/2024/03/13/copilot-for-azure-logic-apps-standard/#respond">Leave a comment</a></span>
+																				</p>
+					</div>
+
+					<p>Those who live in the code-based world have long been enjoying the option to utilise the generative AI assistance via <a href="https://docs.github.com/en/copilot/copilot-individual/about-github-copilot-individual">GitHub Copilot</a>.&#160; Powered by OpenAI and Microsoft, Copilot provides invaluable context-based suggestions for completing code patterns based on training from open source code repositories.</p>
+<p>Until recently, there was no such assistance available for integration developers who preferred the low-code approach of Logic Apps Standard (although <a href="https://www.linkedin.com/in/sandropereira/">Sandro Pereira</a> has produced a useful <a href="https://www.biztalkgurus.com/blogs/msft-biztalk-community/announcing-logic-app-consumption-copilot/">utility for Logic Apps Consumption</a>). Given the <a href="https://learn.microsoft.com/en-us/connectors/connector-reference/">large number of Logic App connectors available</a> and the inherent complexity in designing integration patterns, a “Copilot” functionality would be especially useful for creating and documenting workflows.</p>
+<p>Thankfully, Microsoft is now taking great strides in introducing <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/overview">Azure OpenAI</a> to the Logic Apps development space. In mid-November last year, Microsoft revealed a <a href="https://aka.ms/LogicAppsCopilot">public preview offering of the Workflow Assistant</a>, a chat interface powered by Azure OpenAI and ChatGPT that can offer context-based suggestions for your workflows that Copilot does for Azure Functions, for instance.&#160; Although currently only available in the Azure Portal (not Visual Studio Code just yet), the assistant can perform many useful functions such as:</p>
+<ul>
+<li>Suggest which connectors to use in a given scenario and how to configure them</li>
+<li>Describe how to implement a proven pattern to solve a particular problem</li>
+<li>Describe an existing workflow giving a detailed report of what it does</li>
+</ul>
+<p>What’s more, the responses are determined by the workflow currently open and therefore reflect the relevant context. This is an extraordinary help to those who are not necessarily that familiar with all of Logic Apps capabilities. </p>
+<p> <a href="https://mindovermessaging.com/2024/03/13/copilot-for-azure-logic-apps-standard/#more-1176" class="more-link">Read more of this post</a></p>
+<div class="clear"></div>
+
+				</div>
+
+				<div class="post-meta">
+					<p>
+						<span class="categories">Filed under <a href="https://mindovermessaging.com/category/azure/" rel="category tag">Azure</a></span>
+						<span class="tags">Tagged with <a href="https://mindovermessaging.com/tag/ai/" rel="tag">AI</a>, <a href="https://mindovermessaging.com/tag/copilot/" rel="tag">Copilot</a>, <a href="https://mindovermessaging.com/tag/logic-apps/" rel="tag">Logic Apps</a></span>					</p>
+				</div>
+
+			</div>
+
+		
+			<div class="post-1153 post type-post status-publish format-standard hentry category-azure category-uncategorized tag-dih">
+
+				<div class="entry">
+
+					<h2><a href="https://mindovermessaging.com/2022/03/29/maximising-your-apis-with-a-digital-integration-hub/">Maximising Your APIs with a Digital Integration&nbsp;Hub</a></h2>
+
+					<div class="post-info">
+						<p>
+							<span class="time">March 29, 2022</span>
+																						<span class="post-comments"><a href="https://mindovermessaging.com/2022/03/29/maximising-your-apis-with-a-digital-integration-hub/#comments">2 Comments</a></span>
+																				</p>
+					</div>
+
+					<p>APIs make the digital world go round. According to <a href="https://www.gartner.com/en/documents/3579034">Gartner</a>, they are an essential element of every digital strategy. They enable systems and applications to interact, connecting disparate data sources and bridging access protocols. APIs can unlock your organisation’s digital assets and allow them to be consumed in a controlled manner.</p>
+<p>However, simply exposing your systems and enterprise applications via an API layer presents some formidable challenges, for example:</p>
+<ul>
+<li>How do you shield your backend systems from being overrun with numerous requests?</li>
+<li>How do you avoid an unmanageable mess of tightly-coupled point-to-point connections?</li>
+<li>How do you ensure that consumers only have access to the data they should?</li>
+</ul>
+<p>The answer may be a <b>Digital Integration Hub (DIH)</b>.</p>
+<h4>The Problem with a Traditional API Integration Architecture</h4>
+<p>Modern enterprises will typically have invested in a well-conceived integration architecture for their APIs, introducing multiple layers that serve the data through a request-based integration layer:</p>
+<p align="center"><a href="https://mindovermessaging.com/wp-content/uploads/2022/03/clip_image002.png"><img loading="lazy" title="clip_image002" style="display:inline;background-image:none;" border="0" alt="clip_image002" src="https://mindovermessaging.com/wp-content/uploads/2022/03/clip_image002_thumb.png?w=606&#038;h=376" width="606" height="376" /><i>Image from </i><i>&quot;Turbocharge Your API Platform with a Digital Integration Hub – Gartner (G00360082, Jul 2018)</i><i></i></a></p>
+<p>The primary role of the integration platform is to field requests from the APIs and deliver data from the source systems. Depending on the complexity of the systems, the underlying data structures, and the expected load from the API consumers, this solution may work reasonably well. </p>
+<p>The problem is that even though the integration layer abstracts the underlying systems from the consumers, there is still a degree of coupling:</p>
+<ul>
+<li>Backend systems ultimately bear the burden of responding to API requests – even if asynchronously. </li>
+<li>Changes to the backend systems will necessarily impact the APIs and, consequently, the consumers.</li>
+<li>The data returned by the APIs is typically bound to the data structures of the backend systems as opposed to a non-proprietary business model.</li>
+<li>Whilst the API Gateway may perform coarse level authorisation, it is unlikely to filter data at a granular level. </li>
+</ul>
+<p>In this conventional model, the last two points can only be addressed at the cost of highly complex API service logic &#8211; hence the term “macroservices” used by Gartner. </p>
+<p>One might represent this coupling as a collection of meshed gears, whereby moving any one will force movement in the others:</p>
+<p><a href="https://mindovermessaging.com/wp-content/uploads/2022/03/clip_image004.png"><img loading="lazy" title="clip_image004" style="margin-right:auto;margin-left:auto;float:none;display:block;background-image:none;" border="0" alt="clip_image004" src="https://mindovermessaging.com/wp-content/uploads/2022/03/clip_image004_thumb.png?w=538&#038;h=439" width="538" height="439" /></a></p>
+<h4>Digital Integration Hub to the Rescue</h4>
+<p>The problems mentioned above can be resolved by introducing a <b>High-Performance Data Store</b> (HPDS) which sits between the integration and the services layer:</p>
+<p align="center"><a href="https://mindovermessaging.com/wp-content/uploads/2022/03/clip_image006.png"><img loading="lazy" title="clip_image006" style="display:inline;background-image:none;" border="0" alt="clip_image006" src="https://mindovermessaging.com/wp-content/uploads/2022/03/clip_image006_thumb.png?w=605&#038;h=459" width="605" height="459" /><i>Image from </i><i>&quot;Turbocharge Your API Platform with a Digital Integration Hub – Gartner (G00360082, Jul 2018)</i><i></i></a></p>
+<p>The main purpose of this layer is to create an aggregated replica of the system of record data, fed via the integration layer which ideally operates in an event-based fashion (for example, <a href="https://www.qlik.com/us/change-data-capture/cdc-change-data-capture">Change Data Capture</a>). This enables several significant improvements:</p>
+<ul>
+<li>The APIs can deliver a much more responsive user experience as they draw from the HPDS instead of competing with the core processing functions of the target System of Record (SoR).</li>
+<li>The SoRs can concentrate resources on their primary activities rather than serving API requests.</li>
+<li>Complete decoupling of the APIs from the SoRs affords potential 24/7 availability, as well as shielding consumers from replacement of a legacy system.</li>
+<li>The heavy lifting of normalising and aggregating data can be delegated to the HPDS instead of the microservices.</li>
+<li>Reporting and analytics can also draw from the HPDS, providing business insight whilst again relieving the load on the primary SoRs.</li>
+</ul>
+<p>The HPDS can be implemented in many different ways; for example, it may include a data lake, a data warehouse, an MDM, etc. The key is that it is <i>highly performant</i>, and a good metadata management solution would be essential to support a domain-driven design. </p>
+<p>The integration layer should also support multiple patterns, although these will vary according to the organisation’s requirements. Example patterns would include:</p>
+<ul>
+<li>Event brokering / messaging</li>
+<li>Extract Transform &amp; Load (ETL)</li>
+<li>Change Data Capture (CDC)</li>
+<li>Integration Patterns (ESB, iPaaS)</li>
+<li>Stream processing (Spark, Flint)</li>
+</ul>
+<h4>Example Architecture</h4>
+<p>There are few (if any) products that will give you a full Digital Integration Hub out of the box. In all likelihood, it requires an assembly of multiple products, possibly from different vendors. </p>
+<p>That said, Microsoft provides an <a href="https://github.com/Azure-Samples/digital-integration-hub">Azure DIH Accelerator</a> to facilitate building a DIH architecture in the cloud. Hosted in GitHub, it provides a pre-configured development environment with a sample application, as well as build and deployment automation.</p>
+<p>The architecture is fairly basic, but it is a starting point which supports injection of your own business logic, as well as swapping out components (for example, substituting a SQL Database for the provided PostgreSQL database). </p>
+<p align="center"><a href="https://mindovermessaging.com/wp-content/uploads/2022/03/clip_image008.png"><img loading="lazy" title="clip_image008" style="display:inline;background-image:none;" border="0" alt="clip_image008" src="https://mindovermessaging.com/wp-content/uploads/2022/03/clip_image008_thumb.png?w=606&#038;h=291" width="606" height="291" /><i>Image from Microsoft, DIH Accelerator on GitHub</i></a></p>
+<p>In this sample, the front-end APIs are implemented via API Gateway and Azure Functions, the integration layer is comprised of Logic Apps and Event Grid, and a data layer consists of a PosgreSQL database. It also provides monitoring via App Insights and Log Analytics. Although not included in the sample, Azure Synapse can easily be bolted on to provide analytics.</p>
+<h4>Challenges</h4>
+<p>A Digital Integration Hub is not a simple architecture by any means and would typically be suited to a large mature enterprise that is going through a digital transformation. Some of the key challenges include:</p>
+<ul>
+<li>Complexity of rolling out a high-performance data management technology (e.g. NoSQL DBMS or in-memory data grid)</li>
+<li>Supporting bidirectional, event-driven synchronization between the HPDS and SoR applications</li>
+<li>Designing a canonical data model for the DIH business entities that supports multiple channels</li>
+<li>Implementing appropriate metadata management to support discovery and introspection of data entities and relationships represented across multiple data sources</li>
+<li>Designing, building, and managing the complex distributed architecture of a DIH</li>
+</ul>
+<p>Any organisation that aspires to setting up a DIH would do well to follow these recommendations:</p>
+<ul>
+<li>Determine if the organisation needs a DIH and if it has the skills to support it.</li>
+<li>Know its data and consumer requirements.</li>
+<li>Understand the integration patterns that will be required.</li>
+<li>Design its APIs to be abstracted from the underlying systems (“API First” approach).</li>
+<li>Consider using a technology partner for implementation.</li>
+</ul>
+<h4>Summary</h4>
+<p>API-based access to disparate data services is costly from a performance and maintenance perspective. A <b>Digital Integration Hub</b> enables enhanced performance in accessing your organisational data, while ensuring effective protection of your backend systems. A DIH architecture also provides increased scalability, greater flexibility, and better insights.</p>
+<div class="clear"></div>
+
+				</div>
+
+				<div class="post-meta">
+					<p>
+						<span class="categories">Filed under <a href="https://mindovermessaging.com/category/azure/" rel="category tag">Azure</a>, <a href="https://mindovermessaging.com/category/uncategorized/" rel="category tag">Uncategorized</a></span>
+						<span class="tags">Tagged with <a href="https://mindovermessaging.com/tag/dih/" rel="tag">DIH</a></span>					</p>
+				</div>
+
+			</div>
+
+		
+			<div class="post-1141 post type-post status-publish format-standard hentry category-azure category-events tag-azure tag-event-grid">
+
+				<div class="entry">
+
+					<h2><a href="https://mindovermessaging.com/2020/05/19/sneak-peak-my-integrate-2020-remote-presentation-on-azure-event-grid/">Sneak Peak: My Integrate 2020 Remote Presentation on Azure Event&nbsp;Grid</a></h2>
+
+					<div class="post-info">
+						<p>
+							<span class="time">May 19, 2020</span>
+																						<span class="post-comments"><a href="https://mindovermessaging.com/2020/05/19/sneak-peak-my-integrate-2020-remote-presentation-on-azure-event-grid/#respond">Leave a comment</a></span>
+																				</p>
+					</div>
+
+					<p>I feel very privileged to be a speaker at <a href="https://www.biztalk360.com/integrate-2020-remote/">INTEGRATE</a> for the 4th year in a row. Many thanks to <a href="https://www.facebook.com/saravanamv?__tn__=K-R&amp;eid=ARA-e5esK9Uz3TXKjM0KyNgniVz-2Ie3rBfumqCmXIzruekZWzI2Iw6xVg0tjVgQuF3nCv8gVI2oju5b&amp;fref=mentions&amp;__xts__%5B0%5D=68.ARAUZ5jbBE5Fnm4_Sqh35tmF4UAYJouD9-Lo7mZ6keE9Tocat18KXllTVIlnYdxL6WLtoJ6ZV-XWLwAeC3-4iIcufTfoo7Npgt2g4u_IDqi1XIDguOfxK0cpIdr-Zs-Q3QDRvRUHVemjSCDzySbH7r1rou2kRnbyREfyyT63XhWsxQ11Zt3QA732oZA">Saravana Kumar</a> and <a href="https://www.kovai.co/">Kovai</a> for the privilege &amp; opportunity! Of course, thanks to COVID-19 this year will be a bit different&#8230; no jet lag, no expensive bar tabs, and (sadly) no catching up with my good friends &amp; colleagues from around the world (at least not in person anyway). But on the plus side, an online event does have the potential to reach a limitless number of integration enthusiasts. And if you think that you might be one of them, here’s a discount code for you to use!</p>
+<p><a href="https://www.biztalk360.com/integrate-2020-remote/"><img alt="Image may contain: 1 person, text" src="https://scontent.fbne6-1.fna.fbcdn.net/v/t1.0-9/98001732_10221648727668158_3420787747269378048_o.jpg?_nc_cat=106&amp;_nc_sid=8024bb&amp;_nc_ohc=LJbyerTHwCAAX8Z8wxt&amp;_nc_ht=scontent.fbne6-1.fna&amp;oh=db3b6070124c3bb6235873080dd66344&amp;oe=5EE870AC"></a></p>
+<p>So what will my talk be about? Well as the title suggests, you will learn about the benefits of event-based integration and how it can help modernise your applications to be reactive, scalable, and extensible. The star of the show here is <a href="https://azure.microsoft.com/en-au/services/event-grid/">Event Grid</a>, a lynchpin capability offered as part of <a href="https://azure.microsoft.com/en-us/product-categories/integration/">Azure Integration Services</a>.</p>
+<p><a href="https://mindovermessaging.com/wp-content/uploads/2020/05/image.png"><img loading="lazy" title="image" style="display:inline;background-image:none;" border="0" alt="image" src="https://mindovermessaging.com/wp-content/uploads/2020/05/image_thumb.png?w=644&#038;h=359" width="644" height="359"></a></p>
+<p>Event Grid offers a single point for managing events sourced from within and without Azure, intelligently routing them to any number of interested subscribers. It not only supports 1st class integration with a large number of built-in Azure services, but also supports custom event sources and routing to any accessible webhook. On top of that, it boasts low-latency, massive scalability, and exceptional resiliency. It even supports the <a href="https://cloudevents.io/">Cloud Events specification</a> for describing events, as well as your own custom schemas.</p>
+<p>My talk will feature a demo showing how Event Grid easily enables real-time monitoring of Azure resources – but this is only one of many possible scenarios that are supported. <a href="https://www.biztalk360.com/integrate-2020-remote/">Register for Integrate 2020 Remote</a> so you can not only attend this session but also 40 other topics presented by 30+ integration experts from around the world! Use the discount code <strong>INT2020-SPEAKER-DAN</strong> to get 15% off any ticket price.</p>
+<div class="clear"></div>
+
+				</div>
+
+				<div class="post-meta">
+					<p>
+						<span class="categories">Filed under <a href="https://mindovermessaging.com/category/azure/" rel="category tag">Azure</a>, <a href="https://mindovermessaging.com/category/events/" rel="category tag">Events</a></span>
+						<span class="tags">Tagged with <a href="https://mindovermessaging.com/tag/azure/" rel="tag">Azure</a>, <a href="https://mindovermessaging.com/tag/event-grid/" rel="tag">Event Grid</a></span>					</p>
+				</div>
+
+			</div>
+
+		
+			<div class="post-1134 post type-post status-publish format-standard hentry category-uncategorized tag-movember">
+
+				<div class="entry">
+
+					<h2><a href="https://mindovermessaging.com/2019/11/14/hairy-causes-a-movember-to-remember/">Hairy Causes: A Movember to&nbsp;Remember</a></h2>
+
+					<div class="post-info">
+						<p>
+							<span class="time">November 14, 2019</span>
+																						<span class="post-comments"><a href="https://mindovermessaging.com/2019/11/14/hairy-causes-a-movember-to-remember/#respond">Leave a comment</a></span>
+																				</p>
+					</div>
+
+					<p><a href="https://au.movember.com/about/foundation"><img loading="lazy" style="background-image:none;float:right;padding-top:0;padding-left:0;display:inline;padding-right:0;border-width:0;" title="clip_image002" src="https://mindovermessaging.com/wp-content/uploads/2019/11/clip_image002.jpg?w=228&#038;h=193" alt="clip_image002" width="228" height="193" align="right" border="0" hspace="12" /></a>You may notice a trend during the month of November where lots of normally clean-shaven blokes are suddenly sporting <i>(often embarrassingly hideous)</i> attempts at growing a moustache. There’s a good chance that they are making a spectacle of themselves for a worthy cause. Over the past sixteen years, the <a href="https://au.movember.com/about/foundation">Movember Foundation</a> has raised over a billion dollars globally to promote awareness of men’s health issues, including prostate cancer, testicular cancer, depression and suicide prevention. Last year, participants in Australia alone raised $29 million. More than 75% of the money raised is used to fund at least 1250 men’s health projects, including <a href="https://www.beyondblue.org.au/">Beyond Blue</a> and the <a href="https://www.prostate.org.au/">Prostate Cancer Foundation of Australia</a>.</p>
+<p>For the past 12 years, I too have <a href="https://mobro.co/dantoomey?mc=1">participated in one way or another in Movember</a>, either by growing a mo’ myself or sponsoring others. This year I have joined the official Deloitte Platform Engineering (DPE) <a href="https://moteam.co/dpe-move-tash?mc=1">Movember team</a>. My motivation has always come in part from my family’s history of prostate cancer: my dad and two of my three brothers have endured this disease. This year, I have even more inspiration, as I recently extended my family’s history via my own battle with prostate cancer. I will share a bit of my story below. <a href="https://mindovermessaging.com/2019/11/14/hairy-causes-a-movember-to-remember/#more-1134" class="more-link">Read more of this post</a></p>
+<div class="clear"></div>
+
+				</div>
+
+				<div class="post-meta">
+					<p>
+						<span class="categories">Filed under <a href="https://mindovermessaging.com/category/uncategorized/" rel="category tag">Uncategorized</a></span>
+						<span class="tags">Tagged with <a href="https://mindovermessaging.com/tag/movember/" rel="tag">movember</a></span>					</p>
+				</div>
+
+			</div>
+
+		
+			<div class="post-1120 post type-post status-publish format-standard hentry category-uncategorized tag-mvp tag-user-group">
+
+				<div class="entry">
+
+					<h2><a href="https://mindovermessaging.com/2019/09/26/life-as-a-user-group-leader/">Life as a User Group&nbsp;Leader</a></h2>
+
+					<div class="post-info">
+						<p>
+							<span class="time">September 26, 2019</span>
+																						<span class="post-comments"><a href="https://mindovermessaging.com/2019/09/26/life-as-a-user-group-leader/#respond">Leave a comment</a></span>
+																				</p>
+					</div>
+
+					<p><a href="https://mvp.microsoft.com/">Microsoft MVPs</a> are recognised for their voluntary contributions to the technical community. There are many types of eligible contributions, but one of my more notable ones was serving as a user group leader. This is a significant undertaking, and in this post I hope to outline some of the aspects of the commitment and also some lessons I’ve learned over my 14 years of fulfilling this duty.</p>
+<h3>My Experience</h3>
+<p>In 2005, I was asked by Microsoft to start the <a href="https://www.briztalk.org">Brisbane BizTalk User Group</a>. The motivation came through working for one of several organisations that adopted BizTalk Server to handle critical enterprise integration processes. As a newbie to the product, I was heavily reliant on the help I received from the very few experts around Australia and the world, including <a href="https://www.linkedin.com/in/billchesnut/">Bill Chesnut</a>, <a href="https://www.linkedin.com/in/mickbadran/">Mick Badran</a>, and several other MVPs who blogged about their experience. With so little available knowledge and experience in Brisbane, Microsoft’s <a href="https://www.linkedin.com/in/geoffnclarke/">Geoff Clarke</a> decided it would be a great idea to start a user group. It was a daunting challenge and Geoff had to twist my arm a little… but I was encouraged when over 30 people turned up at the first meetup, proving that I wasn’t alone in my struggles. I also had lots of support from Microsoft and my colleagues, and the group met monthly for years to follow.</p>
+<p>Then in 2014, I was asked to take the reigns for the <a href="https://www.meetup.com/Brisbane-Azure-User-Group/">Brisbane Azure User Group</a>, which had been established by <a href="https://www.linkedin.com/in/pbouwer/">Paul Bouwer</a> about a year or two earlier. When Paul earned his “blue card” and became a Microsoft employee that year, he felt it was inappropriate for him to continue leading the group and that a community member would be more appropriate for the role. Again, I reluctantly agreed on the condition that I had at least two co-organisers to help. One of these gentlemen (<a href="https://www.linkedin.com/in/damien-berry-47b7591/">Damien Berry</a>) remains a co-organiser to this day.</p>
+<p>I’ve also ran the <a href="http://brisbane.azurebootcamp.net/">Global Azure Bootcamp</a> in Brisbane for four years, and the <a href="https://www.integrationbootcamp.com/">Global Integration Bootcamp</a> for a couple of years as well.</p>
+<p> <a href="https://mindovermessaging.com/2019/09/26/life-as-a-user-group-leader/#more-1120" class="more-link">Read more of this post</a></p>
+<div class="clear"></div>
+
+				</div>
+
+				<div class="post-meta">
+					<p>
+						<span class="categories">Filed under <a href="https://mindovermessaging.com/category/uncategorized/" rel="category tag">Uncategorized</a></span>
+						<span class="tags">Tagged with <a href="https://mindovermessaging.com/tag/mvp/" rel="tag">MVP</a>, <a href="https://mindovermessaging.com/tag/user-group/" rel="tag">user group</a></span>					</p>
+				</div>
+
+			</div>
+
+		
+			<div class="post-1115 post type-post status-publish format-standard hentry category-azure tag-azure tag-ise tag-logic-apps">
+
+				<div class="entry">
+
+					<h2><a href="https://mindovermessaging.com/2019/08/06/new-dev-sku-for-azure-integration-service-environment-ise/">New Dev SKU for Azure Integration Service Environment&nbsp;(ISE)</a></h2>
+
+					<div class="post-info">
+						<p>
+							<span class="time">August 6, 2019</span>
+																						<span class="post-comments"><a href="https://mindovermessaging.com/2019/08/06/new-dev-sku-for-azure-integration-service-environment-ise/#comments">2 Comments</a></span>
+																				</p>
+					</div>
+
+					<p>Last week, Microsoft responded to numerous requests from the community by <a href="https://azure.microsoft.com/en-au/updates/new-developer-pricing-tier-for-integration-service-environment/">announcing a new developer tier</a> offering for <a href="https://azure.microsoft.com/en-au/blog/announcing-azure-integration-service-environment-for-logic-apps/">Integration Service Environments</a> (ISE). The ISE has been generally available for several weeks, but the single available SKU prior to this announcement carried a hefty price tag.</p>
+<p><a href="https://mindovermessaging.com/wp-content/uploads/2019/08/fromeldertwhatsapp-image-2019-06-27-at-10.59.51-am.jpg"><img loading="lazy" style="background-image:none;float:right;padding-top:0;padding-left:0;margin:0 0 0 5px;display:inline;padding-right:0;border-width:0;" title="(fromEldert)WhatsApp Image 2019-06-27 at 10.59.51 AM" src="https://mindovermessaging.com/wp-content/uploads/2019/08/fromeldertwhatsapp-image-2019-06-27-at-10.59.51-am_thumb.jpg?w=244&#038;h=139" alt="(fromEldert)WhatsApp Image 2019-06-27 at 10.59.51 AM" width="244" height="139" align="right" border="0" /></a>I had the great honour and privilege of speaking about ISE at the <a href="https://www.biztalk360.com/integrate-2019/usa/">INTEGRATE 2019</a> conference at Microsoft headquarters in Redmond, WA (USA) last month.  My topic was <em>Four Scenarios for Using an Integration Service Environment</em>, which attempted to shed some light on what type of situations would justify using this flat-cost product as opposed to the consumption-based serverless offering of <a href="https://azure.microsoft.com/en-au/services/logic-apps/">Logic Apps</a>.</p>
+<p>While this <a href="https://www.slideshare.net/dtoomey/four-scenarios-for-an-integration-service-environment-ise">presentation </a>hopefully piqued interest in the offering, one of the burning questions from the attendees was &#8220;When will a lower cost developer SKU be available so we can try it out?&#8221;  All Microsoft was able to say at that point was, &#8220;Soon.&#8221;  Well, at least they were right, as it is now available only a few weeks later!</p>
+<p> <a href="https://mindovermessaging.com/2019/08/06/new-dev-sku-for-azure-integration-service-environment-ise/#more-1115" class="more-link">Read more of this post</a></p>
+<div class="clear"></div>
+
+				</div>
+
+				<div class="post-meta">
+					<p>
+						<span class="categories">Filed under <a href="https://mindovermessaging.com/category/azure/" rel="category tag">Azure</a></span>
+						<span class="tags">Tagged with <a href="https://mindovermessaging.com/tag/azure/" rel="tag">Azure</a>, <a href="https://mindovermessaging.com/tag/ise/" rel="tag">ISE</a>, <a href="https://mindovermessaging.com/tag/logic-apps/" rel="tag">Logic Apps</a></span>					</p>
+				</div>
+
+			</div>
+
+		
+			<div class="post-1058 post type-post status-publish format-standard hentry category-azure category-events tag-azure tag-powershell tag-service-fabric">
+
+				<div class="entry">
+
+					<h2><a href="https://mindovermessaging.com/2019/03/05/faster-service-fabric-deployments-with-powershell/">Swift Service Fabric Deployments with&nbsp;PowerShell</a></h2>
+
+					<div class="post-info">
+						<p>
+							<span class="time">March 5, 2019</span>
+																						<span class="post-comments"><a href="https://mindovermessaging.com/2019/03/05/faster-service-fabric-deployments-with-powershell/#comments">1 Comment</a></span>
+																				</p>
+					</div>
+
+					
+<div class="wp-block-image"><figure class="alignright"><a href="https://mindovermessaging.com/wp-content/uploads/2019/03/presentation-1.jpg"><img src="https://mindovermessaging.com/wp-content/uploads/2019/03/presentation_thumb-1.jpg" alt="Presentation" /></a></figure></div>
+
+
+
+<p class="wp-block-paragraph">A few weeks ago I had the great privilege of presenting a 60 minute breakout session at <a href="https://www.microsoft.com/en-au/ignite-the-tour/sydney">Microsoft Ignite | The Tour in Sydney</a>. It was thrilling to have over 200 people registered to see my topic “Seamless Deployments with Azure Service Fabric”, especially in the massive Convention Centre.  </p>
+
+
+
+<p class="wp-block-paragraph">In the session I demonstrated the self-healing capabilities of Service Fabric by introducing a bug in the code and then attempting a rolling upgrade. It was impressive to see how Service Fabric detected the bug after the first node was upgraded and then immediately started rolling it back.</p>
+
+
+
+<p class="wp-block-paragraph">As you can imagine, it took a fair amount of practice to get the demo smooth and functioning within the tight time limits of the average audience attention span. <em>(In fact, I had to learn how to tweak both the cluster and the application health check settings to shorten the interval – perhaps the subject of another blog post!) </em>Naturally this also entailed frequently “resetting” the environment so that I could start over when things didn’t go quite as planned, or if I wanted to reset the version number. If you’ve ever worked with Service Fabric before you would know that deployments from Visual Studio (or Azure DevOps) can take a while; and undeploying an application from Service Fabric manually in the portal is painful!</p>
+
+
+
+ <a href="https://mindovermessaging.com/2019/03/05/faster-service-fabric-deployments-with-powershell/#more-1058" class="more-link">Read more of this post</a><div class="clear"></div>
+
+				</div>
+
+				<div class="post-meta">
+					<p>
+						<span class="categories">Filed under <a href="https://mindovermessaging.com/category/azure/" rel="category tag">Azure</a>, <a href="https://mindovermessaging.com/category/events/" rel="category tag">Events</a></span>
+						<span class="tags">Tagged with <a href="https://mindovermessaging.com/tag/azure/" rel="tag">Azure</a>, <a href="https://mindovermessaging.com/tag/powershell/" rel="tag">PowerShell</a>, <a href="https://mindovermessaging.com/tag/service-fabric/" rel="tag">Service Fabric</a></span>					</p>
+				</div>
+
+			</div>
+
+		
+			<div class="post-1041 post type-post status-publish format-standard hentry category-uncategorized tag-messaging tag-patterns">
+
+				<div class="entry">
+
+					<h2><a href="https://mindovermessaging.com/2018/12/10/how-to-explain-messaging-patterns-to-your-grandmother/">How to Explain Messaging Patterns to your&nbsp;Grandmother</a></h2>
+
+					<div class="post-info">
+						<p>
+							<span class="time">December 10, 2018</span>
+																						<span class="post-comments"><a href="https://mindovermessaging.com/2018/12/10/how-to-explain-messaging-patterns-to-your-grandmother/#comments">1 Comment</a></span>
+																				</p>
+					</div>
+
+					<p><em>First of all, I’d like to apologise to all grandmothers out there… I mean you no disrespect. It’s just meant to be a catchy title, really. I know grandmothers who are smarter than most of us.</em></p>
+<p>A couple of months ago I had the privilege of speaking at the <a href="https://www.apidays.com.au/#">API Days event in Melbourne</a>. My topic was on <a href="https://www.slideshare.net/dtoomey/building-event-driven-integration-architectures">Building Event-Driven Integration Architectures</a>, and within that talk I felt a need to compare events to messages, as Clement Vasters did so eloquently in his presentation at <a href="https://www.biztalk360.com/integrate-2018/">INTEGRATE 2018</a>. In a slight divergence within that talk I highlighted three common messaging patterns using a pizza based analogy. Given the time constraint that segment was compressed into less than a minute, but I thought it might be valuable enough to put in a blog post.</p>
+<p><a href="https://mindovermessaging.com/wp-content/uploads/2018/12/image.png"><img loading="lazy" style="background-image:none;padding-top:0;padding-left:0;display:inline;padding-right:0;border-width:0;" title="image" src="https://mindovermessaging.com/wp-content/uploads/2018/12/image_thumb.png" alt="image" width="644" height="404" border="0" /></a></p>
+<p align="center"><em>Photo courtesy of </em><a href="http://mypizzachoice.com"><em>mypizzachoice.com</em></a></p>
+<p align="center"> <a href="https://mindovermessaging.com/2018/12/10/how-to-explain-messaging-patterns-to-your-grandmother/#more-1041" class="more-link">Read more of this post</a></p>
+<div class="clear"></div>
+
+				</div>
+
+				<div class="post-meta">
+					<p>
+						<span class="categories">Filed under <a href="https://mindovermessaging.com/category/uncategorized/" rel="category tag">Uncategorized</a></span>
+						<span class="tags">Tagged with <a href="https://mindovermessaging.com/tag/messaging/" rel="tag">messaging</a>, <a href="https://mindovermessaging.com/tag/patterns/" rel="tag">patterns</a></span>					</p>
+				</div>
+
+			</div>
+
+		
+			<div class="post-1011 post type-post status-publish format-standard hentry category-azure category-biztalk category-events">
+
+				<div class="entry">
+
+					<h2><a href="https://mindovermessaging.com/2018/06/21/integrate-2018-highlights-from-another-great-event/">INTEGRATE 2018: Highlights from Another Great&nbsp;Event</a></h2>
+
+					<div class="post-info">
+						<p>
+							<span class="time">June 21, 2018</span>
+																						<span class="post-comments"><a href="https://mindovermessaging.com/2018/06/21/integrate-2018-highlights-from-another-great-event/#comments">1 Comment</a></span>
+																				</p>
+					</div>
+
+					<p><div style="width: 254px" class="wp-caption alignright"><img loading="lazy" class=" alignright" title="34777644_920192494824567_1394121413341741056_o" src="https://mindovermessaging.com/wp-content/uploads/2018/06/34777644_920192494824567_1394121413341741056_o_thumb.jpg" alt="34777644_920192494824567_1394121413341741056_o" width="244" height="139" border="0" /><p class="wp-caption-text">Photo by Tariq Sheikh</p></div></p>
+<p>Two weeks ago I had not only the privilege to attend the sixth <a href="https://www.biztalk360.com/integrate-2018/">INTEGRATE event in London</a>, but also the great honour of speaking for the second time. These events always provide a wealth of information and insight as well as opportunities to meet face-to-face with the greatest minds in the enterprise integration space. This year was no exception, with at least 24 sessions featuring as many speakers from both the Microsoft and the MVP community.</p>
+<p>As usual, the first half of the 3-day conference was devoted to the Microsoft product team, with presentations from <a href="https://twitter.com/jonfancey">Jon Fancy</a> (who also gave the keynote), <a href="https://twitter.com/kevinlam_msft">Kevin Lam</a>, <a href="https://www.linkedin.com/in/wenyangli/">Derek Li</a>, <a href="https://twitter.com/jeffhollan">Jeff Hollan</a>, <a href="https://www.linkedin.com/in/paul-larsen-919895149/">Paul Larsen</a>, <a href="https://www.linkedin.com/in/valerie-robb-16698b29/">Valerie Robb</a>, <a href="https://twitter.com/vladvino">Vladimir Vinogradsky</a>, <a href="https://twitter.com/miaojiang">Miao Jiang</a>, <a href="https://twitter.com/clemensv">Clemens Vasters</a>, <a href="https://twitter.com/DanRosanova">Dan Rosanova</a>, <a href="https://twitter.com/divyamsft">Divya Swarnkar</a>, <a href="https://twitter.com/wearsy">Kent Weare</a>, <a href="https://twitter.com/amitkumardua">Amit Kumar Dua</a>, and <a href="https://www.linkedin.com/in/matthew-farmer-6504445/">Matt Farmer</a>. For me, the highlights of these sessions were: <a href="https://mindovermessaging.com/2018/06/21/integrate-2018-highlights-from-another-great-event/#more-1011" class="more-link">Read more of this post</a></p>
+<div class="clear"></div>
+
+				</div>
+
+				<div class="post-meta">
+					<p>
+						<span class="categories">Filed under <a href="https://mindovermessaging.com/category/azure/" rel="category tag">Azure</a>, <a href="https://mindovermessaging.com/category/biztalk/" rel="category tag">BizTalk</a>, <a href="https://mindovermessaging.com/category/events/" rel="category tag">Events</a></span>
+											</p>
+				</div>
+
+			</div>
+
+		
+		<div class="navlink">
+			<div class="nav-previous"><p><a href="https://mindovermessaging.com/page/2/" ><span class="meta-nav">&larr;</span> Older posts</a></p></div>
+			<div class="nav-next"><p></p></div>
+		</div>
+
+	</div>
+
+<div id="sidebar">
+
+	<div id="calendar-2" class="widget widget_calendar"><div id="calendar_wrap" class="calendar_wrap"><table id="wp-calendar" class="wp-calendar-table">
+	<caption>September 2026</caption>
+	<thead>
+	<tr>
+		<th scope="col" aria-label="Monday">M</th>
+		<th scope="col" aria-label="Tuesday">T</th>
+		<th scope="col" aria-label="Wednesday">W</th>
+		<th scope="col" aria-label="Thursday">T</th>
+		<th scope="col" aria-label="Friday">F</th>
+		<th scope="col" aria-label="Saturday">S</th>
+		<th scope="col" aria-label="Sunday">S</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td colspan="1" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td>
+	</tr>
+	<tr>
+		<td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td>
+	</tr>
+	<tr>
+		<td>14</td><td>15</td><td>16</td><td>17</td><td id="today">18</td><td>19</td><td>20</td>
+	</tr>
+	<tr>
+		<td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td>
+	</tr>
+	<tr>
+		<td>28</td><td>29</td><td>30</td>
+		<td class="pad" colspan="4">&nbsp;</td>
+	</tr>
+	</tbody>
+	</table><nav aria-label="Previous and next months" class="wp-calendar-nav">
+		<span class="wp-calendar-nav-prev"><a href="https://mindovermessaging.com/2025/03/">&laquo; Mar</a></span>
+		<span class="pad">&nbsp;</span>
+		<span class="wp-calendar-nav-next">&nbsp;</span>
+	</nav></div></div><div id="wp_tag_cloud-2" class="widget wp_widget_tag_cloud"><h4>Tag Cloud</h4><a href="https://mindovermessaging.com/tag/ai/" class="tag-cloud-link tag-link-14067 tag-link-position-1" style="font-size: 10.065573770492pt;" aria-label="AI (2 items)">AI</a>
+<a href="https://mindovermessaging.com/tag/ai-search/" class="tag-cloud-link tag-link-10431269 tag-link-position-2" style="font-size: 8pt;" aria-label="AI Search (1 item)">AI Search</a>
+<a href="https://mindovermessaging.com/tag/apim/" class="tag-cloud-link tag-link-2603437 tag-link-position-3" style="font-size: 8pt;" aria-label="APIM (1 item)">APIM</a>
+<a href="https://mindovermessaging.com/tag/appfabic/" class="tag-cloud-link tag-link-257001247 tag-link-position-4" style="font-size: 8pt;" aria-label="AppFabic (1 item)">AppFabic</a>
+<a href="https://mindovermessaging.com/tag/artificial-intelligence/" class="tag-cloud-link tag-link-12374 tag-link-position-5" style="font-size: 8pt;" aria-label="artificial-intelligence (1 item)">artificial-intelligence</a>
+<a href="https://mindovermessaging.com/tag/azure/" class="tag-cloud-link tag-link-335778 tag-link-position-6" style="font-size: 22pt;" aria-label="Azure (32 items)">Azure</a>
+<a href="https://mindovermessaging.com/tag/azure-app-service/" class="tag-cloud-link tag-link-339826888 tag-link-position-7" style="font-size: 10.065573770492pt;" aria-label="Azure App Service (2 items)">Azure App Service</a>
+<a href="https://mindovermessaging.com/tag/azure-functions/" class="tag-cloud-link tag-link-478828745 tag-link-position-8" style="font-size: 10.065573770492pt;" aria-label="Azure Functions (2 items)">Azure Functions</a>
+<a href="https://mindovermessaging.com/tag/azure-relay/" class="tag-cloud-link tag-link-523893187 tag-link-position-9" style="font-size: 8pt;" aria-label="Azure Relay (1 item)">Azure Relay</a>
+<a href="https://mindovermessaging.com/tag/b2b/" class="tag-cloud-link tag-link-14906 tag-link-position-10" style="font-size: 12.590163934426pt;" aria-label="B2B (4 items)">B2B</a>
+<a href="https://mindovermessaging.com/tag/bam/" class="tag-cloud-link tag-link-180827 tag-link-position-11" style="font-size: 10.065573770492pt;" aria-label="BAM (2 items)">BAM</a>
+<a href="https://mindovermessaging.com/tag/baug/" class="tag-cloud-link tag-link-10135497 tag-link-position-12" style="font-size: 13.508196721311pt;" aria-label="BAUG (5 items)">BAUG</a>
+<a href="https://mindovermessaging.com/tag/biztalk/" class="tag-cloud-link tag-link-11073 tag-link-position-13" style="font-size: 21.540983606557pt;" aria-label="BizTalk (29 items)">BizTalk</a>
+<a href="https://mindovermessaging.com/tag/biztalk360/" class="tag-cloud-link tag-link-154312251 tag-link-position-14" style="font-size: 14.311475409836pt;" aria-label="BizTalk360 (6 items)">BizTalk360</a>
+<a href="https://mindovermessaging.com/tag/biztalk-2013/" class="tag-cloud-link tag-link-123116482 tag-link-position-15" style="font-size: 16.032786885246pt;" aria-label="BizTalk 2013 (9 items)">BizTalk 2013</a>
+<a href="https://mindovermessaging.com/tag/biztalk-2016/" class="tag-cloud-link tag-link-432453484 tag-link-position-16" style="font-size: 11.44262295082pt;" aria-label="BizTalk 2016 (3 items)">BizTalk 2016</a>
+<a href="https://mindovermessaging.com/tag/biztalk-saturday/" class="tag-cloud-link tag-link-159368563 tag-link-position-17" style="font-size: 10.065573770492pt;" aria-label="BizTalk Saturday (2 items)">BizTalk Saturday</a>
+<a href="https://mindovermessaging.com/tag/biztalk-services/" class="tag-cloud-link tag-link-1076049 tag-link-position-18" style="font-size: 19.245901639344pt;" aria-label="BizTalk Services (18 items)">BizTalk Services</a>
+<a href="https://mindovermessaging.com/tag/biztalk-summit/" class="tag-cloud-link tag-link-197651482 tag-link-position-19" style="font-size: 13.508196721311pt;" aria-label="BizTalk Summit (5 items)">BizTalk Summit</a>
+<a href="https://mindovermessaging.com/tag/btdf/" class="tag-cloud-link tag-link-74922288 tag-link-position-20" style="font-size: 8pt;" aria-label="BTDF (1 item)">BTDF</a>
+<a href="https://mindovermessaging.com/tag/certification/" class="tag-cloud-link tag-link-11198 tag-link-position-21" style="font-size: 11.44262295082pt;" aria-label="certification (3 items)">certification</a>
+<a href="https://mindovermessaging.com/tag/configuration/" class="tag-cloud-link tag-link-45809 tag-link-position-22" style="font-size: 13.508196721311pt;" aria-label="configuration (5 items)">configuration</a>
+<a href="https://mindovermessaging.com/tag/copilot/" class="tag-cloud-link tag-link-1254252 tag-link-position-23" style="font-size: 8pt;" aria-label="Copilot (1 item)">Copilot</a>
+<a href="https://mindovermessaging.com/tag/dih/" class="tag-cloud-link tag-link-3809306 tag-link-position-24" style="font-size: 8pt;" aria-label="DIH (1 item)">DIH</a>
+<a href="https://mindovermessaging.com/tag/documentation/" class="tag-cloud-link tag-link-19551 tag-link-position-25" style="font-size: 8pt;" aria-label="documentation (1 item)">documentation</a>
+<a href="https://mindovermessaging.com/tag/eai/" class="tag-cloud-link tag-link-43541 tag-link-position-26" style="font-size: 11.44262295082pt;" aria-label="EAI (3 items)">EAI</a>
+<a href="https://mindovermessaging.com/tag/edi/" class="tag-cloud-link tag-link-163492 tag-link-position-27" style="font-size: 14.311475409836pt;" aria-label="EDI (6 items)">EDI</a>
+<a href="https://mindovermessaging.com/tag/event-grid/" class="tag-cloud-link tag-link-416867271 tag-link-position-28" style="font-size: 13.508196721311pt;" aria-label="Event Grid (5 items)">Event Grid</a>
+<a href="https://mindovermessaging.com/tag/functoids/" class="tag-cloud-link tag-link-1053867 tag-link-position-29" style="font-size: 12.590163934426pt;" aria-label="functoids (4 items)">functoids</a>
+<a href="https://mindovermessaging.com/tag/hybrid-connections/" class="tag-cloud-link tag-link-2396074 tag-link-position-30" style="font-size: 16.491803278689pt;" aria-label="Hybrid Connections (10 items)">Hybrid Connections</a>
+<a href="https://mindovermessaging.com/tag/iaas/" class="tag-cloud-link tag-link-1419732 tag-link-position-31" style="font-size: 10.065573770492pt;" aria-label="IaaS (2 items)">IaaS</a>
+<a href="https://mindovermessaging.com/tag/ignite/" class="tag-cloud-link tag-link-20851 tag-link-position-32" style="font-size: 8pt;" aria-label="Ignite (1 item)">Ignite</a>
+<a href="https://mindovermessaging.com/tag/ipaas/" class="tag-cloud-link tag-link-60944247 tag-link-position-33" style="font-size: 10.065573770492pt;" aria-label="iPaaS (2 items)">iPaaS</a>
+<a href="https://mindovermessaging.com/tag/ise/" class="tag-cloud-link tag-link-936037 tag-link-position-34" style="font-size: 8pt;" aria-label="ISE (1 item)">ISE</a>
+<a href="https://mindovermessaging.com/tag/json/" class="tag-cloud-link tag-link-72721 tag-link-position-35" style="font-size: 8pt;" aria-label="JSON (1 item)">JSON</a>
+<a href="https://mindovermessaging.com/tag/llm/" class="tag-cloud-link tag-link-642672 tag-link-position-36" style="font-size: 8pt;" aria-label="llm (1 item)">llm</a>
+<a href="https://mindovermessaging.com/tag/logic-apps/" class="tag-cloud-link tag-link-230405003 tag-link-position-37" style="font-size: 13.508196721311pt;" aria-label="Logic Apps (5 items)">Logic Apps</a>
+<a href="https://mindovermessaging.com/tag/mabs/" class="tag-cloud-link tag-link-6170423 tag-link-position-38" style="font-size: 18.327868852459pt;" aria-label="MABS (15 items)">MABS</a>
+<a href="https://mindovermessaging.com/tag/mapper/" class="tag-cloud-link tag-link-3875929 tag-link-position-39" style="font-size: 13.508196721311pt;" aria-label="Mapper (5 items)">Mapper</a>
+<a href="https://mindovermessaging.com/tag/messaging/" class="tag-cloud-link tag-link-108919 tag-link-position-40" style="font-size: 8pt;" aria-label="messaging (1 item)">messaging</a>
+<a href="https://mindovermessaging.com/tag/mexia/" class="tag-cloud-link tag-link-9588394 tag-link-position-41" style="font-size: 10.065573770492pt;" aria-label="Mexia (2 items)">Mexia</a>
+<a href="https://mindovermessaging.com/tag/microservices/" class="tag-cloud-link tag-link-17060625 tag-link-position-42" style="font-size: 11.44262295082pt;" aria-label="microservices (3 items)">microservices</a>
+<a href="https://mindovermessaging.com/tag/mobile/" class="tag-cloud-link tag-link-120 tag-link-position-43" style="font-size: 10.065573770492pt;" aria-label="mobile (2 items)">mobile</a>
+<a href="https://mindovermessaging.com/tag/movember/" class="tag-cloud-link tag-link-317813 tag-link-position-44" style="font-size: 8pt;" aria-label="movember (1 item)">movember</a>
+<a href="https://mindovermessaging.com/tag/mvp/" class="tag-cloud-link tag-link-224713 tag-link-position-45" style="font-size: 14.311475409836pt;" aria-label="MVP (6 items)">MVP</a>
+<a href="https://mindovermessaging.com/tag/openai/" class="tag-cloud-link tag-link-102117159 tag-link-position-46" style="font-size: 8pt;" aria-label="OpenAI (1 item)">OpenAI</a>
+<a href="https://mindovermessaging.com/tag/operational-support/" class="tag-cloud-link tag-link-8558674 tag-link-position-47" style="font-size: 11.44262295082pt;" aria-label="Operational Support (3 items)">Operational Support</a>
+<a href="https://mindovermessaging.com/tag/patterns/" class="tag-cloud-link tag-link-5604 tag-link-position-48" style="font-size: 8pt;" aria-label="patterns (1 item)">patterns</a>
+<a href="https://mindovermessaging.com/tag/pipeline/" class="tag-cloud-link tag-link-34463 tag-link-position-49" style="font-size: 10.065573770492pt;" aria-label="pipeline (2 items)">pipeline</a>
+<a href="https://mindovermessaging.com/tag/pluralsight/" class="tag-cloud-link tag-link-36048006 tag-link-position-50" style="font-size: 11.44262295082pt;" aria-label="Pluralsight (3 items)">Pluralsight</a>
+<a href="https://mindovermessaging.com/tag/powershell/" class="tag-cloud-link tag-link-178495 tag-link-position-51" style="font-size: 10.065573770492pt;" aria-label="PowerShell (2 items)">PowerShell</a>
+<a href="https://mindovermessaging.com/tag/rag/" class="tag-cloud-link tag-link-648259 tag-link-position-52" style="font-size: 8pt;" aria-label="RAG (1 item)">RAG</a>
+<a href="https://mindovermessaging.com/tag/rest/" class="tag-cloud-link tag-link-15314 tag-link-position-53" style="font-size: 11.44262295082pt;" aria-label="REST (3 items)">REST</a>
+<a href="https://mindovermessaging.com/tag/schema/" class="tag-cloud-link tag-link-778497 tag-link-position-54" style="font-size: 13.508196721311pt;" aria-label="schema (5 items)">schema</a>
+<a href="https://mindovermessaging.com/tag/serverless/" class="tag-cloud-link tag-link-2092318 tag-link-position-55" style="font-size: 8pt;" aria-label="Serverless (1 item)">Serverless</a>
+<a href="https://mindovermessaging.com/tag/service-bus/" class="tag-cloud-link tag-link-5546455 tag-link-position-56" style="font-size: 18.098360655738pt;" aria-label="Service Bus (14 items)">Service Bus</a>
+<a href="https://mindovermessaging.com/tag/service-fabric/" class="tag-cloud-link tag-link-170976025 tag-link-position-57" style="font-size: 12.590163934426pt;" aria-label="Service Fabric (4 items)">Service Fabric</a>
+<a href="https://mindovermessaging.com/tag/sql-server/" class="tag-cloud-link tag-link-6407 tag-link-position-58" style="font-size: 13.508196721311pt;" aria-label="SQL Server (5 items)">SQL Server</a>
+<a href="https://mindovermessaging.com/tag/sso/" class="tag-cloud-link tag-link-325304 tag-link-position-59" style="font-size: 8pt;" aria-label="SSO (1 item)">SSO</a>
+<a href="https://mindovermessaging.com/tag/user-group/" class="tag-cloud-link tag-link-110515 tag-link-position-60" style="font-size: 18.672131147541pt;" aria-label="user group (16 items)">user group</a>
+<a href="https://mindovermessaging.com/tag/validation/" class="tag-cloud-link tag-link-53079 tag-link-position-61" style="font-size: 11.44262295082pt;" aria-label="validation (3 items)">validation</a>
+<a href="https://mindovermessaging.com/tag/wcf/" class="tag-cloud-link tag-link-46648 tag-link-position-62" style="font-size: 12.590163934426pt;" aria-label="WCF (4 items)">WCF</a>
+<a href="https://mindovermessaging.com/tag/webcast/" class="tag-cloud-link tag-link-65726 tag-link-position-63" style="font-size: 16.491803278689pt;" aria-label="webcast (10 items)">webcast</a>
+<a href="https://mindovermessaging.com/tag/xml/" class="tag-cloud-link tag-link-6852 tag-link-position-64" style="font-size: 14.885245901639pt;" aria-label="XML (7 items)">XML</a>
+<a href="https://mindovermessaging.com/tag/xpath/" class="tag-cloud-link tag-link-99556 tag-link-position-65" style="font-size: 10.065573770492pt;" aria-label="XPath (2 items)">XPath</a>
+<a href="https://mindovermessaging.com/tag/xslt/" class="tag-cloud-link tag-link-11437 tag-link-position-66" style="font-size: 11.44262295082pt;" aria-label="XSLT (3 items)">XSLT</a></div>
+		<div id="recent-posts-3" class="widget widget_recent_entries">
+		<h4>Recent Posts</h4>
+		<ul>
+											<li>
+					<a href="https://mindovermessaging.com/2025/03/28/building-a-complete-rag-application-in-azure-with-no-code/">Building a Complete RAG Application in Azure with No&nbsp;Code</a>
+									</li>
+											<li>
+					<a href="https://mindovermessaging.com/2024/03/13/copilot-for-azure-logic-apps-standard/">Copilot for Azure Logic Apps&nbsp;Standard</a>
+									</li>
+											<li>
+					<a href="https://mindovermessaging.com/2022/03/29/maximising-your-apis-with-a-digital-integration-hub/">Maximising Your APIs with a Digital Integration&nbsp;Hub</a>
+									</li>
+											<li>
+					<a href="https://mindovermessaging.com/2020/05/19/sneak-peak-my-integrate-2020-remote-presentation-on-azure-event-grid/">Sneak Peak: My Integrate 2020 Remote Presentation on Azure Event&nbsp;Grid</a>
+									</li>
+											<li>
+					<a href="https://mindovermessaging.com/2019/11/14/hairy-causes-a-movember-to-remember/">Hairy Causes: A Movember to&nbsp;Remember</a>
+									</li>
+					</ul>
+
+		</div><div id="media_image-2" class="widget widget_media_image"><h4>Pluralsight Free Trial</h4><style>.widget.widget_media_image { overflow: hidden; }.widget.widget_media_image img { height: auto; max-width: 100%; }</style><a href="http://www.shareasale.com/r.cfm?b=652750&#038;u=1025054&#038;m=53701&#038;urllink=&#038;afftrack="><img class="image aligncenter" src="http://static.shareasale.com/image/53701/pl_250x250.gif" alt="Pluralsight" width="250" height="250" /></a></div><div id="archives-3" class="widget widget_archive"><h4>Archives</h4>
+			<ul>
+					<li><a href='https://mindovermessaging.com/2025/03/'>March 2025</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2024/03/'>March 2024</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2022/03/'>March 2022</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2020/05/'>May 2020</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2019/11/'>November 2019</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2019/09/'>September 2019</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2019/08/'>August 2019</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2019/03/'>March 2019</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2018/12/'>December 2018</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2018/06/'>June 2018</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2018/04/'>April 2018</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2018/03/'>March 2018</a>&nbsp;(2)</li>
+	<li><a href='https://mindovermessaging.com/2018/01/'>January 2018</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2017/11/'>November 2017</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2017/09/'>September 2017</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2017/07/'>July 2017</a>&nbsp;(2)</li>
+	<li><a href='https://mindovermessaging.com/2017/06/'>June 2017</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2017/04/'>April 2017</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2017/02/'>February 2017</a>&nbsp;(2)</li>
+	<li><a href='https://mindovermessaging.com/2016/12/'>December 2016</a>&nbsp;(2)</li>
+	<li><a href='https://mindovermessaging.com/2016/08/'>August 2016</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2016/06/'>June 2016</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2016/05/'>May 2016</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2016/03/'>March 2016</a>&nbsp;(2)</li>
+	<li><a href='https://mindovermessaging.com/2016/02/'>February 2016</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2016/01/'>January 2016</a>&nbsp;(2)</li>
+	<li><a href='https://mindovermessaging.com/2015/12/'>December 2015</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2015/06/'>June 2015</a>&nbsp;(3)</li>
+	<li><a href='https://mindovermessaging.com/2015/05/'>May 2015</a>&nbsp;(2)</li>
+	<li><a href='https://mindovermessaging.com/2015/03/'>March 2015</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2014/12/'>December 2014</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2014/11/'>November 2014</a>&nbsp;(2)</li>
+	<li><a href='https://mindovermessaging.com/2014/10/'>October 2014</a>&nbsp;(3)</li>
+	<li><a href='https://mindovermessaging.com/2014/09/'>September 2014</a>&nbsp;(3)</li>
+	<li><a href='https://mindovermessaging.com/2014/08/'>August 2014</a>&nbsp;(5)</li>
+	<li><a href='https://mindovermessaging.com/2014/07/'>July 2014</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2014/06/'>June 2014</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2014/05/'>May 2014</a>&nbsp;(2)</li>
+	<li><a href='https://mindovermessaging.com/2014/02/'>February 2014</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2013/11/'>November 2013</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2013/10/'>October 2013</a>&nbsp;(2)</li>
+	<li><a href='https://mindovermessaging.com/2013/09/'>September 2013</a>&nbsp;(5)</li>
+	<li><a href='https://mindovermessaging.com/2013/08/'>August 2013</a>&nbsp;(1)</li>
+	<li><a href='https://mindovermessaging.com/2013/07/'>July 2013</a>&nbsp;(2)</li>
+	<li><a href='https://mindovermessaging.com/2013/06/'>June 2013</a>&nbsp;(2)</li>
+	<li><a href='https://mindovermessaging.com/2013/05/'>May 2013</a>&nbsp;(4)</li>
+	<li><a href='https://mindovermessaging.com/2013/04/'>April 2013</a>&nbsp;(5)</li>
+	<li><a href='https://mindovermessaging.com/2013/03/'>March 2013</a>&nbsp;(5)</li>
+	<li><a href='https://mindovermessaging.com/2013/02/'>February 2013</a>&nbsp;(6)</li>
+			</ul>
+
+			</div><div id="blog_subscription-2" class="widget widget_blog_subscription jetpack_subscription_widget"><h4><label for="subscribe-field">Follow Blog via Email</label></h4>
+
+			<div class="wp-block-jetpack-subscriptions__container">
+			<form
+				action="https://subscribe.wordpress.com"
+				method="post"
+				accept-charset="utf-8"
+				data-blog="46851543"
+				data-post_access_level="everybody"
+				id="subscribe-blog"
+			>
+				<p>Enter your email address to follow this blog and receive notifications of new posts by email.</p>
+				<p id="subscribe-email">
+					<label
+						id="subscribe-field-label"
+						for="subscribe-field"
+						class="screen-reader-text"
+					>
+						Email Address:					</label>
+
+					<input
+							type="email"
+							name="email"
+							autocomplete="email"
+							
+							style="width: 95%; padding: 1px 10px"
+							placeholder="Email Address"
+							value=""
+							id="subscribe-field"
+							required
+						/>				</p>
+
+				<p id="subscribe-submit"
+									>
+					<input type="hidden" name="action" value="subscribe"/>
+					<input type="hidden" name="blog_id" value="46851543"/>
+					<input type="hidden" name="source" value="https://mindovermessaging.com/"/>
+					<input type="hidden" name="sub-type" value="widget"/>
+					<input type="hidden" name="redirect_fragment" value="subscribe-blog"/>
+					<input type="hidden" id="_wpnonce" name="_wpnonce" value="7d2c212a32" />					<button type="submit"
+													class="wp-block-button__link"
+																	>
+						Follow					</button>
+				</p>
+			</form>
+							<div class="wp-block-jetpack-subscriptions__subscount">
+					Join 35 other subscribers				</div>
+						</div>
+			
+</div><div id="twitter-2" class="widget widget_twitter"><h4><a href='http://twitter.com/daniel2me'>My Latest Tweets</a></h4><a class="twitter-timeline" data-height="600" data-dnt="true" href="https://twitter.com/daniel2me">Tweets by daniel2me</a></div><div id="blog-stats-3" class="widget widget_blog-stats"><h4>Blog Stats</h4>		<ul>
+			<li>129,697 hits</li>
+		</ul>
+		</div><div id="jp_blogs_i_follow-2" class="widget widget_jp_blogs_i_follow"><h4>Blogs I Follow</h4><ul><li><a href="http://jglisson73.wordpress.com" class="bump-view" data-bump-view="bif">John Glisson - Geek of the Cloth</a></li><li><a href="http://prashantbiztalkblogs.wordpress.com" class="bump-view" data-bump-view="bif">Prashant BizTalk And Azure Integration Blogs</a></li><li><a href="http://thecrucible.wordpress.com" class="bump-view" data-bump-view="bif">The CRUCIBLE</a></li><li><a href="http://abdulrafaysbiztalk.wordpress.com" class="bump-view" data-bump-view="bif">Architecture for cloud and integration</a></li><li><a href="http://cdijkgraaf.wordpress.com" class="bump-view" data-bump-view="bif">BizTalk musings</a></li><li><a href="http://fafach.wordpress.com" class="bump-view" data-bump-view="bif">EAI Guy.net</a></li><li><a href="http://www.connected-pawns.com/" class="bump-view" data-bump-view="bif">Connected Pawns</a></li><li><a href="http://adventuresinsidethemessagebox.wordpress.com" class="bump-view" data-bump-view="bif">Adventures inside the Message Box</a></li><li><a href="http://biztalktalk.wordpress.com" class="bump-view" data-bump-view="bif">Biz(Talk)2</a></li><li><a href="http://seroter.com" class="bump-view" data-bump-view="bif">Richard Seroter&#039;s Architecture Musings</a></li><li><a href="http://blog.sandro-pereira.com" class="bump-view" data-bump-view="bif">Sandro Pereira BizTalk Blog</a></li><li><a href="http://brisbaneazure.wordpress.com" class="bump-view" data-bump-view="bif">Brisbane Azure User Group</a></li><li><a href="http://mindovermessaging.com" class="bump-view" data-bump-view="bif">Mind Over Messaging</a></li><li><a href="http://en.blog.wordpress.com" class="bump-view" data-bump-view="bif">WordPress.com Blog</a></li></ul></div>
+</div>
+</div>
+
+<div id="footer-widgeted">
+    <div class="footer-widgeted-1">
+        <div id="text-3" class="widget widget_text">			<div class="textwidget"><a href="https://mindovermessaging.wordpress.com/about/">About the Author</a></div>
+		</div>    </div>
+    <div class="footer-widgeted-2">
+        <div id="text-2" class="widget widget_text">			<div class="textwidget"><div style="text-align:center;"><a href="https://mindovermessaging.wordpress.com/disclaimer/">Terms &amp; Conditions</a></div></div>
+		</div>    </div>
+    <div class="footer-widgeted-3">
+        <div id="text-4" class="widget widget_text">			<div class="textwidget"><div style="text-align:right;">All Content &copy;2017, Mind Over Messaging</div></div>
+		</div>    </div>
+</div>
+
+<div id="footer">
+	<div class="footerleft">
+		<p><a href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog at WordPress.com.</a></p>
+    </div>
+    <div class="footerright">
+	        </div>
+</div>
+
+</div>
+
+		<script type="text/javascript">
+		var infiniteScroll = {"settings":{"id":"content-left","ajaxurl":"https://mindovermessaging.com/?infinity=scrolling","type":"click","wrapper":true,"wrapper_class":"infinite-wrap","footer":true,"click_handle":"1","text":"Older posts","totop":"Scroll back to top","currentday":"21.06.18","order":"DESC","scripts":[],"styles":[],"google_analytics":false,"offset":1,"history":{"host":"mindovermessaging.com","path":"/page/%d/","use_trailing_slashes":true,"parameters":""},"query_args":{"error":"","m":"","p":0,"post_parent":"","subpost":"","subpost_id":"","attachment":"","attachment_id":0,"name":"","pagename":"","page_id":0,"second":"","minute":"","hour":"","day":0,"monthnum":0,"year":0,"w":0,"category_name":"","tag":"","cat":"","tag_id":"","author":"","author_name":"","feed":"","tb":"","paged":0,"meta_key":"","meta_value":"","preview":"","s":"","sentence":"","title":"","fields":"all","menu_order":"","embed":"","category__in":[],"category__not_in":[],"category__and":[],"post__in":[],"post__not_in":[],"post_name__in":[],"tag__in":[],"tag__not_in":[],"tag__and":[],"tag_slug__in":[],"tag_slug__and":[],"post_parent__in":[],"post_parent__not_in":[],"author__in":[],"author__not_in":[],"search_columns":[],"lazy_load_term_meta":false,"posts_per_page":10,"ignore_sticky_posts":false,"suppress_filters":false,"cache_results":true,"update_post_term_cache":true,"update_menu_item_cache":false,"update_post_meta_cache":true,"post_type":"","nopaging":false,"comments_per_page":"50","no_found_rows":false,"order":"DESC"},"query_before":"2026-09-18 23:37:40","last_post_date":"2018-06-21 12:02:49","body_class":"infinite-scroll","loading_text":"Loading new page","stats":"blog=46851543\u0026v=wpcom\u0026tz=0\u0026user_id=0\u0026arch_home=1\u0026subd=mindovermessaging\u0026x_pagetype=infinite-click"}};
+		</script>
+		<!--  -->
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/files/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/pub/enterprise/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<div id="wpcom-follow-bubbles-jp_blogs_i_follow-2" class="wpcom-follow-bubbles"><div id="wpcom-bubble-jp_blogs_i_follow-2-1" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://jglisson73.wordpress.com" class="bump-view" data-bump-view="bif">John Glisson - Geek of the Cloth</a><p><small>Thoughts on integration, technology and what-not...</small></p></div></div><div id="wpcom-bubble-jp_blogs_i_follow-2-2" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://prashantbiztalkblogs.wordpress.com" class="bump-view" data-bump-view="bif">Prashant BizTalk And Azure Integration Blogs</a><p><small>My Integration Experiences - BizTalk And Azure Integration</small></p></div></div><div id="wpcom-bubble-jp_blogs_i_follow-2-3" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://thecrucible.wordpress.com" class="bump-view" data-bump-view="bif">The CRUCIBLE</a><p><small>THINK:  It&#039;s not illegal....yet.....</small></p></div></div><div id="wpcom-bubble-jp_blogs_i_follow-2-4" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://abdulrafaysbiztalk.wordpress.com" class="bump-view" data-bump-view="bif">Architecture for cloud and integration</a><p><small>Abdul Rafay&#039;s experiences with software architecture, integration, cloud and things around it.</small></p></div></div><div id="wpcom-bubble-jp_blogs_i_follow-2-5" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://cdijkgraaf.wordpress.com" class="bump-view" data-bump-view="bif">BizTalk musings</a><p><small>Issues, patterns and useful tips for BizTalk development</small></p></div></div><div id="wpcom-bubble-jp_blogs_i_follow-2-6" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://fafach.wordpress.com" class="bump-view" data-bump-view="bif">EAI Guy.net</a><p><small>Enterprise Applicaiton Integration and SOA 2.0</small></p></div></div><div id="wpcom-bubble-jp_blogs_i_follow-2-7" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://www.connected-pawns.com/" class="bump-view" data-bump-view="bif">Connected Pawns</a><p><small>Mainly BizTalk &amp; Little Chess</small></p></div></div><div id="wpcom-bubble-jp_blogs_i_follow-2-8" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://adventuresinsidethemessagebox.wordpress.com" class="bump-view" data-bump-view="bif">Adventures inside the Message Box</a><p><small>BizTalk, Azure, and other tools in the Microsoft stack - Johann Cooper</small></p></div></div><div id="wpcom-bubble-jp_blogs_i_follow-2-9" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://biztalktalk.wordpress.com" class="bump-view" data-bump-view="bif">Biz(Talk)2</a><p><small>Talk, talk and more talk about BizTalk</small></p></div></div><div id="wpcom-bubble-jp_blogs_i_follow-2-10" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://seroter.com" class="bump-view" data-bump-view="bif">Richard Seroter&#039;s Architecture Musings</a><p><small>Blog Featuring Links, Code, Thoughts, and Experiences with Software, AI, and Cloud Services</small></p></div></div><div id="wpcom-bubble-jp_blogs_i_follow-2-11" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://blog.sandro-pereira.com" class="bump-view" data-bump-view="bif">Sandro Pereira BizTalk Blog</a><p><small>My notes about BizTalk Server 2004, 2006, 2006 R2, 2009, 2010, 2013 and now also Windows Azure BizTalk Services.</small></p></div></div><div id="wpcom-bubble-jp_blogs_i_follow-2-12" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://brisbaneazure.wordpress.com" class="bump-view" data-bump-view="bif">Brisbane Azure User Group</a><p></p></div></div><div id="wpcom-bubble-jp_blogs_i_follow-2-13" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://mindovermessaging.com" class="bump-view" data-bump-view="bif">Mind Over Messaging</a><p><small>Musings on BizTalk, Azure, and Enterprise Integration</small></p></div></div><div id="wpcom-bubble-jp_blogs_i_follow-2-14" class="wpcom-bubble wpcom-follow-bubble"><div class="bubble-txt"><a href="http://en.blog.wordpress.com" class="bump-view" data-bump-view="bif">WordPress.com Blog</a><p><small>News, Tips &amp; Website Tutorials</small></p></div></div></div><script id="grofiles-cards-js" src="//0.gravatar.com/js/hovercards/hovercards.min.js?ver=202638d1133547e8a1f2801609f51cef12522abe7f6647d869e9fbc974fe356a37e613"></script>
+<script id="wpgroho-js-extra">
+var WPGroHo = {"my_hash":""};
+//# sourceURL=wpgroho-js-extra
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1610363240i'></script>
+
+	<script>
+		// Initialize and attach hovercards to all gravatars
+		( function() {
+			function init() {
+				if ( typeof Gravatar === 'undefined' ) {
+					return;
+				}
+
+				if ( typeof Gravatar.init !== 'function' ) {
+					return;
+				}
+
+				Gravatar.profile_cb = function ( hash, id ) {
+					WPGroHo.syncProfileData( hash, id );
+				};
+
+				Gravatar.my_hash = WPGroHo.my_hash;
+				Gravatar.init(
+					'body',
+					'#wp-admin-bar-my-account',
+					{
+						i18n: {
+							'Edit your profile →': 'Edit your profile →',
+							'View profile →': 'View profile →',
+							'Contact': 'Contact',
+							'Send money': 'Send money',
+							'Sorry, we are unable to load this Gravatar profile.': 'Sorry, we are unable to load this Gravatar profile.',
+							'Gravatar not found.': 'Gravatar not found.',
+							'Too Many Requests.': 'Too Many Requests.',
+							'Internal Server Error.': 'Internal Server Error.',
+							'Is this you?': 'Is this you?',
+							'Claim your free profile.': 'Claim your free profile.',
+							'Email': 'Email',
+							'Home Phone': 'Home Phone',
+							'Work Phone': 'Work Phone',
+							'Cell Phone': 'Cell Phone',
+							'Contact Form': 'Contact Form',
+							'Calendar': 'Calendar',
+						},
+					}
+				);
+			}
+
+			if ( document.readyState !== 'loading' ) {
+				init();
+			} else {
+				document.addEventListener( 'DOMContentLoaded', init );
+			}
+		} )();
+	</script>
+
+		<div style="display:none">
+	</div>
+		<div id="actionbar" dir="ltr" style="display: none;"
+			class="actnbr-pub-enterprise actnbr-has-follow actnbr-has-actions">
+		<ul>
+								<li class="actnbr-btn actnbr-hidden">
+								<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+							<div class="actnbr-popover tip tip-top-left actnbr-notice" id="follow-bubble">
+							<div class="tip-arrow"></div>
+							<div class="tip-inner actnbr-follow-bubble">
+															<ul>
+											<li class="actnbr-sitename">
+			<a href="https://mindovermessaging.com">
+				<img loading='lazy' alt='' src='https://s0.wp.com/i/logo/wpcom-gray-white.png?m=1479929237i' srcset='https://s0.wp.com/i/logo/wpcom-gray-white.png 1x' class='avatar avatar-50' height='50' width='50' />				Mind Over Messaging			</a>
+		</li>
+										<div class="actnbr-message no-display"></div>
+									<form method="post" action="https://subscribe.wordpress.com" accept-charset="utf-8" style="display: none;">
+																						<div class="actnbr-follow-count">Join 35 other subscribers</div>
+																					<div>
+										<input type="email" name="email" placeholder="Enter your email address" class="actnbr-email-field" aria-label="Enter your email address" />
+										</div>
+										<input type="hidden" name="action" value="subscribe" />
+										<input type="hidden" name="blog_id" value="46851543" />
+										<input type="hidden" name="source" value="https://mindovermessaging.com/" />
+										<input type="hidden" name="sub-type" value="actionbar-follow" />
+										<input type="hidden" id="_wpnonce" name="_wpnonce" value="7d2c212a32" />										<div class="actnbr-button-wrap">
+											<button type="submit" value="Sign me up">
+												Sign me up											</button>
+										</div>
+									</form>
+									<li class="actnbr-login-nudge">
+										<div>
+											Already have a WordPress.com account? <a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fmindovermessaging.com%252F2025%252F03%252F28%252Fbuilding-a-complete-rag-application-in-azure-with-no-code%252F">Log in now.</a>										</div>
+									</li>
+								</ul>
+															</div>
+						</div>
+					</li>
+							<li class="actnbr-ellipsis actnbr-hidden">
+				<svg class="gridicon gridicons-ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"/></g></svg>				<div class="actnbr-popover tip tip-top-left actnbr-more">
+					<div class="tip-arrow"></div>
+					<div class="tip-inner">
+						<ul>
+								<li class="actnbr-sitename">
+			<a href="https://mindovermessaging.com">
+				<img loading='lazy' alt='' src='https://s0.wp.com/i/logo/wpcom-gray-white.png?m=1479929237i' srcset='https://s0.wp.com/i/logo/wpcom-gray-white.png 1x' class='avatar avatar-50' height='50' width='50' />				Mind Over Messaging			</a>
+		</li>
+								<li class="actnbr-folded-follow">
+										<a class="actnbr-action actnbr-actn-follow " href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path clip-rule="evenodd" d="m4 4.5h12v6.5h1.5v-6.5-1.5h-1.5-12-1.5v1.5 10.5c0 1.1046.89543 2 2 2h7v-1.5h-7c-.27614 0-.5-.2239-.5-.5zm10.5 2h-9v1.5h9zm-5 3h-4v1.5h4zm3.5 1.5h-1v1h1zm-1-1.5h-1.5v1.5 1 1.5h1.5 1 1.5v-1.5-1-1.5h-1.5zm-2.5 2.5h-4v1.5h4zm6.5 1.25h1.5v2.25h2.25v1.5h-2.25v2.25h-1.5v-2.25h-2.25v-1.5h2.25z"  fill-rule="evenodd"></path></svg>
+			<span>Subscribe</span>
+		</a>
+		<a class="actnbr-action actnbr-actn-following  no-display" href="">
+			<svg class="gridicon" height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 4.5H4V15C4 15.2761 4.22386 15.5 4.5 15.5H11.5V17H4.5C3.39543 17 2.5 16.1046 2.5 15V3H17.5V12.5H16V4.5ZM5.5 6.5H14.5V8H5.5V6.5ZM5.5 9.5H9.5V11H5.5V9.5ZM12 11H13V12H12V11ZM10.5 9.5H14.5V13.5H10.5V9.5ZM5.5 12H9.5V13.5H5.5V12Z" fill="#008A20"></path><path d="M19.5303 15.0303L15.5 19.0605L12.9697 16.5303L14.0303 15.4697L15.5 16.9395L18.4697 13.9697L19.5303 15.0303Z" fill="#008A20"></path></svg>
+			<span>Subscribed</span>
+		</a>
+								</li>
+														<li class="actnbr-signup"><a href="https://wordpress.com/start/">Sign up</a></li>
+							<li class="actnbr-login"><a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fmindovermessaging.com%252F2025%252F03%252F28%252Fbuilding-a-complete-rag-application-in-azure-with-no-code%252F">Log in</a></li>
+															<li class="flb-report">
+									<a href="https://wordpress.com/abuse/?report_url=https://mindovermessaging.com" target="_blank" rel="noopener noreferrer">
+										Report this content									</a>
+								</li>
+															<li class="actnbr-reader">
+									<a href="https://wordpress.com/reader/feeds/13624497">
+										View site in Reader									</a>
+								</li>
+															<li class="actnbr-subs">
+									<a href="https://subscribe.wordpress.com/">Manage subscriptions</a>
+								</li>
+																<li class="actnbr-fold"><a href="">Collapse this bar</a></li>
+														</ul>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+<script>
+window.addEventListener( "DOMContentLoaded", function( event ) {
+	var link = document.createElement( "link" );
+	link.href = "/wp-content/mu-plugins/actionbar/actionbar.css?v=20250116";
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	document.head.appendChild( link );
+
+	var script = document.createElement( "script" );
+	script.src = "/wp-content/mu-plugins/actionbar/actionbar.js?v=20250204";
+	document.body.appendChild( script );
+} );
+</script>
+
+			<div id="jp-carousel-loading-overlay" style="display: none;">
+			<div id="jp-carousel-loading-wrapper">
+				<span id="jp-carousel-library-loading"><svg class="jetpack-spinner" width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg></span>
+			</div>
+		</div>
+		<div class="jp-carousel-overlay" style="display: none;">
+
+		<div class="jp-carousel-container">
+			<!-- The Carousel Swiper -->
+			<div
+				class="jp-carousel-wrap swiper jp-carousel-swiper-container jp-carousel-transitions"
+				itemscope
+				itemtype="https://schema.org/ImageGallery">
+				<div class="jp-carousel swiper-wrapper"></div>
+				<div class="jp-swiper-button-prev swiper-button-prev">
+					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<mask id="maskPrev" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="9" height="12">
+							<path d="M16.2072 16.59L11.6496 12L16.2072 7.41L14.8041 6L8.8335 12L14.8041 18L16.2072 16.59Z" fill="white"/>
+						</mask>
+						<g mask="url(#maskPrev)">
+							<rect x="0.579102" width="23.8823" height="24" fill="#FFFFFF"/>
+						</g>
+					</svg>
+				</div>
+				<div class="jp-swiper-button-next swiper-button-next">
+					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<mask id="maskNext" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="8" height="12">
+							<path d="M8.59814 16.59L13.1557 12L8.59814 7.41L10.0012 6L15.9718 12L10.0012 18L8.59814 16.59Z" fill="white"/>
+						</mask>
+						<g mask="url(#maskNext)">
+							<rect x="0.34375" width="23.8822" height="24" fill="#FFFFFF"/>
+						</g>
+					</svg>
+				</div>
+			</div>
+			<!-- The main close buton -->
+			<div class="jp-carousel-close-hint">
+				<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<mask id="maskClose" mask-type="alpha" maskUnits="userSpaceOnUse" x="5" y="5" width="15" height="14">
+						<path d="M19.3166 6.41L17.9135 5L12.3509 10.59L6.78834 5L5.38525 6.41L10.9478 12L5.38525 17.59L6.78834 19L12.3509 13.41L17.9135 19L19.3166 17.59L13.754 12L19.3166 6.41Z" fill="white"/>
+					</mask>
+					<g mask="url(#maskClose)">
+						<rect x="0.409668" width="23.8823" height="24" fill="#FFFFFF"/>
+					</g>
+				</svg>
+			</div>
+			<!-- Image info, comments and meta -->
+			<div class="jp-carousel-info">
+				<div class="jp-carousel-info-footer">
+					<div class="jp-carousel-pagination-container">
+						<div class="jp-swiper-pagination swiper-pagination"></div>
+						<div class="jp-carousel-pagination"></div>
+					</div>
+					<div class="jp-carousel-photo-title-container">
+						<div class="jp-carousel-photo-caption"></div>
+					</div>
+					<div class="jp-carousel-photo-icons-container">
+						<a href="#" class="jp-carousel-icon-btn jp-carousel-icon-info" aria-label="Toggle photo metadata visibility">
+							<span class="jp-carousel-icon">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="maskInfo" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="20">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M12.7537 2C7.26076 2 2.80273 6.48 2.80273 12C2.80273 17.52 7.26076 22 12.7537 22C18.2466 22 22.7046 17.52 22.7046 12C22.7046 6.48 18.2466 2 12.7537 2ZM11.7586 7V9H13.7488V7H11.7586ZM11.7586 11V17H13.7488V11H11.7586ZM4.79292 12C4.79292 16.41 8.36531 20 12.7537 20C17.142 20 20.7144 16.41 20.7144 12C20.7144 7.59 17.142 4 12.7537 4C8.36531 4 4.79292 7.59 4.79292 12Z" fill="white"/>
+									</mask>
+									<g mask="url(#maskInfo)">
+										<rect x="0.8125" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+							</span>
+						</a>
+												<a href="#" class="jp-carousel-icon-btn jp-carousel-icon-comments" aria-label="Toggle photo comments visibility">
+							<span class="jp-carousel-icon">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="maskComments" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="20">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M4.3271 2H20.2486C21.3432 2 22.2388 2.9 22.2388 4V16C22.2388 17.1 21.3432 18 20.2486 18H6.31729L2.33691 22V4C2.33691 2.9 3.2325 2 4.3271 2ZM6.31729 16H20.2486V4H4.3271V18L6.31729 16Z" fill="white"/>
+									</mask>
+									<g mask="url(#maskComments)">
+										<rect x="0.34668" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+
+								<span class="jp-carousel-has-comments-indicator" aria-label="This image has comments."></span>
+							</span>
+						</a>
+											</div>
+				</div>
+				<div class="jp-carousel-info-extra">
+					<div class="jp-carousel-info-content-wrapper">
+						<div class="jp-carousel-photo-title-container">
+							<div class="jp-carousel-photo-title"></div>
+						</div>
+						<div class="jp-carousel-comments-wrapper">
+															<div id="jp-carousel-comments-loading">
+									<span>Loading Comments...</span>
+								</div>
+								<div class="jp-carousel-comments"></div>
+								<div id="jp-carousel-comment-form-container">
+									<span id="jp-carousel-comment-form-spinner"><svg class="jetpack-spinner" width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg></span>
+									<div id="jp-carousel-comment-post-results"></div>
+																														<form id="jp-carousel-comment-form">
+												<label for="jp-carousel-comment-form-comment-field" class="screen-reader-text">Write a Comment...</label>
+												<textarea
+													name="comment"
+													class="jp-carousel-comment-form-field jp-carousel-comment-form-textarea"
+													id="jp-carousel-comment-form-comment-field"
+													placeholder="Write a Comment..."
+												></textarea>
+												<div id="jp-carousel-comment-form-submit-and-info-wrapper">
+													<div id="jp-carousel-comment-form-commenting-as">
+																													<fieldset>
+																<label for="jp-carousel-comment-form-email-field">Email (Required)</label>
+																<input type="text" name="email" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-email-field" />
+															</fieldset>
+															<fieldset>
+																<label for="jp-carousel-comment-form-author-field">Name (Required)</label>
+																<input type="text" name="author" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-author-field" />
+															</fieldset>
+															<fieldset>
+																<label for="jp-carousel-comment-form-url-field">Website</label>
+																<input type="text" name="url" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-url-field" />
+															</fieldset>
+																											</div>
+													<input
+														type="submit"
+														name="submit"
+														class="jp-carousel-comment-form-button"
+														id="jp-carousel-comment-form-button-submit"
+														value="Post Comment" />
+												</div>
+											</form>
+																											</div>
+													</div>
+						<div class="jp-carousel-image-meta">
+							<div class="jp-carousel-title-and-caption">
+								<div class="jp-carousel-photo-info">
+									<div class="jp-carousel-caption" itemprop="caption description"></div>
+								</div>
+
+								<div class="jp-carousel-photo-description"></div>
+							</div>
+							<a class="jp-carousel-image-download" href="#" aria-label="Download image" target="_blank" style="display: none;">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="3" y="3" width="19" height="18">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M5.84615 5V19H19.7775V12H21.7677V19C21.7677 20.1 20.8721 21 19.7775 21H5.84615C4.74159 21 3.85596 20.1 3.85596 19V5C3.85596 3.9 4.74159 3 5.84615 3H12.8118V5H5.84615ZM14.802 5V3H21.7677V10H19.7775V6.41L9.99569 16.24L8.59261 14.83L18.3744 5H14.802Z" fill="white"/>
+									</mask>
+									<g mask="url(#mask0)">
+										<rect x="0.870605" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+								<span class="jp-carousel-download-text"></span>
+							</a>
+							<div class="jp-carousel-image-map" style="display: none;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		</div>
+		
+	<script type="text/javascript">
+		(function () {
+			var wpcom_reblog = {
+				source: 'toolbar',
+
+				toggle_reblog_box_flair: function (obj_id, post_id) {
+
+					// Go to site selector. This will redirect to their blog if they only have one.
+					const postEndpoint = `https://wordpress.com/post`;
+
+					// Ideally we would use the permalink here, but fortunately this will be replaced with the 
+					// post permalink in the editor.
+					const originalURL = `${ document.location.href }?page_id=${ post_id }`; 
+					
+					const url =
+						postEndpoint +
+						'?url=' +
+						encodeURIComponent( originalURL ) +
+						'&is_post_share=true' +
+						'&v=5';
+
+					const redirect = function () {
+						if (
+							! window.open( url, '_blank' )
+						) {
+							location.href = url;
+						}
+					};
+
+					if ( /Firefox/.test( navigator.userAgent ) ) {
+						setTimeout( redirect, 0 );
+					} else {
+						redirect();
+					}
+				},
+			};
+
+			window.wpcom_reblog = wpcom_reblog;
+		})();
+	</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJxtzDEOwjAMQNEL4TpIFZkQR0E0TSMHx4mwo6i3pwMsiPEN/+NoEKpYFMPSoXFPJIo5WnuE58eoXfBOEnDpxCuSbCRkETS8KvPX+1RIpqwn/D8dtKZoigvXpECwHW0dPzz6W7mevfezu8zO5TeTbTuZ'></script>
+<script id="twitter-widgets-js" src="https://platform.twitter.com/widgets.js?ver=20111117"></script>
+<script id="jetpack-carousel-js-extra">
+var jetpackSwiperLibraryPath = {"url":"/wp-content/mu-plugins/jetpack-plugin/sun/_inc/blocks/swiper.js"};
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https://mindovermessaging.com/wp-admin/admin-ajax.php","nonce":"7bd7d090a3","display_exif":"1","display_comments":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","image_label":"Open image in full-screen.","download_original":"View full size \u003Cspan class=\"photo-size\"\u003E{0}\u003Cspan class=\"photo-size-times\"\u003E\u00d7\u003C/span\u003E{1}\u003C/span\u003E","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https://mindovermessaging.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fmindovermessaging.com%2F2018%2F06%2F21%2Fintegrate-2018-highlights-from-another-great-event%2F","blog_id":"46851543","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"stats_query_args":"blog=46851543&v=wpcom&tz=0&user_id=0&arch_home=1&subd=mindovermessaging","is_public":"1"};
+//# sourceURL=jetpack-carousel-js-extra
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/mu-plugins/jetpack-plugin/sun/_inc/build/carousel/jetpack-carousel.min.js?m=1785214086i'></script>
+<script data-wp-strategy="defer" defer id="tiled-gallery-js" src="/wp-content/mu-plugins/jetpack-plugin/sun/_inc/build/tiled-gallery/tiled-gallery/tiled-gallery.min.js?m=1755011788i&#038;ver=16.3-a.2"></script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/mu-plugins/carousel-wpcom/carousel-wpcom.js?m=1761899756i'></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/72x72/","ext":".png","svgUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/svg/","svgExt":".svg","source":{"concatemoji":"/wp-includes/js/wp-emoji-release.min.js?m=1783090810i&ver=7.1.1-alpha-63587"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=/wp-includes/js/wp-emoji-loader.min.js
+</script>
+		<script type="text/javascript">
+			(function() {
+				var extend = function(out) {
+					out = out || {};
+
+					for (var i = 1; i < arguments.length; i++) {
+						if (!arguments[i])
+						continue;
+
+						for (var key in arguments[i]) {
+						if (arguments[i].hasOwnProperty(key))
+							out[key] = arguments[i][key];
+						}
+					}
+
+					return out;
+				};
+				extend( window.infiniteScroll.settings.scripts, ["jetpack-mu-wpcom-settings","rlt-proxy","follow_js","widget-bump-view","wpcom-actionbar-placeholder","grofiles-cards","wpgroho","the-neverending-homepage","jp-widget-follow-blogs","twitter-widgets","jetpack-carousel","tiled-gallery","carousel-wpcom"] );
+				extend( window.infiniteScroll.settings.styles, ["the-neverending-homepage","coblocks-frontend","wpcom-core-compat-playlist-styles","wpcom-text-widget-styles","wpcom-bbpress2-staff-css","enterprise","follow_css","hover-bubbles","reblogging","geo-location-flair","a8c-global-print","h4-global","widget-grid-and-list","blogs-i-follow-widget","wp-img-auto-sizes-contain","wp-emoji-styles","wp-block-library","classic-theme-styles","wp-block-styles-placeholder","coblocks-inline-format","wp-global-styles-placeholder","jetpack-global-styles-frontend-style","wp-block-image","wp-block-paragraph","global-styles","jetpack-swiper-library","jetpack-carousel","tiled-gallery","jetpack-subscriptions","core-block-supports-duotone"] );
+			})();
+		</script>
+				<span id="infinite-aria" aria-live="assertive"></span>
+		<script src="//stats.wp.com/w.js?69" defer></script> <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'46851543','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+		// Prevent sending pageview tracking from WP-Admin pages.
+		_stq.push(['view', {'blog':'46851543','v':'wpcom','tz':'0','user_id':'0','arch_home':'1','subd':'mindovermessaging'}]);
+		_stq.push(['extra', {'crypt':'UE5tW3cvZGQtW1JXcy0rJW1Kd3duRXpHcVIyMT9QMy4/dDRDNjNPQVFoc1d4V28uZ0ZEdTJ8MjhwSS55dkt0Zy9aW10lSDg0aC5xMT0vUTElOSsyU18sS2NVWTd6N25MNW8/TkwzUjFkRitialo1dElYakRzNHVddVMrS09db0l8OXYwVUlnLjVOMmIuc19CenddU3ZtLFRrcU9kRlR2cXFrQUt6TFMmOVBVRForZk84LGNGME9KcTdndUg2R1AlLn4leTVyJnRRczZSQj1qLXpqY1FhMnZ4cGdVSmZfZWhxWHxFRmU2Znd4Q3V+S1R8NX5ZRWQtT0xoeHR2ejVWRnlBT189bklpfjZiVkM='}]);
+_stq.push([ 'clickTrackerInit', '46851543', '0' ]);
+</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:1px;width:1px;overflow:hidden;position:absolute;bottom:1px;" alt="" /></noscript>
+<meta id="bilmur" property="bilmur:data" content="" data-provider="wordpress.com" data-service="simple" data-site-tz="Etc/GMT-0" data-custom-props="{&quot;logged_in&quot;:&quot;0&quot;,&quot;wptheme&quot;:&quot;pub\/enterprise&quot;,&quot;wptheme_is_block&quot;:&quot;0&quot;}"   >
+		<script defer src="/wp-content/js/bilmur.min.js?i=19&amp;m=202638"></script> 	
+</body>
+</html>
