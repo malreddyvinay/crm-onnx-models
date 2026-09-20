@@ -1,0 +1,1 @@
+A curated list of articles and videos to update developers with the latest and upcoming features in #PowerPlatform.

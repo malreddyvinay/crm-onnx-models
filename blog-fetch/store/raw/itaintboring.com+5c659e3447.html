@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.itaintboring.com/xmlrpc.php" />
+<!--[if lt IE 9]>
+<script src="https://www.itaintboring.com/wp-content/themes/iconic-one/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Microsoft Dataverse is more than a database, and it’s not, necessarily, a good thing &#8211; It Ain&#039;t Boring</title>
+<meta name='robots' content='max-image-preview:large' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="It Ain&#039;t Boring &raquo; Feed" href="https://www.itaintboring.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="It Ain&#039;t Boring &raquo; Comments Feed" href="https://www.itaintboring.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="It Ain&#039;t Boring &raquo; Microsoft Dataverse is more than a database, and it’s not, necessarily, a good thing Comments Feed" href="https://www.itaintboring.com/power-platform/microsoft-dataverse-is-more-than-a-database-and-its-not-necessarily-a-good-thing/feed/" />
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.itaintboring.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.8.9"}};
+/*! This file is auto-generated */
+!function(s,n){var o,i,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),a=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===a[t]})}function u(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);for(var n=e.getImageData(16,16,1,1),a=0;a<n.data.length;a++)if(0!==n.data[a])return!1;return!0}function f(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\udedf")}return!1}function g(e,t,n,a){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):s.createElement("canvas"),o=r.getContext("2d",{willReadFrequently:!0}),i=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(function(e){i[e]=t(o,e,n,a)}),i}function t(e){var t=s.createElement("script");t.src=e,t.defer=!0,s.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",i=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){s.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+g.toString()+"("+[JSON.stringify(i),f.toString(),p.toString(),u.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"}),r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=function(e){c(n=e.data),r.terminate(),t(n)})}catch(e){}c(n=g(i,f,p,u))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://www.itaintboring.com/wp-includes/css/dist/block-library/style.min.css?ver=6.8.9' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='themonic-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C700&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='themonic-style-css' href='https://www.itaintboring.com/wp-content/themes/iconic-one/style.css?ver=2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='custom-style-css' href='https://www.itaintboring.com/wp-content/themes/iconic-one/custom.css?ver=6.8.9' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='themonic-ie-css' href='https://www.itaintboring.com/wp-content/themes/iconic-one/css/ie.css?ver=20130305' type='text/css' media='all' />
+<![endif]-->
+<link rel="https://api.w.org/" href="https://www.itaintboring.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.itaintboring.com/wp-json/wp/v2/posts/8194" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.itaintboring.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.8.9" />
+<link rel="canonical" href="https://www.itaintboring.com/power-platform/microsoft-dataverse-is-more-than-a-database-and-its-not-necessarily-a-good-thing/" />
+<link rel='shortlink' href='https://www.itaintboring.com/?p=8194' />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.itaintboring.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.itaintboring.com%2Fpower-platform%2Fmicrosoft-dataverse-is-more-than-a-database-and-its-not-necessarily-a-good-thing%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.itaintboring.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.itaintboring.com%2Fpower-platform%2Fmicrosoft-dataverse-is-more-than-a-database-and-its-not-necessarily-a-good-thing%2F&#038;format=xml" />
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style></head>
+<body class="wp-singular post-template-default single single-post postid-8194 single-format-standard wp-theme-iconic-one custom-font-enabled single-author">
+<div id="page" class="site">
+	<header id="masthead" class="site-header" role="banner">
+					<div class="io-title-description">
+			<a href="https://www.itaintboring.com/" title="It Ain&#039;t Boring" rel="home">It Ain&#039;t Boring</a>
+				<br .../> 
+								 <a class="site-description">Writing about the technology to understand it better</a>
+						</div>
+			
+		
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="#main" title="Skip to content">Skip to content</a>
+			<ul id="menu-top" class="nav-menu"><li id="menu-item-306" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-306"><a href="https://www.itaintboring.com/">Home</a></li>
+<li id="menu-item-8199" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8199"><a href="https://www.itaintboring.com/ita-business-rules/">ITA Business Rules</a></li>
+<li id="menu-item-8208" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-8208"><a href="https://www.itaintboring.com/training/power-platform-training-course/">TRAINING</a></li>
+<li id="menu-item-8155" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8155"><a href="https://www.itaintboring.com/e-books/">E-Books</a></li>
+<li id="menu-item-307" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-307"><a href="https://www.itaintboring.com/about/">Contact</a></li>
+<li id="menu-item-8270" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8270"><a href="https://www.itaintboring.com/web-starter-portal/">Web Starter Portal</a></li>
+</ul>		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+
+	<div id="main" class="wrapper">	<div id="primary" class="site-content">
+		<div id="content" role="main">
+
+			
+				
+	<article id="post-8194" class="post-8194 post type-post status-publish format-standard hentry category-microsoft-dataverse category-power-platform tag-power-platform">
+				<header class="entry-header">
+						<h1 class="entry-title">Microsoft Dataverse is more than a database, and it’s not, necessarily, a good thing</h1>
+									
+		<div class="below-title-meta">
+		<div class="adt">
+		By        <span class="vcard author">
+			<span class="fn"><a href="https://www.itaintboring.com/author/admin/" title="Posts by Alex Shlega" rel="author">Alex Shlega</a></span>
+        </span>
+        <span class="meta-sep">|</span> 
+				
+				<span class="date updated">July 18, 2023</span>
+				 
+        </div>
+		<div class="adt-comment">
+		<a class="link-comments" href="https://www.itaintboring.com/power-platform/microsoft-dataverse-is-more-than-a-database-and-its-not-necessarily-a-good-thing/#respond">0 Comment</a> 
+        </div>       
+		</div><!-- below title meta end -->
+			
+						
+		</header><!-- .entry-header -->
+
+							<div class="entry-content">
+												
+<p>There are all sorts of definitions of what Microsoft Dataverse is. Just go to&nbsp;<a rel="noreferrer noopener" href="https://powerplatform.microsoft.com/en-us/dataverse/" target="_blank">https://powerplatform.microsoft.com/en-us/dataverse/</a>, and you’ll get a few right away:</p>
+
+
+
+<p><em>Microsoft Dataverse is the data backbone that enables people to store their data in a scalable and secure environment dynamically. It enables [us] to look at data as a service spun up on-demand to meet ever-changing business needs</em>.</p>
+
+
+
+<p><em>Microsoft Dataverse allows my team to provide business value faster through low-code solutions while still having pro-code as a safety net for more complex requirements</em>.</p>
+
+
+
+<p><em>Getting security and compliance right across many services is hard. [Microsoft Dataverse] gives me one security and auditing model</em>.</p>
+
+
+
+<p>And the one below comes from the&nbsp;<a rel="noreferrer noopener" href="https://learn.microsoft.com/en-us/training/modules/introduction-common-data-service/4-explore-microsoft-dataverse" target="_blank">training module</a>:</p>
+
+
+
+<p><em>Microsoft Dataverse is a cloud-based solution that easily structures various data and business logic to support interconnected applications and processes in a secure and compliant manner</em>.</p>
+
+
+
+<p>However, even though it may look, sometimes, as if Power Platform and Dataverse were inseparable, but they are. One can build a Canvas App without using Dataverse at all, yet far not every Power Automate flow will be connecting to Dataverse. But, of course, Model-Driven apps do need it.</p>
+
+
+
+<p>Microsoft Dataverse serves multiple purposes in the Power Platform world – it’s a service used by Microsoft to deliver some of the Power Platform functionality such as solution-based ALM. It’s also a data management service that’s used for a number of first-party solutions such as Customer Service, Sales, Mareting, etc. But it’s also a data management solution that application developers can user to store their data when developing with Power Platform, and it’s the only data management option that works for Model-Driven apps.</p>
+
+
+
+<p>Still, why don’t we just call it a database?</p>
+
+
+
+<p>Well, there are multiple examples where it behaves differently from what you’d be expecting from your usual database – sometimes it’s useful, and, sometimes, it’s challenging.</p>
+
+
+
+<p>As a service, it offers (among other things):</p>
+
+
+
+<ul class="wp-block-list">
+<li>Custom security model that goes beyond the regular CRUD</li>
+
+
+
+<li>Server-Side extensibility (plugins)</li>
+
+
+
+<li>Custom column types (lookups, optionsets)</li>
+
+
+
+<li>Custom column formats for the regular data types (such as the ability to define whether a datetime field is going to be timezone independent or not)</li>
+
+
+
+<li>It scales automatically</li>
+</ul>
+
+
+
+<p>It also offers some additional out of the box features and perks such as custom data modelling UI, duplicate detections jobs and related UI, scheduled system jobs, and more. But I’d argue that almost every database out there is offering those, too.</p>
+
+
+
+<p><em>Note: I guess FetchXML, as a proprietary query language, needs to be mentioned, too. It makes things more complicated, and the sole reason for its existence is, likely, the fact that all that security and custom data types are not “natively” supported in SQL.</em></p>
+
+
+
+<p>What Microsoft Dataverse does not offer, and to a large extent it’s probably because it has to ensure it can keep offering what I listed above, is direct write access to the Database. There is an option to use TDS endpoint for read operations, though it’s questionable how useful it is outside of the Power BI reporting scenarios, but there is no option to write directly into the database – everything has to go through the API-s.</p>
+
+
+
+<p>Which is where, I think, the main problem of any Dataverse-based solution is. The fact that we have to use custom API rather than native SQL, brings with it a couple of limitations:</p>
+
+
+
+<ul class="wp-block-list">
+<li>From the licensing perspective, those API calls are relatively expensive. They are definitely more expensive (on any large implementation) than SQL calls, and, even though Dataverse scales automatically, you don’t necessarily even need it to scale since you may not want to get to those levels of utilization. Depending on how you count, you will be hovering at around $0.0002 per API call at least, so, if you ever have to do a mass update to fix the data, that will cost you over $20 per 100K records, and, then, if you have to do it daily, yet if you have multiple users, yet if your application is heavy on the API usage, this will all be adding up. Although, the initial usage is covered through license entitlements, but it’s all adding up fast.</li>
+
+
+
+<li>From the usability perspective, if you ever had to update hundreds of thousands of records through the API, you may have noticed it’s a relatively slow process and it may take anywhere from a few hours to a few days, whereas doing the same kind of update directly in SQL will normally take only a few minutes.</li>
+</ul>
+
+
+
+<p>Personally, I have yet to find a large project (as in, at least 500K records… which is not large in reality) where I would not have to work around the API slowness by allowing more time for data migration, for instance (not just for the actual run, but, also, for the initial development / testing), and, lately, by having to watch out&nbsp;<a rel="noreferrer noopener" href="https://www.itaintboring.com/power-platform/power-automate-licensing-watch-out-for-those-limits/" target="_blank">for the request limits</a>.</p>
+
+
+
+<p>Which is why the architecture below usually works better with Dataverse:</p>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="https://www.itaintboring.com/wp-content/uploads/2023/07/image-27-1024x526.png" alt="" class="wp-image-8297"/></figure>
+
+
+
+<p>But, of course, since it’s more complicated to set up than having everything stored and done directly in Dataverse, we often and up with “let’s do everything in Dataverse directly”, and, then, we pay the price literally and figuratively by having to purchase additional licenses and/or by having to spend more time debugging and/or just waiting for the ETL jobs to complete.</p>
+
+
+
+<p>I am not sure if Microsoft is ever going to be able to open up Dataverse database so that we’d be able to use SQL there (instead of having to go through the API) – that would be awesome, and, perhaps, would allow for the utilization-based billing to show up which would be on par with Azure SQL.</p>
+											</div><!-- .entry-content -->
+		
+	<footer class="entry-meta">
+					<span>Category: <a href="https://www.itaintboring.com/category/microsoft-dataverse/" rel="category tag">Microsoft Dataverse</a> <a href="https://www.itaintboring.com/category/power-platform/" rel="category tag">Power Platform</a></span>
+								<span>Tags: <a href="https://www.itaintboring.com/tag/power-platform/" rel="tag">Power Platform</a></span>
+			
+           						</footer><!-- .entry-meta -->
+	</article><!-- #post -->
+				<nav class="nav-single">
+					<div class="assistive-text">Post navigation</div>
+					<span class="nav-previous"><a href="https://www.itaintboring.com/powerapps/ita-business-rules-admin-v1-01/" rel="prev"><span class="meta-nav">&larr;</span> ITA Business Rules Admin – V1.01</a></span>
+					<span class="nav-next"><a href="https://www.itaintboring.com/power-platform/we-can-now-chat-with-microsoft-support/" rel="next">We can now chat with Microsoft Support <span class="meta-nav">&rarr;</span></a></span>
+				</nav><!-- .nav-single -->
+
+				
+<div id="comments" class="comments-area">
+
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/power-platform/microsoft-dataverse-is-more-than-a-database-and-its-not-necessarily-a-good-thing/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://www.itaintboring.com/wp-comments-post.php" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message">Required fields are marked <span class="required">*</span></span></p><p class="comment-form-comment"><label for="comment">Comment <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required="required" /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required="required" /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200" autocomplete="url" /></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='8194' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p></form>	</div><!-- #respond -->
+	
+</div><!-- #comments .comments-area -->
+			
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+			<aside id="search-2" class="widget widget_search"><form role="search" method="get" id="searchform" class="searchform" action="https://www.itaintboring.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form></aside><aside id="nav_menu-7" class="widget widget_nav_menu"><p class="widget-title">The best of ItAintBoring</p><div class="menu-best-of-itaintboring-container"><ul id="menu-best-of-itaintboring" class="menu"><li id="menu-item-4548" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-4548"><a href="https://www.itaintboring.com/uncategorized/choosing-the-right-model-driven-app-supporting-technology/">Choosing the right Model-Driven App Supporting Technology</a></li>
+<li id="menu-item-4549" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-4549"><a href="https://www.itaintboring.com/dynamics-crm/cicd-for-powerplatform-round-3/">CI/CD for PowerPlatform, round #3</a></li>
+<li id="menu-item-4550" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-4550"><a href="https://www.itaintboring.com/dynamics-crm/from-xrm-to-power-platform/">From XRM to Power Platform</a></li>
+<li id="menu-item-4551" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-4551"><a href="https://www.itaintboring.com/dynamics-crm/using-powershell-to-exportimport-solutions-data-and-word-templates/">Using PowerShell to export/import solutions, data, and Word Templates</a></li>
+<li id="menu-item-4566" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4566"><a href="https://itaintboring.com/downloads/training/presentations/PCF.pdf">PCF presentation</a></li>
+<li id="menu-item-4567" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4567"><a href="https://itaintboring.com/downloads/training/presentations/DevOps.pdf">DevOps presentation</a></li>
+</ul></div></aside><aside id="recent-comments-4" class="widget widget_recent_comments"><p class="widget-title">Recent Comments</p><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Kenneth Leong</span> on <a href="https://www.itaintboring.com/ai/ai-adoption-why-would-anyone-think-its-not-going-to-cost-us-at-least-some-jobs/#comment-36530">AI adoption &#8211; why would anyone think it&#8217;s not going to cost us at least some jobs?</a></li><li class="recentcomments"><span class="comment-author-link"><a href="https://www.blackfincloud.com" class="url" rel="ugc external nofollow">Owen Scott</a></span> on <a href="https://www.itaintboring.com/ai/ai-adoption-why-would-anyone-think-its-not-going-to-cost-us-at-least-some-jobs/#comment-36493">AI adoption &#8211; why would anyone think it&#8217;s not going to cost us at least some jobs?</a></li><li class="recentcomments"><span class="comment-author-link"><a href="http://helpfulbit.com" class="url" rel="ugc external nofollow">Ryan</a></span> on <a href="https://www.itaintboring.com/dynamics/upgrading-a-solution-vs-updating-a-solution-what-is-the-difference/#comment-10774">Upgrading a solution vs updating a solution &ndash; what is the difference?</a></li><li class="recentcomments"><span class="comment-author-link"><a href="https://helpfulbit.com" class="url" rel="ugc external nofollow">Ryan Perry</a></span> on <a href="https://www.itaintboring.com/dynamics-crm/managed-solutions-what-are-the-benefits/#comment-8743">Managed solutions &ndash; what are the benefits?</a></li></ul></aside><aside id="nav_menu-3" class="widget widget_nav_menu"><p class="widget-title">Trainings &#038; Books</p><div class="menu-side-menu-container"><ul id="menu-side-menu" class="menu"><li id="menu-item-3141" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3141"><a href="https://www.itaintboring.com/training/power-platform-training-course">Dynamics Training</a></li>
+<li id="menu-item-3121" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3121"><a href="https://www.itaintboring.com/dynamics-dojo-dynamics-plugin-developer-course/">Plugin Developer Training</a></li>
+<li id="menu-item-4375" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4375"><a href="https://itaintboring.com/downloads/training/MigrationtotheCloud.pdf">Migration to the Cloud (E-Book)</a></li>
+</ul></div></aside><aside id="nav_menu-5" class="widget widget_nav_menu"><p class="widget-title">Tools and Solutions</p><div class="menu-tools-components-container"><ul id="menu-tools-components" class="menu"><li id="menu-item-5880" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5880"><a href="https://www.itaintboring.com/canvasappcodereuse/">Canvas App Code Reuse tool for XrmToolBox</a></li>
+<li id="menu-item-399" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-399"><a href="https://www.itaintboring.com/tcs-tools/solution-summary/">TCS Tools: Solution Summary</a></li>
+<li id="menu-item-3101" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3101"><a href="https://www.itaintboring.com/tag/ezchange/">EZChange: Deployment Automation</a></li>
+<li id="menu-item-946" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-946"><a href="https://www.itaintboring.com/tcs-tools/code-now-plugin-for-xrmtoolbox/">Code Now plugin for XrmToolBox</a></li>
+<li id="menu-item-918" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-918"><a href="https://www.itaintboring.com/dynamics-crm/quick-find-on-your-terms/">Quick Find on Your Terms</a></li>
+<li id="menu-item-366" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-366"><a href="https://www.itaintboring.com/dynamics-crm/dynamics-crm-use-a-workflow-to-set-a-lookup/">Dynamics CRM (TCS Tools): Use a workflow to set a lookup</a></li>
+</ul></div></aside><aside id="tag_cloud-3" class="widget widget_tag_cloud"><p class="widget-title">Tags</p><div class="tagcloud"><a href="https://www.itaintboring.com/tag/ai/" class="tag-cloud-link tag-link-84 tag-link-position-1" style="font-size: 13.84347826087pt;" aria-label="AI (17 items)">AI</a>
+<a href="https://www.itaintboring.com/tag/analytics/" class="tag-cloud-link tag-link-50 tag-link-position-2" style="font-size: 10.434782608696pt;" aria-label="Analytics (4 items)">Analytics</a>
+<a href="https://www.itaintboring.com/tag/azure/" class="tag-cloud-link tag-link-40 tag-link-position-3" style="font-size: 9.095652173913pt;" aria-label="Azure (2 items)">Azure</a>
+<a href="https://www.itaintboring.com/tag/canvasapps/" class="tag-cloud-link tag-link-86 tag-link-position-4" style="font-size: 12.260869565217pt;" aria-label="CanvasApps (9 items)">CanvasApps</a>
+<a href="https://www.itaintboring.com/tag/canvas-apps/" class="tag-cloud-link tag-link-112 tag-link-position-5" style="font-size: 9.095652173913pt;" aria-label="Canvas Apps (2 items)">Canvas Apps</a>
+<a href="https://www.itaintboring.com/tag/copilot/" class="tag-cloud-link tag-link-115 tag-link-position-6" style="font-size: 9.095652173913pt;" aria-label="copilot (2 items)">copilot</a>
+<a href="https://www.itaintboring.com/tag/copilot-studio/" class="tag-cloud-link tag-link-124 tag-link-position-7" style="font-size: 9.095652173913pt;" aria-label="Copilot Studio (2 items)">Copilot Studio</a>
+<a href="https://www.itaintboring.com/tag/dataflows/" class="tag-cloud-link tag-link-90 tag-link-position-8" style="font-size: 9.8260869565217pt;" aria-label="Dataflows (3 items)">Dataflows</a>
+<a href="https://www.itaintboring.com/tag/dataverse/" class="tag-cloud-link tag-link-105 tag-link-position-9" style="font-size: 11.347826086957pt;" aria-label="Dataverse (6 items)">Dataverse</a>
+<a href="https://www.itaintboring.com/tag/design-architecture/" class="tag-cloud-link tag-link-15 tag-link-position-10" style="font-size: 10.921739130435pt;" aria-label="Design &amp; Architecture (5 items)">Design &amp; Architecture</a>
+<a href="https://www.itaintboring.com/tag/devops/" class="tag-cloud-link tag-link-80 tag-link-position-11" style="font-size: 9.095652173913pt;" aria-label="DevOps (2 items)">DevOps</a>
+<a href="https://www.itaintboring.com/tag/diagrams/" class="tag-cloud-link tag-link-73 tag-link-position-12" style="font-size: 9.095652173913pt;" aria-label="Diagrams (2 items)">Diagrams</a>
+<a href="https://www.itaintboring.com/tag/dynamics/" class="tag-cloud-link tag-link-30 tag-link-position-13" style="font-size: 22pt;" aria-label="Dynamics (399 items)">Dynamics</a>
+<a href="https://www.itaintboring.com/tag/dynamics365/" class="tag-cloud-link tag-link-79 tag-link-position-14" style="font-size: 14.695652173913pt;" aria-label="Dynamics365 (24 items)">Dynamics365</a>
+<a href="https://www.itaintboring.com/tag/dynamics-crm/" class="tag-cloud-link tag-link-4 tag-link-position-15" style="font-size: 14.75652173913pt;" aria-label="Dynamics CRM (25 items)">Dynamics CRM</a>
+<a href="https://www.itaintboring.com/tag/dynamics-portals/" class="tag-cloud-link tag-link-44 tag-link-position-16" style="font-size: 13.35652173913pt;" aria-label="Dynamics Portals (14 items)">Dynamics Portals</a>
+<a href="https://www.itaintboring.com/tag/easyrepro/" class="tag-cloud-link tag-link-58 tag-link-position-17" style="font-size: 10.434782608696pt;" aria-label="EasyRepro (4 items)">EasyRepro</a>
+<a href="https://www.itaintboring.com/tag/ezchange/" class="tag-cloud-link tag-link-70 tag-link-position-18" style="font-size: 10.434782608696pt;" aria-label="EZChange (4 items)">EZChange</a>
+<a href="https://www.itaintboring.com/tag/field-service/" class="tag-cloud-link tag-link-53 tag-link-position-19" style="font-size: 9.8260869565217pt;" aria-label="Field Service (3 items)">Field Service</a>
+<a href="https://www.itaintboring.com/tag/flow/" class="tag-cloud-link tag-link-65 tag-link-position-20" style="font-size: 16.339130434783pt;" aria-label="Flow (46 items)">Flow</a>
+<a href="https://www.itaintboring.com/tag/ita-web-starter/" class="tag-cloud-link tag-link-114 tag-link-position-21" style="font-size: 9.095652173913pt;" aria-label="ITA Web Starter (2 items)">ITA Web Starter</a>
+<a href="https://www.itaintboring.com/tag/life-and-work/" class="tag-cloud-link tag-link-22 tag-link-position-22" style="font-size: 9.095652173913pt;" aria-label="life and work (2 items)">life and work</a>
+<a href="https://www.itaintboring.com/tag/microsoft-dataverse/" class="tag-cloud-link tag-link-100 tag-link-position-23" style="font-size: 9.8260869565217pt;" aria-label="Microsoft Dataverse (3 items)">Microsoft Dataverse</a>
+<a href="https://www.itaintboring.com/tag/mvp/" class="tag-cloud-link tag-link-61 tag-link-position-24" style="font-size: 9.8260869565217pt;" aria-label="MVP (3 items)">MVP</a>
+<a href="https://www.itaintboring.com/tag/patterns/" class="tag-cloud-link tag-link-17 tag-link-position-25" style="font-size: 9.095652173913pt;" aria-label="Patterns (2 items)">Patterns</a>
+<a href="https://www.itaintboring.com/tag/pcf/" class="tag-cloud-link tag-link-78 tag-link-position-26" style="font-size: 13.478260869565pt;" aria-label="PCF (15 items)">PCF</a>
+<a href="https://www.itaintboring.com/tag/portals/" class="tag-cloud-link tag-link-59 tag-link-position-27" style="font-size: 11.95652173913pt;" aria-label="Portals (8 items)">Portals</a>
+<a href="https://www.itaintboring.com/tag/powerapps/" class="tag-cloud-link tag-link-52 tag-link-position-28" style="font-size: 20.478260869565pt;" aria-label="PowerApps (222 items)">PowerApps</a>
+<a href="https://www.itaintboring.com/tag/powerautomate/" class="tag-cloud-link tag-link-88 tag-link-position-29" style="font-size: 17.069565217391pt;" aria-label="PowerAutomate (61 items)">PowerAutomate</a>
+<a href="https://www.itaintboring.com/tag/power-bi/" class="tag-cloud-link tag-link-96 tag-link-position-30" style="font-size: 12.260869565217pt;" aria-label="Power BI (9 items)">Power BI</a>
+<a href="https://www.itaintboring.com/tag/power-pages/" class="tag-cloud-link tag-link-110 tag-link-position-31" style="font-size: 15.24347826087pt;" aria-label="Power Pages (30 items)">Power Pages</a>
+<a href="https://www.itaintboring.com/tag/power-platform/" class="tag-cloud-link tag-link-63 tag-link-position-32" style="font-size: 20.782608695652pt;" aria-label="Power Platform (253 items)">Power Platform</a>
+<a href="https://www.itaintboring.com/tag/powerplatform/" class="tag-cloud-link tag-link-93 tag-link-position-33" style="font-size: 14.75652173913pt;" aria-label="PowerPlatform (25 items)">PowerPlatform</a>
+<a href="https://www.itaintboring.com/tag/powershell/" class="tag-cloud-link tag-link-74 tag-link-position-34" style="font-size: 10.434782608696pt;" aria-label="PowerShell (4 items)">PowerShell</a>
+<a href="https://www.itaintboring.com/tag/powerstorm/" class="tag-cloud-link tag-link-92 tag-link-position-35" style="font-size: 9.8260869565217pt;" aria-label="PowerStorm (3 items)">PowerStorm</a>
+<a href="https://www.itaintboring.com/tag/scrum/" class="tag-cloud-link tag-link-55 tag-link-position-36" style="font-size: 11.95652173913pt;" aria-label="Scrum (8 items)">Scrum</a>
+<a href="https://www.itaintboring.com/tag/simplesolutions/" class="tag-cloud-link tag-link-109 tag-link-position-37" style="font-size: 9.8260869565217pt;" aria-label="SImpleSolutions (3 items)">SImpleSolutions</a>
+<a href="https://www.itaintboring.com/tag/solutioning/" class="tag-cloud-link tag-link-118 tag-link-position-38" style="font-size: 8pt;" aria-label="solutioning (1 item)">solutioning</a>
+<a href="https://www.itaintboring.com/tag/ssis/" class="tag-cloud-link tag-link-29 tag-link-position-39" style="font-size: 10.434782608696pt;" aria-label="SSIS (4 items)">SSIS</a>
+<a href="https://www.itaintboring.com/tag/tcs-expressions/" class="tag-cloud-link tag-link-38 tag-link-position-40" style="font-size: 9.8260869565217pt;" aria-label="TCS Expressions (3 items)">TCS Expressions</a>
+<a href="https://www.itaintboring.com/tag/tcs-tools/" class="tag-cloud-link tag-link-35 tag-link-position-41" style="font-size: 12.504347826087pt;" aria-label="TCS Tools (10 items)">TCS Tools</a>
+<a href="https://www.itaintboring.com/tag/thoughts/" class="tag-cloud-link tag-link-14 tag-link-position-42" style="font-size: 10.921739130435pt;" aria-label="Thoughts (5 items)">Thoughts</a>
+<a href="https://www.itaintboring.com/tag/virtual-entities/" class="tag-cloud-link tag-link-98 tag-link-position-43" style="font-size: 9.095652173913pt;" aria-label="Virtual Entities (2 items)">Virtual Entities</a>
+<a href="https://www.itaintboring.com/tag/xamarin/" class="tag-cloud-link tag-link-47 tag-link-position-44" style="font-size: 9.095652173913pt;" aria-label="Xamarin (2 items)">Xamarin</a>
+<a href="https://www.itaintboring.com/tag/xrm/" class="tag-cloud-link tag-link-6 tag-link-position-45" style="font-size: 9.8260869565217pt;" aria-label="XRM (3 items)">XRM</a></div>
+</aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<p class="widget-title">Recent Posts</p>
+		<ul>
+											<li>
+					<a href="https://www.itaintboring.com/ai/custom-cua-with-deepseek-and-o4-mini-why-not/">Custom CUA with Deepseek and o4-Mini? Why not&#8230;</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/ai/are-you-saying-ai-coding-agents-cant-replace-developers-you-must-be-kidding/">Are you saying AI coding agents can&#8217;t replace developers? You must be kidding</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/ai/less-junior-developers-less-problems/">Less junior developers &#8211; less problems</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/ai/ai-exposure-and-software-development/">AI exposure and software development</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/ai/using-ai-to-develop-side-projects/">Using AI to develop side projects?</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/ai/youve-added-instructions-to-your-copilot-studio-agent-what-happens-next/">You&#8217;ve added instructions to your Copilot Studio agent. What happens next?</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/copilot-studio/copilot-studio-agent-keeps-asking-you-to-connect-to-an-mcp-server-even-though-you-are-apparently-connected-check-this-setting/">Copilot studio agent keeps asking you to connect to an MCP server even though you are, apparently, connected? Check this setting</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/uncategorized/feeling-overwhelmed-with-all-the-tech-news-its-not-just-you-and-i-hope-it-helps/">Feeling overwhelmed with all the tech news? It&#8217;s not just you (and I hope it helps)</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/ai/as-far-as-ai-goes-it-sometimes-seems-we-are-just-kids-playing-with-plastic-toys/">As far as AI goes, it often seems we are just kids playing with cool plastic toys</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/power-platform/content-translations-in-power-pages/">Content translations in Power Pages &#8211; the custom way</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/power-pages/power-pages-how-not-to-cache-the-user-object/">Power Pages &#8211; how not to cache signed in user data</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/power-pages/power-pages-http-502-invalid-response-but-i-thought-its-going-to-be-page-not-found/">Power Pages HTTP 502 &#8211; invalid response. But I thought it&#8217;s going to be &#8220;page not found&#8221;?</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/power-platform/your-power-pages-are-misbehaving-out-of-a-sudden-on-monday-morning-purge-the-cache/">Your power pages are misbehaving out of a sudden on Monday morning? Purge the cache</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/power-automate/your-flow-has-a-new-trigger-url/">Your flow has a new trigger URL</a>
+									</li>
+											<li>
+					<a href="https://www.itaintboring.com/ai/ai-isnt-broken-we-just-expected-too-much/">AI Isn’t Broken, We Just Expected Too Much</a>
+									</li>
+					</ul>
+
+		</aside><aside id="categories-4" class="widget widget_categories"><p class="widget-title">Categories</p>
+			<ul>
+					<li class="cat-item cat-item-82"><a href="https://www.itaintboring.com/category/ai/">AI</a>
+</li>
+	<li class="cat-item cat-item-49"><a href="https://www.itaintboring.com/category/analytics/">Analytics</a>
+</li>
+	<li class="cat-item cat-item-69"><a href="https://www.itaintboring.com/category/azure-devops/">Azure DevOps</a>
+</li>
+	<li class="cat-item cat-item-31"><a href="https://www.itaintboring.com/category/blogging/">Blogging</a>
+</li>
+	<li class="cat-item cat-item-83"><a href="https://www.itaintboring.com/category/bots/">Bots</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="https://www.itaintboring.com/category/business-analysis/">Business Analysis</a>
+</li>
+	<li class="cat-item cat-item-111"><a href="https://www.itaintboring.com/category/canvas-apps/">Canvas Apps</a>
+</li>
+	<li class="cat-item cat-item-113"><a href="https://www.itaintboring.com/category/coe/">COE</a>
+</li>
+	<li class="cat-item cat-item-116"><a href="https://www.itaintboring.com/category/copilot/">copilot</a>
+</li>
+	<li class="cat-item cat-item-125"><a href="https://www.itaintboring.com/category/copilot-studio/">Copilot Studio</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="https://www.itaintboring.com/category/crm-tips/">CRM Tips</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="https://www.itaintboring.com/category/data-migration/">Data Migration</a>
+</li>
+	<li class="cat-item cat-item-27"><a href="https://www.itaintboring.com/category/databases/">Databases</a>
+</li>
+	<li class="cat-item cat-item-89"><a href="https://www.itaintboring.com/category/dataflows/">Dataflows</a>
+</li>
+	<li class="cat-item cat-item-104"><a href="https://www.itaintboring.com/category/dataverse/">Dataverse</a>
+</li>
+	<li class="cat-item cat-item-71"><a href="https://www.itaintboring.com/category/decisions/">Decisions</a>
+</li>
+	<li class="cat-item cat-item-45"><a href="https://www.itaintboring.com/category/dynamics/">Dynamics</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://www.itaintboring.com/category/dynamics-crm/">Dynamics 365</a>
+</li>
+	<li class="cat-item cat-item-42"><a href="https://www.itaintboring.com/category/dynamics-toolbox/">Dynamics ToolBox</a>
+</li>
+	<li class="cat-item cat-item-64"><a href="https://www.itaintboring.com/category/flow/">Flow</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="https://www.itaintboring.com/category/gradio/">Gradio</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="https://www.itaintboring.com/category/life-and-technology/">Life and Technology</a>
+</li>
+	<li class="cat-item cat-item-99"><a href="https://www.itaintboring.com/category/microsoft-dataverse/">Microsoft Dataverse</a>
+</li>
+	<li class="cat-item cat-item-56"><a href="https://www.itaintboring.com/category/microsoft-teams/">Microsoft Teams</a>
+</li>
+	<li class="cat-item cat-item-60"><a href="https://www.itaintboring.com/category/mvp/">MVP</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="https://www.itaintboring.com/category/patterns/">Patterns</a>
+</li>
+	<li class="cat-item cat-item-66"><a href="https://www.itaintboring.com/category/portals/">Portals</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="https://www.itaintboring.com/category/power-automate/">Power Automate</a>
+</li>
+	<li class="cat-item cat-item-95"><a href="https://www.itaintboring.com/category/power-bi/">Power BI</a>
+</li>
+	<li class="cat-item cat-item-120"><a href="https://www.itaintboring.com/category/power-pages/">Power Pages</a>
+</li>
+	<li class="cat-item cat-item-62"><a href="https://www.itaintboring.com/category/power-platform/">Power Platform</a>
+</li>
+	<li class="cat-item cat-item-51"><a href="https://www.itaintboring.com/category/powerapps/">PowerApps</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="https://www.itaintboring.com/category/powershell/">PowerShell</a>
+</li>
+	<li class="cat-item cat-item-91"><a href="https://www.itaintboring.com/category/powerstorm/">PowerStorm</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="https://www.itaintboring.com/category/published/">Published</a>
+</li>
+	<li class="cat-item cat-item-54"><a href="https://www.itaintboring.com/category/scrum/">SCRUM</a>
+</li>
+	<li class="cat-item cat-item-108"><a href="https://www.itaintboring.com/category/simple-solutions/">Simple Solutions</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://www.itaintboring.com/category/softwarearchitecture/">Software Architecture</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="https://www.itaintboring.com/category/software-development/">Software Development</a>
+</li>
+	<li class="cat-item cat-item-119"><a href="https://www.itaintboring.com/category/solutions/">Solutions</a>
+</li>
+	<li class="cat-item cat-item-43"><a href="https://www.itaintboring.com/category/syndication/">Syndication</a>
+</li>
+	<li class="cat-item cat-item-34"><a href="https://www.itaintboring.com/category/tcs-tools/">TCS Tools</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="https://www.itaintboring.com/category/thoughts/">Thoughts</a>
+</li>
+	<li class="cat-item cat-item-41"><a href="https://www.itaintboring.com/category/training/">Training</a>
+</li>
+	<li class="cat-item cat-item-127"><a href="https://www.itaintboring.com/category/tryloop/">TryLoop</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://www.itaintboring.com/category/uncategorized/">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-117"><a href="https://www.itaintboring.com/category/web-starter/">Web Starter</a>
+</li>
+	<li class="cat-item cat-item-67"><a href="https://www.itaintboring.com/category/windows-containers/">Windows Containers</a>
+</li>
+	<li class="cat-item cat-item-102"><a href="https://www.itaintboring.com/category/wordpress/">WordPress</a>
+</li>
+	<li class="cat-item cat-item-46"><a href="https://www.itaintboring.com/category/xamarin/">Xamarin</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="https://www.itaintboring.com/category/xrm/">XRM</a>
+</li>
+			</ul>
+
+			</aside><aside id="archives-2" class="widget widget_archive"><p class="widget-title">Archives</p>
+			<ul>
+					<li><a href='https://www.itaintboring.com/2026/05/'>May 2026</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2026/04/'>April 2026</a>&nbsp;(3)</li>
+	<li><a href='https://www.itaintboring.com/2025/11/'>November 2025</a>&nbsp;(4)</li>
+	<li><a href='https://www.itaintboring.com/2025/09/'>September 2025</a>&nbsp;(5)</li>
+	<li><a href='https://www.itaintboring.com/2025/08/'>August 2025</a>&nbsp;(3)</li>
+	<li><a href='https://www.itaintboring.com/2025/05/'>May 2025</a>&nbsp;(1)</li>
+	<li><a href='https://www.itaintboring.com/2025/03/'>March 2025</a>&nbsp;(1)</li>
+	<li><a href='https://www.itaintboring.com/2025/02/'>February 2025</a>&nbsp;(3)</li>
+	<li><a href='https://www.itaintboring.com/2025/01/'>January 2025</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2024/12/'>December 2024</a>&nbsp;(1)</li>
+	<li><a href='https://www.itaintboring.com/2024/11/'>November 2024</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2024/09/'>September 2024</a>&nbsp;(4)</li>
+	<li><a href='https://www.itaintboring.com/2024/08/'>August 2024</a>&nbsp;(9)</li>
+	<li><a href='https://www.itaintboring.com/2024/07/'>July 2024</a>&nbsp;(9)</li>
+	<li><a href='https://www.itaintboring.com/2024/06/'>June 2024</a>&nbsp;(5)</li>
+	<li><a href='https://www.itaintboring.com/2024/04/'>April 2024</a>&nbsp;(7)</li>
+	<li><a href='https://www.itaintboring.com/2024/03/'>March 2024</a>&nbsp;(8)</li>
+	<li><a href='https://www.itaintboring.com/2024/01/'>January 2024</a>&nbsp;(1)</li>
+	<li><a href='https://www.itaintboring.com/2023/12/'>December 2023</a>&nbsp;(3)</li>
+	<li><a href='https://www.itaintboring.com/2023/11/'>November 2023</a>&nbsp;(5)</li>
+	<li><a href='https://www.itaintboring.com/2023/10/'>October 2023</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2023/09/'>September 2023</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2023/08/'>August 2023</a>&nbsp;(3)</li>
+	<li><a href='https://www.itaintboring.com/2023/07/'>July 2023</a>&nbsp;(10)</li>
+	<li><a href='https://www.itaintboring.com/2023/06/'>June 2023</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2023/04/'>April 2023</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2023/03/'>March 2023</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2023/02/'>February 2023</a>&nbsp;(1)</li>
+	<li><a href='https://www.itaintboring.com/2022/12/'>December 2022</a>&nbsp;(3)</li>
+	<li><a href='https://www.itaintboring.com/2022/11/'>November 2022</a>&nbsp;(8)</li>
+	<li><a href='https://www.itaintboring.com/2022/08/'>August 2022</a>&nbsp;(6)</li>
+	<li><a href='https://www.itaintboring.com/2022/07/'>July 2022</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2022/05/'>May 2022</a>&nbsp;(1)</li>
+	<li><a href='https://www.itaintboring.com/2022/04/'>April 2022</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2022/02/'>February 2022</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2022/01/'>January 2022</a>&nbsp;(7)</li>
+	<li><a href='https://www.itaintboring.com/2021/12/'>December 2021</a>&nbsp;(4)</li>
+	<li><a href='https://www.itaintboring.com/2021/11/'>November 2021</a>&nbsp;(8)</li>
+	<li><a href='https://www.itaintboring.com/2021/10/'>October 2021</a>&nbsp;(10)</li>
+	<li><a href='https://www.itaintboring.com/2021/09/'>September 2021</a>&nbsp;(12)</li>
+	<li><a href='https://www.itaintboring.com/2021/08/'>August 2021</a>&nbsp;(7)</li>
+	<li><a href='https://www.itaintboring.com/2021/07/'>July 2021</a>&nbsp;(6)</li>
+	<li><a href='https://www.itaintboring.com/2021/06/'>June 2021</a>&nbsp;(5)</li>
+	<li><a href='https://www.itaintboring.com/2021/05/'>May 2021</a>&nbsp;(4)</li>
+	<li><a href='https://www.itaintboring.com/2021/04/'>April 2021</a>&nbsp;(14)</li>
+	<li><a href='https://www.itaintboring.com/2021/03/'>March 2021</a>&nbsp;(4)</li>
+	<li><a href='https://www.itaintboring.com/2021/02/'>February 2021</a>&nbsp;(6)</li>
+	<li><a href='https://www.itaintboring.com/2021/01/'>January 2021</a>&nbsp;(11)</li>
+	<li><a href='https://www.itaintboring.com/2020/12/'>December 2020</a>&nbsp;(12)</li>
+	<li><a href='https://www.itaintboring.com/2020/11/'>November 2020</a>&nbsp;(19)</li>
+	<li><a href='https://www.itaintboring.com/2020/10/'>October 2020</a>&nbsp;(3)</li>
+	<li><a href='https://www.itaintboring.com/2020/09/'>September 2020</a>&nbsp;(6)</li>
+	<li><a href='https://www.itaintboring.com/2020/08/'>August 2020</a>&nbsp;(1)</li>
+	<li><a href='https://www.itaintboring.com/2020/07/'>July 2020</a>&nbsp;(15)</li>
+	<li><a href='https://www.itaintboring.com/2020/06/'>June 2020</a>&nbsp;(11)</li>
+	<li><a href='https://www.itaintboring.com/2020/05/'>May 2020</a>&nbsp;(4)</li>
+	<li><a href='https://www.itaintboring.com/2020/04/'>April 2020</a>&nbsp;(1)</li>
+	<li><a href='https://www.itaintboring.com/2020/03/'>March 2020</a>&nbsp;(10)</li>
+	<li><a href='https://www.itaintboring.com/2020/02/'>February 2020</a>&nbsp;(9)</li>
+	<li><a href='https://www.itaintboring.com/2020/01/'>January 2020</a>&nbsp;(13)</li>
+	<li><a href='https://www.itaintboring.com/2019/12/'>December 2019</a>&nbsp;(8)</li>
+	<li><a href='https://www.itaintboring.com/2019/11/'>November 2019</a>&nbsp;(11)</li>
+	<li><a href='https://www.itaintboring.com/2019/10/'>October 2019</a>&nbsp;(8)</li>
+	<li><a href='https://www.itaintboring.com/2019/09/'>September 2019</a>&nbsp;(7)</li>
+	<li><a href='https://www.itaintboring.com/2019/08/'>August 2019</a>&nbsp;(9)</li>
+	<li><a href='https://www.itaintboring.com/2019/07/'>July 2019</a>&nbsp;(7)</li>
+	<li><a href='https://www.itaintboring.com/2019/06/'>June 2019</a>&nbsp;(8)</li>
+	<li><a href='https://www.itaintboring.com/2019/05/'>May 2019</a>&nbsp;(13)</li>
+	<li><a href='https://www.itaintboring.com/2019/04/'>April 2019</a>&nbsp;(12)</li>
+	<li><a href='https://www.itaintboring.com/2019/03/'>March 2019</a>&nbsp;(18)</li>
+	<li><a href='https://www.itaintboring.com/2019/02/'>February 2019</a>&nbsp;(14)</li>
+	<li><a href='https://www.itaintboring.com/2019/01/'>January 2019</a>&nbsp;(10)</li>
+	<li><a href='https://www.itaintboring.com/2018/12/'>December 2018</a>&nbsp;(7)</li>
+	<li><a href='https://www.itaintboring.com/2018/11/'>November 2018</a>&nbsp;(6)</li>
+	<li><a href='https://www.itaintboring.com/2018/10/'>October 2018</a>&nbsp;(5)</li>
+	<li><a href='https://www.itaintboring.com/2018/09/'>September 2018</a>&nbsp;(11)</li>
+	<li><a href='https://www.itaintboring.com/2018/08/'>August 2018</a>&nbsp;(11)</li>
+	<li><a href='https://www.itaintboring.com/2018/07/'>July 2018</a>&nbsp;(11)</li>
+	<li><a href='https://www.itaintboring.com/2018/06/'>June 2018</a>&nbsp;(13)</li>
+	<li><a href='https://www.itaintboring.com/2018/05/'>May 2018</a>&nbsp;(7)</li>
+	<li><a href='https://www.itaintboring.com/2018/04/'>April 2018</a>&nbsp;(5)</li>
+	<li><a href='https://www.itaintboring.com/2018/03/'>March 2018</a>&nbsp;(3)</li>
+	<li><a href='https://www.itaintboring.com/2018/02/'>February 2018</a>&nbsp;(7)</li>
+	<li><a href='https://www.itaintboring.com/2018/01/'>January 2018</a>&nbsp;(12)</li>
+	<li><a href='https://www.itaintboring.com/2017/12/'>December 2017</a>&nbsp;(6)</li>
+	<li><a href='https://www.itaintboring.com/2017/11/'>November 2017</a>&nbsp;(9)</li>
+	<li><a href='https://www.itaintboring.com/2017/10/'>October 2017</a>&nbsp;(28)</li>
+	<li><a href='https://www.itaintboring.com/2017/09/'>September 2017</a>&nbsp;(15)</li>
+	<li><a href='https://www.itaintboring.com/2017/08/'>August 2017</a>&nbsp;(18)</li>
+	<li><a href='https://www.itaintboring.com/2017/07/'>July 2017</a>&nbsp;(22)</li>
+	<li><a href='https://www.itaintboring.com/2017/06/'>June 2017</a>&nbsp;(8)</li>
+	<li><a href='https://www.itaintboring.com/2017/05/'>May 2017</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2017/04/'>April 2017</a>&nbsp;(13)</li>
+	<li><a href='https://www.itaintboring.com/2017/03/'>March 2017</a>&nbsp;(5)</li>
+	<li><a href='https://www.itaintboring.com/2016/08/'>August 2016</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2016/06/'>June 2016</a>&nbsp;(5)</li>
+	<li><a href='https://www.itaintboring.com/2016/05/'>May 2016</a>&nbsp;(5)</li>
+	<li><a href='https://www.itaintboring.com/2016/04/'>April 2016</a>&nbsp;(20)</li>
+	<li><a href='https://www.itaintboring.com/2013/10/'>October 2013</a>&nbsp;(1)</li>
+	<li><a href='https://www.itaintboring.com/2013/06/'>June 2013</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2013/03/'>March 2013</a>&nbsp;(1)</li>
+	<li><a href='https://www.itaintboring.com/2013/01/'>January 2013</a>&nbsp;(1)</li>
+	<li><a href='https://www.itaintboring.com/2012/11/'>November 2012</a>&nbsp;(2)</li>
+	<li><a href='https://www.itaintboring.com/2012/10/'>October 2012</a>&nbsp;(3)</li>
+			</ul>
+
+			</aside><aside id="meta-2" class="widget widget_meta"><p class="widget-title">Meta</p>
+		<ul>
+						<li><a href="https://www.itaintboring.com/wp-login.php">Log in</a></li>
+			<li><a href="https://www.itaintboring.com/feed/">Entries feed</a></li>
+			<li><a href="https://www.itaintboring.com/comments/feed/">Comments feed</a></li>
+
+			<li><a href="https://wordpress.org/">WordPress.org</a></li>
+		</ul>
+
+		</aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	<footer id="colophon" role="contentinfo">
+		<div class="site-info">
+		<div class="footercopy">Copyright 2011-2019, It Ain't Boring</div>
+		<div class="footercredit"></div>
+		<div class="clear"></div>
+		</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+		<div class="site-wordpress">
+				<a href="https://themonic.com/iconic-one/">Iconic One</a> Theme | Powered by <a href="https://wordpress.org">Wordpress</a>
+				</div><!-- .site-info -->
+				<div class="clear"></div>
+</div><!-- #page -->
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/iconic-one\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script type="text/javascript" src="https://www.itaintboring.com/wp-includes/js/comment-reply.min.js?ver=6.8.9" id="comment-reply-js" async="async" data-wp-strategy="async"></script>
+<script type="text/javascript" src="https://www.itaintboring.com/wp-content/themes/iconic-one/js/selectnav.js?ver=1.0" id="themonic-mobile-navigation-js"></script>
+</body>
+</html>

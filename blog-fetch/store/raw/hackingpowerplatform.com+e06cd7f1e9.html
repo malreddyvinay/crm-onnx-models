@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+
+	<title>Hidden features of FetchXml &#8211; Hacking Power Platform</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="Hacking Power Platform &raquo; Feed" href="https://hackingpowerplatform.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Hacking Power Platform &raquo; Comments Feed" href="https://hackingpowerplatform.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Hacking Power Platform &raquo; Hidden features of FetchXml Comments Feed" href="https://hackingpowerplatform.com/hidden-features-of-fetchxml/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://hackingpowerplatform.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fhackingpowerplatform.com%2Fhidden-features-of-fetchxml%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://hackingpowerplatform.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fhackingpowerplatform.com%2Fhidden-features-of-fetchxml%2F&#038;format=xml" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="wp-block-heading-inline-css">
+h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-background,h3:where(.wp-block-heading).has-background,h4:where(.wp-block-heading).has-background,h5:where(.wp-block-heading).has-background,h6:where(.wp-block-heading).has-background{padding:1.25em 2.375em}h1.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h1.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h2.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h2.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h3.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h3.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h4.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h4.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h5.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h5.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h6.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h6.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]){rotate:180deg}
+/*# sourceURL=https://hackingpowerplatform.com/wp-includes/blocks/heading/style.min.css */
+</style>
+<style id="wp-block-list-inline-css">
+ol,ul{box-sizing:border-box}:root :where(.wp-block-list.has-background){padding:1.25em 2.375em}
+/*# sourceURL=https://hackingpowerplatform.com/wp-includes/blocks/list/style.min.css */
+</style>
+<style id="wp-block-paragraph-inline-css">
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:1.25em 2.375em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+/*# sourceURL=https://hackingpowerplatform.com/wp-includes/blocks/paragraph/style.min.css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+
+<style id="kevinbatdorf-code-block-pro-style-inline-css">
+.wp-block-kevinbatdorf-code-block-pro{direction:ltr!important;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;-webkit-text-size-adjust:100%!important;box-sizing:border-box!important;position:relative!important}.wp-block-kevinbatdorf-code-block-pro *{box-sizing:border-box!important}.wp-block-kevinbatdorf-code-block-pro pre,.wp-block-kevinbatdorf-code-block-pro pre *{font-size:inherit!important;line-height:inherit!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre{background-image:none!important;border:0!important;border-radius:0!important;border-style:none!important;border-width:0!important;color:inherit!important;font-family:inherit!important;margin:0!important;overflow:auto!important;overflow-wrap:normal!important;padding:16px 0 16px 16px!important;text-align:left!important;white-space:pre!important;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)!important;outline:2px solid transparent!important;outline-offset:2px!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre:focus-visible{outline-color:inherit!important}.wp-block-kevinbatdorf-code-block-pro.padding-disabled:not(.code-block-pro-editor)
+	pre{padding:0!important}.wp-block-kevinbatdorf-code-block-pro.padding-bottom-disabled pre{padding-bottom:0!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre code{background:none!important;background-color:transparent!important;border:0!important;border-radius:0!important;border-style:none!important;border-width:0!important;color:inherit!important;display:block!important;font-family:inherit!important;margin:0!important;overflow-wrap:normal!important;padding:0!important;text-align:left!important;white-space:pre!important;width:100%!important;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor)
+	pre
+	code
+	.line{display:inline-block!important;min-width:var(--cbp-block-width,100%)!important;vertical-align:top!important}.wp-block-kevinbatdorf-code-block-pro.cbp-has-line-numbers:not(.code-block-pro-editor)
+	pre
+	code
+	.line{padding-left:calc(12px + var(--cbp-line-number-width, auto))!important}.wp-block-kevinbatdorf-code-block-pro.cbp-has-line-numbers:not(.code-block-pro-editor)
+	pre
+	code{counter-increment:step calc(var(--cbp-line-number-start, 1) - 1)!important;counter-reset:step!important}.wp-block-kevinbatdorf-code-block-pro pre code .line{position:relative!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor)
+	pre
+	code
+	.line:before{content:""!important;display:inline-block!important}.wp-block-kevinbatdorf-code-block-pro.cbp-has-line-numbers:not(.code-block-pro-editor)
+	pre
+	code
+	.line:not(.cbp-line-number-disabled):before{color:var(--cbp-line-number-color,#999)!important;content:counter(step)!important;counter-increment:step!important;left:0!important;opacity:.5!important;position:absolute!important;text-align:right!important;transition-duration:.5s!important;transition-property:opacity!important;transition-timing-function:cubic-bezier(.4,0,.2,1)!important;-webkit-user-select:none!important;-moz-user-select:none!important;user-select:none!important;width:var(--cbp-line-number-width,auto)!important}.wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover .line{min-height:var(--cbp-block-height,100%)!important}.wp-block-kevinbatdorf-code-block-pro .line.cbp-line-highlight .cbp-line-highlighter,.wp-block-kevinbatdorf-code-block-pro .line.cbp-no-blur:hover .cbp-line-highlighter,.wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover:not(.cbp-blur-enabled:not(.cbp-unblur-on-hover))
+		.line:hover .cbp-line-highlighter{background:var(--cbp-line-highlight-color,rgba(14,165,233,.2))!important;left:-16px!important;min-height:var(--cbp-block-height,100%)!important;min-width:calc(var(--cbp-block-width, 100%) + 16px)!important;pointer-events:none!important;position:absolute!important;top:0!important;width:100%!important}[data-code-block-pro-font-family="Code-Pro-Comic-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro .line.cbp-line-highlight .cbp-line-highlighter,[data-code-block-pro-font-family="Code-Pro-Comic-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro .line.cbp-no-blur:hover .cbp-line-highlighter,[data-code-block-pro-font-family="Code-Pro-Comic-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover:not(.cbp-blur-enabled:not(.cbp-unblur-on-hover))
+		.line:hover .cbp-line-highlighter{top:-.125rem!important}[data-code-block-pro-font-family=Code-Pro-Fira-Code].wp-block-kevinbatdorf-code-block-pro .line.cbp-line-highlight .cbp-line-highlighter,[data-code-block-pro-font-family=Code-Pro-Fira-Code].wp-block-kevinbatdorf-code-block-pro .line.cbp-no-blur:hover .cbp-line-highlighter,[data-code-block-pro-font-family=Code-Pro-Fira-Code].wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover:not(.cbp-blur-enabled:not(.cbp-unblur-on-hover))
+		.line:hover .cbp-line-highlighter{top:-1.5px!important}[data-code-block-pro-font-family="Code-Pro-Deja-Vu-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro .line.cbp-line-highlight .cbp-line-highlighter,[data-code-block-pro-font-family="Code-Pro-Deja-Vu-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro .line.cbp-no-blur:hover .cbp-line-highlighter,[data-code-block-pro-font-family="Code-Pro-Deja-Vu-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover:not(.cbp-blur-enabled:not(.cbp-unblur-on-hover))
+		.line:hover .cbp-line-highlighter,[data-code-block-pro-font-family=Code-Pro-Cozette].wp-block-kevinbatdorf-code-block-pro .line.cbp-line-highlight .cbp-line-highlighter,[data-code-block-pro-font-family=Code-Pro-Cozette].wp-block-kevinbatdorf-code-block-pro .line.cbp-no-blur:hover .cbp-line-highlighter,[data-code-block-pro-font-family=Code-Pro-Cozette].wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover:not(.cbp-blur-enabled:not(.cbp-unblur-on-hover))
+		.line:hover .cbp-line-highlighter{top:-1px!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor).padding-disabled pre
+	.line.cbp-line-highlight:after{left:0!important;width:100%!important}.wp-block-kevinbatdorf-code-block-pro.cbp-blur-enabled
+	pre
+	.line:not(.cbp-no-blur){filter:blur(1.35px)!important;opacity:.8!important;pointer-events:none!important;transition-duration:.2s!important;transition-property:all!important;transition-timing-function:cubic-bezier(.4,0,.2,1)!important}.wp-block-kevinbatdorf-code-block-pro.cbp-blur-enabled.cbp-unblur-on-hover:hover
+	pre
+	.line:not(.cbp-no-blur){opacity:1!important;pointer-events:auto!important;--tw-blur: ;filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre *{font-family:inherit!important}.cbp-see-more-simple-btn-hover{transition-property:none!important}.cbp-see-more-simple-btn-hover:hover{box-shadow:inset 0 0 100px 100px hsla(0,0%,100%,.1)!important}.code-block-pro-copy-button{border:0!important;border-style:none!important;border-width:0!important;cursor:pointer!important;left:auto!important;line-height:1!important;opacity:.1!important;outline:2px solid transparent!important;outline-offset:2px!important;padding:6px!important;position:absolute!important;right:0!important;top:0!important;transition-duration:.2s!important;transition-property:opacity!important;transition-timing-function:cubic-bezier(.4,0,.2,1)!important;z-index:10!important}.code-block-pro-copy-button:focus{opacity:.4!important}.code-block-pro-copy-button:focus-visible{outline-color:inherit!important}.code-block-pro-copy-button:not([data-has-text-button]){background:none!important;background-color:transparent!important}body
+	.wp-block-kevinbatdorf-code-block-pro:not(#x)
+	.code-block-pro-copy-button-textarea,body .wp-block-kevinbatdorf-code-block-pro:not(#x)
+	.code-block-pro-copy-button-pre{clip:rect(0,0,0,0)!important;background-color:transparent!important;border-width:0!important;color:transparent!important;height:1px!important;left:0!important;margin:-.25rem!important;opacity:0!important;overflow:hidden!important;pointer-events:none!important;position:absolute!important;resize:none!important;top:0!important;white-space:nowrap!important;width:1px!important;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)!important}.wp-block-kevinbatdorf-code-block-pro.padding-disabled
+	.code-block-pro-copy-button{padding:0!important}.wp-block-kevinbatdorf-code-block-pro:hover .code-block-pro-copy-button{opacity:.5!important}.wp-block-kevinbatdorf-code-block-pro .code-block-pro-copy-button:hover{opacity:.9!important}.code-block-pro-copy-button[data-has-text-button],.wp-block-kevinbatdorf-code-block-pro:hover
+	.code-block-pro-copy-button[data-has-text-button]{opacity:1!important}.wp-block-kevinbatdorf-code-block-pro
+	.code-block-pro-copy-button[data-has-text-button]:hover{opacity:.8!important}.code-block-pro-copy-button[data-has-text-button]{border-radius:.75rem!important;display:block!important;margin-right:.75rem!important;margin-top:.7rem!important;padding:.125rem .375rem!important}.code-block-pro-copy-button[data-inside-header-type=headlightsMuted],.code-block-pro-copy-button[data-inside-header-type^=headlights]{margin-top:.85rem!important}.code-block-pro-copy-button[data-inside-header-type=headlightsMutedAlt]{margin-top:.65rem!important}.code-block-pro-copy-button[data-inside-header-type=simpleString]{margin-top:.645rem!important}.code-block-pro-copy-button[data-inside-header-type=pillString]{margin-top:1rem!important}.code-block-pro-copy-button[data-inside-header-type=pillString]
+	.cbp-btn-text{position:relative!important;top:1px!important}.cbp-btn-text{font-size:.75rem!important;line-height:1rem!important}.code-block-pro-copy-button .without-check{display:block!important}.code-block-pro-copy-button .with-check{display:none!important}.code-block-pro-copy-button.cbp-copying{opacity:1!important}.code-block-pro-copy-button.cbp-copying .without-check{display:none!important}.code-block-pro-copy-button.cbp-copying .with-check{display:block!important}.cbp-footer-link:hover{text-decoration-line:underline!important}@media print{.wp-block-kevinbatdorf-code-block-pro pre{max-height:none!important}.wp-block-kevinbatdorf-code-block-pro:not(#x) .line:before{background-color:transparent!important;color:inherit!important}.wp-block-kevinbatdorf-code-block-pro:not(#x) .cbp-line-highlighter,.wp-block-kevinbatdorf-code-block-pro:not(#x)>span{display:none!important}}
+
+/*# sourceURL=https://hackingpowerplatform.com/wp-content/plugins/code-block-pro/build/style-index.css */
+</style>
+
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 16px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 25px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-size--larger: 35px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-larger-font-size{font-size: var(--wp--preset--font-size--larger) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel='stylesheet' id='fairy-style-css' href='https://hackingpowerplatform.com/wp-content/themes/fairy/style.css?ver=7.1.1' media='all' />
+<style id="fairy-style-inline-css">
+.primary-color, p a, h1 a, h2 a, h3 a, h4 a, h5 a, .author-title a, figure a, table a, span a, strong a, li a, h1 a, .btn-primary-border, .main-navigation #primary-menu > li > a:hover, .widget-area .widget a:hover, .widget-area .widget a:focus, .card-bg-image .card_body a:hover, .main-navigation #primary-menu > li.focus > a, .card-blog-post .category-label-group a:hover, .card_title a:hover, .card-blog-post .entry-meta a:hover, .site-title a:visited, .post-navigation .nav-links > * a:hover, .post-navigation .nav-links > * a:focus, .wp-block-button.is-style-outline .wp-block-button__link, .error-404-title, .ct-dark-mode a:hover, .ct-dark-mode .widget ul li a:hover, .ct-dark-mode .widget-area .widget ul li a:hover, .ct-dark-mode .post-navigation .nav-links > * a, .ct-dark-mode .author-wrapper .author-title a, .ct-dark-mode .wp-calendar-nav a, .site-footer a:hover, .top-header-toggle-btn, .woocommerce ul.products li.product .woocommerce-loop-category__title:hover, .woocommerce ul.products li.product .woocommerce-loop-product__title:hover, .woocommerce ul.products li.product h3:hover, .entry-content dl a, .entry-content table a, .entry-content ul a, .breadcrumb-trail .trial-items a:hover, .breadcrumbs ul a:hover, .breadcrumb-trail .trial-items .trial-end a, .breadcrumbs ul li:last-child a, .comment-list .comment .comment-body a, .comment-list .comment .comment-body .comment-metadata a.comment-edit-link { color: #ffdc00; }.primary-bg, .btn-primary, .main-navigation ul ul a, #secondary .widget .widget-title:after, .search-form .search-submit, .category-label-group a:after, .posts-navigation .nav-links a, .category-label-group.bg-label a, .wp-block-button__link, .wp-block-button.is-style-outline .wp-block-button__link:hover, button, input[type="button"], input[type="reset"], input[type="submit"], .pagination .page-numbers.current, .pagination .page-numbers:hover, table #today, .tagcloud .tag-cloud-link:hover, .footer-go-to-top, .woocommerce ul.products li.product .button,
+.woocommerce #respond input#submit.alt, .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt,
+.woocommerce #respond input#submit.alt.disabled, .woocommerce #respond input#submit.alt.disabled:hover, .woocommerce #respond input#submit.alt:disabled, .woocommerce #respond input#submit.alt:disabled:hover, .woocommerce #respond input#submit.alt:disabled[disabled], .woocommerce #respond input#submit.alt:disabled[disabled]:hover, .woocommerce a.button.alt.disabled, .woocommerce a.button.alt.disabled:hover, .woocommerce a.button.alt:disabled, .woocommerce a.button.alt:disabled:hover, .woocommerce a.button.alt:disabled[disabled], .woocommerce a.button.alt:disabled[disabled]:hover, .woocommerce button.button.alt.disabled, .woocommerce button.button.alt.disabled:hover, .woocommerce button.button.alt:disabled, .woocommerce button.button.alt:disabled:hover, .woocommerce button.button.alt:disabled[disabled], .woocommerce button.button.alt:disabled[disabled]:hover, .woocommerce input.button.alt.disabled, .woocommerce input.button.alt.disabled:hover, .woocommerce input.button.alt:disabled, .woocommerce input.button.alt:disabled:hover, .woocommerce input.button.alt:disabled[disabled], .woocommerce input.button.alt:disabled[disabled]:hover, .woocommerce .widget_price_filter .ui-slider .ui-slider-range, .woocommerce .widget_price_filter .ui-slider .ui-slider-handle, .fairy-menu-social li a[href*="mailto:"], .ajax-pagination .show-more { background-color: #ffdc00; }.primary-border, .btn-primary-border, .site-header-v2,.wp-block-button.is-style-outline .wp-block-button__link, .site-header-bottom, .ajax-pagination .show-more { border-color: #ffdc00; }a:focus, button.slick-arrow:focus, input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=search]:focus, input[type=file]:focus, input[type=number]:focus, input[type=datetime]:focus, input[type=url]:focus, select:focus, textarea:focus { outline-color: #ffdc00; }.entry-content a { text-decoration-color: #ffdc00; }.post-thumbnail a:focus img, .card_media a:focus img, article.sticky .card-blog-post { border-color: #ffdc00; }.site-title, .site-title a, h1.site-title a, p.site-title a,  .site-title a:visited { color: #ffdc00; }.site-description { color: #404040; }
+                    .card-bg-image:after, .card-bg-image.card-promo .card_media a:after{
+                    background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgb(150 150 150 / 34%));
+                    }
+                    
+                    .entry-content a{
+                   text-decoration: underline;
+                    }
+                    body, button, input, select, optgroup, textarea { font-family: 'Muli'; }h1, h2, h3, h4, h5, h6, .entry-content h1 { font-family: 'Poppins'; }
+/*# sourceURL=fairy-style-inline-css */
+</style>
+<link rel='stylesheet' id='fairy-dark-style-css' href='https://hackingpowerplatform.com/wp-content/themes/fairy-dark/style.css?ver=7.1.1' media='all' />
+<link rel='stylesheet' id='Muli:400,300italic,300-css' href='//fonts.googleapis.com/css?family=Muli:400,300italic,300&#038;ver=7.1.1' media='all' />
+<link rel='stylesheet' id='Poppins:400,500,600,700-css' href='//fonts.googleapis.com/css?family=Poppins:400,500,600,700&#038;ver=7.1.1' media='all' />
+<link rel='stylesheet' id='font-awesome-css' href='https://hackingpowerplatform.com/wp-content/themes/fairy/candidthemes/assets/framework/font-awesome-6/css/all.min.css?ver=1.3.7' media='all' />
+<link rel='stylesheet' id='slick-css' href='https://hackingpowerplatform.com/wp-content/themes/fairy/candidthemes/assets/framework/slick/slick.css?ver=1.3.7' media='all' />
+<link rel='stylesheet' id='slick-theme-css' href='https://hackingpowerplatform.com/wp-content/themes/fairy/candidthemes/assets/framework/slick/slick-theme.css?ver=1.3.7' media='all' />
+<script id="jquery-core-js" src="https://hackingpowerplatform.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script id="jquery-migrate-js" src="https://hackingpowerplatform.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"></script>
+<link rel="https://api.w.org/" href="https://hackingpowerplatform.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://hackingpowerplatform.com/wp-json/wp/v2/posts/176" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://hackingpowerplatform.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 7.1.1" />
+<link rel="canonical" href="https://hackingpowerplatform.com/hidden-features-of-fetchxml/" />
+<link rel='shortlink' href='https://hackingpowerplatform.com/?p=176' />
+		<script type="text/javascript">
+			(function(c, l, a, r, i, t, y) {
+				c[a] = c[a] || function() {
+					(c[a].q = c[a].q || []).push(arguments)
+				};
+				t = l.createElement(r);
+				t.async = 1;
+				t.src = "https://www.clarity.ms/tag/" + i + "?ref=wordpress";
+				y = l.getElementsByTagName(r)[0];
+				y.parentNode.insertBefore(t, y);
+			})(window, document, "clarity", "script", "km9wef7hiw");
+		</script>
+	<link rel="pingback" href="https://hackingpowerplatform.com/xmlrpc.php">		<style type="text/css">
+					.site-title a, .site-title {
+				color: #ffdc00;
+			}
+				</style>
+		<link rel="icon" href="https://hackingpowerplatform.com/wp-content/uploads/2024/02/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://hackingpowerplatform.com/wp-content/uploads/2024/02/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://hackingpowerplatform.com/wp-content/uploads/2024/02/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://hackingpowerplatform.com/wp-content/uploads/2024/02/cropped-logo-270x270.png" />
+<style id="wp-custom-css">
+.wp-block-code {
+	background: #212121 !important;
+}
+
+#secondary .widget .widget-title:after {
+	background-color: #ffdc00 !important;
+}
+
+p.site-title a {
+	color: #ffdc00 !important;
+}
+
+.site-title a{
+	color: #ffdc00 !important;
+}
+
+li > a {
+	background: #212121 !important;
+	color: #CCCCCC !important;
+}
+
+.menu-toggle .line {
+	background-color: #212121 !important;
+}
+
+.fa-times {
+	color: #212121 !important;
+}
+
+#content {
+	background: #333333;
+}
+
+.site-footer-bottom {
+	background: #212121;
+}
+
+#site-navigation {
+	background: #212121;
+	border-bottom-width: medium;
+  border-bottom-color: #CCCCCC;
+  border-bottom-style: solid;
+}
+
+.category-label-group {
+	display:none
+}
+
+.card_title a {
+	color: #ffdc00 !important;
+}
+.card_title {
+	color: #ffdc00 !important;
+}
+
+
+</style>
+</head>
+
+<body class="wp-singular post-template-default single single-post postid-176 single-format-standard wp-embed-responsive wp-theme-fairy wp-child-theme-fairy-dark ct-sticky-sidebar fairy-fontawesome-version-6">
+<div id="page" class="site">
+        <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+            <header id="masthead" class="site-header text-center site-header-v2">
+            
+        <div id="site-nav-wrap">
+            <section id="site-navigation" class="site-header-top header-main-bar" >
+                <div class="container">
+                    <div class="row">
+                        <div class="col-1-1">
+                                    <div class="site-branding">
+                            <p class="site-title"><a href="https://hackingpowerplatform.com/" rel="home">Hacking Power Platform</a></p>
+                    </div><!-- .site-branding -->
+
+        <button id="menu-toggle-button" class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+                            </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="site-header-bottom">
+                <div class="container">
+                            <nav class="main-navigation">
+            <ul id="primary-menu" class="nav navbar-nav nav-menu justify-content-center">
+                <li id="menu-item-128" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-128"><a href="/">Home</a></li>
+<li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26"><a href="https://hackingpowerplatform.com/about/">About</a></li>
+                <button class="close_nav"><i class="fa fa-times"></i></button>
+            </ul>
+        </nav><!-- #site-navigation -->
+
+                </div>
+            </section>
+        </div>
+            </header><!-- #masthead -->
+    <div id="content" class="site-content">
+    <main class="site-main">
+        <section class="single-section sec-spacing">
+            <div class="container">
+                                <div class="row ">
+                    <div id="primary" class="col-1-1 col-md-2-3">
+
+                                        <div class="fairy-breadcrumb-wrapper">
+                    <div class='breadcrumbs init-animate clearfix'><div id='fairy-breadcrumbs' class='clearfix'><div role="navigation" aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb"><ul class="trail-items" itemscope itemtype="http://schema.org/BreadcrumbList"><meta name="numberOfItems" content="3" /><meta name="itemListOrder" content="Ascending" /><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="trail-item trail-begin"><a href="https://hackingpowerplatform.com/" rel="home" itemprop="item"><span itemprop="name">Home</span></a><meta itemprop="position" content="1" /></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="trail-item"><a href="https://hackingpowerplatform.com/category/tips-and-tricks/" itemprop="item"><span itemprop="name">Tips and tricks</span></a><meta itemprop="position" content="2" /></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="trail-item trail-end"><a href="https://hackingpowerplatform.com/hidden-features-of-fetchxml/" itemprop="item"><span itemprop="name">Hidden features of FetchXml</span></a><meta itemprop="position" content="3" /></li></ul></div></div></div>                </div>
+
+                        
+<article id="post-176" class="post-176 post type-post status-publish format-standard hentry category-tips-and-tricks">
+    <!-- for full single column card layout add [.card-full-width] class -->
+    <div class="card card-blog-post card-full-width card-single-article">
+         <div class="fairy-metas">
+            <div class="category-label-group"><span class="cat-links"><a class="ct-cat-item-8" href="https://hackingpowerplatform.com/category/tips-and-tricks/"  rel="category tag">Tips and tricks</a> </span></div>
+
+            <h1 class="card_title">Hidden features of FetchXml</h1>                            <div class="entry-meta">
+                    <span class="posted-on"><i class="fa fa-calendar"></i><a href="https://hackingpowerplatform.com/hidden-features-of-fetchxml/" rel="bookmark"><time class="entry-date published" datetime="2024-01-15T14:27:58+00:00">January 15, 2024</time><time class="updated" datetime="2024-03-28T18:49:44+00:00">March 28, 2024</time></a></span><span class="byline"> <span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://hackingpowerplatform.com/author/erik/">Erik</a></span></span>                </div><!-- .entry-meta -->
+                        </div>
+
+                <div class="card_body">
+            <div class="entry-content">
+                
+<p class="wp-block-paragraph">UPDATE: Microsoft has released <a href="https://learn.microsoft.com/en-us/power-apps/developer/data-platform/fetchxml/join-tables?tabs=fetchxml">documentation</a> describing these features. All features mentioned in this article are now fully supported.</p>
+
+
+
+<h2 class="wp-block-heading">Introduction</h2>
+
+
+
+<p class="wp-block-paragraph">When using the Dataverse web api, you can do more advanced queries with OData than you can with FetchXml/QueryExpression. First, let&#8217;s talk a little about operations that OData can do, which FetchXml cannot.</p>
+
+
+
+<h2 class="wp-block-heading">The dataset</h2>
+
+
+
+<p class="wp-block-paragraph">Let&#8217;s say we have two contacts in our Dataverse environment:</p>
+
+
+
+<p class="wp-block-paragraph">Contact 1:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Fullname: Contact without any Tasks</li>
+
+
+
+<li>Tasks: None</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">Contact 2:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Fullname: Contact with Tasks</li>
+
+
+
+<li>Tasks (2):</li>
+
+
+
+<li>Task 1:
+<ul class="wp-block-list">
+<li>Subject: Please make me coffee</li>
+
+
+
+<li>Status: Closed (1)</li>
+</ul>
+</li>
+
+
+
+<li>Task 2:
+<ul class="wp-block-list">
+<li>Subject: Please approve my holiday</li>
+
+
+
+<li>Status: Active (0)</li>
+</ul>
+</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">About OData vs FetchXml</h2>
+
+
+
+<p class="wp-block-paragraph">Now, let&#8217;s say that we want to get the contacts where ALL of the Tasks are Active (eq 0). We can do that with the following OData filter:<br><em>[DataverseOrgUrl]/api/data/v9.2/contacts?$filter=Contact_Tasks/all(t:t/statecode eq 0)<br></em>Result:<br>[None] (The &#8216;Please make me coffee&#8217; task is Closed)</p>
+
+
+
+<p class="wp-block-paragraph">There is no (official) equivalent FetchXml query for this. When querying related tables with FetchXml, you can do the following things:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Get all rows that do NOT have any rows associated to them at all (not-in)</li>
+
+
+
+<li>Get all rows that have ANY rows associated to them</li>
+
+
+
+<li>Get all rows where ANY of the related rows satisfy a given condition</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">With OData, we can the above, and much more:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Get all rows where ALL of the related rows satisfy a given condition</li>
+
+
+
+<li>Get all rows that do NOT have ANY rows that satisfy a given condition</li>
+
+
+
+<li>The given condition can also be a similar ANY/ALL query to a related (nested) table.</li>
+
+
+
+<li>The filters on related tables can all be grouped in AND/OR clauses, allowing for very complex filters.</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph"><strong>Some more examples</strong>:<br>Get all contacts where ALL tasks are Active (eq 0), or ANY task is Closed (eq 1) AND has the Subject &#8216;Please make me coffee&#8217;:<br><em>[DataverseOrgUrl]/api/data/v9.2/contacts?$filter=Contact_Tasks/all(t:t/statecode eq 0) or Contact_Tasks/any(t:t/statecode eq 1 and t/subject eq &#8216;Please make me coffee&#8217;)<br></em>Result:<br>[Contact with Tasks]</p>
+
+
+
+<p class="wp-block-paragraph">Get all contacts that do NOT have any Tasks, or all Tasks are Closed (eq 1):<br><em>[DataverseOrgUrl]/api/data/v9.2/contacts?$filter=not Contact_Tasks/any() or Contact_Tasks/all(t:t/statecode eq 1)<br></em>Result:<br>[Contact without any Tasks]</p>
+
+
+
+<h2 class="wp-block-heading">How to do more advanced queries with FetchXml</h2>
+
+
+
+<p class="wp-block-paragraph">It turns out that all of the above queries are possible to do with FetchXml, using undocumented operators. Let&#8217;s go back to the first example: Get contacts where ALL of the Tasks are Active. For simplicity, let&#8217;s only select the attribute &#8216;fullname&#8217;.<br>First the OData fetch:<br><em>[DataverseOrgUrl]/api/data/v9.2/contacts?$filter=Contact_Tasks/all(t:t/statecode eq 0)&amp;$select=fullname</em></p>
+
+
+
+<p class="wp-block-paragraph">You can do this with the following FetchXml:</p>
+
+
+
+<div class="wp-block-kevinbatdorf-code-block-pro" data-code-block-pro-font-family="Code-Pro-JetBrains-Mono" style="font-size:.875rem;font-family:Code-Pro-JetBrains-Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25rem;--cbp-tab-width:2;tab-size:var(--cbp-tab-width, 2)"><span role="button" tabindex="0" data-code="&lt;fetch distinct=&quot;false&quot; useraworderby=&quot;true&quot; no-lock=&quot;false&quot; mapping=&quot;logical&quot;&gt;
+	&lt;entity name=&quot;contact&quot;&gt;
+		&lt;attribute name=&quot;fullname&quot;/&gt;
+		&lt;filter type=&quot;and&quot;&gt;
+			&lt;filter type=&quot;and&quot;&gt;
+				&lt;link-entity name=&quot;task&quot; to=&quot;contactid&quot; from=&quot;regardingobjectid&quot; link-type=&quot;all&quot;&gt;
+					&lt;filter type=&quot;and&quot; anyallalias=&quot;task1&quot;&gt;
+						&lt;condition attribute=&quot;statecode&quot; operator=&quot;ne&quot; value=&quot;0&quot;/&gt;
+					&lt;/filter&gt;
+				&lt;/link-entity&gt;
+			&lt;/filter&gt;
+		&lt;/filter&gt;
+	&lt;/entity&gt;
+&lt;/fetch&gt;
+" style="color:#D4D4D4;display:none" aria-label="Copy" class="code-block-pro-copy-button"><svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path class="with-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path><path class="without-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></span><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #808080">&lt;</span><span style="color: #569CD6">fetch</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">distinct</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;false&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">useraworderby</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;true&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">no-lock</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;false&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">mapping</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;logical&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">	</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">entity</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;contact&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">		</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">attribute</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;fullname&quot;</span><span style="color: #808080">/&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">		</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">			</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">				</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">link-entity</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;task&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">to</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;contactid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">from</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;regardingobjectid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">link-type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;all&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">					</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">anyallalias</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;task1&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">						</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">condition</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">attribute</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;statecode&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">operator</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;ne&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">value</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;0&quot;</span><span style="color: #808080">/&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">					</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">				</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">link-entity</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">			</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">		</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">	</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">entity</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #808080">&lt;/</span><span style="color: #569CD6">fetch</span><span style="color: #808080">&gt;</span></span>
+<span class="line"></span></code></pre></div>
+
+
+
+<p class="wp-block-paragraph"><br> </p>
+
+
+
+<p class="wp-block-paragraph">What&#8217;s happening here? Two nested filter elements, followed by a link-entity with link-type=&#8221;all&#8221;. It turns out that using this syntax, you can create the equivalent of the more complex OData queries! If you look closely, you can see that the statecode value filter is &#8216;ne 0&#8217; instead of &#8216;eq 0&#8217;. Why is that? It turns out that Dataverse inverts all conditions in the query when link-type=&#8221;all&#8221;</p>
+
+
+
+<p class="wp-block-paragraph">Let&#8217;s go to the second exemple: Get all contacts where ALL tasks are Active (eq 0), or ANY task is Closed (eq 1) and has the Subject &#8216;Please make me coffee&#8217;. Only select the fullname. OData query:<br><em>[DataverseOrgUrl]/api/data/v9.2/contacts?$filter=Contact_Tasks/all(t:t/statecode eq 0) or Contact_Tasks/any(t:t/statecode eq 1 and t/subject eq &#8216;Please make me coffee&#8217;)&amp;$select=fullname</em></p>
+
+
+
+<p class="wp-block-paragraph">This corresponds with the following FetchXml:</p>
+
+
+
+<div class="wp-block-kevinbatdorf-code-block-pro" data-code-block-pro-font-family="Code-Pro-JetBrains-Mono" style="font-size:.875rem;font-family:Code-Pro-JetBrains-Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25rem;--cbp-tab-width:2;tab-size:var(--cbp-tab-width, 2)"><span role="button" tabindex="0" data-code="&lt;fetch distinct=&quot;false&quot; useraworderby=&quot;true&quot; no-lock=&quot;false&quot; mapping=&quot;logical&quot;&gt;
+	&lt;entity name=&quot;contact&quot;&gt;
+		&lt;attribute name=&quot;fullname&quot;/&gt;
+		&lt;filter type=&quot;or&quot;&gt;
+			&lt;filter type=&quot;and&quot;&gt;
+				&lt;link-entity name=&quot;task&quot; to=&quot;contactid&quot; from=&quot;regardingobjectid&quot; link-type=&quot;all&quot;&gt;
+					&lt;filter type=&quot;and&quot; anyallalias=&quot;task1&quot;&gt;
+						&lt;condition attribute=&quot;statecode&quot; operator=&quot;ne&quot; value=&quot;0&quot;/&gt;
+					&lt;/filter&gt;
+				&lt;/link-entity&gt;
+			&lt;/filter&gt;
+			&lt;filter type=&quot;and&quot;&gt;
+				&lt;link-entity name=&quot;task&quot; to=&quot;contactid&quot; from=&quot;regardingobjectid&quot; link-type=&quot;any&quot;&gt;
+					&lt;filter type=&quot;and&quot; anyallalias=&quot;task1&quot;&gt;
+						&lt;condition attribute=&quot;statecode&quot; operator=&quot;eq&quot; value=&quot;1&quot;/&gt;
+						&lt;condition attribute=&quot;subject&quot; operator=&quot;eq&quot; value=&quot;Please make me coffee&quot;/&gt;
+					&lt;/filter&gt;
+				&lt;/link-entity&gt;
+			&lt;/filter&gt;
+		&lt;/filter&gt;
+	&lt;/entity&gt;
+&lt;/fetch" style="color:#D4D4D4;display:none" aria-label="Copy" class="code-block-pro-copy-button"><svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path class="with-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path><path class="without-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></span><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #808080">&lt;</span><span style="color: #569CD6">fetch</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">distinct</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;false&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">useraworderby</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;true&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">no-lock</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;false&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">mapping</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;logical&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">	</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">entity</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;contact&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">		</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">attribute</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;fullname&quot;</span><span style="color: #808080">/&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">		</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;or&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">			</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">				</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">link-entity</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;task&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">to</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;contactid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">from</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;regardingobjectid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">link-type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;all&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">					</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">anyallalias</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;task1&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">						</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">condition</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">attribute</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;statecode&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">operator</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;ne&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">value</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;0&quot;</span><span style="color: #808080">/&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">					</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">				</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">link-entity</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">			</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">			</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">				</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">link-entity</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;task&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">to</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;contactid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">from</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;regardingobjectid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">link-type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;any&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">					</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">anyallalias</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;task1&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">						</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">condition</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">attribute</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;statecode&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">operator</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;eq&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">value</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;1&quot;</span><span style="color: #808080">/&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">						</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">condition</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">attribute</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;subject&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">operator</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;eq&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">value</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;Please make me coffee&quot;</span><span style="color: #808080">/&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">					</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">				</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">link-entity</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">			</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">		</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">	</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">entity</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #808080">&lt;/</span><span style="color: #569CD6">fetch</span></span></code></pre></div>
+
+
+
+<p class="wp-block-paragraph"> <br></p>
+
+
+
+<p class="wp-block-paragraph">Again, the conditions in the link-type=&#8221;all&#8221; link-entity seem to be inverted. For the link-type=&#8221;any&#8221; link-entity, this is not the case.</p>
+
+
+
+<p class="wp-block-paragraph">And the third OData example: Get all contacts that do NOT have any Tasks, or all Tasks are Closed (eq 1). Select the fullname. OData query:<br><em>[DataverseOrgUrl]/api/data/v9.2/contacts?$filter=not Contact_Tasks/any() or Contact_Tasks/all(t:t/statecode eq 1)</em></p>
+
+
+
+<p class="wp-block-paragraph">FetchXml:</p>
+
+
+
+<div class="wp-block-kevinbatdorf-code-block-pro" data-code-block-pro-font-family="Code-Pro-JetBrains-Mono" style="font-size:.875rem;font-family:Code-Pro-JetBrains-Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25rem;--cbp-tab-width:2;tab-size:var(--cbp-tab-width, 2)"><span role="button" tabindex="0" data-code="&lt;fetch distinct=&quot;false&quot; useraworderby=&quot;true&quot; no-lock=&quot;false&quot; mapping=&quot;logical&quot;&gt;
+	&lt;entity name=&quot;contact&quot;&gt;
+		&lt;attribute name=&quot;fullname&quot;/&gt;
+		&lt;filter type=&quot;or&quot;&gt;
+			&lt;filter type=&quot;and&quot;&gt;
+				&lt;link-entity name=&quot;task&quot; to=&quot;contactid&quot; from=&quot;regardingobjectid&quot; link-type=&quot;not any&quot;&gt;
+					&lt;filter type=&quot;and&quot; anyallalias=&quot;task1&quot;/&gt;
+				&lt;/link-entity&gt;
+			&lt;/filter&gt;
+			&lt;filter type=&quot;and&quot;&gt;
+				&lt;link-entity name=&quot;task&quot; to=&quot;contactid&quot; from=&quot;regardingobjectid&quot; link-type=&quot;all&quot;&gt;
+					&lt;filter type=&quot;and&quot; anyallalias=&quot;task1&quot;&gt;
+						&lt;condition attribute=&quot;statecode&quot; operator=&quot;ne&quot; value=&quot;1&quot;/&gt;
+					&lt;/filter&gt;
+				&lt;/link-entity&gt;
+			&lt;/filter&gt;
+		&lt;/filter&gt;
+	&lt;/entity&gt;
+&lt;/fetch&gt;
+" style="color:#D4D4D4;display:none" aria-label="Copy" class="code-block-pro-copy-button"><svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path class="with-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path><path class="without-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></span><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #808080">&lt;</span><span style="color: #569CD6">fetch</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">distinct</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;false&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">useraworderby</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;true&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">no-lock</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;false&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">mapping</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;logical&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">	</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">entity</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;contact&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">		</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">attribute</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;fullname&quot;</span><span style="color: #808080">/&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">		</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;or&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">			</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">				</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">link-entity</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;task&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">to</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;contactid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">from</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;regardingobjectid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">link-type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;not any&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">					</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">anyallalias</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;task1&quot;</span><span style="color: #808080">/&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">				</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">link-entity</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">			</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">			</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">				</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">link-entity</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;task&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">to</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;contactid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">from</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;regardingobjectid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">link-type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;all&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">					</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">anyallalias</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;task1&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">						</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">condition</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">attribute</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;statecode&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">operator</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;ne&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">value</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;1&quot;</span><span style="color: #808080">/&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">					</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">				</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">link-entity</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">			</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">		</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">	</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">entity</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #808080">&lt;/</span><span style="color: #569CD6">fetch</span><span style="color: #808080">&gt;</span></span>
+<span class="line"></span></code></pre></div>
+
+
+
+<p class="wp-block-paragraph"><br> </p>
+
+
+
+<p class="wp-block-paragraph">Let&#8217;s make a filter with more nested tables and see what the resulting FetchXml is. This filter retrieves all contacts where NOT ALL of the cases (incident) have ANY tasks. Select the fullname. OData query:<br><em>[DataverseOrgUrl]/api/data/v9.2/contacts?$filter=not incident_customer_contacts/all(c:c/Incident_Tasks/any())&amp;$select=fullname</em></p>
+
+
+
+<p class="wp-block-paragraph">FetchXml:</p>
+
+
+
+<div class="wp-block-kevinbatdorf-code-block-pro" data-code-block-pro-font-family="Code-Pro-JetBrains-Mono" style="font-size:.875rem;font-family:Code-Pro-JetBrains-Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25rem;--cbp-tab-width:2;tab-size:var(--cbp-tab-width, 2)"><span role="button" tabindex="0" data-code="&lt;fetch distinct=&quot;false&quot; useraworderby=&quot;true&quot; no-lock=&quot;false&quot; mapping=&quot;logical&quot;&gt;
+	&lt;entity name=&quot;contact&quot;&gt;
+		&lt;attribute name=&quot;fullname&quot;/&gt;
+		&lt;filter type=&quot;and&quot;&gt;
+			&lt;filter type=&quot;and&quot;&gt;
+				&lt;link-entity name=&quot;incident&quot; to=&quot;contactid&quot; from=&quot;customerid&quot; link-type=&quot;not all&quot;&gt;
+					&lt;filter type=&quot;and&quot; anyallalias=&quot;incident1&quot;&gt;
+						&lt;filter type=&quot;and&quot; anyallalias=&quot;incident1&quot;&gt;
+							&lt;link-entity name=&quot;task&quot; to=&quot;incidentid&quot; from=&quot;regardingobjectid&quot; link-type=&quot;not any&quot;&gt;
+								&lt;filter type=&quot;and&quot; anyallalias=&quot;task1&quot;/&gt;
+							&lt;/link-entity&gt;
+						&lt;/filter&gt;
+					&lt;/filter&gt;
+				&lt;/link-entity&gt;
+			&lt;/filter&gt;
+		&lt;/filter&gt;
+	&lt;/entity&gt;
+&lt;/fetch&gt;" style="color:#D4D4D4;display:none" aria-label="Copy" class="code-block-pro-copy-button"><svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path class="with-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path><path class="without-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></span><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #808080">&lt;</span><span style="color: #569CD6">fetch</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">distinct</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;false&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">useraworderby</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;true&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">no-lock</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;false&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">mapping</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;logical&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">	</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">entity</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;contact&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">		</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">attribute</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;fullname&quot;</span><span style="color: #808080">/&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">		</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">			</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">				</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">link-entity</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;incident&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">to</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;contactid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">from</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;customerid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">link-type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;not all&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">					</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">anyallalias</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;incident1&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">						</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">anyallalias</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;incident1&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">							</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">link-entity</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">name</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;task&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">to</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;incidentid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">from</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;regardingobjectid&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">link-type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;not any&quot;</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">								</span><span style="color: #808080">&lt;</span><span style="color: #569CD6">filter</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">type</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;and&quot;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">anyallalias</span><span style="color: #D4D4D4">=</span><span style="color: #CE9178">&quot;task1&quot;</span><span style="color: #808080">/&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">							</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">link-entity</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">						</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">					</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">				</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">link-entity</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">			</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">		</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">filter</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #D4D4D4">	</span><span style="color: #808080">&lt;/</span><span style="color: #569CD6">entity</span><span style="color: #808080">&gt;</span></span>
+<span class="line"><span style="color: #808080">&lt;/</span><span style="color: #569CD6">fetch</span><span style="color: #808080">&gt;</span></span></code></pre></div>
+
+
+
+<p class="wp-block-paragraph"> <br></p>
+
+
+
+<p class="wp-block-paragraph">Note that all of the conditions under the &#8216;not-all&#8217; are inverted, even the link-entity (&#8216;not any&#8217; vs &#8216;any&#8217;).</p>
+
+
+
+<p class="wp-block-paragraph">So how did I work this out? I did not write these fetches by hand. It was simple: just create a PreOperation plugin that runs on the RetrieveMultiple of a given table. Write the Query from the context InputParameters to the trace log. Then do OData queries and see what the resulting FetchXml is. This is the code for the plugin:</p>
+
+
+
+<div class="wp-block-kevinbatdorf-code-block-pro" data-code-block-pro-font-family="Code-Pro-JetBrains-Mono" style="font-size:.875rem;font-family:Code-Pro-JetBrains-Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25rem;--cbp-tab-width:2;tab-size:var(--cbp-tab-width, 2)"><span role="button" tabindex="0" data-code="using Microsoft.Crm.Sdk.Messages;
+using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Query;
+using System;
+
+namespace TestPlugin
+{
+    public class LogQueryPlugin : IPlugin
+    {
+        public void Execute(IServiceProvider serviceProvider)
+        {
+            var context = serviceProvider.GetService(typeof(IExecutionContext)) as IExecutionContext;
+            var tracer = serviceProvider.GetService(typeof(ITracingService)) as ITracingService;
+            var orgServiceFactory = serviceProvider.GetService(typeof(IOrganizationServiceFactory)) as IOrganizationServiceFactory;
+            var organizationService = orgServiceFactory.CreateOrganizationService(context.UserId);
+
+            var query = context.InputParameters[&quot;Query&quot;] as QueryBase;
+
+            if (query is FetchExpression fetch)
+            {
+                tracer.Trace(fetch.Query);
+            }
+            else if (query is QueryExpression qe)
+            {
+                var qeToFetchRes = organizationService.Execute(new QueryExpressionToFetchXmlRequest { Query = qe }) as QueryExpressionToFetchXmlResponse;
+                tracer.Trace(qeToFetchRes.FetchXml);
+            }
+        }
+    }
+}" style="color:#D4D4D4;display:none" aria-label="Copy" class="code-block-pro-copy-button"><svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path class="with-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path><path class="without-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></span><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #C586C0">using</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">Microsoft</span><span style="color: #D4D4D4">.</span><span style="color: #4EC9B0">Crm</span><span style="color: #D4D4D4">.</span><span style="color: #4EC9B0">Sdk</span><span style="color: #D4D4D4">.</span><span style="color: #4EC9B0">Messages</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"><span style="color: #C586C0">using</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">Microsoft</span><span style="color: #D4D4D4">.</span><span style="color: #4EC9B0">Xrm</span><span style="color: #D4D4D4">.</span><span style="color: #4EC9B0">Sdk</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"><span style="color: #C586C0">using</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">Microsoft</span><span style="color: #D4D4D4">.</span><span style="color: #4EC9B0">Xrm</span><span style="color: #D4D4D4">.</span><span style="color: #4EC9B0">Sdk</span><span style="color: #D4D4D4">.</span><span style="color: #4EC9B0">Query</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"><span style="color: #C586C0">using</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">System</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #569CD6">namespace</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">TestPlugin</span></span>
+<span class="line"><span style="color: #D4D4D4">{</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #569CD6">public</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">class</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">LogQueryPlugin</span><span style="color: #D4D4D4"> : </span><span style="color: #4EC9B0">IPlugin</span></span>
+<span class="line"><span style="color: #D4D4D4">    {</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #569CD6">public</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">void</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">Execute</span><span style="color: #D4D4D4">(</span><span style="color: #4EC9B0">IServiceProvider</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">serviceProvider</span><span style="color: #D4D4D4">)</span></span>
+<span class="line"><span style="color: #D4D4D4">        {</span></span>
+<span class="line"><span style="color: #D4D4D4">            </span><span style="color: #569CD6">var</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">context</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">serviceProvider</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">GetService</span><span style="color: #D4D4D4">(</span><span style="color: #569CD6">typeof</span><span style="color: #D4D4D4">(</span><span style="color: #4EC9B0">IExecutionContext</span><span style="color: #D4D4D4">)) </span><span style="color: #569CD6">as</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">IExecutionContext</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"><span style="color: #D4D4D4">            </span><span style="color: #569CD6">var</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">tracer</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">serviceProvider</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">GetService</span><span style="color: #D4D4D4">(</span><span style="color: #569CD6">typeof</span><span style="color: #D4D4D4">(</span><span style="color: #4EC9B0">ITracingService</span><span style="color: #D4D4D4">)) </span><span style="color: #569CD6">as</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">ITracingService</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"><span style="color: #D4D4D4">            </span><span style="color: #569CD6">var</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">orgServiceFactory</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">serviceProvider</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">GetService</span><span style="color: #D4D4D4">(</span><span style="color: #569CD6">typeof</span><span style="color: #D4D4D4">(</span><span style="color: #4EC9B0">IOrganizationServiceFactory</span><span style="color: #D4D4D4">)) </span><span style="color: #569CD6">as</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">IOrganizationServiceFactory</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"><span style="color: #D4D4D4">            </span><span style="color: #569CD6">var</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">organizationService</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">orgServiceFactory</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">CreateOrganizationService</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">context</span><span style="color: #D4D4D4">.</span><span style="color: #9CDCFE">UserId</span><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #D4D4D4">            </span><span style="color: #569CD6">var</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">query</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">context</span><span style="color: #D4D4D4">.</span><span style="color: #9CDCFE">InputParameters</span><span style="color: #D4D4D4">[</span><span style="color: #CE9178">&quot;Query&quot;</span><span style="color: #D4D4D4">] </span><span style="color: #569CD6">as</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">QueryBase</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #D4D4D4">            </span><span style="color: #C586C0">if</span><span style="color: #D4D4D4"> (</span><span style="color: #9CDCFE">query</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">is</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">FetchExpression</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">fetch</span><span style="color: #D4D4D4">)</span></span>
+<span class="line"><span style="color: #D4D4D4">            {</span></span>
+<span class="line"><span style="color: #D4D4D4">                </span><span style="color: #9CDCFE">tracer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">Trace</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">fetch</span><span style="color: #D4D4D4">.</span><span style="color: #9CDCFE">Query</span><span style="color: #D4D4D4">);</span></span>
+<span class="line"><span style="color: #D4D4D4">            }</span></span>
+<span class="line"><span style="color: #D4D4D4">            </span><span style="color: #C586C0">else</span><span style="color: #D4D4D4"> </span><span style="color: #C586C0">if</span><span style="color: #D4D4D4"> (</span><span style="color: #9CDCFE">query</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">is</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">QueryExpression</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">qe</span><span style="color: #D4D4D4">)</span></span>
+<span class="line"><span style="color: #D4D4D4">            {</span></span>
+<span class="line"><span style="color: #D4D4D4">                </span><span style="color: #569CD6">var</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">qeToFetchRes</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">organizationService</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">Execute</span><span style="color: #D4D4D4">(</span><span style="color: #569CD6">new</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">QueryExpressionToFetchXmlRequest</span><span style="color: #D4D4D4"> { </span><span style="color: #9CDCFE">Query</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">qe</span><span style="color: #D4D4D4"> }) </span><span style="color: #569CD6">as</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">QueryExpressionToFetchXmlResponse</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"><span style="color: #D4D4D4">                </span><span style="color: #9CDCFE">tracer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">Trace</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">qeToFetchRes</span><span style="color: #D4D4D4">.</span><span style="color: #9CDCFE">FetchXml</span><span style="color: #D4D4D4">);</span></span>
+<span class="line"><span style="color: #D4D4D4">            }</span></span>
+<span class="line"><span style="color: #D4D4D4">        }</span></span>
+<span class="line"><span style="color: #D4D4D4">    }</span></span>
+<span class="line"><span style="color: #D4D4D4">}</span></span></code></pre></div>
+
+
+
+<h2 class="wp-block-heading">Using the FetchXml in views.</h2>
+
+
+
+<p class="wp-block-paragraph">I haven&#8217;t tried to use these fetches in System Views, but it might just work. I you are interested, give it a try and let me know the results. I will update the blog post.</p>
+
+
+
+<h2 class="wp-block-heading">Supported?</h2>
+
+
+
+<p class="wp-block-paragraph">Using undocumented features is mostly not supported by Microsoft. However, I don&#8217;t think that features that are part of the &#8216;core&#8217; system such as FetchXml queries are prone to breaking changes. It&#8217;s probably safe to use this in production. But use at your own risk.</p>
+            </div>
+            
+
+        </div>
+    </div>
+                    <div class="related-post">
+                                            <h2 class="post-title">Related Posts</h2>
+                                        <div class="row">
+                                                        <div class="col-1-1 col-sm-1-2 col-md-1-2">
+                                    <div class="card card-blog-post card-full-width">
+                                                                                <div class="card_body">
+                                            <div class="category-label-group"><span class="cat-links"><a class="ct-cat-item-8" href="https://hackingpowerplatform.com/category/tips-and-tricks/"  rel="category tag">Tips and tricks</a> </span></div>                                            <h4 class="card_title">
+                                                <a href="https://hackingpowerplatform.com/using-queryexpressions-on-the-dataverse-odata-web-api/">
+                                                    Using QueryExpressions on the Dataverse Web Api                                                </a>
+                                            </h4>
+                                            <div class="entry-meta">
+                                                <span class="posted-on"><i class="fa fa-calendar"></i><a href="https://hackingpowerplatform.com/using-queryexpressions-on-the-dataverse-odata-web-api/" rel="bookmark"><time class="entry-date published" datetime="2024-04-10T08:43:58+00:00">April 10, 2024</time><time class="updated" datetime="2024-04-10T09:06:41+00:00">April 10, 2024</time></a></span><span class="byline"> <span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://hackingpowerplatform.com/author/erik/">Erik</a></span></span>                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                                            <div class="col-1-1 col-sm-1-2 col-md-1-2">
+                                    <div class="card card-blog-post card-full-width">
+                                                                                <div class="card_body">
+                                            <div class="category-label-group"><span class="cat-links"><a class="ct-cat-item-8" href="https://hackingpowerplatform.com/category/tips-and-tricks/"  rel="category tag">Tips and tricks</a> </span></div>                                            <h4 class="card_title">
+                                                <a href="https://hackingpowerplatform.com/forcing-recalculation-of-record-counts/">
+                                                    Forcing recalculation of record counts                                                </a>
+                                            </h4>
+                                            <div class="entry-meta">
+                                                <span class="posted-on"><i class="fa fa-calendar"></i><a href="https://hackingpowerplatform.com/forcing-recalculation-of-record-counts/" rel="bookmark"><time class="entry-date published" datetime="2024-01-15T14:29:43+00:00">January 15, 2024</time><time class="updated" datetime="2024-01-23T06:55:53+00:00">January 23, 2024</time></a></span><span class="byline"> <span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://hackingpowerplatform.com/author/erik/">Erik</a></span></span>                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                                </div>
+
+                                </div> <!-- .related-post -->
+                <!-- Related Post Code Here -->
+
+</article><!-- #post-176 -->
+
+	<nav class="navigation post-navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://hackingpowerplatform.com/microsoft-dataverse-openapi-endpoint/" rel="prev"><span class="nav-subtitle">Previous:</span> <span class="nav-title">Microsoft Dataverse OpenApi endpoint</span></a></div><div class="nav-next"><a href="https://hackingpowerplatform.com/forcing-recalculation-of-record-counts/" rel="next"><span class="nav-subtitle">Next:</span> <span class="nav-title">Forcing recalculation of record counts</span></a></div></div>
+	</nav>
+<div id="comments" class="comments-area">
+
+    	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/hidden-features-of-fetchxml/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://hackingpowerplatform.com/wp-comments-post.php" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message">Required fields are marked <span class="required">*</span></span></p><p class="comment-form-comment"><label for="comment">Comment <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" autocomplete="url" /></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='176' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="f9c0db125a" /></p><p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="169"/><script>
+document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );
+</script>
+</p></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->                    </div>
+                                            <div id="secondary" class="col-12 col-md-1-3 col-lg-1-3">
+                            
+<aside class="widget-area">
+	<section id="search-3" class="widget widget_search"><h2 class="widget-title">Search</h2><form role="search" method="get" class="search-form" action="https://hackingpowerplatform.com/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></section><section id="text-3" class="widget widget_text"><h2 class="widget-title">Documenting the undocumented</h2>			<div class="textwidget"><p>In this blog, I will talk about things that I encountered during my hacking journey. These will mostly be useful or interesting features that have not been officially documented by Microsoft.</p>
+</div>
+		</section><section id="text-4" class="widget widget_text"><h2 class="widget-title">Find me online</h2>			<div class="textwidget"><p><u><a href="https://twitter.com/kire_devs_hacks">Twitter</a></u><br />
+<u><a href="https://www.linkedin.com/in/erik-donker-50a887bb/">LinkedIn</a></u><br />
+<u><a href="https://github.com/kiredevsandhacks">Github</a></u></p>
+</div>
+		</section></aside><!-- #secondary -->
+                        </div>
+                                        </div>
+
+            </div>
+        </section>
+    </main><!-- #main -->
+
+</div> <!-- #content -->
+
+	<footer id="colophon" class="site-footer">
+        		<section class="site-footer-bottom">
+			<div class="container">
+                <div class="fairy-menu-social">
+                                    </div>
+                        <div class="site-info text-center">
+            <a href="https://wordpress.org/">
+                Proudly powered by WordPress            </a>
+            <span class="sep"> | </span>
+            Theme: Fairy Dark by <a href="http://www.candidthemes.com/">Candid Themes</a>.        </div><!-- .site-info -->
+        			</div>
+		</section>
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/fairy-dark/*","/wp-content/themes/fairy/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="fairy-navigation-js" src="https://hackingpowerplatform.com/wp-content/themes/fairy/js/navigation.js?ver=1.3.7"></script>
+<script id="theia-sticky-sidebar-js" src="https://hackingpowerplatform.com/wp-content/themes/fairy/candidthemes/assets/custom/js/theia-sticky-sidebar.js?ver=1.3.7"></script>
+<script id="slick-js" src="https://hackingpowerplatform.com/wp-content/themes/fairy/candidthemes/assets/framework/slick/slick.js?ver=1.3.7"></script>
+<script id="imagesloaded-js" src="https://hackingpowerplatform.com/wp-includes/js/imagesloaded.min.js?ver=5.0.0"></script>
+<script id="masonry-js" src="https://hackingpowerplatform.com/wp-includes/js/masonry.min.js?ver=4.2.2"></script>
+<script id="fairy-custom-js-js" src="https://hackingpowerplatform.com/wp-content/themes/fairy/candidthemes/assets/custom/js/custom.js?ver=1.3.7"></script>
+<script async data-wp-strategy="async" fetchpriority="low" id="comment-reply-js" src="https://hackingpowerplatform.com/wp-includes/js/comment-reply.min.js?ver=7.1.1"></script>
+<script data-wp-strategy="defer" id="kevinbatdorf-code-block-pro-view-script-js" src="https://hackingpowerplatform.com/wp-content/plugins/code-block-pro/build/front/front.js?ver=897e78bb623a899126f1"></script>
+<script id="kevinbatdorf-code-block-pro-view-script-js-after">
+window.codeBlockPro = {"pluginUrl":"https:\/\/hackingpowerplatform.com\/wp-content\/plugins\/code-block-pro\/"};
+//# sourceURL=kevinbatdorf-code-block-pro-view-script-js-after
+</script>
+<script defer id="akismet-frontend-js" src="https://hackingpowerplatform.com/wp-content/plugins/akismet/_inc/akismet-frontend.js?ver=1787213602"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://hackingpowerplatform.com/wp-includes/js/wp-emoji-release.min.js?ver=7.1.1"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://hackingpowerplatform.com/wp-includes/js/wp-emoji-loader.min.js
+</script>
+
+</body>
+</html>

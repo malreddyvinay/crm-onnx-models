@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html class='v2' dir='ltr' lang='en'>
+<head>
+<link href='https://www.blogger.com/static/v1/widgets/2872013778-css_bundle_v2.css' rel='stylesheet' type='text/css'/>
+<meta content='width=1100' name='viewport'/>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+<meta content='blogger' name='generator'/>
+<link href='https://thedynamicsdude.blogspot.com/favicon.ico' rel='icon' type='image/x-icon'/>
+<link href='http://thedynamicsdude.blogspot.com/2025/06/enhancing-user-experience-in-power-apps.html' rel='canonical'/>
+<link rel="alternate" type="application/atom+xml" title="Accelerating Transformation with Dynamics 365 and Power Apps - Atom" href="https://thedynamicsdude.blogspot.com/feeds/posts/default" />
+<link rel="alternate" type="application/rss+xml" title="Accelerating Transformation with Dynamics 365 and Power Apps - RSS" href="https://thedynamicsdude.blogspot.com/feeds/posts/default?alt=rss" />
+<link rel="service.post" type="application/atom+xml" title="Accelerating Transformation with Dynamics 365 and Power Apps - Atom" href="https://www.blogger.com/feeds/8789814779400803060/posts/default" />
+
+<link rel="alternate" type="application/atom+xml" title="Accelerating Transformation with Dynamics 365 and Power Apps - Atom" href="https://thedynamicsdude.blogspot.com/feeds/3215147191668733009/comments/default" />
+<!--Can't find substitution for tag [blog.ieCssRetrofitLinks]-->
+<meta content='http://thedynamicsdude.blogspot.com/2025/06/enhancing-user-experience-in-power-apps.html' property='og:url'/>
+<meta content='Comparing Approaches for Power Apps Model Driven Apps Form Notifications' property='og:title'/>
+<meta content='                    Comparing Approaches for Power Apps Notifications: Why JavaScript Is the Best Solution    In this blog, we’ll explore di...' property='og:description'/>
+<title>Accelerating Transformation with Dynamics 365 and Power Apps: Comparing Approaches for Power Apps Model Driven Apps Form Notifications</title>
+<style id='page-skin-1' type='text/css'><!--
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Simple
+Designer: Blogger
+URL:      www.blogger.com
+----------------------------------------------- */
+/* Content
+----------------------------------------------- */
+body {
+font: normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #222222;
+background: #eeaa00 none repeat scroll top left;
+padding: 0 40px 40px 40px;
+}
+html body .region-inner {
+min-width: 0;
+max-width: 100%;
+width: auto;
+}
+h2 {
+font-size: 22px;
+}
+a:link {
+text-decoration:none;
+color: #cc6611;
+}
+a:visited {
+text-decoration:none;
+color: #888888;
+}
+a:hover {
+text-decoration:underline;
+color: #ff9900;
+}
+.body-fauxcolumn-outer .fauxcolumn-inner {
+background: transparent url(https://resources.blogblog.com/blogblog/data/1kt/simple/body_gradient_tile_light.png) repeat scroll top left;
+_background-image: none;
+}
+.body-fauxcolumn-outer .cap-top {
+position: absolute;
+z-index: 1;
+height: 400px;
+width: 100%;
+}
+.body-fauxcolumn-outer .cap-top .cap-left {
+width: 100%;
+background: transparent url(https://resources.blogblog.com/blogblog/data/1kt/simple/gradients_light.png) repeat-x scroll top left;
+_background-image: none;
+}
+.content-outer {
+-moz-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+-goog-ms-box-shadow: 0 0 10px #333333;
+box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+margin-bottom: 1px;
+}
+.content-inner {
+padding: 10px 10px;
+}
+.content-inner {
+background-color: #ffffff;
+}
+/* Header
+----------------------------------------------- */
+.header-outer {
+background: #cc6611 url(https://resources.blogblog.com/blogblog/data/1kt/simple/gradients_light.png) repeat-x scroll 0 -400px;
+_background-image: none;
+}
+.Header h1 {
+font: normal normal 60px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #ffffff;
+text-shadow: 1px 2px 3px rgba(0, 0, 0, .2);
+}
+.Header h1 a {
+color: #ffffff;
+}
+.Header .description {
+font-size: 140%;
+color: #ffffff;
+}
+.header-inner .Header .titlewrapper {
+padding: 22px 30px;
+}
+.header-inner .Header .descriptionwrapper {
+padding: 0 30px;
+}
+/* Tabs
+----------------------------------------------- */
+.tabs-inner .section:first-child {
+border-top: 0 solid #eeeeee;
+}
+.tabs-inner .section:first-child ul {
+margin-top: -0;
+border-top: 0 solid #eeeeee;
+border-left: 0 solid #eeeeee;
+border-right: 0 solid #eeeeee;
+}
+.tabs-inner .widget ul {
+background: #f5f5f5 url(https://resources.blogblog.com/blogblog/data/1kt/simple/gradients_light.png) repeat-x scroll 0 -800px;
+_background-image: none;
+border-bottom: 1px solid #eeeeee;
+margin-top: 0;
+margin-left: -30px;
+margin-right: -30px;
+}
+.tabs-inner .widget li a {
+display: inline-block;
+padding: .6em 1em;
+font: normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #999999;
+border-left: 1px solid #ffffff;
+border-right: 1px solid #eeeeee;
+}
+.tabs-inner .widget li:first-child a {
+border-left: none;
+}
+.tabs-inner .widget li.selected a, .tabs-inner .widget li a:hover {
+color: #000000;
+background-color: #eeeeee;
+text-decoration: none;
+}
+/* Columns
+----------------------------------------------- */
+.main-outer {
+border-top: 0 solid #eeeeee;
+}
+.fauxcolumn-left-outer .fauxcolumn-inner {
+border-right: 1px solid #eeeeee;
+}
+.fauxcolumn-right-outer .fauxcolumn-inner {
+border-left: 1px solid #eeeeee;
+}
+/* Headings
+----------------------------------------------- */
+div.widget > h2,
+div.widget h2.title {
+margin: 0 0 1em 0;
+font: normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #000000;
+}
+/* Widgets
+----------------------------------------------- */
+.widget .zippy {
+color: #999999;
+text-shadow: 2px 2px 1px rgba(0, 0, 0, .1);
+}
+.widget .popular-posts ul {
+list-style: none;
+}
+/* Posts
+----------------------------------------------- */
+h2.date-header {
+font: normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+}
+.date-header span {
+background-color: transparent;
+color: #222222;
+padding: inherit;
+letter-spacing: inherit;
+margin: inherit;
+}
+.main-inner {
+padding-top: 30px;
+padding-bottom: 30px;
+}
+.main-inner .column-center-inner {
+padding: 0 15px;
+}
+.main-inner .column-center-inner .section {
+margin: 0 15px;
+}
+.post {
+margin: 0 0 25px 0;
+}
+h3.post-title, .comments h4 {
+font: normal normal 22px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+margin: .75em 0 0;
+}
+.post-body {
+font-size: 110%;
+line-height: 1.4;
+position: relative;
+}
+.post-body img, .post-body .tr-caption-container, .Profile img, .Image img,
+.BlogList .item-thumbnail img {
+padding: 2px;
+background: #ffffff;
+border: 1px solid #eeeeee;
+-moz-box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+-webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+}
+.post-body img, .post-body .tr-caption-container {
+padding: 5px;
+}
+.post-body .tr-caption-container {
+color: #222222;
+}
+.post-body .tr-caption-container img {
+padding: 0;
+background: transparent;
+border: none;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+}
+.post-header {
+margin: 0 0 1.5em;
+line-height: 1.6;
+font-size: 90%;
+}
+.post-footer {
+margin: 20px -2px 0;
+padding: 5px 10px;
+color: #666666;
+background-color: #f9f9f9;
+border-bottom: 1px solid #eeeeee;
+line-height: 1.6;
+font-size: 90%;
+}
+#comments .comment-author {
+padding-top: 1.5em;
+border-top: 1px solid #eeeeee;
+background-position: 0 1.5em;
+}
+#comments .comment-author:first-child {
+padding-top: 0;
+border-top: none;
+}
+.avatar-image-container {
+margin: .2em 0 0;
+}
+#comments .avatar-image-container img {
+border: 1px solid #eeeeee;
+}
+/* Comments
+----------------------------------------------- */
+.comments .comments-content .icon.blog-author {
+background-repeat: no-repeat;
+background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB9sLFwMeCjjhcOMAAAD+SURBVDjLtZSvTgNBEIe/WRRnm3U8RC1neQdsm1zSBIU9VVF1FkUguQQsD9ITmD7ECZIJSE4OZo9stoVjC/zc7ky+zH9hXwVwDpTAWWLrgS3QAe8AZgaAJI5zYAmc8r0G4AHYHQKVwII8PZrZFsBFkeRCABYiMh9BRUhnSkPTNCtVXYXURi1FpBDgArj8QU1eVXUzfnjv7yP7kwu1mYrkWlU33vs1QNu2qU8pwN0UpKoqokjWwCztrMuBhEhmh8bD5UDqur75asbcX0BGUB9/HAMB+r32hznJgXy2v0sGLBcyAJ1EK3LFcbo1s91JeLwAbwGYu7TP/3ZGfnXYPgAVNngtqatUNgAAAABJRU5ErkJggg==);
+}
+.comments .comments-content .loadmore a {
+border-top: 1px solid #999999;
+border-bottom: 1px solid #999999;
+}
+.comments .comment-thread.inline-thread {
+background-color: #f9f9f9;
+}
+.comments .continue {
+border-top: 2px solid #999999;
+}
+/* Accents
+---------------------------------------------- */
+.section-columns td.columns-cell {
+border-left: 1px solid #eeeeee;
+}
+.blog-pager {
+background: transparent none no-repeat scroll top center;
+}
+.blog-pager-older-link, .home-link,
+.blog-pager-newer-link {
+background-color: #ffffff;
+padding: 5px;
+}
+.footer-outer {
+border-top: 0 dashed #bbbbbb;
+}
+/* Mobile
+----------------------------------------------- */
+body.mobile  {
+background-size: auto;
+}
+.mobile .body-fauxcolumn-outer {
+background: transparent none repeat scroll top left;
+}
+.mobile .body-fauxcolumn-outer .cap-top {
+background-size: 100% auto;
+}
+.mobile .content-outer {
+-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+}
+.mobile .tabs-inner .widget ul {
+margin-left: 0;
+margin-right: 0;
+}
+.mobile .post {
+margin: 0;
+}
+.mobile .main-inner .column-center-inner .section {
+margin: 0;
+}
+.mobile .date-header span {
+padding: 0.1em 10px;
+margin: 0 -10px;
+}
+.mobile h3.post-title {
+margin: 0;
+}
+.mobile .blog-pager {
+background: transparent none no-repeat scroll top center;
+}
+.mobile .footer-outer {
+border-top: none;
+}
+.mobile .main-inner, .mobile .footer-inner {
+background-color: #ffffff;
+}
+.mobile-index-contents {
+color: #222222;
+}
+.mobile-link-button {
+background-color: #cc6611;
+}
+.mobile-link-button a:link, .mobile-link-button a:visited {
+color: #ffffff;
+}
+.mobile .tabs-inner .section:first-child {
+border-top: none;
+}
+.mobile .tabs-inner .PageList .widget-content {
+background-color: #eeeeee;
+color: #000000;
+border-top: 1px solid #eeeeee;
+border-bottom: 1px solid #eeeeee;
+}
+.mobile .tabs-inner .PageList .widget-content .pagelist-arrow {
+border-left: 1px solid #eeeeee;
+}
+
+--></style>
+<style id='template-skin-1' type='text/css'><!--
+body {
+min-width: 960px;
+}
+.content-outer, .content-fauxcolumn-outer, .region-inner {
+min-width: 960px;
+max-width: 960px;
+_width: 960px;
+}
+.main-inner .columns {
+padding-left: 0;
+padding-right: 310px;
+}
+.main-inner .fauxcolumn-center-outer {
+left: 0;
+right: 310px;
+/* IE6 does not respect left and right together */
+_width: expression(this.parentNode.offsetWidth -
+parseInt("0") -
+parseInt("310px") + 'px');
+}
+.main-inner .fauxcolumn-left-outer {
+width: 0;
+}
+.main-inner .fauxcolumn-right-outer {
+width: 310px;
+}
+.main-inner .column-left-outer {
+width: 0;
+right: 100%;
+margin-left: -0;
+}
+.main-inner .column-right-outer {
+width: 310px;
+margin-right: -310px;
+}
+#layout {
+min-width: 0;
+}
+#layout .content-outer {
+min-width: 0;
+width: 800px;
+}
+#layout .region-inner {
+min-width: 0;
+width: auto;
+}
+body#layout div.add_widget {
+padding: 8px;
+}
+body#layout div.add_widget a {
+margin-left: 32px;
+}
+--></style>
+<link href='https://www.blogger.com/dyncss/8789814779400803060/authorization.css?zx=75fc7a09-c22d-43c8-a591-848169f947d2' media='none' onload='if(media!=&#39;all&#39;)media=&#39;all&#39;' rel='stylesheet'/><noscript><link href='https://www.blogger.com/dyncss/8789814779400803060/authorization.css?zx=75fc7a09-c22d-43c8-a591-848169f947d2' rel='stylesheet'/></noscript>
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7791486293879178&host=ca-host-pub-1556223355139109" crossorigin="anonymous"></script>
+
+<!-- data-ad-client=ca-pub-7791486293879178 -->
+
+</head>
+<body class='loading variant-bold'>
+<div class='navbar section' id='navbar' name='Navbar'><div class='widget Navbar' data-version='1' id='Navbar1'><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"></div>
+<script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
+<script type="text/javascript">
+      gapi.load("gapi.iframes:gapi.iframes.style.bubble", function() {
+        if (gapi.iframes && gapi.iframes.getContext) {
+          gapi.iframes.getContext().openChild({
+              url: 'https://www.blogger.com/navbar/8789814779400803060?po\x3d3215147191668733009\x26origin\x3dhttps://thedynamicsdude.blogspot.com',
+              where: document.getElementById("navbar-iframe-container"),
+              id: "navbar-iframe"
+          });
+        }
+      });
+    </script><script type="text/javascript">
+(function() {
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/google_top_exp.js';
+var head = document.getElementsByTagName('head')[0];
+if (head) {
+head.appendChild(script);
+}})();
+</script>
+</div></div>
+<div class='body-fauxcolumns'>
+<div class='fauxcolumn-outer body-fauxcolumn-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</div>
+<div class='content'>
+<div class='content-fauxcolumns'>
+<div class='fauxcolumn-outer content-fauxcolumn-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</div>
+<div class='content-outer'>
+<div class='content-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left content-fauxborder-left'>
+<div class='fauxborder-right content-fauxborder-right'></div>
+<div class='content-inner'>
+<header>
+<div class='header-outer'>
+<div class='header-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left header-fauxborder-left'>
+<div class='fauxborder-right header-fauxborder-right'></div>
+<div class='region-inner header-inner'>
+<div class='header section' id='header' name='Header'><div class='widget Header' data-version='1' id='Header1'>
+<div id='header-inner'>
+<div class='titlewrapper'>
+<h1 class='title'>
+<a href='https://thedynamicsdude.blogspot.com/'>
+Accelerating Transformation with Dynamics 365 and Power Apps
+</a>
+</h1>
+</div>
+<div class='descriptionwrapper'>
+<p class='description'><span>
+</span></p>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<div class='header-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</header>
+<div class='tabs-outer'>
+<div class='tabs-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left tabs-fauxborder-left'>
+<div class='fauxborder-right tabs-fauxborder-right'></div>
+<div class='region-inner tabs-inner'>
+<div class='tabs no-items section' id='crosscol' name='Cross-Column'></div>
+<div class='tabs no-items section' id='crosscol-overflow' name='Cross-Column 2'></div>
+</div>
+</div>
+<div class='tabs-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<div class='main-outer'>
+<div class='main-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left main-fauxborder-left'>
+<div class='fauxborder-right main-fauxborder-right'></div>
+<div class='region-inner main-inner'>
+<div class='columns fauxcolumns'>
+<div class='fauxcolumn-outer fauxcolumn-center-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<div class='fauxcolumn-outer fauxcolumn-left-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<div class='fauxcolumn-outer fauxcolumn-right-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<!-- corrects IE6 width calculation -->
+<div class='columns-inner'>
+<div class='column-center-outer'>
+<div class='column-center-inner'>
+<div class='main section' id='main' name='Main'><div class='widget Blog' data-version='1' id='Blog1'>
+<div class='blog-posts hfeed'>
+
+          <div class="date-outer">
+        
+<h2 class='date-header'><span>Friday, June 20, 2025</span></h2>
+
+          <div class="date-posts">
+        
+<div class='post-outer'>
+<div class='post hentry uncustomized-post-template' itemprop='blogPost' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
+<meta content='8789814779400803060' itemprop='blogId'/>
+<meta content='3215147191668733009' itemprop='postId'/>
+<a name='3215147191668733009'></a>
+<h3 class='post-title entry-title' itemprop='name'>
+Comparing Approaches for Power Apps Model Driven Apps Form Notifications
+</h3>
+<div class='post-header'>
+<div class='post-header-line-1'></div>
+</div>
+<div class='post-body entry-content' id='post-body-3215147191668733009' itemprop='description articleBody'>
+<!--DOCTYPE html-->
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7791486293879178"
+    crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0 auto;
+      max-width: 800px;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      font-size: 2.2em;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 1.8em;
+      color: #34495e;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+    p {
+      margin-bottom: 15px;
+      font-size: 1em;
+    }
+    pre {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 15px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    ul {
+      margin-bottom: 15px;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .note {
+      background: #e8f4f8;
+      border-left: 4px solid #3498db;
+      padding: 15px;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>Comparing Approaches for Power Apps Notifications: Why JavaScript Is the Best Solution</h1>
+  <p>In this blog, we&#8217;ll explore different approaches to implementing dynamic notifications in Power Apps model-driven apps, specifically for notifying users. By comparing JavaScript, Business Rules, and Power Fx, we&#8217;ll determine which is the best-suited solution for our scenario. Our requirement involves displaying a notification with a 5-second timeout when the linked Address is Inactive, ensuring a seamless user experience. Spoiler: JavaScript emerges as the most flexible and powerful choice. Let&#8217;s dive into the details to understand why.</p>
+
+  <h2>The Requirement</h2>
+  <p>Our Power Apps model-driven app uses two Dataverse tables:</p>
+  <ul>
+    <li><strong>Address</strong>: Contains address records with a status (<code>statecode</code> and <code>statuscode</code>), where Active is <code>statecode = 0</code> and Inactive is <code>statecode = 1</code> (e.g., <code>statuscode = 2</code> for &#8220;Inactive/Retired&#8221;).</li>
+    <li><strong>Site</strong>: Includes a lookup field (<code>cr123_addressid</code>) linking to an Address record in a one-to-many relationship.</li>
+  </ul>
+  <p>We needed to:</p>
+  <ol>
+    <li>Create a system view in the Site table to show Sites linked to Inactive Addresses.</li>
+    <li>Display a notification on the Site main form when the linked Address is Inactive, suggesting an Active Address, with the notification clearing after 5 seconds.</li>
+  </ol>
+  <p>We implemented the system view using the Power Apps maker portal&#8217;s view designer, filtering for Sites with an Inactive Address (<code>statecode = 1</code>). For the notification, we evaluated JavaScript, Business Rules, and Power Fx to find the best approach.</p>
+
+  <h2>Approach 1: JavaScript Solution</h2>
+  <p>The JavaScript solution uses a web resource attached to the Site form&#8217;s OnLoad event to check the Address status and display a notification. Here&#8217;s the code:</p>
+  <pre>
+// Function to display a notification if the related Address is Inactive
+// Ensure schema names and status codes are updated:
+// - Replace 'cr123_addressid' with the actual Address lookup field schema name
+// - Replace 'cr123_address' with the actual Address table logical name
+// - Replace '1' with the actual statecode for Inactive (typically 1)
+// - Replace '2' with the actual statuscode for Inactive reason (e.g., Inactive/Retired)
+function showInactiveAddressNotification(executionContext) {
+    var formContext = executionContext.getFormContext();
+    
+    // Check if running on the main form (2 = Update form)
+    if (formContext.ui.getFormType() !== 2) {
+        return;
+    }
+
+    // Get the Address lookup field
+    var addressLookup = formContext.getAttribute("cr123_addressid");
+    if (!addressLookup || !addressLookup.getValue()) {
+        // Clear any existing notification if no Address is selected
+        formContext.ui.clearFormNotification("InactiveAddressWarning");
+        return;
+    }
+
+    // Get the Address ID
+    var addressId = addressLookup.getValue()[0].id;
+
+    // Retrieve the Address record's statecode and statuscode
+    Xrm.WebApi.retrieveRecord("cr123_address", addressId, "?$select=statecode,statuscode").then(
+        function (result) {
+            // Clear any existing notification
+            formContext.ui.clearFormNotification("InactiveAddressWarning");
+
+            // Check if Address is Inactive
+            if (result.statecode === 1 && result.statuscode === 2) {
+                // Set notification
+                formContext.ui.setFormNotification(
+                    "The related Address record is Inactive. Please consider selecting an Address with Active status.",
+                    "WARNING",
+                    "InactiveAddressWarning"
+                );
+                // Clear notification after 5 seconds
+                setTimeout(function() {
+                    formContext.ui.clearFormNotification("InactiveAddressWarning");
+                }, 5000);
+            }
+        },
+        function (error) {
+            console.log("Error retrieving Address: " + error.message);
+            formContext.ui.setFormNotification(
+                "Failed to verify Address status. Please try again or contact support.",
+                "ERROR",
+                "AddressError"
+            );
+            setTimeout(function() {
+                formContext.ui.clearFormNotification("AddressError");
+            }, 5000);
+        }
+    );
+}
+
+// Optional: Add OnChange handler for dynamic updates
+function registerAddressLookupOnChange(executionContext) {
+    var formContext = executionContext.getFormContext();
+    var addressLookup = formContext.getAttribute("cr123_addressid");
+    if (addressLookup) {
+        addressLookup.addOnChange(showInactiveAddressNotification);
+    }
+}
+  </pre>
+  <h3>How It Works</h3>
+  <ul>
+    <li><strong>OnLoad Event</strong>: Runs on form load, ensuring it only executes on the main Update form (<code>formType = 2</code>).</li>
+    <li><strong>Lookup Check</strong>: Verifies the Address lookup field (<code>cr123_addressid</code>) has a value, clearing notifications if empty.</li>
+    <li><strong>Web API Query</strong>: Fetches the Address&#8217;s <code>statecode</code> and <code>statuscode</code> via <code>Xrm.WebApi</code>.</li>
+    <li><strong>Notification</strong>: Displays a banner notification for Inactive Addresses, clearing after 5 seconds via <code>setTimeout</code>.</li>
+    <li><strong>Dynamic Updates</strong>: Attaches an OnChange handler to the Address lookup for real-time updates.</li>
+    <li><strong>Dependencies</strong>: Ensures the <code>cr123_addressid</code> field is available via a table column dependency.</li>
+  </ul>
+  <h3>Implementation Steps</h3>
+  <ol>
+    <li>Create a JavaScript web resource (<code>new_showInactiveAddressNotification</code>) with the code above, updating schema names.</li>
+    <li>Add the web resource to the Site form&#8217;s Form Libraries and register both functions under OnLoad, enabling &#8220;Pass execution context.&#8221;</li>
+    <li>Add a dependency for <code>cr123_addressid</code>.</li>
+    <li>Test across scenarios (Inactive Address, Active Address, no Address, lookup changes).</li>
+  </ol>
+
+  <h2>Approach 2: Business Rules</h2>
+  <p>Business Rules provide a no-code way to apply form logic, such as showing error messages or locking fields.</p>
+  <h3>Limitations</h3>
+  <ul>
+    <li><strong>Intrusive Messages</strong>: Error messages block form saving, unlike JavaScript&#8217;s non-intrusive banner notification.</li>
+    <li><strong>Limited Logic</strong>: Cannot query related records&#8217; <code>statecode</code>/<code>statuscode</code> or implement timeouts.</li>
+    <li><strong>Static Behavior</strong>: Lacks support for dynamic updates on field changes without form reloads.</li>
+  </ul>
+  <h3>When to Use</h3>
+  <p>Business Rules suit simple, no-code tasks (e.g., locking fields) but are inadequate for dynamic notifications.</p>
+
+  <h2>Approach 3: Power Fx</h2>
+  <p>Power Fx is a low-code formula language used in canvas apps and some model-driven app features (e.g., command bar rules).</p>
+  <h3>Limitations</h3>
+  <ul>
+    <li><strong>No OnLoad Support</strong>: Power Fx cannot run on model-driven form OnLoad events, which rely on JavaScript&#8217;s <code>Xrm</code> API.</li>
+    <li><strong>Custom Page Needed</strong>: Requires a modal custom page, which is intrusive and complex to integrate.</li>
+    <li><strong>No Native Notification</strong>: Power Fx&#8217;s <code>Notify</code> function doesn&#8217;t support form banner notifications in model-driven apps.</li>
+    <li><strong>Integration Complexity</strong>: Combining Power Fx with JavaScript for form events adds unnecessary overhead.</li>
+  </ul>
+  <h3>When to Use</h3>
+  <p>Power Fx is ideal for canvas apps or command bar logic but unsuitable for model-driven form events.</p>
+
+  <h2>Why JavaScript Is the Best-Suited Solution</h2>
+  <p>JavaScript outperforms Business Rules and Power Fx due to its unmatched flexibility and capability:</p>
+  <h3>1. Comprehensive Feature Support</h3>
+  <ul>
+    <li>Handles all requirements: notification, timeout, and dynamic updates within a single script.</li>
+    <li>Uses <code>setFormNotification</code> for native banner notifications that integrate seamlessly with the app&#8217;s UI.</li>
+  </ul>
+  <h3>2. Advanced Logic and Integration</h3>
+  <ul>
+    <li>Queries related records via <code>Xrm.WebApi</code> for dual <code>statecode</code>/<code>statuscode</code> checks.</li>
+    <li>Supports OnChange handlers for real-time updates, unlike Business Rules.</li>
+    <li>Integrates with model-driven app forms via the <code>Xrm</code> API.</li>
+  </ul>
+  <h3>3. User Experience</h3>
+  <p>Delivers a polished experience with non-intrusive notifications and precise timeout control.</p>
+  <h3>4. Robustness and Extensibility</h3>
+  <ul>
+    <li>Includes error handling for Web API failures and form type checks for compatibility.</li>
+    <li>Supports accessibility (e.g., can add <code>aria-label</code> for screen readers).</li>
+    <li>Maintains reliability with table column dependencies.</li>
+  </ul>
+  <p>Compared to Business Rules&#8217; limited scope and Power Fx&#8217;s inapplicability to form events, JavaScript&#8217;s versatility makes it the clear winner.</p>
+
+   <h2>Conclusion</h2>
+  <p>By exploring JavaScript, Business Rules, and Power Fx for our Power Apps notification requirement, we&#8217;ve seen that JavaScript is the best-suited solution. Its flexibility, integration with model-driven app forms, and ability to handle complex logic and dynamic updates make it far superior to the limited Business Rules and incompatible Power Fx. This solution enhances user awareness, ensures data integrity, and delivers a seamless experience in our app. Try it in your Power Apps project and see the difference!</p>
+  <p class="note">What&#8217;s your preferred approach for Power Apps notifications? Share your insights in the comments!</p>
+</body>
+</html>
+<div style='clear: both;'></div>
+</div>
+<div class='post-footer'>
+<div class='post-footer-line post-footer-line-1'>
+<span class='post-author vcard'>
+</span>
+<span class='post-timestamp'>
+at
+<meta content='http://thedynamicsdude.blogspot.com/2025/06/enhancing-user-experience-in-power-apps.html' itemprop='url'/>
+<a class='timestamp-link' href='https://thedynamicsdude.blogspot.com/2025/06/enhancing-user-experience-in-power-apps.html' rel='bookmark' title='permanent link'><abbr class='published' itemprop='datePublished' title='2025-06-20T20:01:00-07:00'>June 20, 2025</abbr></a>
+</span>
+<span class='post-comment-link'>
+</span>
+<span class='post-icons'>
+<span class='item-control blog-admin pid-360920176'>
+<a href='https://www.blogger.com/post-edit.g?blogID=8789814779400803060&postID=3215147191668733009&from=pencil' title='Edit Post'>
+<img alt='' class='icon-action' height='18' src='https://resources.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
+</a>
+</span>
+</span>
+<div class='post-share-buttons goog-inline-block'>
+<a class='goog-inline-block share-button sb-email' href='https://www.blogger.com/share-post.g?blogID=8789814779400803060&postID=3215147191668733009&target=email' target='_blank' title='Email This'><span class='share-button-link-text'>Email This</span></a><a class='goog-inline-block share-button sb-blog' href='https://www.blogger.com/share-post.g?blogID=8789814779400803060&postID=3215147191668733009&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'><span class='share-button-link-text'>BlogThis!</span></a><a class='goog-inline-block share-button sb-twitter' href='https://www.blogger.com/share-post.g?blogID=8789814779400803060&postID=3215147191668733009&target=twitter' target='_blank' title='Share to X'><span class='share-button-link-text'>Share to X</span></a><a class='goog-inline-block share-button sb-facebook' href='https://www.blogger.com/share-post.g?blogID=8789814779400803060&postID=3215147191668733009&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'><span class='share-button-link-text'>Share to Facebook</span></a><a class='goog-inline-block share-button sb-pinterest' href='https://www.blogger.com/share-post.g?blogID=8789814779400803060&postID=3215147191668733009&target=pinterest' target='_blank' title='Share to Pinterest'><span class='share-button-link-text'>Share to Pinterest</span></a>
+</div>
+</div>
+<div class='post-footer-line post-footer-line-2'>
+<span class='post-labels'>
+</span>
+</div>
+<div class='post-footer-line post-footer-line-3'>
+<span class='post-location'>
+</span>
+</div>
+</div>
+</div>
+<div class='comments' id='comments'>
+<a name='comments'></a>
+<h4>No comments:</h4>
+<div id='Blog1_comments-block-wrapper'>
+<dl class='avatar-comment-indent' id='comments-block'>
+</dl>
+</div>
+<p class='comment-footer'>
+<div class='comment-form'>
+<a name='comment-form'></a>
+<h4 id='comment-post-message'>Post a Comment</h4>
+<p>
+</p>
+<a href='https://www.blogger.com/comment/frame/8789814779400803060?po=3215147191668733009&hl=en&saa=85391&origin=https://thedynamicsdude.blogspot.com' id='comment-editor-src'></a>
+<iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='410px' id='comment-editor' name='comment-editor' src='' width='100%'></iframe>
+<script src='https://www.blogger.com/static/v1/jsbin/3790099508-comment_from_post_iframe.js' type='text/javascript'></script>
+<script type='text/javascript'>
+      BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html');
+    </script>
+</div>
+</p>
+</div>
+</div>
+
+        </div></div>
+      
+</div>
+<div class='blog-pager' id='blog-pager'>
+<span id='blog-pager-newer-link'>
+<a class='blog-pager-newer-link' href='https://thedynamicsdude.blogspot.com/2025/06/building-visitor-check-in-app-with.html' id='Blog1_blog-pager-newer-link' title='Newer Post'>Newer Post</a>
+</span>
+<span id='blog-pager-older-link'>
+<a class='blog-pager-older-link' href='https://thedynamicsdude.blogspot.com/2025/05/powerapps-dynamics-365-ce-interview.html' id='Blog1_blog-pager-older-link' title='Older Post'>Older Post</a>
+</span>
+<a class='home-link' href='https://thedynamicsdude.blogspot.com/'>Home</a>
+</div>
+<div class='clear'></div>
+<div class='post-feeds'>
+<div class='feed-links'>
+Subscribe to:
+<a class='feed-link' href='https://thedynamicsdude.blogspot.com/feeds/3215147191668733009/comments/default' target='_blank' type='application/atom+xml'>Post Comments (Atom)</a>
+</div>
+</div>
+</div><div class='widget FeaturedPost' data-version='1' id='FeaturedPost1'>
+<div class='post-summary'>
+<h3><a href='https://thedynamicsdude.blogspot.com/2026/07/enhancing-model-driven-app-views-with.html'>Enhancing Model-Driven App Views with Custom Column Icons</a></h3>
+<p>
+Enhancing Model-Driven App Views with Custom Column Icons   A Hidden Feature That Can Make Your Views Much More User-Friendly    I came acro...
+</p>
+</div>
+<style type='text/css'>
+    .image {
+      width: 100%;
+    }
+  </style>
+<div class='clear'></div>
+</div><div class='widget PopularPosts' data-version='1' id='PopularPosts1'>
+<div class='widget-content popular-posts'>
+<ul>
+<li>
+<div class='item-content'>
+<div class='item-title'><a href='https://thedynamicsdude.blogspot.com/2025/05/fixing-no-name-issue-when-setting.html'>Fixing the &#8220;No Name&#8221; Issue When Setting RegardingObjectId in Dataverse Plugins</a></div>
+<div class='item-snippet'>           Fixing the &#8220;No Name&#8221; Issue When Setting RegardingObjectId in Dataverse Plugins                   When building plugins for Micros...</div>
+</div>
+<div style='clear: both;'></div>
+</li>
+<li>
+<div class='item-content'>
+<div class='item-thumbnail'>
+<a href='https://thedynamicsdude.blogspot.com/2025/06/building-visitor-check-in-app-with.html' target='_blank'>
+<img alt='' border='0' src='https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tX3KvBbq1SsM_ihE3nQxd1Ivl2Wx1gvYL7Wdn2g6yd0ekVp2Rbv7FmF0-OFVbSgHZIlA=w72-h72-p-k-no-nu'/>
+</a>
+</div>
+<div class='item-title'><a href='https://thedynamicsdude.blogspot.com/2025/06/building-visitor-check-in-app-with.html'>Building a Visitor Check-In App with Microsoft Power Platform: A Hands-On Success</a></div>
+<div class='item-snippet'>                       From Paper Logs to Power Platform: Building a Visitor Check-In App in 60 minutes                      From Paper Logs...</div>
+</div>
+<div style='clear: both;'></div>
+</li>
+<li>
+<div class='item-content'>
+<div class='item-title'><a href='https://thedynamicsdude.blogspot.com/2025/06/bulk-updating-over-20000-records-in.html'>Bulk Updating Over 20,000 Records in Dataverse ExecuteMultipleRequest &#8212;Step-by-Step Implementation</a></div>
+<div class='item-snippet'>                     Mastering Dataverse Updates with ExecuteMultipleRequest: A Modern C# Guide                                          Dat...</div>
+</div>
+<div style='clear: both;'></div>
+</li>
+</ul>
+<div class='clear'></div>
+</div>
+</div></div>
+</div>
+</div>
+<div class='column-left-outer'>
+<div class='column-left-inner'>
+<aside>
+</aside>
+</div>
+</div>
+<div class='column-right-outer'>
+<div class='column-right-inner'>
+<aside>
+<div class='sidebar section' id='sidebar-right-1'><div class='widget BlogSearch' data-version='1' id='BlogSearch1'>
+<h2 class='title'>Search This Blog</h2>
+<div class='widget-content'>
+<div id='BlogSearch1_form'>
+<form action='https://thedynamicsdude.blogspot.com/search' class='gsc-search-box' target='_top'>
+<table cellpadding='0' cellspacing='0' class='gsc-search-box'>
+<tbody>
+<tr>
+<td class='gsc-input'>
+<input autocomplete='off' class='gsc-input' name='q' size='10' title='search' type='text' value=''/>
+</td>
+<td class='gsc-search-button'>
+<input class='gsc-search-button' title='search' type='submit' value='Search'/>
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+</div>
+</div>
+<div class='clear'></div>
+</div><div class='widget PageList' data-version='1' id='PageList1'>
+<div class='widget-content'>
+<ul>
+<li>
+<a href='https://thedynamicsdude.blogspot.com/'>Home</a>
+</li>
+</ul>
+<div class='clear'></div>
+</div>
+</div><div class='widget Profile' data-version='1' id='Profile1'>
+<h2>About Me</h2>
+<div class='widget-content'>
+<a href='https://www.blogger.com/profile/09103909560649697546'><img alt='My photo' class='profile-img' height='80' src='//blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhu3tv8E_5hSLPfOKF2NmASwtdvyoEgtF-CZSspFdeOA_Z5A5sqPJAT_P6sKc3qVydGGwP7CEGx6hXV9Tdk48bBkbxknWoTcAyGp7VbJvixzGHzyHLB55aw3z-eFJ0ojQNuCTP69tffweBFNeSuy_NYlojtfgrFEag4hp6TLWQRz2XYQyg/s1600/Sudip-removebg-preview%20(1).png' width='80'/></a>
+<dl class='profile-datablock'>
+<dt class='profile-data'>
+<a class='profile-name-link g-profile' href='https://www.blogger.com/profile/09103909560649697546' rel='author' style='background-image: url(//www.blogger.com/img/logo-16.png);'>
+Sudip Chakrovorty
+</a>
+</dt>
+<dd class='profile-textblock'>Sudip is a seasoned IT consultant with 18 years of experience specializing in Dynamics 365, Power Apps Platform, and Microsoft technologies. Holding a Master of Computer Science from Virginia State University, USA, and a Bachelor of Software Systems from Guru Gobind Singh Indraprastha University, India, he has a strong academic foundation supported by prestigious certifications, including Microsoft&#174; Certified: Power Platform Solution Architect and Dynamics 365 Solutions Expert.  
+
+Sudip has successfully led multi-million-dollar projects, delivering exceptional results in architecture design, customization, integration, and migration. Proficient in Agile (SCRUM) and Waterfall methodologies, he ensures quality delivery and client satisfaction.  
+
+With expertise in pre-sales, technical presentations, and RFx creation, Sudip bridges technical solutions with business needs. Passionate about process improvement and performance optimization, he is a trusted leader across industries such as government, manufacturing, telecom, and healthcare. Analytical, motivated, and client-focused, Sudip consistently drives innovation and success.</dd>
+</dl>
+<a class='profile-link' href='https://www.blogger.com/profile/09103909560649697546' rel='author'>View my complete profile</a>
+<div class='clear'></div>
+</div>
+</div><div class='widget BlogArchive' data-version='1' id='BlogArchive1'>
+<h2>Blog Archive</h2>
+<div class='widget-content'>
+<div id='ArchiveList'>
+<div id='BlogArchive1_ArchiveList'>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2026/'>
+2026
+</a>
+<span class='post-count' dir='ltr'>(3)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2026/07/'>
+July
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2026/04/'>
+April
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2026/03/'>
+March
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate expanded'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy toggle-open'>
+
+        &#9660;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2025/'>
+2025
+</a>
+<span class='post-count' dir='ltr'>(25)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2025/07/'>
+July
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate expanded'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy toggle-open'>
+
+        &#9660;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2025/06/'>
+June
+</a>
+<span class='post-count' dir='ltr'>(11)</span>
+<ul class='posts'>
+<li><a href='https://thedynamicsdude.blogspot.com/2025/06/bulk-updating-over-20000-records-in.html'>Bulk Updating Over 20,000 Records in Dataverse Exe...</a></li>
+<li><a href='https://thedynamicsdude.blogspot.com/2025/06/how-to-retrieve-more-than-5000-records_27.html'>How to Retrieve More Than 5000 Records Using Fetch...</a></li>
+<li><a href='https://thedynamicsdude.blogspot.com/2025/06/how-to-use-fetchxml-with-paging-in.html'>How to Retrieve More Than 5000 Records Using Fetch...</a></li>
+<li><a href='https://thedynamicsdude.blogspot.com/2025/06/how-to-retrieve-more-than-5000-records.html'>How to Retrieve More Than 5000 Records Using Fetch...</a></li>
+<li><a href='https://thedynamicsdude.blogspot.com/2025/06/moving-bpf-stages-backward-in-dynamics_26.html'>Moving BPF Stages Backward in Dynamics 365 with Ja...</a></li>
+<li><a href='https://thedynamicsdude.blogspot.com/2025/06/moving-bpf-stages-backward-in-dynamics.html'>Moving BPF Stages Backward in Dynamics 365 with Po...</a></li>
+<li><a href='https://thedynamicsdude.blogspot.com/2025/06/moving-business-process-flow-stages.html'>Moving Business Process Flow Stages Backward in Dy...</a></li>
+<li><a href='https://thedynamicsdude.blogspot.com/2025/06/dynamics-365-powerapps-dataverses-web.html'>Dynamics 365 / PowerApps Dataverse&#8217;s Web API</a></li>
+<li><a href='https://thedynamicsdude.blogspot.com/2025/06/odata-in-dynamics-365-how-to-get-data.html'>OData in Dynamics 365: How to Get the Data You Nee...</a></li>
+<li><a href='https://thedynamicsdude.blogspot.com/2025/06/building-visitor-check-in-app-with.html'>Building a Visitor Check-In App with Microsoft Pow...</a></li>
+<li><a href='https://thedynamicsdude.blogspot.com/2025/06/enhancing-user-experience-in-power-apps.html'>Comparing Approaches for Power Apps Model Driven A...</a></li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2025/05/'>
+May
+</a>
+<span class='post-count' dir='ltr'>(6)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2025/02/'>
+February
+</a>
+<span class='post-count' dir='ltr'>(3)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2025/01/'>
+January
+</a>
+<span class='post-count' dir='ltr'>(4)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2024/'>
+2024
+</a>
+<span class='post-count' dir='ltr'>(14)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2024/12/'>
+December
+</a>
+<span class='post-count' dir='ltr'>(14)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2020/'>
+2020
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2020/07/'>
+July
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2018/'>
+2018
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2018/08/'>
+August
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2014/'>
+2014
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2014/03/'>
+March
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2013/'>
+2013
+</a>
+<span class='post-count' dir='ltr'>(9)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2013/09/'>
+September
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2013/07/'>
+July
+</a>
+<span class='post-count' dir='ltr'>(7)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2013/06/'>
+June
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2012/'>
+2012
+</a>
+<span class='post-count' dir='ltr'>(3)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2012/07/'>
+July
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2012/05/'>
+May
+</a>
+<span class='post-count' dir='ltr'>(2)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2011/'>
+2011
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+        &#9658;&#160;
+      
+</span>
+</a>
+<a class='post-count-link' href='https://thedynamicsdude.blogspot.com/2011/07/'>
+July
+</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class='clear'></div>
+</div>
+</div></div>
+<table border='0' cellpadding='0' cellspacing='0' class='section-columns columns-2'>
+<tbody>
+<tr>
+<td class='first columns-cell'>
+<div class='sidebar section' id='sidebar-right-2-1'><div class='widget Followers' data-version='1' id='Followers1'>
+<h2 class='title'>Followers</h2>
+<div class='widget-content'>
+<div id='Followers1-wrapper'>
+<div style='margin-right:2px;'>
+<div><script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
+<div id="followers-iframe-container"></div>
+<script type="text/javascript">
+    window.followersIframe = null;
+    function followersIframeOpen(url) {
+      gapi.load("gapi.iframes", function() {
+        if (gapi.iframes && gapi.iframes.getContext) {
+          window.followersIframe = gapi.iframes.getContext().openChild({
+            url: url,
+            where: document.getElementById("followers-iframe-container"),
+            messageHandlersFilter: gapi.iframes.CROSS_ORIGIN_IFRAMES_FILTER,
+            messageHandlers: {
+              '_ready': function(obj) {
+                window.followersIframe.getIframeEl().height = obj.height;
+              },
+              'reset': function() {
+                window.followersIframe.close();
+                followersIframeOpen("https://www.blogger.com/followers/frame/8789814779400803060?colors\x3dCgt0cmFuc3BhcmVudBILdHJhbnNwYXJlbnQaByMyMjIyMjIiByNjYzY2MTEqByNmZmZmZmYyByMwMDAwMDA6ByMyMjIyMjJCByNjYzY2MTFKByM5OTk5OTlSByNjYzY2MTFaC3RyYW5zcGFyZW50\x26pageSize\x3d21\x26hl\x3den\x26origin\x3dhttps://thedynamicsdude.blogspot.com");
+              },
+              'open': function(url) {
+                window.followersIframe.close();
+                followersIframeOpen(url);
+              }
+            }
+          });
+        }
+      });
+    }
+    followersIframeOpen("https://www.blogger.com/followers/frame/8789814779400803060?colors\x3dCgt0cmFuc3BhcmVudBILdHJhbnNwYXJlbnQaByMyMjIyMjIiByNjYzY2MTEqByNmZmZmZmYyByMwMDAwMDA6ByMyMjIyMjJCByNjYzY2MTFKByM5OTk5OTlSByNjYzY2MTFaC3RyYW5zcGFyZW50\x26pageSize\x3d21\x26hl\x3den\x26origin\x3dhttps://thedynamicsdude.blogspot.com");
+  </script></div>
+</div>
+</div>
+<div class='clear'></div>
+</div>
+</div></div>
+</td>
+<td class='columns-cell'>
+<div class='sidebar section' id='sidebar-right-2-2'><div class='widget ReportAbuse' data-version='1' id='ReportAbuse1'>
+<h3 class='title'>
+<a class='report_abuse' href='https://www.blogger.com/go/report-abuse' rel='noopener nofollow' target='_blank'>
+Report Abuse
+</a>
+</h3>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class='sidebar no-items section' id='sidebar-right-3'>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<div style='clear: both'></div>
+<!-- columns -->
+</div>
+<!-- main -->
+</div>
+</div>
+<div class='main-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<footer>
+<div class='footer-outer'>
+<div class='footer-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left footer-fauxborder-left'>
+<div class='fauxborder-right footer-fauxborder-right'></div>
+<div class='region-inner footer-inner'>
+<div class='foot no-items section' id='footer-1'></div>
+<table border='0' cellpadding='0' cellspacing='0' class='section-columns columns-2'>
+<tbody>
+<tr>
+<td class='first columns-cell'>
+<div class='foot no-items section' id='footer-2-1'></div>
+</td>
+<td class='columns-cell'>
+<div class='foot no-items section' id='footer-2-2'></div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- outside of the include in order to lock Attribution widget -->
+<div class='foot section' id='footer-3' name='Footer'><div class='widget Attribution' data-version='1' id='Attribution1'>
+<div class='widget-content' style='text-align: center;'>
+Simple theme. Powered by <a href='https://www.blogger.com' target='_blank'>Blogger</a>.
+</div>
+<div class='clear'></div>
+</div></div>
+</div>
+</div>
+<div class='footer-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</footer>
+<!-- content -->
+</div>
+</div>
+<div class='content-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</div>
+<script type='text/javascript'>
+    window.setTimeout(function() {
+        document.body.className = document.body.className.replace('loading', '');
+      }, 10);
+  </script>
+
+<script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/851759228-widgets.js"></script>
+<script type='text/javascript'>
+window['__wavt'] = 'AAPvtVnObxu3JxSSOQUgA5FKlIZv:1789887573047';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d8789814779400803060','//thedynamicsdude.blogspot.com/2025/06/enhancing-user-experience-in-power-apps.html','8789814779400803060');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '8789814779400803060', 'title': 'Accelerating Transformation with Dynamics 365 and Power Apps', 'url': 'https://thedynamicsdude.blogspot.com/2025/06/enhancing-user-experience-in-power-apps.html', 'canonicalUrl': 'http://thedynamicsdude.blogspot.com/2025/06/enhancing-user-experience-in-power-apps.html', 'homepageUrl': 'https://thedynamicsdude.blogspot.com/', 'searchUrl': 'https://thedynamicsdude.blogspot.com/search', 'canonicalHomepageUrl': 'http://thedynamicsdude.blogspot.com/', 'blogspotFaviconUrl': 'https://thedynamicsdude.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': true, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Accelerating Transformation with Dynamics 365 and Power Apps - Atom\x22 href\x3d\x22https://thedynamicsdude.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22Accelerating Transformation with Dynamics 365 and Power Apps - RSS\x22 href\x3d\x22https://thedynamicsdude.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Accelerating Transformation with Dynamics 365 and Power Apps - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/8789814779400803060/posts/default\x22 /\x3e\n\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Accelerating Transformation with Dynamics 365 and Power Apps - Atom\x22 href\x3d\x22https://thedynamicsdude.blogspot.com/feeds/3215147191668733009/comments/default\x22 /\x3e\n', 'meTag': '', 'adsenseClientId': 'ca-pub-7791486293879178', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': true, 'adsenseAutoAds': true, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/7ce469edaf870342', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': 'Share to X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'item', 'postId': '3215147191668733009', 'pageName': 'Comparing Approaches for Power Apps Model Driven Apps Form Notifications', 'pageTitle': 'Accelerating Transformation with Dynamics 365 and Power Apps: Comparing Approaches for Power Apps Model Driven Apps Form Notifications'}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'name': 'Simple', 'localizedName': 'Simple', 'isResponsive': false, 'isAlternateRendering': false, 'isCustom': false, 'variant': 'bold', 'variantId': 'bold'}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': 'Comparing Approaches for Power Apps Model Driven Apps Form Notifications', 'description': '                    Comparing Approaches for Power Apps Notifications: Why JavaScript Is the Best Solution    In this blog, we\u2019ll explore di...', 'url': 'https://thedynamicsdude.blogspot.com/2025/06/enhancing-user-experience-in-power-apps.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': false, 'isPost': true, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'postId': 3215147191668733009}}]);
+_WidgetManager._RegisterWidget('_NavbarView', new _WidgetInfo('Navbar1', 'navbar', document.getElementById('Navbar1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/120969204-lbx.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/828616780-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FeaturedPostView', new _WidgetInfo('FeaturedPost1', 'main', document.getElementById('FeaturedPost1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PopularPostsView', new _WidgetInfo('PopularPosts1', 'main', document.getElementById('PopularPosts1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogSearchView', new _WidgetInfo('BlogSearch1', 'sidebar-right-1', document.getElementById('BlogSearch1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PageListView', new _WidgetInfo('PageList1', 'sidebar-right-1', document.getElementById('PageList1'), {'title': '', 'links': [{'isCurrentPage': false, 'href': 'https://thedynamicsdude.blogspot.com/', 'title': 'Home'}], 'mobile': false, 'showPlaceholder': true, 'hasCurrentPage': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_ProfileView', new _WidgetInfo('Profile1', 'sidebar-right-1', document.getElementById('Profile1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebar-right-1', document.getElementById('BlogArchive1'), {'languageDirection': 'ltr', 'loadingMessage': 'Loading\x26hellip;'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FollowersView', new _WidgetInfo('Followers1', 'sidebar-right-2-1', document.getElementById('Followers1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_ReportAbuseView', new _WidgetInfo('ReportAbuse1', 'sidebar-right-2-2', document.getElementById('ReportAbuse1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'footer-3', document.getElementById('Attribution1'), {}, 'displayModeFull'));
+</script>
+</body>
+</html>

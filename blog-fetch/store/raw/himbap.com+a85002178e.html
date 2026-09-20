@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) & !(IE 8)]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="pingback" href="https://himbap.com/blog/xmlrpc.php" />
+<!--[if lt IE 9]>
+<script src="https://himbap.com/blog/wp-content/themes/zerogravity/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<title>Creating Email Template for Custom Entities in Dynamics 365 CE &#8211; HIMBAP</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="HIMBAP &raquo; Feed" href="https://himbap.com/blog/?feed=rss2" />
+<link rel="alternate" type="application/rss+xml" title="HIMBAP &raquo; Comments Feed" href="https://himbap.com/blog/?feed=comments-rss2" />
+<link rel="alternate" type="application/rss+xml" title="HIMBAP &raquo; Creating Email Template for Custom Entities in Dynamics 365 CE Comments Feed" href="https://himbap.com/blog/?feed=rss2&#038;p=4541" />
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/himbap.com\/blog\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.2.12"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){p.clearRect(0,0,i.width,i.height),p.fillText(e,0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(t,0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(p&&p.fillText)switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s("\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!s("\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!s("\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!s("\ud83e\udef1\ud83c\udffb\u200d\ud83e\udef2\ud83c\udfff","\ud83e\udef1\ud83c\udffb\u200b\ud83e\udef2\ud83c\udfff")}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css' href='https://himbap.com/blog/wp-includes/css/dist/block-library/style.min.css?ver=6.2.12' type='text/css' media='all' />
+<link rel='stylesheet' id='classic-theme-styles-css' href='https://himbap.com/blog/wp-includes/css/classic-themes.min.css?ver=6.2.12' type='text/css' media='all' />
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='dgd-scrollbox-plugin-core-css' href='https://himbap.com/blog/wp-content/plugins/dreamgrow-scroll-triggered-box/css/style.css?ver=2.3' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css' href='https://himbap.com/blog/wp-includes/css/dashicons.min.css?ver=6.2.12' type='text/css' media='all' />
+<link rel='stylesheet' id='post-views-counter-frontend-css' href='https://himbap.com/blog/wp-content/plugins/post-views-counter/css/frontend.min.css?ver=1.4.5' type='text/css' media='all' />
+<link rel='stylesheet' id='zerogravity-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu:400italic,700italic,400,700&#038;subset=latin,latin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='zerogravity-style-css' href='https://himbap.com/blog/wp-content/themes/zerogravity/style.css?ver=1.5.1' type='text/css' media='all' />
+<link rel='stylesheet' id='zerogravity-custom-style-css' href='https://himbap.com/blog/wp-content/themes/zerogravity/custom-style.css?ver=6.2.12' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='zerogravity-ie-css' href='https://himbap.com/blog/wp-content/themes/zerogravity/css/ie.css?ver=20121010' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='font-awesome-css' href='https://himbap.com/blog/wp-content/themes/zerogravity/css/font-awesome-4.4.0/css/font-awesome.min.css?ver=6.2.12' type='text/css' media='all' />
+<script type='text/javascript' src='https://himbap.com/blog/wp-includes/js/jquery/jquery.min.js?ver=3.6.4' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://himbap.com/blog/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.0' id='jquery-migrate-js'></script>
+<script type='text/javascript' id='dgd-scrollbox-plugin-js-extra'>
+/* <![CDATA[ */
+var $DGD = {"ajaxurl":"\/blog\/wp-admin\/admin-ajax.php","nonce":"c8f9e0ed2f","debug":"","permalink":"https:\/\/himbap.com\/blog\/?p=4541","title":"Creating Email Template for Custom Entities in Dynamics 365 CE","thumbnail":"","scripthost":"\/blog\/wp-content\/plugins\/dreamgrow-scroll-triggered-box\/","scrollboxes":[{"id":"dgd_scrollbox-3140-tab","parentid":"dgd_scrollbox-3140","trigger":{"action":"tab"},"height":"auto","width":"auto","vpos":"bottom","hpos":"center","theme":"default","jsCss":{"margin":"0","backgroundImageUrl":"","backgroundColor":"#f4ba09","boxShadow":"0px","borderColor":"#4800f2","borderWidth":"0px","borderRadius":""},"transition":{"effect":"none","from":"t","speed":"400"},"lightbox":0,"closeImageUrl":"","hide_mobile":"1","submit_auto_close":0,"delay_auto_close":0,"hide_submitted":0,"cookieLifetime":-1,"receiver_email":"1","thankyou":"You are subscribed. Thank You!","widget_enabled":"0"},{"trigger":{"action":"scroll","scroll":"50","delaytime":"0","element":""},"vpos":"center","hpos":"center","cookieLifetime":"1","hide_mobile":"1","receiver_email":"1","thankyou":"You are subscribed. Thank You!","submit_auto_close":"5","hide_submitted":"1","delay_auto_close":"40","lightbox":{"color":"#000000","opacity":"0.7","blur":"2"},"theme":"default","widget_enabled":"1","height":"auto","width":"350","jsCss":{"padding":"10","margin":"10","backgroundColor":"#f4ba09","boxShadow":"0px","borderColor":"#4800f2","borderWidth":"0px","borderRadius":"0px","backgroundImageUrl":""},"closeImageUrl":"","transition":{"from":"t","effect":"none","speed":"400"},"tab":"1","social":{"facebook":"","twitter":"","google":"","pinterest":"","stumbleupon":"","linkedin":""},"id":"dgd_scrollbox-3140","mode":"stb","voff":0,"hoff":0,"tabid":"dgd_scrollbox-3140-tab"}]};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://himbap.com/blog/wp-content/plugins/dreamgrow-scroll-triggered-box/js/script.js?ver=2.3' id='dgd-scrollbox-plugin-js'></script>
+<link rel="https://api.w.org/" href="https://himbap.com/blog/index.php?rest_route=/" /><link rel="alternate" type="application/json" href="https://himbap.com/blog/index.php?rest_route=/wp/v2/posts/4541" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://himbap.com/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://himbap.com/blog/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 6.2.12" />
+<link rel="canonical" href="https://himbap.com/blog/?p=4541" />
+<link rel='shortlink' href='https://himbap.com/blog/?p=4541' />
+<link rel="alternate" type="application/json+oembed" href="https://himbap.com/blog/index.php?rest_route=%2Foembed%2F1.0%2Fembed&#038;url=https%3A%2F%2Fhimbap.com%2Fblog%2F%3Fp%3D4541" />
+<link rel="alternate" type="text/xml+oembed" href="https://himbap.com/blog/index.php?rest_route=%2Foembed%2F1.0%2Fembed&#038;url=https%3A%2F%2Fhimbap.com%2Fblog%2F%3Fp%3D4541&#038;format=xml" />
+<style type="text/css">
+ul.scfw_16px li, ul.scfw_24px li, ul.scfw_32px li, ul.scfw_16px li a, ul.scfw_24px li a, ul.scfw_32px li a {
+	display:inline !important;
+	float:none !important;
+	border:0 !important;
+	background:transparent none !important;
+	margin:0 !important;
+	padding:0 !important;
+}
+ul.scfw_16px li {
+	margin:0 2px 0 0 !important;
+}
+ul.scfw_24px li {
+	margin:0 3px 0 0 !important;
+}
+ul.scfw_32px li {
+	margin:0 5px 0 0 !important;
+}
+ul.scfw_text_img li:before, ul.scfw_16px li:before, ul.scfw_24px li:before, ul.scfw_32px li:before {
+	content:none !important;
+}
+.scfw img {
+	float:none !important;
+}
+</style>	
+		<style type='text/css'>
+		a {color: #0098D3;}
+	a:hover {color: #0098D3;}
+	.blog-info-sin-imagen {background-color: #0098D3;}
+	.social-icon-wrapper a:hover {color: #0098D3;}
+	.toggle-search {color: #0098D3;}
+	.prefix-widget-title {color: #0098D3;}
+	.term-icon {color: #0098D3;}
+	
+	.sub-title a:hover {color:#0098D3;}
+	.entry-content a:visited,.comment-content a:visited {color:#0098D3;}
+	input[type="submit"] {background-color:#0098D3 !important;}
+	.bypostauthor cite span {background-color:#0098D3;}
+	.site-header h1 a:hover,
+	.site-header h2 a:hover {
+		color: #0098D3;
+	}
+	.entry-header .entry-title a:hover {color:#0098D3 ;}
+	.archive-header {border-left-color:#0098D3;}
+	.main-navigation a:hover,
+	.main-navigation a:focus {
+		color: #0098D3;
+	}
+	.widget-area .widget a:hover {
+		color: #0098D3 !important;
+	}
+	footer[role="contentinfo"] a:hover {
+		color: #0098D3;
+	}
+	.entry-meta a:hover {
+	color: #0098D3;
+	}
+	.format-status .entry-header header a:hover {
+		color: #0098D3;
+	}
+	.comments-area article header a:hover {
+		color: #0098D3;
+	}
+	a.comment-reply-link:hover,
+	a.comment-edit-link:hover {
+		color: #0098D3;
+	}
+	.template-front-page .widget-area .widget li a:hover {
+		color: #0098D3;
+	}
+	.main-navigation .current-menu-item a,
+	.main-navigation .current-menu-ancestor > a,
+	.main-navigation .current_page_item > a,
+	.main-navigation .current_page_ancestor > a {color: #0098D3;}
+	.currenttext, .paginacion a:hover {background-color:#0098D3;}
+	.main-navigation li a:hover  {color: #0098D3;}
+	.aside{border-left-color:#0098D3 !important;}
+	blockquote{border-left-color:#0098D3;}
+	.logo-header-wrapper, .image-header-wrapper {background-color:#0098D3;}
+	h2.comments-title {border-left-color:#0098D3;}
+	
+		
+			.logo-header-wrapper, .image-header-wrapper {background-color:#ffffff;}
+		.blog-info-sin-imagen {
+			background-color:#ffffff;
+			color:#444444 !important;
+		}
+		.blog-info-sin-imagen a {
+			color:#444444 !important;
+		}
+		.blog-info-sin-imagen h2 {color:#444444 !important;}
+		
+			.wrapper-excerpt-thumbnail img {
+	 		border-radius:0;
+		}
+		
+			
+		body.custom-font-enabled {font-family: "Ubuntu", Arial, Verdana;}
+	
+			@media screen and (min-width: 600px) {
+			#primary {float:left;}
+			#secondary {float:right;}
+			.site-content {
+				border-left: none;
+				padding-left:0;
+				padding-right: 24px;
+				padding-right:1.714285714285714rem;
+				/*border-right: 1px solid #e0e0e0;*/
+			}
+		}
+		@media screen and (min-width: 960px) {
+			.site-content {
+				border-right: 1px solid #e0e0e0;
+			}
+		}
+		
+	@media screen and (max-width: 599px) {
+		.menu-toggle, .menu-toggle:hover {
+			background:#0098D3 !important;
+			color:#ffffff !important;
+			width:100%;
+		}
+	}
+	</style>
+	
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Creating Email Template for Custom Entities in Dynamics 365 CE" />
+<meta property="og:url" content="https://himbap.com/blog/?p=4541" />
+<meta property="og:description" content="Introduction: In the dynamic landscape of modern business operations, effective communication stands as a cornerstone for achieving success. Within Dynamics 365 CE, various communication avenues ar…" />
+<meta property="article:published_time" content="2024-01-29T16:46:19+00:00" />
+<meta property="article:modified_time" content="2024-01-29T16:46:19+00:00" />
+<meta property="og:site_name" content="HIMBAP" />
+<meta property="og:image" content="https://himbap.com/blog/wp-content/uploads/2024/01/email4-300x164.png" />
+</head>
+
+<body class="post-template-default single single-post postid-4541 single-format-standard custom-font-enabled single-author">
+
+<a name='inicio_pagina'></a>
+
+<div id="page" class="hfeed site">
+	<div class="top-bar">
+				
+		<div class="boton-menu-movil"><i class="fa fa-align-justify"></i></div>
+				<div class="toggle-search"><i class="fa fa-search"></i></div>
+		<div class="social-icon-wrapper">
+							<a href="https://twitter.com/himbapinfo" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a> 
+						
+							<a href="https://facebook.com/HimbapPage" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+						
+							<a href="https://plus.google.com" title="Google Plus" target="_blank"><i class="fa fa-google-plus"></i></a>
+						
+					 		<a href="https://www.linkedin.com/company/himbap" title="LindedIn" target="_blank"><i class="fa fa-linkedin"></i></a>
+						
+						
+						
+						
+							<a class="rss" href="https://himbap.com/blog/?feed=rss2" title="RSS" target="_blank"><i class="fa fa-rss"></i></a>			
+					</div><!-- .social-icon-wrapper -->	
+	</div><!-- .top-bar --->
+	
+	<div class="wrapper-search-top-bar"><div class="search-top-bar">	<div>
+		<form method="get" id="searchform-toggle" action="https://himbap.com/blog/">
+			<label for="s" class="assistive-text">Search</label>
+			<input type="search" class="txt-search" name="s" id="s" />
+			<input type="submit" name="submit" id="btn-search" value="Search" />
+		</form>
+    </div></div></div>
+	
+	<header id="masthead" class="site-header" role="banner">
+	<div style="position:relative">
+<div id="menu-movil">
+	<div class="search-form-movil">
+		<form method="get" id="searchform-movil" action="https://himbap.com/blog/">
+			<label for="s" class="assistive-text">Search</label>
+			<input type="search" class="txt-search-movil" placeholder="Search..." name="s" id="s" />
+			<input type="submit" name="submit" id="btn-search-movil" value="Search" />
+		</form>
+    </div><!-- search-form-movil -->
+	<div class="menu-movil-enlaces">
+		<div class="nav-menu"><ul>
+<li ><a href="https://himbap.com/blog/">Home</a></li><li class="page_item page-item-2710"><a href="https://himbap.com/blog/?page_id=2710">Web API Sample Code</a></li>
+<li class="page_item page-item-2563"><a href="https://himbap.com/blog/?page_id=2563">Speakings</a></li>
+</ul></div>
+	</div>
+	
+	<div class="social-icon-wrapper-movil">
+							<a href="https://twitter.com/himbapinfo" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a> 
+						
+							<a href="https://facebook.com/HimbapPage" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+						
+							<a href="https://plus.google.com" title="Google Plus" target="_blank"><i class="fa fa-google-plus"></i></a>
+						
+					 		<a href="https://www.linkedin.com/company/himbap" title="LindedIn" target="_blank"><i class="fa fa-linkedin"></i></a>
+						
+						
+						
+						
+							<a class="rss" href="https://himbap.com/blog/?feed=rss2" title="RSS" target="_blank"><i class="fa fa-rss"></i></a>			
+					</div><!-- .social-icon-wrapper -->	
+</div><!-- #menu-movil --></div>
+						
+				<div class="image-header-wrapper">				<a href="https://himbap.com/blog/"><img src="https://himbap.com/blog/wp-content/uploads/2015/09/cropped-header1.gif" class="header-image" width="1340" height="135" alt="HIMBAP" /></a>
+				</div><!-- .logo-header-wrapper or .image-header-wrapper -->
+				
+				
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div class="nav-menu"><ul>
+<li ><a href="https://himbap.com/blog/">Home</a></li><li class="page_item page-item-2710"><a href="https://himbap.com/blog/?page_id=2710">Web API Sample Code</a></li>
+<li class="page_item page-item-2563"><a href="https://himbap.com/blog/?page_id=2563">Speakings</a></li>
+</ul></div>
+		</nav><!-- #site-navigation -->
+
+		
+	</header><!-- #masthead -->
+
+	<div id="main" class="wrapper">
+	<div id="primary" class="site-content">
+		<div id="content" role="main">
+
+			
+				
+	<article id="post-4541" class="post-4541 post type-post status-publish format-standard hentry category-crm-dvelopment-series category-dynamics-365 tag-creating-email-template-for-custom-entity tag-creating-global-template tag-writing-expression-for-dynamics-values-for-custom-entity-in-global-template">
+		
+		<header class="entry-header">
+						<h1 class="entry-title">Creating Email Template for Custom Entities in Dynamics 365 CE</h1>
+						
+			<!-- Author, date and comments -->
+            <div class='sub-title'>
+				<div class="autor-fecha">
+                	<i class="fa fa-user"></i> <a href='https://himbap.com/blog/?author=1'>Mahender</a>&nbsp;&nbsp;
+                 	<i class="fa fa-calendar-o"></i> January 29, 2024&nbsp;&nbsp;<i class="fa fa-comment-o"></i> <a href="https://himbap.com/blog/?p=4541#respond">No Comments<span class="screen-reader-text"> on Creating Email Template for Custom Entities in Dynamics 365 CE</span></a>               </div>
+                <!--<div class="popup-comments"> </div>-->
+            </div><!-- .sub-title -->
+		</header><!-- .entry-header -->
+		
+		<!-- Subtitle widget area -->
+					<div class="sub-title-widget-area">
+							</div><!-- .sub-title-widget-area -->	
+				
+				
+			<div class="entry-content">
+				<p><strong>Introduction</strong>:</p>
+<p>In the dynamic landscape of modern business operations, effective communication stands as a cornerstone for achieving success. Within Dynamics 365 CE, various communication avenues are available to engage with customers through activities. While the platform offers several out-of-the-box options for sending notifications to customers, there are occasions when we must extend the capabilities of Dynamics 365 CE to meet specific requirements.</p>
+<p>Consider a scenario where the need arises to dispatch emails using templates for a custom entity. This email correspondence must originate from a designated Queue and be directed to unresolved email addresses. In this first post, we will discuss about sending emails to custom entities utilizing templates within Dynamics 365 CE.</p>
+<p><strong>Details</strong><br />
+Email templates in Dynamics 365 CE are like pre-made layouts for emails that help businesses send messages to customers in a consistent and efficient way. With templates, companies can keep their brand style the same and make sure their messages are interesting to customers. While creating email template we have only few out of the box entities available directly, for other out of the box entities or custom entities we need to select Global option.<br />
+<a href="https://himbap.com/blog/wp-content/uploads/2024/01/email1.png"><img decoding="async" class="alignnone size-medium wp-image-4554 aligncenter" src="https://himbap.com/blog/wp-content/uploads/2024/01/email1-300x259.png" alt="email1" width="300" height="259" srcset="https://himbap.com/blog/wp-content/uploads/2024/01/email1-300x259.png 300w, https://himbap.com/blog/wp-content/uploads/2024/01/email1.png 523w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<p>While creating email template for the above available out of the box entities for example let&#8217;s say Account, we can easily use dynamic values options like below and use data field to design our template.<br />
+<a href="https://himbap.com/blog/wp-content/uploads/2024/01/email2.png"><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-4555 aligncenter" src="https://himbap.com/blog/wp-content/uploads/2024/01/email2-300x103.png" alt="email2" width="300" height="103" srcset="https://himbap.com/blog/wp-content/uploads/2024/01/email2-300x103.png 300w, https://himbap.com/blog/wp-content/uploads/2024/01/email2-1024x352.png 1024w, https://himbap.com/blog/wp-content/uploads/2024/01/email2-624x215.png 624w, https://himbap.com/blog/wp-content/uploads/2024/01/email2.png 1622w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<p>But we can&#8217;t use these options for our custom entities, while we are using Global template we can only add dynamic values from the User entities directly but this does not mean we can&#8217;t use dynamic values from our custom entity, yes we can do that 🙂 using following options.</p>
+<p>Let&#8217;s take an example we want to use dynamic value for the primary field from our custom entity, we need to write is using following syntax</p>
+<p>{!entitylogicalname:fieldlogicalname;}</p>
+<p>so for example if we have a him_event entity and we want to use dynamic value for name field (him_name) we need to write it like below</p>
+<p>{!him_event:him_name;}</p>
+<p>Similarly let&#8217;s we have field for other data type like below<br />
+<a href="https://himbap.com/blog/wp-content/uploads/2024/01/email3.png"><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-4556 aligncenter" src="https://himbap.com/blog/wp-content/uploads/2024/01/email3-300x109.png" alt="email3" width="300" height="109" srcset="https://himbap.com/blog/wp-content/uploads/2024/01/email3-300x109.png 300w, https://himbap.com/blog/wp-content/uploads/2024/01/email3-1024x372.png 1024w, https://himbap.com/blog/wp-content/uploads/2024/01/email3-624x227.png 624w, https://himbap.com/blog/wp-content/uploads/2024/01/email3.png 1261w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<p>In above screenshot we cost is currency field, event organizer is lookup field and event type is an option set. When we will save these change it should be changed like below<br />
+<a href="https://himbap.com/blog/wp-content/uploads/2024/01/email4.png"><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-4557 aligncenter" src="https://himbap.com/blog/wp-content/uploads/2024/01/email4-300x164.png" alt="email4" width="300" height="164" srcset="https://himbap.com/blog/wp-content/uploads/2024/01/email4-300x164.png 300w, https://himbap.com/blog/wp-content/uploads/2024/01/email4-624x342.png 624w, https://himbap.com/blog/wp-content/uploads/2024/01/email4.png 758w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<p>If it is not changing like above it means there is some issue in the syntax. Now let&#8217;s say we want to bring some non primary fields from the lookup entity, we don&#8217;t have any out of the box option available so in our next post we will discuss how we can bring non primary field to our email while using Global templates so stay tunned.</p>
+<p><strong>Summary</strong><br />
+Today&#8217;s we saw how we can use dynamic values for our custom entity in the global template.</p>
+<p>Hope it will help someone !!<br />
+<strong>Keep learning and Keep Sharing !!</strong></p>
+<div class="post-views content-post post-4541 entry-meta">
+				<span class="post-views-icon dashicons dashicons-chart-bar"></span> <span class="post-views-label">Post Views:</span> <span class="post-views-count">12,176</span>
+			</div>							</div><!-- .entry-content -->
+			
+		
+		<footer class="entry-meta">
+			<!-- Post end widget area -->
+							<div class="post-end-widget-area">
+									</div>
+						
+						<div class="entry-meta-term">
+			<span class="term-icon"><i class="fa fa-folder-open"></i></span> <a href="https://himbap.com/blog/?cat=21" rel="tag">CRM Dvelopment Series</a>, <a href="https://himbap.com/blog/?cat=402" rel="tag">Dynamics 365</a>			
+						&nbsp;&nbsp;&nbsp;<span class="term-icon"><i class="fa fa-tags"></i></span> <a href="https://himbap.com/blog/?tag=creating-email-template-for-custom-entity" rel="tag">Creating email template for custom entity</a>, <a href="https://himbap.com/blog/?tag=creating-global-template" rel="tag">Creating global template</a>, <a href="https://himbap.com/blog/?tag=writing-expression-for-dynamics-values-for-custom-entity-in-global-template" rel="tag">Writing expression for dynamics values for custom entity in global template</a>			
+			<div style="float:right;"></div>
+			</div>
+			
+			 
+				
+					</footer><!-- .entry-meta -->
+	</article><!-- #post -->
+
+				<nav class="nav-single">
+					<h3 class="assistive-text">Post navigation</h3>
+					<div class="wrapper-navigation-below">
+					<span class="nav-previous"><a href="https://himbap.com/blog/?p=4543" rel="prev"><span class="meta-nav">&larr;</span> Leveraging Power BI Parameters for Efficient Data Source Configuration</a></span>
+					<span class="nav-next"><a href="https://himbap.com/blog/?p=4562" rel="next">Getting Additional Fields from Lookup while using Email Template <span class="meta-nav">&rarr;</span></a></span>
+					</div><!-- .wrapper-navigation-below -->
+				</nav><!-- .nav-single -->
+
+				
+<div id="comments" class="comments-area">
+	
+		
+		<div class="wrapper-form-comments">
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/blog/?p=4541#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://himbap.com/blog/wp-comments-post.php" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message">Required fields are marked <span class="required">*</span></span></p><p class="comment-form-comment"><label for="comment">Comment <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required="required" /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required="required" /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200" autocomplete="url" /></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+Are you human? Please solve:<img class="wpcaptcha-captcha-img" style="vertical-align: text-top;" src="data:image/png;base64,R0lGODdhLQAPALMAAP///0JCQgAAAP///2x2mGeOrWVma7Vqm4atkgAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAALQAPAAAEnHBIc6S9ONtySe/chXhaaY1YOKgHYhaUicXzZax3JggYahIqTEXSIu0uu2OKJpK5BsykRanM+ChVK5A0SPK6X0l2WRlPhisxjxoGl56DUXsAhE7UePd0Dh16YQcCLRZDZWFsSG11OgJAPnEST15eeVWDJZcSgCRciYlVORowZnGLjBhKpj2dGjeApxmZM2gmFWiPJqEYqk6QFzAZEQA7" alt="Captcha" /><input class="input" type="text" size="3" name="wpcaptcha_captcha[7575]" id="wpcaptcha_captcha" value=""/><input type="hidden" name="wpcaptcha_captcha_token[7575]" id="wpcaptcha_captcha_token" value="fc8fcd165a912161128c6c03856ca6a0" /></label></p><br /><p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='4541' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p></form>	</div><!-- #respond -->
+		</div>
+
+</div><!-- #comments .comments-area -->
+			
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+			<aside id="search-2" class="widget widget_search">	<div class="wrapper-search-form">
+		<form method="get" id="searchform" action="https://himbap.com/blog/">
+			<label for="s" class="assistive-text">Search</label>
+			<input type="text" class="txt-search-n" name="s" id="s" />
+			<input type="submit" name="submit" id="btn-search-n" value="Search" />
+		</form>
+    </div></aside>
+		<aside id="recent-posts-2" class="widget widget_recent_entries">
+		<h3 class="widget-title"><span class="prefix-widget-title"><i class="fa fa-th-large"></i></span> Recent Posts</h3>
+		<ul>
+											<li>
+					<a href="https://himbap.com/blog/?p=4786">Build a Recruiter AI Agent Using Outlook, SharePoint, and Microsoft Teams</a>
+									</li>
+											<li>
+					<a href="https://himbap.com/blog/?p=4779">Selling Your Products in Multiple Units in D365 Sales</a>
+									</li>
+											<li>
+					<a href="https://himbap.com/blog/?p=4771">Fix: &#8220;Rows with localizable attributes can only be created…&#8221; in Product Creation</a>
+									</li>
+											<li>
+					<a href="https://himbap.com/blog/?p=4763">Fix &#8220;Importing Packages with Flows is Disabled&#8221;</a>
+									</li>
+											<li>
+					<a href="https://himbap.com/blog/?p=4756">Filtering Price Lists by Business Unit in D365CE</a>
+									</li>
+											<li>
+					<a href="https://himbap.com/blog/?p=4752">Closing an Opportunity Automatically from BPF</a>
+									</li>
+											<li>
+					<a href="https://himbap.com/blog/?p=4745">Avoiding Currency Mismatch Errors in Dynamics 365 CE</a>
+									</li>
+											<li>
+					<a href="https://himbap.com/blog/?p=4738">Fixing the &#8220;403 Forbidden&#8221; Error on Account Creation in Field Service App</a>
+									</li>
+											<li>
+					<a href="https://himbap.com/blog/?p=4730">Fixing -&#8220;This attribute is mapped more..&#8221;</a>
+									</li>
+											<li>
+					<a href="https://himbap.com/blog/?p=4722">Run Power Automate From Command Button</a>
+									</li>
+					</ul>
+
+		</aside><aside id="archives-2" class="widget widget_archive"><h3 class="widget-title"><span class="prefix-widget-title"><i class="fa fa-th-large"></i></span> Archives</h3>		<label class="screen-reader-text" for="archives-dropdown-2">Archives</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">Select Month</option>
+				<option value='https://himbap.com/blog/?m=202609'> September 2026 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202607'> July 2026 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202604'> April 2026 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202602'> February 2026 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202512'> December 2025 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202511'> November 2025 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202510'> October 2025 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202508'> August 2025 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202507'> July 2025 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202506'> June 2025 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202505'> May 2025 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202504'> April 2025 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202502'> February 2025 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202501'> January 2025 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202412'> December 2024 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202411'> November 2024 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202408'> August 2024 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202405'> May 2024 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202404'> April 2024 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202402'> February 2024 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202401'> January 2024 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=202312'> December 2023 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=202311'> November 2023 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202310'> October 2023 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202309'> September 2023 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202308'> August 2023 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202305'> May 2023 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202303'> March 2023 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202302'> February 2023 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202301'> January 2023 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=202212'> December 2022 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202211'> November 2022 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202210'> October 2022 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202209'> September 2022 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202208'> August 2022 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202203'> March 2022 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202202'> February 2022 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202201'> January 2022 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=202112'> December 2021 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=202109'> September 2021 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202108'> August 2021 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202106'> June 2021 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202105'> May 2021 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202104'> April 2021 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202103'> March 2021 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202102'> February 2021 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=202101'> January 2021 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202012'> December 2020 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202010'> October 2020 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=202009'> September 2020 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202008'> August 2020 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=202007'> July 2020 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=202006'> June 2020 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=202005'> May 2020 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=202004'> April 2020 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=202003'> March 2020 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=202002'> February 2020 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=202001'> January 2020 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201911'> November 2019 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201909'> September 2019 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201908'> August 2019 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201907'> July 2019 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201905'> May 2019 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201904'> April 2019 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201901'> January 2019 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201812'> December 2018 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201811'> November 2018 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=201810'> October 2018 &nbsp;(6)</option>
+	<option value='https://himbap.com/blog/?m=201809'> September 2018 &nbsp;(7)</option>
+	<option value='https://himbap.com/blog/?m=201808'> August 2018 &nbsp;(7)</option>
+	<option value='https://himbap.com/blog/?m=201807'> July 2018 &nbsp;(7)</option>
+	<option value='https://himbap.com/blog/?m=201806'> June 2018 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=201805'> May 2018 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201804'> April 2018 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201802'> February 2018 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201801'> January 2018 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201711'> November 2017 &nbsp;(5)</option>
+	<option value='https://himbap.com/blog/?m=201710'> October 2017 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=201709'> September 2017 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201708'> August 2017 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201707'> July 2017 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201706'> June 2017 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201702'> February 2017 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201701'> January 2017 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201611'> November 2016 &nbsp;(10)</option>
+	<option value='https://himbap.com/blog/?m=201610'> October 2016 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201609'> September 2016 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201608'> August 2016 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201607'> July 2016 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201606'> June 2016 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201605'> May 2016 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=201604'> April 2016 &nbsp;(5)</option>
+	<option value='https://himbap.com/blog/?m=201603'> March 2016 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201602'> February 2016 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201601'> January 2016 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201512'> December 2015 &nbsp;(10)</option>
+	<option value='https://himbap.com/blog/?m=201511'> November 2015 &nbsp;(5)</option>
+	<option value='https://himbap.com/blog/?m=201510'> October 2015 &nbsp;(8)</option>
+	<option value='https://himbap.com/blog/?m=201509'> September 2015 &nbsp;(6)</option>
+	<option value='https://himbap.com/blog/?m=201508'> August 2015 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201507'> July 2015 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201506'> June 2015 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201505'> May 2015 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201504'> April 2015 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201502'> February 2015 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201501'> January 2015 &nbsp;(5)</option>
+	<option value='https://himbap.com/blog/?m=201412'> December 2014 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201411'> November 2014 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201410'> October 2014 &nbsp;(7)</option>
+	<option value='https://himbap.com/blog/?m=201409'> September 2014 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201408'> August 2014 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=201407'> July 2014 &nbsp;(5)</option>
+	<option value='https://himbap.com/blog/?m=201405'> May 2014 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201404'> April 2014 &nbsp;(5)</option>
+	<option value='https://himbap.com/blog/?m=201403'> March 2014 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201401'> January 2014 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201312'> December 2013 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201311'> November 2013 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201310'> October 2013 &nbsp;(5)</option>
+	<option value='https://himbap.com/blog/?m=201309'> September 2013 &nbsp;(6)</option>
+	<option value='https://himbap.com/blog/?m=201308'> August 2013 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201307'> July 2013 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201306'> June 2013 &nbsp;(6)</option>
+	<option value='https://himbap.com/blog/?m=201305'> May 2013 &nbsp;(6)</option>
+	<option value='https://himbap.com/blog/?m=201304'> April 2013 &nbsp;(6)</option>
+	<option value='https://himbap.com/blog/?m=201303'> March 2013 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201302'> February 2013 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201301'> January 2013 &nbsp;(6)</option>
+	<option value='https://himbap.com/blog/?m=201212'> December 2012 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201211'> November 2012 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201210'> October 2012 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201209'> September 2012 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201208'> August 2012 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201207'> July 2012 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201206'> June 2012 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=201205'> May 2012 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201204'> April 2012 &nbsp;(5)</option>
+	<option value='https://himbap.com/blog/?m=201203'> March 2012 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201202'> February 2012 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201201'> January 2012 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201112'> December 2011 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201111'> November 2011 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201110'> October 2011 &nbsp;(5)</option>
+	<option value='https://himbap.com/blog/?m=201109'> September 2011 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201108'> August 2011 &nbsp;(7)</option>
+	<option value='https://himbap.com/blog/?m=201107'> July 2011 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=201106'> June 2011 &nbsp;(6)</option>
+	<option value='https://himbap.com/blog/?m=201105'> May 2011 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201104'> April 2011 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201103'> March 2011 &nbsp;(5)</option>
+	<option value='https://himbap.com/blog/?m=201101'> January 2011 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201012'> December 2010 &nbsp;(3)</option>
+	<option value='https://himbap.com/blog/?m=201011'> November 2010 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201010'> October 2010 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=201009'> September 2010 &nbsp;(6)</option>
+	<option value='https://himbap.com/blog/?m=201008'> August 2010 &nbsp;(10)</option>
+	<option value='https://himbap.com/blog/?m=201007'> July 2010 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=201006'> June 2010 &nbsp;(2)</option>
+	<option value='https://himbap.com/blog/?m=201005'> May 2010 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=201004'> April 2010 &nbsp;(6)</option>
+	<option value='https://himbap.com/blog/?m=201003'> March 2010 &nbsp;(6)</option>
+	<option value='https://himbap.com/blog/?m=201002'> February 2010 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=200912'> December 2009 &nbsp;(5)</option>
+	<option value='https://himbap.com/blog/?m=200911'> November 2009 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=200908'> August 2009 &nbsp;(1)</option>
+	<option value='https://himbap.com/blog/?m=200907'> July 2009 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=200906'> June 2009 &nbsp;(4)</option>
+	<option value='https://himbap.com/blog/?m=200904'> April 2009 &nbsp;(2)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</aside><aside id="tag_cloud-3" class="widget widget_tag_cloud"><h3 class="widget-title"><span class="prefix-widget-title"><i class="fa fa-th-large"></i></span> Tags</h3><div class="tagcloud"><a href="https://himbap.com/blog/?tag=adding-custom-button-using-ribbonworkfbench" class="tag-cloud-link tag-link-30 tag-link-position-1" style="font-size: 8pt;" aria-label="Adding custom button using Ribbonworkfbench (2 items)">Adding custom button using Ribbonworkfbench</a>
+<a href="https://himbap.com/blog/?tag=azure-function-trigger" class="tag-cloud-link tag-link-654 tag-link-position-2" style="font-size: 11.85pt;" aria-label="Azure function trigger (4 items)">Azure function trigger</a>
+<a href="https://himbap.com/blog/?tag=azure-integration" class="tag-cloud-link tag-link-661 tag-link-position-3" style="font-size: 11.85pt;" aria-label="Azure integration (4 items)">Azure integration</a>
+<a href="https://himbap.com/blog/?tag=bingmaps" class="tag-cloud-link tag-link-35 tag-link-position-4" style="font-size: 8pt;" aria-label="Bingmaps (2 items)">Bingmaps</a>
+<a href="https://himbap.com/blog/?tag=business-rules" class="tag-cloud-link tag-link-38 tag-link-position-5" style="font-size: 10.1pt;" aria-label="Business Rules (3 items)">Business Rules</a>
+<a href="https://himbap.com/blog/?tag=canvas-apps" class="tag-cloud-link tag-link-731 tag-link-position-6" style="font-size: 10.1pt;" aria-label="Canvas Apps (3 items)">Canvas Apps</a>
+<a href="https://himbap.com/blog/?tag=custom-workflow-in-ms-crm-2011" class="tag-cloud-link tag-link-55 tag-link-position-7" style="font-size: 8pt;" aria-label="Custom workflow in MS CRM 2011 (2 items)">Custom workflow in MS CRM 2011</a>
+<a href="https://himbap.com/blog/?tag=dynamics-365" class="tag-cloud-link tag-link-404 tag-link-position-8" style="font-size: 22pt;" aria-label="Dynamics 365 (18 items)">Dynamics 365</a>
+<a href="https://himbap.com/blog/?tag=dynamics-365-and-azure-function" class="tag-cloud-link tag-link-670 tag-link-position-9" style="font-size: 10.1pt;" aria-label="Dynamics 365 and Azure function (3 items)">Dynamics 365 and Azure function</a>
+<a href="https://himbap.com/blog/?tag=dynamics-365-business-process-flow" class="tag-cloud-link tag-link-421 tag-link-position-10" style="font-size: 8pt;" aria-label="Dynamics 365 Business Process Flow (2 items)">Dynamics 365 Business Process Flow</a>
+<a href="https://himbap.com/blog/?tag=dynamics-365-new-features" class="tag-cloud-link tag-link-416 tag-link-position-11" style="font-size: 8pt;" aria-label="Dynamics 365 New Features (2 items)">Dynamics 365 New Features</a>
+<a href="https://himbap.com/blog/?tag=dynamics-365-portal" class="tag-cloud-link tag-link-503 tag-link-position-12" style="font-size: 20.6pt;" aria-label="Dynamics 365 Portal (15 items)">Dynamics 365 Portal</a>
+<a href="https://himbap.com/blog/?tag=dynamics-365-portals" class="tag-cloud-link tag-link-641 tag-link-position-13" style="font-size: 14.475pt;" aria-label="Dynamics 365 Portals (6 items)">Dynamics 365 Portals</a>
+<a href="https://himbap.com/blog/?tag=dynamics-365-webapi" class="tag-cloud-link tag-link-526 tag-link-position-14" style="font-size: 8pt;" aria-label="Dynamics 365 WebAPI (2 items)">Dynamics 365 WebAPI</a>
+<a href="https://himbap.com/blog/?tag=dynamics-crm-2016-new-features" class="tag-cloud-link tag-link-333 tag-link-position-15" style="font-size: 8pt;" aria-label="Dynamics CRM 2016 new features (2 items)">Dynamics CRM 2016 new features</a>
+<a href="https://himbap.com/blog/?tag=dynamics-crm-2016-update-1" class="tag-cloud-link tag-link-362 tag-link-position-16" style="font-size: 8pt;" aria-label="Dynamics CRM 2016 Update 1 (2 items)">Dynamics CRM 2016 Update 1</a>
+<a href="https://himbap.com/blog/?tag=editable-grid-in-dynamics-365" class="tag-cloud-link tag-link-405 tag-link-position-17" style="font-size: 8pt;" aria-label="Editable grid in Dynamics 365 (2 items)">Editable grid in Dynamics 365</a>
+<a href="https://himbap.com/blog/?tag=email-integration-in-ms-crm-2013" class="tag-cloud-link tag-link-72 tag-link-position-18" style="font-size: 8pt;" aria-label="Email integration in MS CRM 2013 (2 items)">Email integration in MS CRM 2013</a>
+<a href="https://himbap.com/blog/?tag=free-crm-book" class="tag-cloud-link tag-link-77 tag-link-position-19" style="font-size: 8pt;" aria-label="free crm book (2 items)">free crm book</a>
+<a href="https://himbap.com/blog/?tag=html-web-resource-in-ms-crm-2011" class="tag-cloud-link tag-link-88 tag-link-position-20" style="font-size: 8pt;" aria-label="HTML Web resource in MS CRM 2011 (2 items)">HTML Web resource in MS CRM 2011</a>
+<a href="https://himbap.com/blog/?tag=ifd-for-ms-crm" class="tag-cloud-link tag-link-90 tag-link-position-21" style="font-size: 8pt;" aria-label="IFD for MS CRM (2 items)">IFD for MS CRM</a>
+<a href="https://himbap.com/blog/?tag=javascript-notification-in-dynamics-365" class="tag-cloud-link tag-link-429 tag-link-position-22" style="font-size: 8pt;" aria-label="JavaScript Notification in Dynamics 365 (2 items)">JavaScript Notification in Dynamics 365</a>
+<a href="https://himbap.com/blog/?tag=late-bound" class="tag-cloud-link tag-link-94 tag-link-position-23" style="font-size: 8pt;" aria-label="Late Bound (2 items)">Late Bound</a>
+<a href="https://himbap.com/blog/?tag=microsoft-flow" class="tag-cloud-link tag-link-600 tag-link-position-24" style="font-size: 10.1pt;" aria-label="Microsoft Flow (3 items)">Microsoft Flow</a>
+<a href="https://himbap.com/blog/?tag=modify-sitemap" class="tag-cloud-link tag-link-226 tag-link-position-25" style="font-size: 8pt;" aria-label="Modify SiteMap (2 items)">Modify SiteMap</a>
+<a href="https://himbap.com/blog/?tag=ms-crm-2011" class="tag-cloud-link tag-link-107 tag-link-position-26" style="font-size: 14.475pt;" aria-label="MS CRM 2011 (6 items)">MS CRM 2011</a>
+<a href="https://himbap.com/blog/?tag=ms-crm-2011-book" class="tag-cloud-link tag-link-108 tag-link-position-27" style="font-size: 10.1pt;" aria-label="MS CRM 2011 Book (3 items)">MS CRM 2011 Book</a>
+<a href="https://himbap.com/blog/?tag=ms-crm-2011-data-type" class="tag-cloud-link tag-link-109 tag-link-position-28" style="font-size: 8pt;" aria-label="MS CRM 2011 data type (2 items)">MS CRM 2011 data type</a>
+<a href="https://himbap.com/blog/?tag=ms-crm-2013" class="tag-cloud-link tag-link-115 tag-link-position-29" style="font-size: 15.35pt;" aria-label="MS CRM 2013 (7 items)">MS CRM 2013</a>
+<a href="https://himbap.com/blog/?tag=ms-crm-2013-beta" class="tag-cloud-link tag-link-116 tag-link-position-30" style="font-size: 8pt;" aria-label="MS CRM 2013 beta (2 items)">MS CRM 2013 beta</a>
+<a href="https://himbap.com/blog/?tag=ms-crm-2013-new-feature" class="tag-cloud-link tag-link-118 tag-link-position-31" style="font-size: 10.1pt;" aria-label="MS CRM 2013 New Feature (3 items)">MS CRM 2013 New Feature</a>
+<a href="https://himbap.com/blog/?tag=ms-crm-2013-online" class="tag-cloud-link tag-link-119 tag-link-position-32" style="font-size: 8pt;" aria-label="MS CRM 2013 Online (2 items)">MS CRM 2013 Online</a>
+<a href="https://himbap.com/blog/?tag=ms-crm-2015-new-feature" class="tag-cloud-link tag-link-127 tag-link-position-33" style="font-size: 11.85pt;" aria-label="MS CRM 2015 New feature (4 items)">MS CRM 2015 New feature</a>
+<a href="https://himbap.com/blog/?tag=polaris" class="tag-cloud-link tag-link-147 tag-link-position-34" style="font-size: 8pt;" aria-label="Polaris (2 items)">Polaris</a>
+<a href="https://himbap.com/blog/?tag=server-side-synchronization" class="tag-cloud-link tag-link-169 tag-link-position-35" style="font-size: 8pt;" aria-label="Server Side Synchronization (2 items)">Server Side Synchronization</a>
+<a href="https://himbap.com/blog/?tag=showautocomplete-in-crm-2016" class="tag-cloud-link tag-link-282 tag-link-position-36" style="font-size: 8pt;" aria-label="showAutoComplete in CRM 2016 (2 items)">showAutoComplete in CRM 2016</a>
+<a href="https://himbap.com/blog/?tag=sitemap-customization" class="tag-cloud-link tag-link-215 tag-link-position-37" style="font-size: 8pt;" aria-label="Sitemap Customization (2 items)">Sitemap Customization</a>
+<a href="https://himbap.com/blog/?tag=using-web-api-in-crm-2016" class="tag-cloud-link tag-link-301 tag-link-position-38" style="font-size: 8pt;" aria-label="using Web API in CRM 2016 (2 items)">using Web API in CRM 2016</a>
+<a href="https://himbap.com/blog/?tag=voice-of-the-customer" class="tag-cloud-link tag-link-457 tag-link-position-39" style="font-size: 11.85pt;" aria-label="Voice of the Customer (4 items)">Voice of the Customer</a>
+<a href="https://himbap.com/blog/?tag=what-is-new-in-crm-2016" class="tag-cloud-link tag-link-281 tag-link-position-40" style="font-size: 10.1pt;" aria-label="What is new in CRM 2016 (3 items)">What is new in CRM 2016</a>
+<a href="https://himbap.com/blog/?tag=what-is-new-in-dynamics-365" class="tag-cloud-link tag-link-412 tag-link-position-41" style="font-size: 14.475pt;" aria-label="What is new in Dynamics 365 (6 items)">What is new in Dynamics 365</a>
+<a href="https://himbap.com/blog/?tag=what-is-new-in-dynamics-365-update-9-0" class="tag-cloud-link tag-link-488 tag-link-position-42" style="font-size: 8pt;" aria-label="What is new in Dynamics 365 Update 9.0 (2 items)">What is new in Dynamics 365 Update 9.0</a>
+<a href="https://himbap.com/blog/?tag=working-with-business-rules" class="tag-cloud-link tag-link-466 tag-link-position-43" style="font-size: 8pt;" aria-label="Working with Business rules (2 items)">Working with Business rules</a>
+<a href="https://himbap.com/blog/?tag=working-with-virtual-entities-in-dynamics-365" class="tag-cloud-link tag-link-487 tag-link-position-44" style="font-size: 8pt;" aria-label="Working with Virtual Entities in Dynamics 365 (2 items)">Working with Virtual Entities in Dynamics 365</a>
+<a href="https://himbap.com/blog/?tag=xrm-webapi" class="tag-cloud-link tag-link-479 tag-link-position-45" style="font-size: 8pt;" aria-label="Xrm.WebApi (2 items)">Xrm.WebApi</a></div>
+</aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	<footer id="colophon" role="contentinfo">
+		<div class="site-info">
+			<div class="credits credits-left"></div>
+			<div class="credits credits-center"></div>
+			<div class="credits credits-right">
+			<a href="http://galussothemes.com/wordpress-themes/zerogravity">ZeroGravity</a> by GalussoThemes.com<br />
+			Powered by<a href="https://wordpress.org/" title="Semantic Personal Publishing Platform"> WordPress</a>
+			</div>
+		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+		<a href='#inicio_pagina' title='Back to top'><div class="ir-arriba"><i class="fa fa-chevron-up"></i></div></a>
+	    <script type="text/javascript">
+        var templateUrl = 'https://himbap.com/blog';
+        var post_id = '4541';
+    </script>
+    <script type='text/javascript' src='https://himbap.com/blog/wp-includes/js/comment-reply.min.js?ver=6.2.12' id='comment-reply-js'></script>
+<script type='text/javascript' src='https://himbap.com/blog/wp-content/themes/zerogravity/js/navigation.js?ver=20140711' id='zerogravity-navigation-js'></script>
+<script type='text/javascript' src='https://himbap.com/blog/wp-content/themes/zerogravity/js/zg-toggle-search.js?ver=1.5.1' id='zerogravity-toggle-search-js'></script>
+<script type='text/javascript' src='https://himbap.com/blog/wp-content/plugins/srs-simple-hits-counter/js/srs_simple_hits_counter_js.js?ver=6.2.12' id='srs_simple_hits_counter_js-js'></script>
+
+<!--     ===== START Dreamgrow Scroll Triggered Box 2.3 =====   -->
+
+<div class="dgd_overlay"></div>
+<div class="dgd_stb_box default" id="dgd_scrollbox-3140"><a class="dgd_stb_box_close dgd_stb_box_x" href="javascript:void(0);"> </a><h1 style="text-align: center;"><span style="color: #ffffff;">Thank you for visiting HIMBAP   !!</span></h1>
+<p>&nbsp;</p>
+<h1 style="text-align: center;"><input id="email" name="Email" type="text" value="" placeholder="Enter Your Email Address" /> <input class="stb-submit" name="Submit" type="submit" value="Subscribe" /></h1>
+<p class="stbMsgArea">
+</div>
+
+<div class="dgd_stb_box default" id="dgd_scrollbox-3140-tab">Subscribe!</div>
+
+
+<!--     ===== END OF Dreamgrow Scroll Triggered Box 2.3 =====   -->
+
+
+</body>
+</html>

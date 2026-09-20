@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Power Platform: Front-end Authentication to Power Automate with Custom API | Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Power Platform: Front-end Authentication to Power Automate with Custom API" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This post demonstrates how to securely allow front-end JavaScript to authenticate with Power Automate flows using tokens from a managed identity. By creating a custom API in Dataverse, we can generate and provide these tokens to authorized users only." />
+<meta property="og:description" content="This post demonstrates how to securely allow front-end JavaScript to authenticate with Power Automate flows using tokens from a managed identity. By creating a custom API in Dataverse, we can generate and provide these tokens to authorized users only." />
+<link rel="canonical" href="https://www.clive-oldridge.com/azure/2025/04/09/power-platform-front-end-to-power-automate.html" />
+<meta property="og:url" content="https://www.clive-oldridge.com/azure/2025/04/09/power-platform-front-end-to-power-automate.html" />
+<meta property="og:site_name" content="Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-04-09T21:30:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Power Platform: Front-end Authentication to Power Automate with Custom API" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-04-09T21:30:00+00:00","datePublished":"2025-04-09T21:30:00+00:00","description":"This post demonstrates how to securely allow front-end JavaScript to authenticate with Power Automate flows using tokens from a managed identity. By creating a custom API in Dataverse, we can generate and provide these tokens to authorized users only.","headline":"Power Platform: Front-end Authentication to Power Automate with Custom API","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.clive-oldridge.com/azure/2025/04/09/power-platform-front-end-to-power-automate.html"},"url":"https://www.clive-oldridge.com/azure/2025/04/09/power-platform-front-end-to-power-automate.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://www.clive-oldridge.com/feed.xml" title="Blog" /><script async src="https://www.googletagmanager.com/gtag/js?id=G-WYWTW7L165"></script>
+<script>
+  window['ga-disable-G-WYWTW7L165'] = window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1";
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){window.dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WYWTW7L165');
+</script>
+
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Blog</a><nav class="site-nav">
+        <!-- <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"> --><a class="page-link" href="/about/">About</a><!-- </div> -->
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Power Platform: Front-end Authentication to Power Automate with Custom API</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2025-04-09T21:30:00+00:00" itemprop="datePublished">
+        Apr 9, 2025
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>This post demonstrates how to securely allow front-end JavaScript to authenticate with Power Automate flows using tokens from a managed identity. By creating a custom API in Dataverse, we can generate and provide these tokens to authorized users only.</p>
+
+<p>This post builds on my previous blogs about managed identity with Power Platform:</p>
+
+<p><a href="/azure/2024/10/14/set-up-managed-identity-for-power-platform-plugins.html">Set up managed identity for Power Platform Plugins</a></p>
+
+<p><a href="/azure/2024/11/22/power-platform-plugin-package-managed-identity.html">Power Platform Plugin Package – Managed identity</a></p>
+
+<p><a href="/azure/2024/12/05/power-platform-plugin-to-power-automate.html">Power Platform Plugin - Power Automate with managed identity</a></p>
+
+<p>You can find example code that I’ve provided on <a href="https://github.com/Cliveo/ManagedIdentityPlugin" target="_blank">github here</a></p>
+
+<h1 id="motivation">Motivation</h1>
+
+<p>While my previous blog showed how plugins can directly call Power Automate flows synchronously, there are scenarios where you need to trigger flows from front-end JavaScript code. For example:</p>
+
+<ul>
+  <li>Model-driven app form javascript or ribbon buttons</li>
+  <li>Power Apps Component Framework (PCF) controls</li>
+</ul>
+
+<p>The challenge is securing these calls without exposing credentials in the front-end code. Our solution generates secure tokens on-demand through a privileged Dataverse Custom API.</p>
+
+<h1 id="solution-architecture">Solution Architecture</h1>
+
+<ol>
+  <li>JavaScript front-end code calls a Custom API in Dataverse</li>
+  <li>The Custom API (implemented as a plugin) uses managed identity to generate a token</li>
+  <li>The token is returned to the front-end</li>
+  <li>Front-end uses the token to directly call Power Automate HTTP flow endpoints</li>
+  <li>Access to the Custom API is restricted by Dataverse security privileges</li>
+</ol>
+
+<h1 id="step-1-create-the-custom-api-in-dataverse">Step 1: Create the Custom API in Dataverse</h1>
+
+<p>First, we need to define a Custom API that our front-end code can call to retrieve the token. I’m using an amazing tool by David Rivard in XrmToolbox called Custom API Manager.</p>
+
+<p>It’s a simple custom API <code class="language-plaintext highlighter-rouge">co_GetToken</code> that returns a single response parameter of type string called <code class="language-plaintext highlighter-rouge">token</code></p>
+
+<p>You can secure the API by setting a privilege required by the calling user in the <code class="language-plaintext highlighter-rouge">Execute Privilege Name</code> field.</p>
+
+<p><img src="/assets/managed-identity-plugin/get-token/custom-api.png" alt="Custom api" /></p>
+
+<h1 id="step-3-implement-the-custom-api-plugin">Step 3: Implement the Custom API Plugin</h1>
+
+<p>Now let’s create the plugin that will generate the token using managed identity and plumb it into our output parameter:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">namespace</span> <span class="nn">ManagedIdentityPlugin</span>
+<span class="p">{</span>
+    <span class="c1">/// &lt;summary&gt;</span>
+    <span class="c1">/// Plugin development guide: https://docs.microsoft.com/powerapps/developer/common-data-service/plug-ins</span>
+    <span class="c1">/// Best practices and guidance: https://docs.microsoft.com/powerapps/developer/common-data-service/best-practices/business-logic/</span>
+    <span class="c1">/// &lt;/summary&gt;</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">GetFlowToken</span> <span class="p">:</span> <span class="n">PluginBase</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="nf">GetFlowToken</span><span class="p">(</span><span class="kt">string</span> <span class="n">unsecureConfiguration</span><span class="p">,</span> <span class="kt">string</span> <span class="n">secureConfiguration</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">GetFlowToken</span><span class="p">))</span>
+        <span class="p">{</span>
+        <span class="p">}</span>
+
+        <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ExecuteDataversePlugin</span><span class="p">(</span><span class="n">ILocalPluginContext</span> <span class="n">localPluginContext</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">localPluginContext</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nf">ArgumentNullException</span><span class="p">(</span><span class="k">nameof</span><span class="p">(</span><span class="n">localPluginContext</span><span class="p">));</span>
+            <span class="p">}</span>
+
+            <span class="kt">var</span> <span class="n">identityService</span> <span class="p">=</span> <span class="p">(</span><span class="n">IManagedIdentityService</span><span class="p">)</span><span class="n">localPluginContext</span><span class="p">.</span><span class="n">ServiceProvider</span><span class="p">.</span><span class="nf">GetService</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">IManagedIdentityService</span><span class="p">));</span>
+            <span class="kt">var</span> <span class="n">scopes</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="p">{</span> <span class="s">"https://service.flow.microsoft.com//.default"</span> <span class="p">};</span>
+            <span class="kt">var</span> <span class="n">token</span> <span class="p">=</span> <span class="n">identityService</span><span class="p">.</span><span class="nf">AcquireToken</span><span class="p">(</span><span class="n">scopes</span><span class="p">);</span>
+
+            <span class="n">localPluginContext</span><span class="p">.</span><span class="n">PluginExecutionContext</span><span class="p">.</span><span class="n">OutputParameters</span><span class="p">[</span><span class="s">"token"</span><span class="p">]</span> <span class="p">=</span> <span class="n">token</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="step-4-front-end-javascript-to-call-custom-api-and-flow">Step 4: Front-end JavaScript to Call Custom API and Flow</h1>
+
+<p>Now let’s look at how to call this Custom API from JavaScript and use the token to authenticate to Power Automate.</p>
+
+<p>Note: I decided to not to use Xrm.WebAPI as I find it overkill for this, but typically it should be used.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function to get authentication token from our custom API</span>
+<span class="kd">const</span> <span class="nx">GetFlowToken</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/api/data/v9.0/co_GetToken</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">result</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">token</span><span class="p">))</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+<span class="c1">// Function to call Power Automate flow with the token</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">callSecureFlow</span><span class="p">(</span><span class="nx">flowUrl</span><span class="p">,</span> <span class="nx">token</span><span class="p">,</span> <span class="nx">requestData</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">flowUrl</span><span class="p">,</span> <span class="p">{</span>
+            <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+                <span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">token</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+                <span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span>
+            <span class="p">},</span>
+            <span class="na">body</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">requestData</span><span class="p">)</span>
+        <span class="p">});</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Flow returned </span><span class="p">${</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">}</span><span class="s2">: </span><span class="p">${</span><span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">()}</span><span class="s2">`</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+        <span class="k">return</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error calling secure flow:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Example usage</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">CallFlow</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// Get token first</span>
+        <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">GetFlowToken</span><span class="p">();</span>
+        
+        <span class="c1">// Then call the flow with the token</span>
+        <span class="kd">const</span> <span class="nx">flowUrl</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">callSecureFlow</span><span class="p">(</span><span class="nx">flowUrl</span><span class="p">,</span> <span class="nx">token</span><span class="p">);</span>
+        
+        <span class="c1">// Use the flow response</span>
+        <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Address validation failed:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h1 id="step-5-configure-power-automate-flow">Step 5: Configure Power Automate Flow</h1>
+
+<p>Create a Power Automate HTTP trigger flow that is secured with managed identity, similar to the previous blog post:</p>
+
+<ol>
+  <li>Create a new flow with HTTP trigger</li>
+  <li>Set authentication to “Specific users in my tenant”</li>
+  <li>Enter the Object (principal) ID of your managed identity in the “Allowed users” section</li>
+  <li>Configure your flow actions as needed</li>
+</ol>
+
+<p><img src="/assets/plugin-power-automate/2.png" alt="Power Automate" /></p>
+
+<h1 id="testing-the-solution">Testing the Solution</h1>
+
+<p>To test the complete solution:</p>
+
+<ol>
+  <li>Deploy your plugin with the Custom API</li>
+  <li>Assign the relevant privilege to appropriate security roles for testing user</li>
+  <li>Deploy your front-end code (form script, PCF control, etc.)</li>
+  <li>Run through the user scenario and check browser console logs</li>
+  <li>Verify the flow is being triggered successfully</li>
+</ol>
+
+<p>You should see successful authentication to the flow and proper responses being returned to your front-end code.</p>
+
+<p><img src="/assets/managed-identity-plugin/get-token/http.png" alt="HTTP" /></p>
+
+<h1 id="security-considerations">Security Considerations</h1>
+
+<p>This approach maintains security because:</p>
+
+<ol>
+  <li>The managed identity token is never stored in front-end code</li>
+  <li>Tokens are generated on-demand and short-lived (typically 1 hour)</li>
+  <li>Only users with appropriate privileges can call the token generation API</li>
+  <li>The Custom API can include additional logging and security checks</li>
+  <li>Power Automate flows remain secured by the managed identity</li>
+</ol>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>By combining Custom APIs, managed identity, and proper privilege controls, you can enable secure front-end integration with Power Automate while maintaining robust security. This approach leverages the strengths of both Power Platform security and managed identity authentication without exposing credentials.</p>
+
+<p>This pattern can be extended for various scenarios where real-time interaction between front-end components and backend services is needed while maintaining proper security controls.</p>
+
+<p>I hope this helps in your Power Platform integration projects. Feel free to reach out with any questions or share how you’ve applied this approach in your solutions!</p>
+
+  </div><a class="u-url" href="/azure/2025/04/09/power-platform-front-end-to-power-automate.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <!-- <div class="footer-col">
+      </div> -->
+      <div class="footer-col">
+        <p>A simple site with content about Power Platform &amp; Azure based software development.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li>
+  <a rel="me" href="https://github.com/cliveo" target="_blank" title="github">
+    <svg class="svg-icon grey">
+      <use xlink:href="/assets/minima-social-icons.svg#github"></use>
+    </svg>
+  </a>
+</li>
+<li>
+  <a rel="me" href="https://www.linkedin.com/in/cliveoldridge" target="_blank" title="linkedin">
+    <svg class="svg-icon grey">
+      <use xlink:href="/assets/minima-social-icons.svg#linkedin"></use>
+    </svg>
+  </a>
+</li>
+<li>
+  <a rel="me" href="https://www.youtube.com/@MrCliveOldridge" target="_blank" title="youtube">
+    <svg class="svg-icon grey">
+      <use xlink:href="/assets/minima-social-icons.svg#youtube"></use>
+    </svg>
+  </a>
+</li>
+</ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

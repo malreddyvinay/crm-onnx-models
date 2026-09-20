@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+
+<title>Setting Autonumber Seed in a Managed Solution in Power Platform &#8211; JonasR.app</title>
+<meta name='robots' content='max-image-preview:large' />
+<!-- Jetpack Site Verification Tags -->
+<meta name="google-site-verification" content="Pbb1iGZ9dqXXCI_P8BRXm1BlIx8sRTpDfTYgO2Yy2pA">
+<link rel='dns-prefetch' href='//secure.gravatar.com' />
+<link rel='dns-prefetch' href='//use.fontawesome.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//v0.wordpress.com' />
+<link rel='dns-prefetch' href='//jetpack.wordpress.com' />
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//public-api.wordpress.com' />
+<link rel='dns-prefetch' href='//widgets.wp.com' />
+<link rel='dns-prefetch' href='//0.gravatar.com' />
+<link rel='dns-prefetch' href='//1.gravatar.com' />
+<link rel='dns-prefetch' href='//2.gravatar.com' />
+<link rel="alternate" type="application/rss+xml" title="JonasR.app &raquo; Feed" href="https://jonasr.app/feed/" />
+<link rel="alternate" type="application/rss+xml" title="JonasR.app &raquo; Comments Feed" href="https://jonasr.app/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="JonasR.app &raquo; Setting Autonumber Seed in a Managed Solution in Power Platform Comments Feed" href="https://jonasr.app/setting-seed/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://jonasr.app/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fjonasr.app%2Fsetting-seed%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://jonasr.app/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fjonasr.app%2Fsetting-seed%2F&#038;format=xml" />
+		<!-- This site uses the Google Analytics by MonsterInsights plugin v11.3.0 - Using Analytics tracking - https://www.monsterinsights.com/ -->
+							<script src="//www.googletagmanager.com/gtag/js?id=G-07CP8M91S3"  data-cfasync="false" data-wpfc-render="false" type="text/javascript" async></script>
+			<script data-cfasync="false" data-wpfc-render="false" type="text/javascript">
+				var mi_version = '11.3.0';
+				var mi_track_user = true;
+				var mi_no_track_reason = '';
+								var MonsterInsightsDefaultLocations = {"page_location":"https:\/\/jonasr.app\/setting-seed\/"};
+								if ( typeof MonsterInsightsPrivacyGuardFilter === 'function' ) {
+					var MonsterInsightsLocations = (typeof MonsterInsightsExcludeQuery === 'object') ? MonsterInsightsPrivacyGuardFilter( MonsterInsightsExcludeQuery ) : MonsterInsightsPrivacyGuardFilter( MonsterInsightsDefaultLocations );
+				} else {
+					var MonsterInsightsLocations = (typeof MonsterInsightsExcludeQuery === 'object') ? MonsterInsightsExcludeQuery : MonsterInsightsDefaultLocations;
+				}
+
+								var disableStrs = [
+										'ga-disable-G-07CP8M91S3',
+									];
+
+				/* Function to detect opted out users */
+				function __gtagTrackerIsOptedOut() {
+					for (var index = 0; index < disableStrs.length; index++) {
+						if (document.cookie.indexOf(disableStrs[index] + '=true') > -1) {
+							return true;
+						}
+					}
+
+					return false;
+				}
+
+				/* Disable tracking if the opt-out cookie exists. */
+				if (__gtagTrackerIsOptedOut()) {
+					for (var index = 0; index < disableStrs.length; index++) {
+						window[disableStrs[index]] = true;
+					}
+				}
+
+				/* Opt-out function */
+				function __gtagTrackerOptout() {
+					for (var index = 0; index < disableStrs.length; index++) {
+						document.cookie = disableStrs[index] + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+						window[disableStrs[index]] = true;
+					}
+				}
+
+				if ('undefined' === typeof gaOptout) {
+					function gaOptout() {
+						__gtagTrackerOptout();
+					}
+				}
+								window.dataLayer = window.dataLayer || [];
+
+				window.MonsterInsightsDualTracker = {
+					helpers: {},
+					trackers: {},
+				};
+				if (mi_track_user) {
+					function __gtagDataLayer() {
+						dataLayer.push(arguments);
+					}
+
+					function __gtagTracker(type, name, parameters) {
+						if (!parameters) {
+							parameters = {};
+						}
+
+						if (parameters.send_to) {
+							__gtagDataLayer.apply(null, arguments);
+							return;
+						}
+
+						if (type === 'event') {
+														parameters.send_to = monsterinsights_frontend.v4_id;
+							var hookName = name;
+							if (typeof parameters['event_category'] !== 'undefined') {
+								hookName = parameters['event_category'] + ':' + name;
+							}
+
+							if (typeof MonsterInsightsDualTracker.trackers[hookName] !== 'undefined') {
+								MonsterInsightsDualTracker.trackers[hookName](parameters);
+							} else {
+								__gtagDataLayer('event', name, parameters);
+							}
+							
+						} else {
+							__gtagDataLayer.apply(null, arguments);
+						}
+					}
+
+					__gtagTracker('js', new Date());
+					__gtagTracker('set', {
+						'developer_id.dZGIzZG': true,
+											});
+					if ( MonsterInsightsLocations.page_location ) {
+						__gtagTracker('set', MonsterInsightsLocations);
+					}
+										__gtagTracker('config', 'G-07CP8M91S3', {"forceSSL":"true","link_attribution":"true","linker":{"domains":["fetchxmlbuilder.com"]}} );
+										window.gtag = __gtagTracker;										(function () {
+						/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+						/* ga and __gaTracker compatibility shim. */
+						var noopfn = function () {
+							return null;
+						};
+						var newtracker = function () {
+							return new Tracker();
+						};
+						var Tracker = function () {
+							return null;
+						};
+						var p = Tracker.prototype;
+						p.get = noopfn;
+						p.set = noopfn;
+						p.send = function () {
+							var args = Array.prototype.slice.call(arguments);
+							args.unshift('send');
+							__gaTracker.apply(null, args);
+						};
+						var __gaTracker = function () {
+							var len = arguments.length;
+							if (len === 0) {
+								return;
+							}
+							var f = arguments[len - 1];
+							if (typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function') {
+								if ('send' === arguments[0]) {
+									var hitConverted, hitObject = false, action;
+									if ('event' === arguments[1]) {
+										if ('undefined' !== typeof arguments[3]) {
+											hitObject = {
+												'eventAction': arguments[3],
+												'eventCategory': arguments[2],
+												'eventLabel': arguments[4],
+												'value': arguments[5] ? arguments[5] : 1,
+											}
+										}
+									}
+									if ('pageview' === arguments[1]) {
+										if ('undefined' !== typeof arguments[2]) {
+											hitObject = {
+												'eventAction': 'page_view',
+												'page_path': arguments[2],
+											}
+										}
+									}
+									if (typeof arguments[2] === 'object') {
+										hitObject = arguments[2];
+									}
+									if (typeof arguments[5] === 'object') {
+										Object.assign(hitObject, arguments[5]);
+									}
+									if ('undefined' !== typeof arguments[1].hitType) {
+										hitObject = arguments[1];
+										if ('pageview' === hitObject.hitType) {
+											hitObject.eventAction = 'page_view';
+										}
+									}
+									if (hitObject) {
+										action = 'timing' === arguments[1].hitType ? 'timing_complete' : hitObject.eventAction;
+										hitConverted = mapArgs(hitObject);
+										__gtagTracker('event', action, hitConverted);
+									}
+								}
+								return;
+							}
+
+							function mapArgs(args) {
+								var arg, hit = {};
+								var gaMap = {
+									'eventCategory': 'event_category',
+									'eventAction': 'event_action',
+									'eventLabel': 'event_label',
+									'eventValue': 'event_value',
+									'nonInteraction': 'non_interaction',
+									'timingCategory': 'event_category',
+									'timingVar': 'name',
+									'timingValue': 'value',
+									'timingLabel': 'event_label',
+									'page': 'page_path',
+									'location': 'page_location',
+									'title': 'page_title',
+									'referrer' : 'page_referrer',
+								};
+								for (arg in args) {
+																		if (!(!args.hasOwnProperty(arg) || !gaMap.hasOwnProperty(arg))) {
+										hit[gaMap[arg]] = args[arg];
+									} else {
+										hit[arg] = args[arg];
+									}
+								}
+								return hit;
+							}
+
+							try {
+								f.hitCallback();
+							} catch (ex) {
+							}
+						};
+						__gaTracker.create = newtracker;
+						__gaTracker.getByName = newtracker;
+						__gaTracker.getAll = function () {
+							return [];
+						};
+						__gaTracker.remove = noopfn;
+						__gaTracker.loaded = true;
+						window['__gaTracker'] = __gaTracker;
+					})();
+									} else {
+										console.log("");
+					(function () {
+						function __gtagTracker() {
+							return null;
+						}
+
+						window['__gtagTracker'] = __gtagTracker;
+						window['gtag'] = __gtagTracker;
+					})();
+									}
+			</script>
+							<!-- / Google Analytics by MonsterInsights -->
+		<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel='stylesheet' id='jetpack_related-posts-css' href='https://jonasr.app/wp-content/plugins/jetpack/modules/related-posts/related-posts.css?ver=20240116' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="wp-block-gallery-inline-css">
+.blocks-gallery-grid:not(.has-nested-images),.wp-block-gallery:not(.has-nested-images){display:flex;flex-wrap:wrap;list-style-type:none;margin:0;padding:0}.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-image,.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-item,.wp-block-gallery:not(.has-nested-images) .blocks-gallery-image,.wp-block-gallery:not(.has-nested-images) .blocks-gallery-item{display:flex;flex-direction:column;flex-grow:1;justify-content:center;margin:0 1em 1em 0;position:relative;width:calc(50% - 1em)}.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-image:nth-of-type(2n),.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-item:nth-of-type(2n),.wp-block-gallery:not(.has-nested-images) .blocks-gallery-image:nth-of-type(2n),.wp-block-gallery:not(.has-nested-images) .blocks-gallery-item:nth-of-type(2n){margin-right:0}.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-image figure,.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-item figure,.wp-block-gallery:not(.has-nested-images) .blocks-gallery-image figure,.wp-block-gallery:not(.has-nested-images) .blocks-gallery-item figure{align-items:flex-end;display:flex;height:100%;justify-content:flex-start;margin:0}.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-image img,.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-item img,.wp-block-gallery:not(.has-nested-images) .blocks-gallery-image img,.wp-block-gallery:not(.has-nested-images) .blocks-gallery-item img{display:block;height:auto;max-width:100%;width:auto}.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-image figcaption,.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-item figcaption,.wp-block-gallery:not(.has-nested-images) .blocks-gallery-image figcaption,.wp-block-gallery:not(.has-nested-images) .blocks-gallery-item figcaption{background:linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,.3) 70%,transparent);bottom:0;box-sizing:border-box;color:#fff;font-size:.8em;margin:0;max-height:100%;overflow:auto;padding:3em .77em .7em;position:absolute;text-align:center;width:100%;z-index:2}.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-image figcaption img,.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-item figcaption img,.wp-block-gallery:not(.has-nested-images) .blocks-gallery-image figcaption img,.wp-block-gallery:not(.has-nested-images) .blocks-gallery-item figcaption img{display:inline}.blocks-gallery-grid:not(.has-nested-images) figcaption,.wp-block-gallery:not(.has-nested-images) figcaption{flex-grow:1}.blocks-gallery-grid:not(.has-nested-images).is-cropped .blocks-gallery-image a,.blocks-gallery-grid:not(.has-nested-images).is-cropped .blocks-gallery-image img,.blocks-gallery-grid:not(.has-nested-images).is-cropped .blocks-gallery-item a,.blocks-gallery-grid:not(.has-nested-images).is-cropped .blocks-gallery-item img,.wp-block-gallery:not(.has-nested-images).is-cropped .blocks-gallery-image a,.wp-block-gallery:not(.has-nested-images).is-cropped .blocks-gallery-image img,.wp-block-gallery:not(.has-nested-images).is-cropped .blocks-gallery-item a,.wp-block-gallery:not(.has-nested-images).is-cropped .blocks-gallery-item img{flex:1;height:100%;-o-object-fit:cover;object-fit:cover;width:100%}.blocks-gallery-grid:not(.has-nested-images).columns-1 .blocks-gallery-image,.blocks-gallery-grid:not(.has-nested-images).columns-1 .blocks-gallery-item,.wp-block-gallery:not(.has-nested-images).columns-1 .blocks-gallery-image,.wp-block-gallery:not(.has-nested-images).columns-1 .blocks-gallery-item{margin-right:0;width:100%}@media (min-width:600px){.blocks-gallery-grid:not(.has-nested-images).columns-3 .blocks-gallery-image,.blocks-gallery-grid:not(.has-nested-images).columns-3 .blocks-gallery-item,.wp-block-gallery:not(.has-nested-images).columns-3 .blocks-gallery-image,.wp-block-gallery:not(.has-nested-images).columns-3 .blocks-gallery-item{margin-right:1em;width:calc(33.33333% - .66667em)}.blocks-gallery-grid:not(.has-nested-images).columns-4 .blocks-gallery-image,.blocks-gallery-grid:not(.has-nested-images).columns-4 .blocks-gallery-item,.wp-block-gallery:not(.has-nested-images).columns-4 .blocks-gallery-image,.wp-block-gallery:not(.has-nested-images).columns-4 .blocks-gallery-item{margin-right:1em;width:calc(25% - .75em)}.blocks-gallery-grid:not(.has-nested-images).columns-5 .blocks-gallery-image,.blocks-gallery-grid:not(.has-nested-images).columns-5 .blocks-gallery-item,.wp-block-gallery:not(.has-nested-images).columns-5 .blocks-gallery-image,.wp-block-gallery:not(.has-nested-images).columns-5 .blocks-gallery-item{margin-right:1em;width:calc(20% - .8em)}.blocks-gallery-grid:not(.has-nested-images).columns-6 .blocks-gallery-image,.blocks-gallery-grid:not(.has-nested-images).columns-6 .blocks-gallery-item,.wp-block-gallery:not(.has-nested-images).columns-6 .blocks-gallery-image,.wp-block-gallery:not(.has-nested-images).columns-6 .blocks-gallery-item{margin-right:1em;width:calc(16.66667% - .83333em)}.blocks-gallery-grid:not(.has-nested-images).columns-7 .blocks-gallery-image,.blocks-gallery-grid:not(.has-nested-images).columns-7 .blocks-gallery-item,.wp-block-gallery:not(.has-nested-images).columns-7 .blocks-gallery-image,.wp-block-gallery:not(.has-nested-images).columns-7 .blocks-gallery-item{margin-right:1em;width:calc(14.28571% - .85714em)}.blocks-gallery-grid:not(.has-nested-images).columns-8 .blocks-gallery-image,.blocks-gallery-grid:not(.has-nested-images).columns-8 .blocks-gallery-item,.wp-block-gallery:not(.has-nested-images).columns-8 .blocks-gallery-image,.wp-block-gallery:not(.has-nested-images).columns-8 .blocks-gallery-item{margin-right:1em;width:calc(12.5% - .875em)}.blocks-gallery-grid:not(.has-nested-images).columns-1 .blocks-gallery-image:nth-of-type(1n),.blocks-gallery-grid:not(.has-nested-images).columns-1 .blocks-gallery-item:nth-of-type(1n),.blocks-gallery-grid:not(.has-nested-images).columns-2 .blocks-gallery-image:nth-of-type(2n),.blocks-gallery-grid:not(.has-nested-images).columns-2 .blocks-gallery-item:nth-of-type(2n),.blocks-gallery-grid:not(.has-nested-images).columns-3 .blocks-gallery-image:nth-of-type(3n),.blocks-gallery-grid:not(.has-nested-images).columns-3 .blocks-gallery-item:nth-of-type(3n),.blocks-gallery-grid:not(.has-nested-images).columns-4 .blocks-gallery-image:nth-of-type(4n),.blocks-gallery-grid:not(.has-nested-images).columns-4 .blocks-gallery-item:nth-of-type(4n),.blocks-gallery-grid:not(.has-nested-images).columns-5 .blocks-gallery-image:nth-of-type(5n),.blocks-gallery-grid:not(.has-nested-images).columns-5 .blocks-gallery-item:nth-of-type(5n),.blocks-gallery-grid:not(.has-nested-images).columns-6 .blocks-gallery-image:nth-of-type(6n),.blocks-gallery-grid:not(.has-nested-images).columns-6 .blocks-gallery-item:nth-of-type(6n),.blocks-gallery-grid:not(.has-nested-images).columns-7 .blocks-gallery-image:nth-of-type(7n),.blocks-gallery-grid:not(.has-nested-images).columns-7 .blocks-gallery-item:nth-of-type(7n),.blocks-gallery-grid:not(.has-nested-images).columns-8 .blocks-gallery-image:nth-of-type(8n),.blocks-gallery-grid:not(.has-nested-images).columns-8 .blocks-gallery-item:nth-of-type(8n),.wp-block-gallery:not(.has-nested-images).columns-1 .blocks-gallery-image:nth-of-type(1n),.wp-block-gallery:not(.has-nested-images).columns-1 .blocks-gallery-item:nth-of-type(1n),.wp-block-gallery:not(.has-nested-images).columns-2 .blocks-gallery-image:nth-of-type(2n),.wp-block-gallery:not(.has-nested-images).columns-2 .blocks-gallery-item:nth-of-type(2n),.wp-block-gallery:not(.has-nested-images).columns-3 .blocks-gallery-image:nth-of-type(3n),.wp-block-gallery:not(.has-nested-images).columns-3 .blocks-gallery-item:nth-of-type(3n),.wp-block-gallery:not(.has-nested-images).columns-4 .blocks-gallery-image:nth-of-type(4n),.wp-block-gallery:not(.has-nested-images).columns-4 .blocks-gallery-item:nth-of-type(4n),.wp-block-gallery:not(.has-nested-images).columns-5 .blocks-gallery-image:nth-of-type(5n),.wp-block-gallery:not(.has-nested-images).columns-5 .blocks-gallery-item:nth-of-type(5n),.wp-block-gallery:not(.has-nested-images).columns-6 .blocks-gallery-image:nth-of-type(6n),.wp-block-gallery:not(.has-nested-images).columns-6 .blocks-gallery-item:nth-of-type(6n),.wp-block-gallery:not(.has-nested-images).columns-7 .blocks-gallery-image:nth-of-type(7n),.wp-block-gallery:not(.has-nested-images).columns-7 .blocks-gallery-item:nth-of-type(7n),.wp-block-gallery:not(.has-nested-images).columns-8 .blocks-gallery-image:nth-of-type(8n),.wp-block-gallery:not(.has-nested-images).columns-8 .blocks-gallery-item:nth-of-type(8n){margin-right:0}}.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-image:last-child,.blocks-gallery-grid:not(.has-nested-images) .blocks-gallery-item:last-child,.wp-block-gallery:not(.has-nested-images) .blocks-gallery-image:last-child,.wp-block-gallery:not(.has-nested-images) .blocks-gallery-item:last-child{margin-right:0}.blocks-gallery-grid:not(.has-nested-images).alignleft,.blocks-gallery-grid:not(.has-nested-images).alignright,.wp-block-gallery:not(.has-nested-images).alignleft,.wp-block-gallery:not(.has-nested-images).alignright{max-width:420px;width:100%}.blocks-gallery-grid:not(.has-nested-images).aligncenter .blocks-gallery-item figure,.wp-block-gallery:not(.has-nested-images).aligncenter .blocks-gallery-item figure{justify-content:center}.wp-block-gallery:not(.is-cropped) .blocks-gallery-item{align-self:flex-start}figure.wp-block-gallery.has-nested-images{align-items:normal}.wp-block-gallery.has-nested-images figure.wp-block-image:not(#individual-image){margin:0;width:calc(50% - var(--wp--style--unstable-gallery-gap, 16px)/2)}.wp-block-gallery.has-nested-images figure.wp-block-image{box-sizing:border-box;display:flex;flex-direction:column;flex-grow:1;justify-content:center;max-width:100%;position:relative}.wp-block-gallery.has-nested-images figure.wp-block-image>a,.wp-block-gallery.has-nested-images figure.wp-block-image>div{flex-direction:column;flex-grow:1;margin:0}.wp-block-gallery.has-nested-images figure.wp-block-image img{display:block;height:auto;max-width:100%!important;width:auto}.wp-block-gallery.has-nested-images figure.wp-block-image figcaption,.wp-block-gallery.has-nested-images figure.wp-block-image:has(figcaption):before{bottom:0;left:0;max-height:100%;position:absolute;right:0}.wp-block-gallery.has-nested-images figure.wp-block-image:has(figcaption):before{backdrop-filter:blur(3px);content:"";height:100%;-webkit-mask-image:linear-gradient(0deg,#000 20%,transparent);mask-image:linear-gradient(0deg,#000 20%,transparent);max-height:3em;pointer-events:none}.wp-block-gallery.has-nested-images figure.wp-block-image figcaption{box-sizing:border-box;color:#fff;font-size:13px;margin:0;overflow:auto;padding:1em;text-align:center;text-shadow:0 0 1.5px #000}.wp-block-gallery.has-nested-images figure.wp-block-image figcaption::-webkit-scrollbar{height:12px;width:12px}.wp-block-gallery.has-nested-images figure.wp-block-image figcaption::-webkit-scrollbar-track{background-color:transparent}.wp-block-gallery.has-nested-images figure.wp-block-image figcaption::-webkit-scrollbar-thumb{background-clip:padding-box;background-color:transparent;border:3px solid transparent;border-radius:8px}.wp-block-gallery.has-nested-images figure.wp-block-image figcaption:focus-within::-webkit-scrollbar-thumb,.wp-block-gallery.has-nested-images figure.wp-block-image figcaption:focus::-webkit-scrollbar-thumb,.wp-block-gallery.has-nested-images figure.wp-block-image figcaption:hover::-webkit-scrollbar-thumb{background-color:hsla(0,0%,100%,.8)}.wp-block-gallery.has-nested-images figure.wp-block-image figcaption{scrollbar-color:transparent transparent;scrollbar-gutter:stable both-edges;scrollbar-width:thin}.wp-block-gallery.has-nested-images figure.wp-block-image figcaption:focus,.wp-block-gallery.has-nested-images figure.wp-block-image figcaption:focus-within,.wp-block-gallery.has-nested-images figure.wp-block-image figcaption:hover{scrollbar-color:hsla(0,0%,100%,.8) transparent}.wp-block-gallery.has-nested-images figure.wp-block-image figcaption{will-change:transform}@media (hover:none){.wp-block-gallery.has-nested-images figure.wp-block-image figcaption{scrollbar-color:hsla(0,0%,100%,.8) transparent}}.wp-block-gallery.has-nested-images figure.wp-block-image figcaption{background:linear-gradient(0deg,rgba(0,0,0,.4),transparent)}.wp-block-gallery.has-nested-images figure.wp-block-image figcaption img{display:inline}.wp-block-gallery.has-nested-images figure.wp-block-image figcaption a{color:inherit}.wp-block-gallery.has-nested-images figure.wp-block-image.has-custom-border img{box-sizing:border-box}.wp-block-gallery.has-nested-images figure.wp-block-image.has-custom-border>a,.wp-block-gallery.has-nested-images figure.wp-block-image.has-custom-border>div,.wp-block-gallery.has-nested-images figure.wp-block-image.is-style-rounded>a,.wp-block-gallery.has-nested-images figure.wp-block-image.is-style-rounded>div{flex:1 1 auto}.wp-block-gallery.has-nested-images figure.wp-block-image.has-custom-border figcaption,.wp-block-gallery.has-nested-images figure.wp-block-image.is-style-rounded figcaption{background:none;color:inherit;flex:initial;margin:0;padding:10px 10px 9px;position:relative;text-shadow:none}.wp-block-gallery.has-nested-images figure.wp-block-image.has-custom-border:before,.wp-block-gallery.has-nested-images figure.wp-block-image.is-style-rounded:before{content:none}.wp-block-gallery.has-nested-images figcaption{flex-basis:100%;flex-grow:1;text-align:center}.wp-block-gallery.has-nested-images:not(.is-cropped) figure.wp-block-image:not(#individual-image){margin-bottom:auto;margin-top:0}.wp-block-gallery.has-nested-images.is-cropped figure.wp-block-image:not(#individual-image){align-self:inherit}.wp-block-gallery.has-nested-images.is-cropped figure.wp-block-image:not(#individual-image)>a,.wp-block-gallery.has-nested-images.is-cropped figure.wp-block-image:not(#individual-image)>div:not(.components-drop-zone){display:flex}.wp-block-gallery.has-nested-images.is-cropped figure.wp-block-image:not(#individual-image) a,.wp-block-gallery.has-nested-images.is-cropped figure.wp-block-image:not(#individual-image) img{flex:1 0 0%;height:100%;-o-object-fit:cover;object-fit:cover;width:100%}.wp-block-gallery.has-nested-images.columns-1 figure.wp-block-image:not(#individual-image){width:100%}@media (min-width:600px){.wp-block-gallery.has-nested-images.columns-3 figure.wp-block-image:not(#individual-image){width:calc(33.33333% - var(--wp--style--unstable-gallery-gap, 16px)*.66667)}.wp-block-gallery.has-nested-images.columns-4 figure.wp-block-image:not(#individual-image){width:calc(25% - var(--wp--style--unstable-gallery-gap, 16px)*.75)}.wp-block-gallery.has-nested-images.columns-5 figure.wp-block-image:not(#individual-image){width:calc(20% - var(--wp--style--unstable-gallery-gap, 16px)*.8)}.wp-block-gallery.has-nested-images.columns-6 figure.wp-block-image:not(#individual-image){width:calc(16.66667% - var(--wp--style--unstable-gallery-gap, 16px)*.83333)}.wp-block-gallery.has-nested-images.columns-7 figure.wp-block-image:not(#individual-image){width:calc(14.28571% - var(--wp--style--unstable-gallery-gap, 16px)*.85714)}.wp-block-gallery.has-nested-images.columns-8 figure.wp-block-image:not(#individual-image){width:calc(12.5% - var(--wp--style--unstable-gallery-gap, 16px)*.875)}.wp-block-gallery.has-nested-images.columns-default figure.wp-block-image:not(#individual-image){width:calc(33.33% - var(--wp--style--unstable-gallery-gap, 16px)*.66667)}.wp-block-gallery.has-nested-images.columns-default figure.wp-block-image:not(#individual-image):first-child:nth-last-child(2),.wp-block-gallery.has-nested-images.columns-default figure.wp-block-image:not(#individual-image):first-child:nth-last-child(2)~figure.wp-block-image:not(#individual-image){width:calc(50% - var(--wp--style--unstable-gallery-gap, 16px)*.5)}.wp-block-gallery.has-nested-images.columns-default figure.wp-block-image:not(#individual-image):first-child:last-child{width:100%}}.wp-block-gallery.has-nested-images.alignleft,.wp-block-gallery.has-nested-images.alignright{max-width:420px;width:100%}.wp-block-gallery.has-nested-images.aligncenter{justify-content:center}
+/*# sourceURL=https://jonasr.app/wp-includes/blocks/gallery/style.min.css */
+</style>
+<style id="wp-block-heading-inline-css">
+h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-background,h3:where(.wp-block-heading).has-background,h4:where(.wp-block-heading).has-background,h5:where(.wp-block-heading).has-background,h6:where(.wp-block-heading).has-background{padding:1.25em 2.375em}h1.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h1.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h2.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h2.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h3.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h3.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h4.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h4.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h5.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h5.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h6.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h6.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]){rotate:180deg}
+/*# sourceURL=https://jonasr.app/wp-includes/blocks/heading/style.min.css */
+</style>
+<style id="wp-block-image-inline-css">
+.wp-block-image>a,.wp-block-image>figure>a{display:inline-block}.wp-block-image img{box-sizing:border-box;height:auto;max-width:100%;vertical-align:bottom}@media not (prefers-reduced-motion){.wp-block-image img.hide{visibility:hidden}.wp-block-image img.show{animation:show-content-image .4s}}.wp-block-image[style*=border-radius] img,.wp-block-image[style*=border-radius]>a{border-radius:inherit}.wp-block-image.has-custom-border img{box-sizing:border-box}.wp-block-image.aligncenter{text-align:center}.wp-block-image.alignfull>a,.wp-block-image.alignwide>a{width:100%}.wp-block-image.alignfull img,.wp-block-image.alignwide img{height:auto;width:100%}.wp-block-image .aligncenter,.wp-block-image .alignleft,.wp-block-image .alignright,.wp-block-image.aligncenter,.wp-block-image.alignleft,.wp-block-image.alignright{display:table}.wp-block-image .aligncenter>figcaption,.wp-block-image .alignleft>figcaption,.wp-block-image .alignright>figcaption,.wp-block-image.aligncenter>figcaption,.wp-block-image.alignleft>figcaption,.wp-block-image.alignright>figcaption{caption-side:bottom;display:table-caption}.wp-block-image .alignleft{float:left;margin:.5em 1em .5em 0}.wp-block-image .alignright{float:right;margin:.5em 0 .5em 1em}.wp-block-image .aligncenter{margin-left:auto;margin-right:auto}.wp-block-image :where(figcaption){margin-bottom:1em;margin-top:.5em}.wp-block-image.is-style-circle-mask img{border-radius:9999px}@supports ((-webkit-mask-image:none) or (mask-image:none)) or (-webkit-mask-image:none){.wp-block-image.is-style-circle-mask img{border-radius:0;-webkit-mask-image:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50"/></svg>');mask-image:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50"/></svg>');mask-mode:alpha;-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:contain;mask-size:contain}}:root :where(.wp-block-image.is-style-rounded img,.wp-block-image .is-style-rounded img){border-radius:9999px}.wp-block-image figure{margin:0}.wp-lightbox-container{display:flex;flex-direction:column;position:relative}.wp-lightbox-container img{cursor:zoom-in}.wp-lightbox-container img:hover+button{opacity:1}.wp-lightbox-container button{align-items:center;backdrop-filter:blur(16px) saturate(180%);background-color:rgba(90,90,90,.25);border:none;border-radius:4px;cursor:zoom-in;display:flex;height:20px;justify-content:center;opacity:0;padding:0;position:absolute;right:16px;text-align:center;top:16px;width:20px;z-index:100}@media not (prefers-reduced-motion){.wp-lightbox-container button{transition:opacity .2s ease}}.wp-lightbox-container button:focus-visible{outline:3px auto rgba(90,90,90,.25);outline:3px auto -webkit-focus-ring-color;outline-offset:3px}.wp-lightbox-container button:hover{cursor:pointer;opacity:1}.wp-lightbox-container button:focus{opacity:1}.wp-lightbox-container button:focus,.wp-lightbox-container button:hover,.wp-lightbox-container button:not(:hover):not(:active):not(.has-background){background-color:rgba(90,90,90,.25);border:none}.wp-lightbox-overlay{box-sizing:border-box;cursor:zoom-out;height:100vh;left:0;overflow:hidden;position:fixed;top:0;visibility:hidden;width:100%;z-index:100000}.wp-lightbox-overlay .wp-lightbox-close-button{align-items:center;cursor:pointer;display:flex;font-family:inherit;gap:8px;justify-content:center;line-height:1;min-height:40px;min-width:40px;padding:0 4px;position:absolute;right:calc(env(safe-area-inset-right) + 16px);top:calc(env(safe-area-inset-top) + 16px);z-index:5000000}.wp-lightbox-overlay .wp-lightbox-close-button:focus,.wp-lightbox-overlay .wp-lightbox-close-button:hover,.wp-lightbox-overlay .wp-lightbox-close-button:not(:hover):not(:active):not(.has-background){background:none;border:none}.wp-lightbox-overlay .wp-lightbox-close-button:has(.wp-lightbox-close-text:not([hidden])) .wp-lightbox-close-icon svg{height:1em;width:1em}.wp-lightbox-overlay .wp-lightbox-close-icon svg{display:block}.wp-lightbox-overlay .wp-lightbox-navigation-button-next,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev{align-items:center;bottom:16px;cursor:pointer;display:flex;font-family:inherit;gap:4px;justify-content:center;line-height:1;min-height:40px;min-width:40px;padding:0 8px;position:absolute;z-index:2000002}.wp-lightbox-overlay .wp-lightbox-navigation-button-next[hidden],.wp-lightbox-overlay .wp-lightbox-navigation-button-prev[hidden]{display:none}@media (min-width:960px){.wp-lightbox-overlay .wp-lightbox-navigation-button-next,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev{bottom:50%;transform:translateY(-50%)}}.wp-lightbox-overlay .wp-lightbox-navigation-button-next:focus,.wp-lightbox-overlay .wp-lightbox-navigation-button-next:hover,.wp-lightbox-overlay .wp-lightbox-navigation-button-next:not(:hover):not(:active):not(.has-background),.wp-lightbox-overlay .wp-lightbox-navigation-button-prev:focus,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev:hover,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev:not(:hover):not(:active):not(.has-background){background:none;border:none;padding:0 8px}.wp-lightbox-overlay .wp-lightbox-navigation-button-next:has(.wp-lightbox-navigation-text:not([hidden])) .wp-lightbox-navigation-icon svg,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev:has(.wp-lightbox-navigation-text:not([hidden])) .wp-lightbox-navigation-icon svg{display:block;height:1.5em;width:1.5em}.wp-lightbox-overlay .wp-lightbox-navigation-button-prev{left:calc(env(safe-area-inset-left) + 16px)}.wp-lightbox-overlay .wp-lightbox-navigation-button-next{right:calc(env(safe-area-inset-right) + 16px)}.wp-lightbox-overlay .wp-lightbox-navigation-icon svg{vertical-align:middle}.wp-lightbox-overlay .lightbox-image-container{height:var(--wp--lightbox-container-height);left:50%;overflow:hidden;position:absolute;top:50%;transform:translate(-50%,-50%);transform-origin:top left;width:var(--wp--lightbox-container-width);z-index:2000001}.wp-lightbox-overlay .wp-block-image{align-items:center;box-sizing:border-box;display:flex;height:100%;justify-content:center;margin:0;position:relative;transform-origin:0 0;width:100%;z-index:3000000}.wp-lightbox-overlay .wp-block-image img{height:var(--wp--lightbox-image-height);min-height:var(--wp--lightbox-image-height);min-width:var(--wp--lightbox-image-width);width:var(--wp--lightbox-image-width)}.wp-lightbox-overlay .wp-block-image figcaption{display:none}.wp-lightbox-overlay button{background:none;border:none}.wp-lightbox-overlay .scrim{background-color:#fff;height:100%;opacity:.9;position:absolute;width:100%;z-index:2000000}.wp-lightbox-overlay.active{visibility:visible}@media not (prefers-reduced-motion){.wp-lightbox-overlay.active{animation:turn-on-visibility .25s both}.wp-lightbox-overlay.active img{animation:turn-on-visibility .35s both}.wp-lightbox-overlay.show-closing-animation:not(.active){animation:turn-off-visibility .35s both}.wp-lightbox-overlay.show-closing-animation:not(.active) img{animation:turn-off-visibility .25s both}.wp-lightbox-overlay.zoom.active{animation:none;opacity:1;visibility:visible}.wp-lightbox-overlay.zoom.active .lightbox-image-container{animation:lightbox-zoom-in .4s}.wp-lightbox-overlay.zoom.active .lightbox-image-container img{animation:none}.wp-lightbox-overlay.zoom.active .scrim{animation:turn-on-visibility .4s forwards}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active){animation:none}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active) .lightbox-image-container{animation:lightbox-zoom-out .4s}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active) .lightbox-image-container img{animation:none}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active) .scrim{animation:turn-off-visibility .4s forwards}}@keyframes show-content-image{0%{visibility:hidden}99%{visibility:hidden}to{visibility:visible}}@keyframes turn-on-visibility{0%{opacity:0}to{opacity:1}}@keyframes turn-off-visibility{0%{opacity:1;visibility:visible}99%{opacity:0;visibility:visible}to{opacity:0;visibility:hidden}}@keyframes lightbox-zoom-in{0%{transform:translate(calc((-100vw + var(--wp--lightbox-scrollbar-width))/2 + var(--wp--lightbox-initial-left-position)),calc(-50vh + var(--wp--lightbox-initial-top-position))) scale(var(--wp--lightbox-scale))}to{transform:translate(-50%,-50%) scale(1)}}@keyframes lightbox-zoom-out{0%{transform:translate(-50%,-50%) scale(1);visibility:visible}99%{visibility:visible}to{transform:translate(calc((-100vw + var(--wp--lightbox-scrollbar-width))/2 + var(--wp--lightbox-initial-left-position)),calc(-50vh + var(--wp--lightbox-initial-top-position))) scale(var(--wp--lightbox-scale));visibility:hidden}}
+/*# sourceURL=https://jonasr.app/wp-includes/blocks/image/style.min.css */
+</style>
+<style id="wp-block-paragraph-inline-css">
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:1.25em 2.375em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+/*# sourceURL=https://jonasr.app/wp-includes/blocks/paragraph/style.min.css */
+</style>
+<style id="wp-block-video-inline-css">
+.wp-block-video{box-sizing:border-box}.wp-block-video video{height:auto;vertical-align:middle;width:100%}@supports (position:sticky){.wp-block-video [poster]{-o-object-fit:cover;object-fit:cover}}.wp-block-video.aligncenter{text-align:center}.wp-block-video :where(figcaption){margin-bottom:1em;margin-top:.5em}
+/*# sourceURL=https://jonasr.app/wp-includes/blocks/video/style.min.css */
+</style>
+<link rel='stylesheet' id='wp-block-group-css' href='https://jonasr.app/wp-includes/blocks/group/style.min.css?ver=7.1.1' media='all' />
+<style id="wp-block-quote-inline-css">
+.wp-block-quote{box-sizing:border-box;overflow-wrap:break-word}.wp-block-quote.is-large:where(:not(.is-style-plain)),.wp-block-quote.is-style-large:where(:not(.is-style-plain)){margin-bottom:1em;padding:0 1em}.wp-block-quote.is-large:where(:not(.is-style-plain)) p,.wp-block-quote.is-style-large:where(:not(.is-style-plain)) p{font-size:1.5em;font-style:italic;line-height:1.6}.wp-block-quote.is-large:where(:not(.is-style-plain)) cite,.wp-block-quote.is-large:where(:not(.is-style-plain)) footer,.wp-block-quote.is-style-large:where(:not(.is-style-plain)) cite,.wp-block-quote.is-style-large:where(:not(.is-style-plain)) footer{font-size:1.125em;text-align:right}.wp-block-quote>cite{display:block}
+/*# sourceURL=https://jonasr.app/wp-includes/blocks/quote/style.min.css */
+</style>
+<style id="wp-block-separator-inline-css">
+@charset "UTF-8";.wp-block-separator{border:none;border-top:2px solid}:root :where(.wp-block-separator.is-style-dots){height:auto;line-height:1;text-align:center}:root :where(.wp-block-separator.is-style-dots):before{color:currentColor;content:"···";font-family:serif;font-size:1.5em;letter-spacing:2em;padding-left:2em}.wp-block-separator.is-style-dots{background:none!important;border:none!important}
+/*# sourceURL=https://jonasr.app/wp-includes/blocks/separator/style.min.css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+
+<style id="font-awesome-svg-styles-default-inline-css">
+.svg-inline--fa {
+  display: inline-block;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -.125em;
+}
+/*# sourceURL=font-awesome-svg-styles-default-inline-css */
+</style>
+<link rel='stylesheet' id='font-awesome-svg-styles-css' href='https://jonasr.app/wp-content/uploads/font-awesome/v6.1.1/css/svg-with-js.css' media='all' />
+<style id="font-awesome-svg-styles-inline-css">
+   .wp-block-font-awesome-icon svg::before,
+   .wp-rich-text-font-awesome-icon svg::before {content: unset;}
+/*# sourceURL=font-awesome-svg-styles-inline-css */
+</style>
+<link rel='stylesheet' id='font-awesome-official-css' href='https://use.fontawesome.com/releases/v6.1.1/css/all.css' media='all' integrity="sha384-/frq1SRXYH/bSyou/HUp/hib7RVN1TawQYja658FEOodR/FQBKVqT9Ol+Oz3Olq5" crossorigin="anonymous" />
+<link rel='stylesheet' id='font-awesome-official-v4shim-css' href='https://use.fontawesome.com/releases/v6.1.1/css/v4-shims.css' media='all' integrity="sha384-4Jczmr1SlicmtiAiHGxwWtSzLJAS97HzJsKGqfC0JtZktLrPXIux1u6GJNVRRqiN" crossorigin="anonymous" />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #fff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--dark-green: #1c7c7c;--wp--preset--color--dark-gray: #666;--wp--preset--color--medium-gray: #999;--wp--preset--color--light-gray: #eee;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-dark-green-color{color: var(--wp--preset--color--dark-green) !important;}.has-dark-gray-color{color: var(--wp--preset--color--dark-gray) !important;}.has-medium-gray-color{color: var(--wp--preset--color--medium-gray) !important;}.has-light-gray-color{color: var(--wp--preset--color--light-gray) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-dark-green-background-color{background-color: var(--wp--preset--color--dark-green) !important;}.has-dark-gray-background-color{background-color: var(--wp--preset--color--dark-gray) !important;}.has-medium-gray-background-color{background-color: var(--wp--preset--color--medium-gray) !important;}.has-light-gray-background-color{background-color: var(--wp--preset--color--light-gray) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-dark-green-border-color{border-color: var(--wp--preset--color--dark-green) !important;}.has-dark-gray-border-color{border-color: var(--wp--preset--color--dark-gray) !important;}.has-medium-gray-border-color{border-color: var(--wp--preset--color--medium-gray) !important;}.has-light-gray-border-color{border-color: var(--wp--preset--color--light-gray) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-gallery.is-layout-flex){gap: var( --wp--style--gallery-gap-default, var( --gallery-block--gutter-size, var( --wp--style--block-gap, 0.5em ) ) );}:where(.wp-block-gallery.is-layout-grid){gap: var( --wp--style--gallery-gap-default, var( --gallery-block--gutter-size, var( --wp--style--block-gap, 0.5em ) ) );}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel='stylesheet' id='page-list-style-css' href='https://jonasr.app/wp-content/plugins/page-list/css/page-list.css?ver=6.3' media='all' />
+<link rel='stylesheet' id='googlefonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu:400&subset=latin' media='all' />
+<style id="jetpack-stats-inline-css">
+img#wpstats{display:none}
+/*# sourceURL=jetpack-stats-inline-css */
+</style>
+<link rel='stylesheet' id='penscratch-2-reset-css' href='https://jonasr.app/wp-content/themes/penscratch-2-wpcom/css/reset.css?ver=1.0' media='all' />
+<link rel='stylesheet' id='penscratch-2-style-css' href='https://jonasr.app/wp-content/themes/penscratch-2-wpcom/style.css?ver=7.1.1' media='all' />
+<link rel='stylesheet' id='penscratch-2-fonts-css' href='https://fonts.googleapis.com/css?family=Roboto+Slab%3A300%2C400%2C700&#038;subset=latin%2Clatin-ext' media='all' />
+<link rel='stylesheet' id='penscratch-2-block-style-css' href='https://jonasr.app/wp-content/themes/penscratch-2-wpcom/css/blocks.css?ver=1.0' media='all' />
+<link rel='stylesheet' id='subscribe-modal-css-css' href='https://jonasr.app/wp-content/plugins/jetpack/modules/subscriptions/subscribe-modal/subscribe-modal.css?ver=16.2' media='all' />
+<style id="jetpack_likes-inline-css">
+#jp-post-flair{padding-top:.5em}#content div.sharedaddy,#main div.sharedaddy,div.sharedaddy{clear:both}div.sharedaddy h3.sd-title{display:inline-block;font-size:9pt;font-weight:700;line-height:1.2;margin:0 0 1em}div.sharedaddy h3.sd-title:before{border-top:1px solid #dcdcde;content:"";display:block;margin-bottom:1em;min-width:30px;width:100%}div.jetpack-likes-widget-wrapper{min-height:50px;position:relative;width:100%}div.jetpack-likes-widget-wrapper .sd-link-color{font-size:12px}div.jetpack-comment-likes-widget-wrapper{min-height:31px;position:relative;width:100%}div.jetpack-comment-likes-widget-wrapper iframe{margin-bottom:0}#likes-other-gravatars{background-color:#fff;border:1px solid #dcdcde;border-radius:4px;box-shadow:none;display:none;height:auto;max-height:240px;min-width:220px;overflow:auto;padding:9px 12px 10px;position:absolute;z-index:1000}#likes-other-gravatars *{line-height:normal}#likes-other-gravatars .likes-text{color:#101517;font-size:12px;font-weight:500;padding-bottom:8px}#likes-other-gravatars :is(li,ul){list-style-type:none;margin:0;padding:0;text-indent:0}#likes-other-gravatars li:before{content:""}#likes-other-gravatars ul.wpl-avatars{display:block;max-height:190px;overflow:auto}#likes-other-gravatars ul.wpl-avatars li{float:none;height:28px;margin:0 0 4px;width:196px}#likes-other-gravatars ul.wpl-avatars li a{align-items:center;border-bottom:none!important;display:flex;gap:8px;margin:0 2px 0 0;text-decoration:none}#likes-other-gravatars ul.wpl-avatars li a span{color:#2c3338;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#likes-other-gravatars ul.wpl-avatars li a img{background:none;border:none;border-radius:50%;box-sizing:border-box;margin:0!important;padding:1px!important;position:static}div.sd-box{border-top:1px solid #00000021}.jetpack-likes-widget-loaded iframe,.jetpack-likes-widget-loading .likes-widget-placeholder,.jetpack-likes-widget-unloaded .likes-widget-placeholder{display:block}.jetpack-likes-widget-loaded .likes-widget-placeholder,.jetpack-likes-widget-loading iframe,.jetpack-likes-widget-unloaded iframe{display:none}.comment-likes-widget,.entry-content .post-likes-widget,.post-likes-widget{border-width:0;margin:0}.comment-likes-widget-placeholder,.post-likes-widget-placeholder{border-width:0;margin:0;position:relative}.comment-likes-widget-placeholder{display:flex;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;height:18px;position:absolute}.comment-likes-widget-placeholder:before{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath fill='%232ea2cc' d='m12 2 2.582 6.953L22 9.257l-5.822 4.602L18.18 21 12 16.89 5.82 21l2.002-7.14L2 9.256l7.418-.304'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:16px 16px;color:#2ea2cc;content:"";display:inline-block;height:16px;padding-right:5px;position:relative;top:3px;width:16px}.post-likes-widget-placeholder .button{display:none}:is(.comment-likes-widget-placeholder,.post-likes-widget-placeholder) .loading{color:#999;font-size:12px}.comment-likes-widget-placeholder .loading{align-self:center;color:#4e4e4e;margin-top:4px;padding-left:5px}div.sharedaddy.sd-like-enabled .sd-like h3{display:none}div.sharedaddy.sd-like-enabled .sd-like .post-likes-widget{float:none;position:absolute;top:0;width:100%}.comment-likes-widget{width:100%}.cs-rating,.pd-rating{display:block!important}.sd-gplus .sd-title{display:none}@media print{.jetpack-likes-widget-wrapper{display:none}}
+/*# sourceURL=https://jonasr.app/wp-content/plugins/jetpack/_inc/build/likes/style.min.css */
+</style>
+<link rel='stylesheet' id='tablepress-default-css' href='https://jonasr.app/wp-content/plugins/tablepress/css/build/default.css?ver=3.3.4' media='all' />
+<link rel='stylesheet' id='sharedaddy-css' href='https://jonasr.app/wp-content/plugins/jetpack/modules/sharedaddy/sharing.css?ver=16.2' media='all' />
+<link rel='stylesheet' id='social-logos-css' href='https://jonasr.app/wp-content/plugins/jetpack/_inc/build/social-logos/social-logos.css?ver=16.2' media='all' />
+<script id="jetpack_related-posts-js-extra">
+var related_posts_js_options = {"post_heading":"h4"};
+//# sourceURL=jetpack_related-posts-js-extra
+</script>
+<script id="jetpack_related-posts-js" src="https://jonasr.app/wp-content/plugins/jetpack/_inc/build/related-posts/related-posts.min.js?ver=20240116"></script>
+<script async data-wp-strategy="async" id="monsterinsights-frontend-script-js" src="https://jonasr.app/wp-content/plugins/google-analytics-for-wordpress/assets/js/frontend-gtag.min.js?ver=11.3.0"></script>
+<script data-cfasync="false" data-wpfc-render="false" type="text/javascript" id='monsterinsights-frontend-script-js-extra'>/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[]","home_url":"https:\/\/jonasr.app","hash_tracking":"false","v4_id":"G-07CP8M91S3"};/* ]]> */
+</script>
+<link rel="https://api.w.org/" href="https://jonasr.app/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://jonasr.app/wp-json/wp/v2/posts/18375" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://jonasr.app/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 7.1.1" />
+<link rel="canonical" href="https://jonasr.app/setting-seed/" />
+<link rel='shortlink' href='https://wp.me/p9WeAJ-4Mn' />
+<script type="text/javascript">
+          var appInsights=window.appInsights||function(a){
+                function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c    
+            }({
+                instrumentationKey:"2a0d8bf2-deee-4712-a495-969487cd89d5"
+            });
+            
+            window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView("Setting Autonumber Seed in a Managed Solution in Power Platform", window.location.origin);
+        </script>		<script type="text/javascript">
+			(function(c, l, a, r, i, t, y) {
+				c[a] = c[a] || function() {
+					(c[a].q = c[a].q || []).push(arguments)
+				};
+				t = l.createElement(r);
+				t.async = 1;
+				t.src = "https://www.clarity.ms/tag/" + i + "?ref=wordpress";
+				y = l.getElementsByTagName(r)[0];
+				y.parentNode.insertBefore(t, y);
+			})(window, document, "clarity", "script", "3xhrf2r1g1");
+		</script>
+	<style type='text/css' media='screen'>
+	h1{ font-family:"Ubuntu", arial, sans-serif;}
+</style>
+<!-- fonts delivered by Wordpress Google Fonts, a plugin by Adrian3.com --><link rel="pingback" href="https://jonasr.app/xmlrpc.php">	<style type="text/css">
+			.site-title,
+		.site-description {
+			position: absolute;
+			clip: rect(1px, 1px, 1px, 1px);
+		}
+		</style>
+	<style id="custom-background-css">
+body.custom-background { background-color: #0042ad; }
+</style>
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Setting Autonumber Seed in a Managed Solution in Power Platform" />
+<meta property="og:url" content="https://jonasr.app/setting-seed/" />
+<meta property="og:description" content="The Power Platform intentionally excludes certain details from solutions, such as the seed for Autonumber columns. This creates challenges in maintaining consistent number sequences across environm…" />
+<meta property="article:published_time" content="2024-12-05T13:33:40+00:00" />
+<meta property="article:modified_time" content="2024-12-11T12:46:16+00:00" />
+<meta property="og:site_name" content="JonasR.app" />
+<meta property="og:image" content="https://jonasr.app/wp-content/uploads/seeds-germinate.jpg" />
+<meta property="og:image:width" content="1000" />
+<meta property="og:image:height" content="707" />
+<meta property="og:image:alt" content="" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@rappen" />
+<meta name="twitter:text:title" content="Setting Autonumber Seed in a Managed Solution in Power Platform" />
+<meta name="twitter:image" content="https://jonasr.app/wp-content/uploads/seeds-germinate.jpg?w=640" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="icon" href="https://jonasr.app/wp-content/uploads/cropped-Jonas-6-transp-flip-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://jonasr.app/wp-content/uploads/cropped-Jonas-6-transp-flip-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://jonasr.app/wp-content/uploads/cropped-Jonas-6-transp-flip-180x180.png" />
+<meta name="msapplication-TileImage" content="https://jonasr.app/wp-content/uploads/cropped-Jonas-6-transp-flip-270x270.png" />
+<style id="wp-custom-css">
+/* h2 and h3 links adjusted for anchors */
+h2 a {
+	padding-left: 10px;
+	font-size: 60%;
+	vertical-align: top;
+	opacity: 0.4;
+}
+
+h2 a:hover {
+	font-size: 80%;
+	opacity: 0.8;
+}
+
+h3 a {
+	padding-left: 10px;
+	font-size: 60%;
+	vertical-align: top;
+	opacity: 0.4;
+}
+
+h3 a:hover {
+	font-size: 80%;
+	opacity: 0.8;
+}
+/* end h2 and h3 anchors */
+
+/* Add class hide-this to block you want to hide temporarily instead of deleting */
+.hide-this { display: none; }
+
+
+/* Set Ubuntu for all styles */
+* {
+	font-family: "Ubuntu"
+}
+
+/* Set Ubuntu for all headers */
+h1,h2,h3,h4,h5,h6 {
+	font-family: "Ubuntu"
+}
+
+/* Enlarge site title */
+.site-title {
+	font-size: 48pt !important
+}
+
+
+.widget {
+	padding-bottom: 10px;
+	padding-top: 10px;
+	margin-bottom: 0px;
+}
+
+/* Fix pre-tag that was really bad */
+pre {
+/*	font-family: Courier, Monospace;*/
+	font-size: 10pt;
+	line-height: 10px;
+	border-style: dotted;
+	border-width: 1px;
+	border-color: silver;
+}
+
+/* Not really required, but it helps stretch the header logo as default width is 600
+img.custom-logo {
+	margin-left: 0px;
+	margin-right: 0px;
+	width: 937px;
+	height: 200px;
+}
+*/
+
+/* Make standard menu items 12px 
+.menu-item {
+	font-size: 12px;
+}
+
+/* Make header menu items larger and non-capitalized 
+.menu-item-home,
+.menu-item-object-page,
+.menu-item-has-children {
+	text-transform: none;
+	font-size: 18px;
+}
+
+/* Make top menu more visible *
+.main-navigation,
+.main-navigation a,
+.main-navigation a:visited {
+	color: black;
+}
+*/
+
+.td-tighter td {
+	padding: 2px 3px 4px;
+	border: none;
+}
+
+.mycode {
+/*	font-family: Courier, Monospace;*/
+	font-size: 10pt;
+	line-height: 10px;
+	border-style: dotted;
+	border-width: 1px;
+	border-color: silver;
+}
+
+.wp-block-code {
+	padding-left: 10px;
+}
+</style>
+<link rel='stylesheet' id='jetpack-swiper-library-css' href='https://jonasr.app/wp-content/plugins/jetpack/_inc/blocks/swiper.css?ver=16.2' media='all' />
+<link rel='stylesheet' id='jetpack-carousel-css' href='https://jonasr.app/wp-content/plugins/jetpack/modules/carousel/jetpack-carousel.css?ver=16.2' media='all' />
+<link rel='stylesheet' id='eu-cookie-law-style-css' href='https://jonasr.app/wp-content/plugins/jetpack/modules/widgets/eu-cookie-law/style.css?ver=16.2' media='all' />
+<style id="core-block-supports-inline-css">
+.wp-block-gallery.wp-block-gallery-2{--wp--style--unstable-gallery-gap:var( --wp--style--gallery-gap-default, var( --gallery-block--gutter-size, var( --wp--style--block-gap, 0.5em ) ) );}
+/*# sourceURL=core-block-supports-inline-css */
+</style>
+<link rel='stylesheet' id='jetpack-block-subscriptions-css' href='https://jonasr.app/wp-content/plugins/jetpack/_inc/blocks/subscriptions/view.css?minify=false&#038;ver=16.2' media='all' />
+
+</head>
+
+<body class="wp-singular post-template-default single single-post postid-18375 single-format-standard custom-background wp-custom-logo wp-embed-responsive wp-theme-penscratch-2-wpcom">
+<div id="page" class="hfeed site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+	<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+			<a href="https://jonasr.app/" class="custom-logo-link" rel="home"><img width="1599" height="153" src="https://jonasr.app/wp-content/uploads/SE-JR-Header-1.png" class="custom-logo" alt="JonasR.app" decoding="async" fetchpriority="high" srcset="https://jonasr.app/wp-content/uploads/SE-JR-Header-1.png 1599w, https://jonasr.app/wp-content/uploads/SE-JR-Header-1-768x73.png 768w, https://jonasr.app/wp-content/uploads/SE-JR-Header-1-1536x147.png 1536w" sizes="(max-width: 1599px) 100vw, 1599px" data-attachment-id="17337" data-permalink="https://jonasr.app/se-jr-header-1/" data-orig-file="https://jonasr.app/wp-content/uploads/SE-JR-Header-1.png" data-orig-size="1599,153" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="SE JR Header 1" data-image-description="" data-image-caption="" data-large-file="https://jonasr.app/wp-content/uploads/SE-JR-Header-1.png" /></a>				<p class="site-title"><a href="https://jonasr.app/" rel="home">JonasR.app</a></p>
+							<p class="site-description">JonasR likes app, and he is Jonas Rapp.</p>
+					</div>
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect x="0" fill="none" width="16" height="16"/><g><path id="menu-icon" d="M0 14h16v-2H0v2zM0 2v2h16V2H0zm0 7h16V7H0v2z"/></g></svg>
+				Menu			</button>
+			<div class="menu-main-menu-container"><ul id="menu-main-menu" class="menu"><li id="menu-item-420" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-420"><a href="https://jonasr.app">Home</a></li>
+<li id="menu-item-4623" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4623"><a href="https://fetchxmlbuilder.com/">FetchXML Builder</a>
+<ul class="sub-menu">
+	<li id="menu-item-4624" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4624"><a href="https://fetchxmlbuilder.com/">Home</a></li>
+	<li id="menu-item-4149" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4149"><a href="https://fetchxmlbuilder.com/features/">Features</a></li>
+	<li id="menu-item-8518" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8518"><a href="https://fetchxmlbuilder.com/releases/">Release Notes</a></li>
+	<li id="menu-item-4187" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4187"><a href="https://fetchxmlbuilder.com/forum">Feedback / Forum</a></li>
+	<li id="menu-item-4007" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4007"><a href="https://fetchxmlbuilder.com/supporters/">Supporters</a></li>
+	<li id="menu-item-4006" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4006"><a href="https://fetchxmlbuilder.com/history/">History</a></li>
+	<li id="menu-item-4026" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4026"><a href="https://fetchxmlbuilder.com/integrate/">Integrate</a></li>
+	<li id="menu-item-4005" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4005"><a href="https://fetchxmlbuilder.com/what/">What is FetchXML?</a></li>
+	<li id="menu-item-4004" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4004"><a href="https://fetchxmlbuilder.com/when/">When to use FetchXML?</a></li>
+</ul>
+</li>
+<li id="menu-item-425" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-425"><a href="#">XrmToolBox</a>
+<ul class="sub-menu">
+	<li id="menu-item-18337" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18337"><a href="https://jonasr.app/supporting/">Support Tools!</a></li>
+	<li id="menu-item-18444" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18444"><a href="https://jonasr.app/supporters/">Proud Supporters</a></li>
+	<li id="menu-item-882" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-882"><a href="https://jonasr.app/xtb-stats/">The Stats</a></li>
+	<li id="menu-item-842" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-842"><a href="https://jonasr.app/xtb-school">The School</a></li>
+	<li id="menu-item-7745" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7745"><a href="#">The Docs</a>
+	<ul class="sub-menu">
+		<li id="menu-item-421" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-421"><a href="https://fetchxmlbuilder.com/">FetchXML Builder</a></li>
+		<li id="menu-item-15125" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15125"><a href="https://jonasr.app/ptv/">Plugin Trace Viewer</a></li>
+		<li id="menu-item-7746" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7746"><a href="https://jonasr.app/bdu/">Bulk Data Updater</a></li>
+		<li id="menu-item-15124" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15124"><a href="https://jonasr.app/anm/">Auto Number Manager</a></li>
+		<li id="menu-item-13466" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13466"><a href="https://jonasr.app/shuffle/">Shuffle Tools</a></li>
+		<li id="menu-item-7749" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7749"><a href="https://jonasr.app/xrm-tokens-runner/">XRM Tokens Runner</a></li>
+		<li id="menu-item-7752" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-7752"><a href="https://jonasr.app/epm/">Portal Entity Permission Manager</a></li>
+		<li id="menu-item-2100" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2100"><a href="https://jonasr.app/pac">Power Apps Checker</a></li>
+		<li id="menu-item-6193" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6193"><a href="https://jonasr.app/uml/">UML Diagram Generator</a></li>
+		<li id="menu-item-18342" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18342"><a href="https://jonasr.app/lcg/">Latebound Constants Generator</a></li>
+		<li id="menu-item-7758" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-7758"><a href="https://jonasr.app/rra-intro/">Related Records Analyzer</a></li>
+		<li id="menu-item-7759" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-7759"><a href="https://jonasr.app/xit/">XrmToolBox Integration Tester</a></li>
+	</ul>
+</li>
+	<li id="menu-item-427" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-427"><a href="#">The Code</a>
+	<ul class="sub-menu">
+		<li id="menu-item-428" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-428"><a href="https://github.com/rappen/FetchXMLBuilder">FXB</a></li>
+		<li id="menu-item-430" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-430"><a href="https://github.com/rappen/PluginTraceViewer">PTV</a></li>
+		<li id="menu-item-431" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-431"><a href="https://github.com/rappen/Xrm.Shuffle">Shuffle</a></li>
+		<li id="menu-item-429" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-429"><a href="https://github.com/rappen/BulkDataUpdater">BDU</a></li>
+		<li id="menu-item-2252" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2252"><a href="https://github.com/rappen/PowerAppsChecker">PAC</a></li>
+		<li id="menu-item-432" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-432"><a href="https://github.com/rappen/AutoNumManager">ANM</a></li>
+		<li id="menu-item-433" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-433"><a href="https://github.com/rappen/LateboundConstantsGenerator">LCG &#038; UDG</a></li>
+		<li id="menu-item-6516" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6516"><a href="https://github.com/rappen/CustomActionTester">CAT &#038; CAPIT</a></li>
+		<li id="menu-item-526" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-526"><a href="https://github.com/rappen/RelatedRecordsAnalyzer">RRA</a></li>
+		<li id="menu-item-6517" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6517"><a href="https://github.com/rappen/Rappen.XTB.IntegrationTester">XIT</a></li>
+		<li id="menu-item-7751" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7751"><a href="https://github.com/rappen/EntityPermissionManager">EPM</a></li>
+		<li id="menu-item-7750" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7750"><a href="https://github.com/rappen/XRMTokensRun">XRMTR</a></li>
+	</ul>
+</li>
+	<li id="menu-item-7867" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7867"><a href="https://www.xrmtoolbox.com">XrmToolBox.com</a></li>
+</ul>
+</li>
+<li id="menu-item-7753" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7753"><a href="https://github.com/rappen/">My Code</a>
+<ul class="sub-menu">
+	<li id="menu-item-8296" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8296"><a href="https://github.com/rappen/Rappen.XTB.Helper/wiki">Rappen.XTB.Helper Wiki</a></li>
+	<li id="menu-item-7755" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7755"><a href="https://github.com/rappen/Rappen.XTB.Helper#rappenxtbhelper">Rappen.XTB.Helper</a></li>
+	<li id="menu-item-7765" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7765"><a href="https://github.com/rappen/Rappen.XTB.Helper.Tester">Rappen.XTB.Helper.Tester</a></li>
+	<li id="menu-item-7432" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7432"><a href="https://jonasr.app/xrm-tokens/">XRM Tokens Docs</a></li>
+	<li id="menu-item-7754" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7754"><a href="https://github.com/rappen/Rappen.XTB.Helper/tree/main/Rappen.XRM.Tokens">XRM Tokens Code Info</a></li>
+	<li id="menu-item-7757" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-7757"><a href="https://jonasr.app/canary/">Canary Docs</a></li>
+	<li id="menu-item-7756" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7756"><a href="https://jonasr.app/canary-code">Canary Code for plugin tracers</a></li>
+</ul>
+</li>
+<li id="menu-item-961" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-961"><a href="#">Jonas</a>
+<ul class="sub-menu">
+	<li id="menu-item-678" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-678"><a href="https://jonasr.app/mvp/">MVP</a></li>
+	<li id="menu-item-946" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-946"><a href="https://jonasr.app/speaking/">Speaking</a></li>
+	<li id="menu-item-2000" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2000"><a href="https://jonasr.app/contact/">Contact</a></li>
+	<li id="menu-item-7437" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7437"><a href="https://stroke.jonasr.app">I got a stroke</a></li>
+	<li id="menu-item-373" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-373"><a href="https://jonasr.app/me/">About</a></li>
+</ul>
+</li>
+</ul></div>		</nav><!-- #site-navigation -->
+	</header><!-- #masthead -->
+
+	<div id="content" class="site-content">
+		
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-18375" class="post-18375 post type-post status-publish format-standard hentry category-customization category-maker-portal category-no-code category-open-source category-power-platform category-sdk category-solutions category-tools tag-anm tag-power-platform tag-xrmtoolbox">
+	<header class="entry-header">
+		<h1 class="entry-title">Setting Autonumber Seed in a Managed Solution in Power Platform</h1>		
+		<div class="entry-meta">
+			<span class="posted-on"><a href="https://jonasr.app/setting-seed/" rel="bookmark"><time class="entry-date published" datetime="2024-12-05T14:33:40+01:00">2024-12-05</time><time class="updated" datetime="2024-12-11T13:46:16+01:00">2024-12-11</time></a></span><span class="byline"><span class="author vcard"><span class="sep"> ~ </span><a class="url fn n" href="https://jonasr.app/author/jonasrapp/">Jonas Rapp</a></span></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<h4 class="wp-block-heading">Some details in the <strong>Power Platform</strong> are intentionally&nbsp;<span style="margin: 0px; padding: 0px;"><em><strong>excluded&nbsp;</strong></em>from the solutions. Still, most</span> of us <span style="margin: 0px; padding: 0px;">developers think they&nbsp;<em><strong>are</strong></em> part of them—</span>unless we read enough about the docs (which is boooring).<br>One example is <strong>Seed </strong>for columns that have the type <strong>Autonumber</strong>.</h4>
+
+
+
+<p class="wp-block-paragraph">As far as I know, the <strong>seed </strong>is not stored in our tables or columns; it is only known in the deep down of the mystery <strong>SQL Server</strong>. So, how can it even be settable in the <strong>Maker Portal</strong>?</p>
+
+
+
+<span id="more-18375"></span>
+
+
+<div class="wp-block-image">
+<figure class="alignleft size-full is-resized"><img decoding="async" width="1000" height="1000" data-attachment-id="18388" data-permalink="https://jonasr.app/setting-seed/seed/" data-orig-file="https://jonasr.app/wp-content/uploads/seed.webp" data-orig-size="1000,1000" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="seed" data-image-description="" data-image-caption="" data-large-file="https://jonasr.app/wp-content/uploads/seed.webp" src="https://jonasr.app/wp-content/uploads/seed.webp" alt="" class="wp-image-18388" style="width:169px;height:auto" srcset="https://jonasr.app/wp-content/uploads/seed.webp 1000w, https://jonasr.app/wp-content/uploads/seed-768x768.webp 768w" sizes="(max-width: 1000px) 100vw, 1000px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">We have <span style="margin: 0px; padding: 0px;">to be able to set &#8220;<em>what should be the next number value</em>&#8221; in some way by those auto number columns</span>.</p>
+
+
+
+<p class="wp-block-paragraph">Of course, it is very nice that we <strong><em>can </em></strong>set the seed. However, the seed is not included in the solution, so we can&#8217;t &#8220;<em>build and deploy</em>&#8221; and make sure we have the same number sequence in the TEST and PROD environments. How do we handle this when we want to be our good guys and gals and stay with a <strong><a href="https://www.crmkonsulterna.se/tjanster/application-lifecycle-management-for-the-power-platform-2-day-training/" target="_blank" rel="noreferrer noopener">Healthy ALM</a></strong> structure?</p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p class="wp-block-paragraph">We have to fake it a bit&#8230;</p>
+</blockquote>
+
+
+<div class="wp-block-image">
+<figure class="alignright size-full is-resized"><a href="https://jonasr.app/wp-content/uploads/image-207.png"><img decoding="async" width="357" height="269" data-attachment-id="18384" data-permalink="https://jonasr.app/setting-seed/image-207/" data-orig-file="https://jonasr.app/wp-content/uploads/image-207.png" data-orig-size="357,269" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="image" data-image-description="" data-image-caption="" data-large-file="https://jonasr.app/wp-content/uploads/image-207.png" src="https://jonasr.app/wp-content/uploads/image-207.png" alt="" class="wp-image-18384" style="width:275px;height:auto"/></a></figure>
+</div>
+
+
+<p class="wp-block-paragraph">When we live in a <strong>Healthy ALM</strong> world, having <strong>managed solutions</strong> <em>(read: <a href="https://jonasr.app/case-closed/" data-type="link" data-id="https://jonasr.app/case-closed/" target="_blank" rel="noreferrer noopener"><strong>Case Closed</strong></a> from 2018, unfortunately still relevant)</em> everywhere, except in the <strong>DEV </strong>environment, and we need to update the seed, how do we change it in the solutions since, well, you know, it&#8217;s <strong>managed</strong>?</p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p class="wp-block-paragraph">A seed is just a seed, then the seed grows up&#8230;</p>
+</blockquote>
+
+
+
+<p class="wp-block-paragraph">Another issue is that we can only see the original seed, which by default is <strong>1000</strong>. If we have created <strong>50 </strong>records, the next record will get number <strong>1051</strong>. But we can&#8217;t see it here since a &#8220;seed&#8221; only shows how it will start, and it is never possible to find what the next value will be.</p>
+
+
+
+<h2 class="wp-block-heading">Changing the Seed</h2>
+
+
+<div class="wp-block-image">
+<figure class="alignleft size-full is-resized"><a href="https://jonasr.app/wp-content/uploads/image-202.png"><img decoding="async" width="351" height="274" data-attachment-id="18377" data-permalink="https://jonasr.app/setting-seed/image-202/" data-orig-file="https://jonasr.app/wp-content/uploads/image-202.png" data-orig-size="351,274" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="image" data-image-description="" data-image-caption="" data-large-file="https://jonasr.app/wp-content/uploads/image-202.png" src="https://jonasr.app/wp-content/uploads/image-202.png" alt="" class="wp-image-18377" style="width:314px;height:auto"/></a></figure>
+</div>
+
+
+<p class="wp-block-paragraph"><span style="margin: 0px; padding: 0px;">Instead, we go to the&nbsp;<strong>Default solution</strong>&nbsp;and find the table (of millions&#8230;), and we find the column </span>where we have the <code>Autonumber </code>format.</p>
+
+
+
+<p class="wp-block-paragraph"><em>I curse myself when I do that, but I do it anyway&#8230;</em></p>
+
+
+
+<p class="wp-block-paragraph"><strong>Now, we can set the seed!</strong></p>
+
+
+<div class="wp-block-image">
+<figure class="alignright size-full is-resized"><a href="https://jonasr.app/wp-content/uploads/image-203.png"><img loading="lazy" decoding="async" width="656" height="314" data-attachment-id="18378" data-permalink="https://jonasr.app/setting-seed/image-203/" data-orig-file="https://jonasr.app/wp-content/uploads/image-203.png" data-orig-size="656,314" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="image" data-image-description="" data-image-caption="" data-large-file="https://jonasr.app/wp-content/uploads/image-203.png" src="https://jonasr.app/wp-content/uploads/image-203.png" alt="" class="wp-image-18378" style="width:405px;height:auto"/></a><figcaption class="wp-element-caption">Finding layers on this column.</figcaption></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Doing that makes the platform set a layer above the managed solution, an unmanaged layer&#8230; ???? That works against the <strong><em>Healthy ALM</em></strong> and my gut feeling and my brain hurts, and it&#8217;s hard to sleep tonight.</p>
+
+
+
+<p class="wp-block-paragraph">But nothing was <strong><em>really </em></strong>changed! We only set the seed, but when we save the whole column, it can&#8217;t differ from what was actually changed, so we get the new layer.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full is-resized"><a href="https://jonasr.app/wp-content/uploads/image-209.png"><img loading="lazy" decoding="async" width="1165" height="220" data-attachment-id="18386" data-permalink="https://jonasr.app/setting-seed/image-209/" data-orig-file="https://jonasr.app/wp-content/uploads/image-209.png" data-orig-size="1165,220" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="image" data-image-description="" data-image-caption="" data-large-file="https://jonasr.app/wp-content/uploads/image-209.png" src="https://jonasr.app/wp-content/uploads/image-209.png" alt="" class="wp-image-18386" style="width:798px;height:auto" srcset="https://jonasr.app/wp-content/uploads/image-209.png 1165w, https://jonasr.app/wp-content/uploads/image-209-768x145.png 768w" sizes="auto, (max-width: 1165px) 100vw, 1165px" /></a><figcaption class="wp-element-caption"><span style="margin: 0px; padding: 0px; text-align: left;">The Formula</span> Definition was changed to the same as before, and of course, the Modified On will be updated.&nbsp;<strong><em>QED: Nothing changed.</em></strong></figcaption></figure>
+</div>
+
+
+<p class="wp-block-paragraph">When we now know that this &#8220;unmanaged change&#8221; is not a change. Therefore, we can now undo the unmanaged layer.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><a href="https://jonasr.app/wp-content/uploads/image-205.png"><img loading="lazy" decoding="async" width="786" height="322" data-attachment-id="18380" data-permalink="https://jonasr.app/setting-seed/image-205/" data-orig-file="https://jonasr.app/wp-content/uploads/image-205.png" data-orig-size="786,322" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="image" data-image-description="" data-image-caption="" data-large-file="https://jonasr.app/wp-content/uploads/image-205.png" src="https://jonasr.app/wp-content/uploads/image-205.png" alt="" class="wp-image-18380" srcset="https://jonasr.app/wp-content/uploads/image-205.png 786w, https://jonasr.app/wp-content/uploads/image-205-768x315.png 768w" sizes="auto, (max-width: 786px) 100vw, 786px" /></a></figure>
+</div>
+
+
+<p class="wp-block-paragraph">It works, but it&#8217;s a bit of an unnecessary detour.</p>
+
+
+
+<h2 class="wp-block-heading">There&#8217;s a better way&#8230;</h2>
+
+
+
+<p class="wp-block-paragraph">Setting the Seed is technically not done by updating the column. Instead, there is a specific request in the API called <code><strong><a href="https://learn.microsoft.com/dotnet/api/microsoft.crm.sdk.messages.setautonumberseedrequest?WT.mc_id=DX-MVP-5002475" target="_blank" rel="noreferrer noopener">SetAutoNumberSeedRequest</a></strong></code> that does <strong><em>not </em></strong>change or touch the column.</p>
+
+
+
+<p class="wp-block-paragraph">You can create your code to execute that request. Or just use what is already available.</p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p class="wp-block-paragraph">I like code, but I assume most people don&#8217;t.<br>That&#8217;s why I create tools. No-code tools.</p>
+</blockquote>
+
+
+
+<p class="wp-block-paragraph">This feature is used in the <strong><a href="https://jonasr.app/anm/" data-type="page" data-id="15121" target="_blank" rel="noreferrer noopener">Auto Number Manager</a></strong> tool in <strong><a href="https://www.xrmtoolbox.com" target="_blank" rel="noreferrer noopener">XrmToolBox</a></strong>.</p>
+
+
+
+<figure class="wp-block-video aligncenter"><video height="478" style="aspect-ratio: 810 / 478;" width="810" autoplay controls loop src="https://jonasr.app/wp-content/uploads/ANM-Setting-Only-Seed.mp4"></video></figure>
+
+
+
+<p class="wp-block-paragraph">As you can see in this short video, you select the table (entity) and the column (attribute). Then, we can let it guess what its current value is, this is not affecting anything, but might be good to see how far from the original seed we are.</p>
+
+
+
+<p class="wp-block-paragraph">Then we enter the value for the new seed, sort of to restart from that initial value.</p>
+
+
+
+<p class="wp-block-paragraph">When we click the <strong>Update </strong>button, it checks to see if anything has been changed in the column; if not, it won&#8217;t be saved. This means that there will not be an unmanaged layer (unless you change some parts of the auto number column).</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="1000" height="707" data-attachment-id="18383" data-permalink="https://jonasr.app/setting-seed/seeds-germinate/" data-orig-file="https://jonasr.app/wp-content/uploads/seeds-germinate.jpg" data-orig-size="1000,707" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="seeds-germinate" data-image-description="" data-image-caption="" data-large-file="https://jonasr.app/wp-content/uploads/seeds-germinate.jpg" src="https://jonasr.app/wp-content/uploads/seeds-germinate.jpg" alt="" class="wp-image-18383" srcset="https://jonasr.app/wp-content/uploads/seeds-germinate.jpg 1000w, https://jonasr.app/wp-content/uploads/seeds-germinate-768x543.jpg 768w" sizes="auto, (max-width: 1000px) 100vw, 1000px" /></figure>
+
+
+
+<p class="has-medium-font-size wp-block-paragraph">After triple-checking the layers, I realized that using this feature in <strong>Auto Number Manager</strong> will still keep the column in a <strong>managed layer</strong>, and now your <strong><em>Healthy ALM</em></strong> will secure your system.</p>
+
+
+
+<p class="wp-block-paragraph">This tool was created in 2017 after attending <strong>eXtreme365 </strong>in Lisbon, Portugal. <strong>MattB </strong>at <strong>Microsoft </strong>told us that this new request was added to the SDK, but nothing has been added to the UI yet. A few years ago, the <strong>Autonumber </strong>was added to the <strong>Maker Portal</strong>, making my tool obsolete. I notice from my stats that the tool is still used ~50 times a day anyway. On the first of January, it is used hundreds of times every year.</p>
+
+
+
+<p class="wp-block-paragraph">After my customer made this request, I realized that my tool is still needed—in this case, to <strong>set the seed</strong>.</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-official sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-url="https://jonasr.app/setting-seed/" data-text="Setting Autonumber Seed in a Managed Solution in Power Platform" data-via="rappen" >Tweet</a></li><li class="share-linkedin"><div class="linkedin_button"><script type="in/share" data-url="https://jonasr.app/setting-seed/" data-counter="right"></script></div></li><li class="share-facebook"><div class="fb-share-button" data-href="https://jonasr.app/setting-seed/" data-layout="button_count"></div></li><li class="share-jetpack-whatsapp"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-whatsapp-18375"
+				class="share-jetpack-whatsapp sd-button"
+				href="https://jonasr.app/setting-seed/?share=jetpack-whatsapp"
+				target="_blank"
+				aria-labelledby="sharing-whatsapp-18375"
+				>
+				<span id="sharing-whatsapp-18375" hidden>Share on WhatsApp (Opens in new window)</span>
+				<span>WhatsApp</span>
+			</a></li><li class="share-email"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-email-18375"
+				class="share-email sd-button"
+				href="mailto:?subject=%5BShared%20Post%5D%20Setting%20Autonumber%20Seed%20in%20a%20Managed%20Solution%20in%20Power%20Platform&#038;body=https%3A%2F%2Fjonasr.app%2Fsetting-seed%2F&#038;share=email"
+				target="_blank"
+				aria-labelledby="sharing-email-18375"
+				data-email-share-error-title="Do you have email set up?" data-email-share-error-text="If you&#039;re having problems sharing via email, you might not have email set up for your browser. You may need to create a new email yourself." data-email-share-nonce="dc078e3c60" data-email-share-track-url="https://jonasr.app/setting-seed/?share=email">
+				<span id="sharing-email-18375" hidden>Email a link to a friend (Opens in new window)</span>
+				<span>Email</span>
+			</a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-146866141-18375-6aaf84478d8f0' data-src='https://widgets.wp.com/likes/?ver=16.2#blog_id=146866141&amp;post_id=18375&amp;origin=jonasr.app&amp;obj_id=146866141-18375-6aaf84478d8f0' data-name='like-post-frame-146866141-18375-6aaf84478d8f0' data-title='Like or Reblog'><h3 class="sd-title">Like this:</h3><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class="loading"><svg class="jetpack-spinner" width="18" height="18" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg><span class="screen-reader-text">Loading…</span></span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div>			</div><!-- .entry-content -->
+
+	<footer class="entry-footer">
+				<span class="cat-links">
+			Posted in <a href="https://jonasr.app/category/customization/" rel="category tag">Customization</a>, <a href="https://jonasr.app/category/maker-portal/" rel="category tag">Maker Portal</a>, <a href="https://jonasr.app/category/no-code/" rel="category tag">No-Code</a>, <a href="https://jonasr.app/category/open-source/" rel="category tag">Open Source</a>, <a href="https://jonasr.app/category/power-platform/" rel="category tag">Power Platform</a>, <a href="https://jonasr.app/category/sdk/" rel="category tag">SDK</a>, <a href="https://jonasr.app/category/solutions/" rel="category tag">Solutions</a>, <a href="https://jonasr.app/category/tools/" rel="category tag">Tools</a>		</span>
+							<span class="tags-links">
+				<a href="https://jonasr.app/tag/anm/" rel="tag">ANM</a><a href="https://jonasr.app/tag/power-platform/" rel="tag">Power Platform</a><a href="https://jonasr.app/tag/xrmtoolbox/" rel="tag">XrmToolBox</a>			</span>
+			</footer><!-- .entry-footer -->
+
+			<div class="entry-author author-avatar-show">
+						<div class="author-avatar">
+				<img alt='' src='https://secure.gravatar.com/avatar/09e6e70adaa9d00e0a8cc259a52797be9296a0cb8ed33ad5e7021c473617cf75?s=60&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/09e6e70adaa9d00e0a8cc259a52797be9296a0cb8ed33ad5e7021c473617cf75?s=120&#038;d=mm&#038;r=g 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>			</div><!-- .author-avatar -->
+			
+			<div class="author-heading">
+				<h2 class="author-title">
+					Published by <span class="author-name">Jonas Rapp</span>				</h2>
+			</div><!-- .author-heading -->
+
+			<p class="author-bio">
+								<a class="author-link" href="https://jonasr.app/author/jonasrapp/" rel="author">
+					View all posts by Jonas Rapp				</a>
+			</p><!-- .author-bio -->
+		</div><!-- .entry-auhtor -->
+		</article><!-- #post-## -->
+
+			
+	<nav class="navigation post-navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://jonasr.app/three-new-features-for-udg/" rel="prev"><span class="meta-nav">&lsaquo; Previous</span>Three Big improvements in UML Diagram Generator for Microsoft Dataverse</a></div><div class="nav-next"><a href="https://jonasr.app/ai-code-helpers/" rel="next"><span class="meta-nav">Next &rsaquo;</span>Code library helps AI in XrmToolBox</a></div></div>
+	</nav>
+			
+<div id="comments" class="comments-area">
+
+	
+	
+	
+	
+		<div id="respond" class="comment-respond">
+			<h3 id="reply-title" class="comment-reply-title">Leave a Reply<small><a rel="nofollow" id="cancel-comment-reply-link" href="/setting-seed/#respond" style="display:none;">Cancel reply</a></small></h3>			<form id="commentform" class="comment-form">
+				<iframe
+					title="Comment Form"
+					src="https://jetpack.wordpress.com/jetpack-comment/?blogid=146866141&#038;postid=18375&#038;comment_registration=0&#038;require_name_email=1&#038;stc_enabled=1&#038;stb_enabled=1&#038;show_avatars=1&#038;avatar_default=mystery&#038;greeting=Leave+a+Reply&#038;jetpack_comments_nonce=acc566057f&#038;greeting_reply=Leave+a+Reply+to+%25s&#038;color_scheme=light&#038;lang=en_US&#038;jetpack_version=16.2&#038;iframe_unique_id=1&#038;show_cookie_consent=10&#038;has_cookie_consent=0&#038;is_current_user_subscribed=0&#038;token_key=%3Bnormal%3B&#038;sig=6deaa020c801331d78a2858920a9c1c2636d8380#parent=https%3A%2F%2Fjonasr.app%2Fsetting-seed%2F"
+											name="jetpack_remote_comment"
+						style="width:100%; height: 430px; border:0;"
+										class="jetpack_remote_comment"
+					id="jetpack_remote_comment"
+					sandbox="allow-same-origin allow-top-navigation allow-scripts allow-forms allow-popups"
+				>
+									</iframe>
+									<!--[if !IE]><!-->
+					<script>
+						document.addEventListener('DOMContentLoaded', function () {
+							var commentForms = document.getElementsByClassName('jetpack_remote_comment');
+							for (var i = 0; i < commentForms.length; i++) {
+								commentForms[i].allowTransparency = false;
+								commentForms[i].scrolling = 'no';
+							}
+						});
+					</script>
+					<!--<![endif]-->
+							</form>
+		</div>
+
+		
+		<input type="hidden" name="comment_parent" id="comment_parent" value="" />
+
+		<p class="akismet_comment_form_privacy_notice">This site uses Akismet to reduce spam. <a href="https://akismet.com/privacy/" target="_blank" rel="nofollow noopener">Learn how your comment data is processed.</a></p>
+</div><!-- #comments -->
+
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+	<div id="secondary" class="widget-area" role="complementary">
+		<aside id="media_image-3" class="widget widget_media_image"><a href="/me"><img width="300" height="300" src="https://jonasr.app/wp-content/uploads/2019/12/Jonas-6-frilagd-sqr-flipped-300x300.png" class="image wp-image-2253  attachment-medium size-medium" alt="" style="max-width: 100%; height: auto;" decoding="async" loading="lazy" srcset="https://jonasr.app/wp-content/uploads/2019/12/Jonas-6-frilagd-sqr-flipped-300x300.png 300w, https://jonasr.app/wp-content/uploads/2019/12/Jonas-6-frilagd-sqr-flipped-150x150.png 150w, https://jonasr.app/wp-content/uploads/2019/12/Jonas-6-frilagd-sqr-flipped-768x768.png 768w, https://jonasr.app/wp-content/uploads/2019/12/Jonas-6-frilagd-sqr-flipped.png 970w" sizes="auto, (max-width: 300px) 100vw, 300px" data-attachment-id="2253" data-permalink="https://jonasr.app/jonas-6-frilagd-sqr-flipped/" data-orig-file="https://jonasr.app/wp-content/uploads/2019/12/Jonas-6-frilagd-sqr-flipped.png" data-orig-size="970,970" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Jonas 6 frilagd sqr flipped" data-image-description="" data-image-caption="" data-large-file="https://jonasr.app/wp-content/uploads/2019/12/Jonas-6-frilagd-sqr-flipped.png" /></a></aside><aside id="block-8" class="widget widget_block widget_media_gallery">
+<figure data-carousel-extra='{&quot;blog_id&quot;:1,&quot;permalink&quot;:&quot;https://jonasr.app/setting-seed/&quot;}'  class="wp-block-gallery has-nested-images columns-1 is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
+<figure class="wp-block-image size-full is-style-rounded"><a href="https://jonasr.app/gh" target="_blank" rel=" noreferrer noopener"><img loading="lazy" decoding="async" width="600" height="200" data-id="17340" src="https://jonasr.app/wp-content/uploads/SE-GitHub.png" alt="" class="wp-image-17340"/></a></figure>
+
+
+
+<figure class="wp-block-image size-full is-style-rounded"><a href="https://jonasr.app/li" target="_blank" rel=" noreferrer noopener"><img loading="lazy" decoding="async" width="600" height="199" data-id="18374" src="https://jonasr.app/wp-content/uploads/SE-LinkedIn2.png" alt="" class="wp-image-18374"/></a></figure>
+
+
+
+<figure class="wp-block-image size-full is-style-rounded"><a href="https://jonasr.app/bsky" target="_blank" rel=" noreferrer noopener"><img loading="lazy" decoding="async" width="600" height="200" data-id="18373" src="https://jonasr.app/wp-content/uploads/SE-bsky.png" alt="" class="wp-image-18373"/></a></figure>
+
+
+
+<figure class="wp-block-image size-full is-style-rounded"><a href="https://rappsolutions.net" target="_blank" rel=" noreferrer noopener"><img loading="lazy" decoding="async" width="600" height="200" data-id="17344" src="https://jonasr.app/wp-content/uploads/SE-RSAB.png" alt="" class="wp-image-17344"/></a></figure>
+
+
+
+<figure class="wp-block-image size-full is-style-rounded"><a href="https://jonasr.app/xtb-school" target="_blank" rel=" noreferrer noopener"><img loading="lazy" decoding="async" width="600" height="201" data-id="17342" src="https://jonasr.app/wp-content/uploads/SE-XTB-School.png" alt="" class="wp-image-17342"/></a></figure>
+
+
+
+<figure class="wp-block-image size-full is-style-rounded"><a href="https://jonasr.app/supporting/"><img loading="lazy" decoding="async" width="600" height="200" data-id="17339" src="https://jonasr.app/wp-content/uploads/SE-Supporting-Tools2.png" alt="" class="wp-image-17339"/></a></figure>
+
+
+
+<figure class="wp-block-image size-full is-style-rounded"><a href="https://buymeacoffee.com/rappen" target="_blank" rel=" noreferrer noopener"><img loading="lazy" decoding="async" width="600" height="200" data-id="17356" src="https://jonasr.app/wp-content/uploads/SE-Buymeacoffee2.png" alt="" class="wp-image-17356"/></a></figure>
+
+
+
+<figure class="wp-block-image size-full is-style-rounded"><a href="https://jonasr.app/yt" target="_blank" rel=" noreferrer noopener"><img loading="lazy" decoding="async" width="600" height="200" data-id="17343" src="https://jonasr.app/wp-content/uploads/SE-YouTube.png" alt="" class="wp-image-17343"/></a></figure>
+
+
+
+<figure class="wp-block-image size-full is-style-rounded"><a href="https://mvp.microsoft.com/en-us/PublicProfile/5002475" target="_blank" rel=" noreferrer noopener"><img loading="lazy" decoding="async" width="600" height="200" data-id="17345" src="https://jonasr.app/wp-content/uploads/SE-MVP.png" alt="" class="wp-image-17345"/></a></figure>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://fetchxmlbuilder.com/supporters"><img loading="lazy" decoding="async" width="500" height="189" data-id="17321" src="https://jonasr.app/wp-content/uploads/FXB-Supporter-1.png" alt="" class="wp-image-17321"/></a></figure>
+
+
+
+<figure class="wp-block-image size-large is-style-default"><a href="https://jonasr.app/xtb-stats/"><img loading="lazy" decoding="async" width="894" height="504" data-id="17327" src="https://jonasr.app/wp-content/uploads/XTB-stats.png" alt="" class="wp-image-17327" srcset="https://jonasr.app/wp-content/uploads/XTB-stats.png 894w, https://jonasr.app/wp-content/uploads/XTB-stats-768x433.png 768w" sizes="auto, (max-width: 894px) 100vw, 894px" /></a></figure>
+</figure>
+</aside><aside id="block-2" class="widget widget_block widget_text">
+<p class="has-text-align-center wp-block-paragraph"><strong>I got a stroke.</strong><br><a rel="noreferrer noopener" href="https://stroke.jonasr.app" target="_blank">stroke.jonasr.app</a></p>
+</aside><aside id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://jonasr.app/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></aside><aside id="eu_cookie_law_widget-2" class="widget widget_eu_cookie_law_widget">
+<div
+	class="hide-on-time negative"
+	data-hide-timeout="30"
+	data-consent-expiration="180"
+	id="eu-cookie-law"
+>
+	<form method="post" id="jetpack-eu-cookie-law-form">
+		<input type="submit" value="Close and accept" class="accept" />
+	</form>
+
+	Privacy &amp; Cookies: This site uses cookies. By continuing to use this website, you agree to their use.<br />
+<br />
+To find out more, including how to control cookies, see here:
+		<a href="http://jonasrapp.net/?page_id=3" rel="">
+		Cookie Policy	</a>
+</div>
+</aside>	</div><!-- #secondary -->
+
+	</div><!-- #content -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+					<div class="footer-widgets clear">
+				
+				
+									<div class="widget-area">
+						<aside id="custom_html-3" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget">Visitors: 
+<!-- Statcounter code for CRM Trenches
+https://jonasr.app/ on WordPress.org -->
+<script type="text/javascript">
+var sc_project=8164424; 
+var sc_invisible=0; 
+var sc_security="d71f5ed7"; 
+var sc_text=5; 
+var sc_https=1; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="website
+statistics" href="http://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="//c.statcounter.com/8164424/0/d71f5ed7/0/" alt="website
+statistics"></a></div></noscript>
+<!-- End of Statcounter Code -->
+</div></aside>					</div><!-- .widget-area -->
+							</div><!-- .sidebar-widgets -->
+				<div class="site-info-wrapper clear">
+						<div class="site-info">
+				<a href="http://wordpress.org/">Proudly powered by WordPress</a>
+				<span class="sep"> ~ </span>
+				Theme: Penscratch 2 by <a href="https://wordpress.com/themes/" rel="designer">WordPress.com</a>.			</div><!-- .site-info -->
+		</div><!-- .site-info-wrapper -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/penscratch-2-wpcom/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+					<div class="jetpack-subscribe-modal">
+						<div class="jetpack-subscribe-modal__modal-content">
+								
+	<div class="wp-block-group has-border-color" style="border-color:#dddddd;border-width:1px;margin-top:0;margin-bottom:0;padding-top:32px;padding-right:32px;padding-bottom:32px;padding-left:32px"><div class="wp-block-group__inner-container is-layout-constrained wp-container-core-group-is-layout-1f4dd145 wp-block-group-is-layout-constrained">
+
+	
+		<h2 class="wp-block-heading has-text-align-center" style="margin-top:4px;margin-bottom:10px;font-size:26px;font-style:normal;font-weight:600">Discover more from JonasR.app</h2>
+		
+
+		
+		<p class="has-text-align-center wp-block-paragraph" style='margin-top:4px;margin-bottom:1em;font-size:15px'>Subscribe now to keep reading and get access to the full archive.</p>
+		
+
+			<div class="wp-block-jetpack-subscriptions__supports-newline is-style-compact wp-block-jetpack-subscriptions">
+		<div class="wp-block-jetpack-subscriptions__container is-not-subscriber">
+							<form
+					action="https://wordpress.com/email-subscriptions"
+					method="post"
+					accept-charset="utf-8"
+					data-blog="146866141"
+					data-post_access_level="everybody"
+					data-subscriber_email=""
+					id="subscribe-blog"
+				>
+					<div class="wp-block-jetpack-subscriptions__form-elements">
+												<p id="subscribe-email">
+							<label
+								id="subscribe-field-label"
+								for="subscribe-field"
+								class="screen-reader-text"
+							>
+								Type your email…							</label>
+							<input
+									required="required"
+									type="email"
+									name="email"
+									autocomplete="email"
+									
+									style="font-size: 16px;padding: 15px 23px 15px 23px;border-radius: 50px;border-width: 1px;"
+									placeholder="Type your email…"
+									value=""
+									id="subscribe-field"
+									title="Please fill in this field."
+								/>						</p>
+												<p id="subscribe-submit"
+													>
+							<input type="hidden" name="action" value="subscribe"/>
+							<input type="hidden" name="blog_id" value="146866141"/>
+							<input type="hidden" name="source" value="https://jonasr.app/setting-seed/"/>
+							<input type="hidden" name="sub-type" value="subscribe-block"/>
+							<input type="hidden" name="app_source" value="subscribe-modal"/>
+							<input type="hidden" name="redirect_fragment" value="subscribe-blog"/>
+							<input type="hidden" name="lang" value="en_US"/>
+							<input type="hidden" id="_wpnonce" name="_wpnonce" value="b57188d6fc" /><input type="hidden" name="_wp_http_referer" value="/setting-seed/" /><input type="hidden" name="post_id" value="18375"/>							<button type="submit"
+																	class="wp-block-button__link"
+																									style="font-size: 16px;padding: 15px 23px 15px 23px;margin: 0; margin-left: 10px;border-radius: 50px;border-width: 1px;"
+																name="jetpack_subscriptions_widget"
+							>
+								Subscribe							</button>
+						</p>
+					</div>
+				</form>
+								</div>
+	</div>
+	
+
+		
+		<p class="has-text-align-center jetpack-subscribe-modal__close wp-block-paragraph" style="margin-top:20px;margin-bottom:0;font-size:14px"><a href="#">Continue reading</a></p>
+		
+	</div></div>
+							</div>
+					</div>
+				<div style="display:none">
+			<div class="grofile-hash-map-cde7d9350fe7616d235bb81542176f96">
+		</div>
+		</div>
+				<div id="jp-carousel-loading-overlay" style="display: none;">
+			<div id="jp-carousel-loading-wrapper">
+				<span id="jp-carousel-library-loading"><svg class="jetpack-spinner" width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg></span>
+			</div>
+		</div>
+		<div class="jp-carousel-overlay jp-carousel-light" style="display: none;">
+
+		<div class="jp-carousel-container jp-carousel-light">
+			<!-- The Carousel Swiper -->
+			<div
+				class="jp-carousel-wrap swiper jp-carousel-swiper-container jp-carousel-transitions"
+				itemscope
+				itemtype="https://schema.org/ImageGallery">
+				<div class="jp-carousel swiper-wrapper"></div>
+				<div class="jp-swiper-button-prev swiper-button-prev">
+					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<mask id="maskPrev" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="9" height="12">
+							<path d="M16.2072 16.59L11.6496 12L16.2072 7.41L14.8041 6L8.8335 12L14.8041 18L16.2072 16.59Z" fill="white"/>
+						</mask>
+						<g mask="url(#maskPrev)">
+							<rect x="0.579102" width="23.8823" height="24" fill="#FFFFFF"/>
+						</g>
+					</svg>
+				</div>
+				<div class="jp-swiper-button-next swiper-button-next">
+					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<mask id="maskNext" mask-type="alpha" maskUnits="userSpaceOnUse" x="8" y="6" width="8" height="12">
+							<path d="M8.59814 16.59L13.1557 12L8.59814 7.41L10.0012 6L15.9718 12L10.0012 18L8.59814 16.59Z" fill="white"/>
+						</mask>
+						<g mask="url(#maskNext)">
+							<rect x="0.34375" width="23.8822" height="24" fill="#FFFFFF"/>
+						</g>
+					</svg>
+				</div>
+			</div>
+			<!-- The main close buton -->
+			<div class="jp-carousel-close-hint">
+				<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<mask id="maskClose" mask-type="alpha" maskUnits="userSpaceOnUse" x="5" y="5" width="15" height="14">
+						<path d="M19.3166 6.41L17.9135 5L12.3509 10.59L6.78834 5L5.38525 6.41L10.9478 12L5.38525 17.59L6.78834 19L12.3509 13.41L17.9135 19L19.3166 17.59L13.754 12L19.3166 6.41Z" fill="white"/>
+					</mask>
+					<g mask="url(#maskClose)">
+						<rect x="0.409668" width="23.8823" height="24" fill="#FFFFFF"/>
+					</g>
+				</svg>
+			</div>
+			<!-- Image info, comments and meta -->
+			<div class="jp-carousel-info">
+				<div class="jp-carousel-info-footer">
+					<div class="jp-carousel-pagination-container">
+						<div class="jp-swiper-pagination swiper-pagination"></div>
+						<div class="jp-carousel-pagination"></div>
+					</div>
+					<div class="jp-carousel-photo-title-container">
+						<div class="jp-carousel-photo-caption"></div>
+					</div>
+					<div class="jp-carousel-photo-icons-container">
+						<a href="#" class="jp-carousel-icon-btn jp-carousel-icon-info" aria-label="Toggle photo metadata visibility">
+							<span class="jp-carousel-icon">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="maskInfo" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="20">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M12.7537 2C7.26076 2 2.80273 6.48 2.80273 12C2.80273 17.52 7.26076 22 12.7537 22C18.2466 22 22.7046 17.52 22.7046 12C22.7046 6.48 18.2466 2 12.7537 2ZM11.7586 7V9H13.7488V7H11.7586ZM11.7586 11V17H13.7488V11H11.7586ZM4.79292 12C4.79292 16.41 8.36531 20 12.7537 20C17.142 20 20.7144 16.41 20.7144 12C20.7144 7.59 17.142 4 12.7537 4C8.36531 4 4.79292 7.59 4.79292 12Z" fill="white"/>
+									</mask>
+									<g mask="url(#maskInfo)">
+										<rect x="0.8125" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+							</span>
+						</a>
+												<a href="#" class="jp-carousel-icon-btn jp-carousel-icon-comments" aria-label="Toggle photo comments visibility">
+							<span class="jp-carousel-icon">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="maskComments" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="21" height="20">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M4.3271 2H20.2486C21.3432 2 22.2388 2.9 22.2388 4V16C22.2388 17.1 21.3432 18 20.2486 18H6.31729L2.33691 22V4C2.33691 2.9 3.2325 2 4.3271 2ZM6.31729 16H20.2486V4H4.3271V18L6.31729 16Z" fill="white"/>
+									</mask>
+									<g mask="url(#maskComments)">
+										<rect x="0.34668" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+
+								<span class="jp-carousel-has-comments-indicator" aria-label="This image has comments."></span>
+							</span>
+						</a>
+											</div>
+				</div>
+				<div class="jp-carousel-info-extra">
+					<div class="jp-carousel-info-content-wrapper">
+						<div class="jp-carousel-photo-title-container">
+							<div class="jp-carousel-photo-title"></div>
+						</div>
+						<div class="jp-carousel-comments-wrapper">
+															<div id="jp-carousel-comments-loading">
+									<span>Loading Comments...</span>
+								</div>
+								<div class="jp-carousel-comments"></div>
+								<div id="jp-carousel-comment-form-container">
+									<span id="jp-carousel-comment-form-spinner"><svg class="jetpack-spinner" width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="#ddd" stroke-width="8"/><path d="M 50 4 A 46 46 0 0 1 96 50" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="1.4s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg></span>
+									<div id="jp-carousel-comment-post-results"></div>
+																														<form id="jp-carousel-comment-form">
+												<label for="jp-carousel-comment-form-comment-field" class="screen-reader-text">Write a Comment...</label>
+												<textarea
+													name="comment"
+													class="jp-carousel-comment-form-field jp-carousel-comment-form-textarea"
+													id="jp-carousel-comment-form-comment-field"
+													placeholder="Write a Comment..."
+												></textarea>
+												<div id="jp-carousel-comment-form-submit-and-info-wrapper">
+													<div id="jp-carousel-comment-form-commenting-as">
+																													<fieldset>
+																<label for="jp-carousel-comment-form-email-field">Email (Required)</label>
+																<input type="text" name="email" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-email-field" />
+															</fieldset>
+															<fieldset>
+																<label for="jp-carousel-comment-form-author-field">Name (Required)</label>
+																<input type="text" name="author" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-author-field" />
+															</fieldset>
+															<fieldset>
+																<label for="jp-carousel-comment-form-url-field">Website</label>
+																<input type="text" name="url" class="jp-carousel-comment-form-field jp-carousel-comment-form-text-field" id="jp-carousel-comment-form-url-field" />
+															</fieldset>
+																											</div>
+													<input
+														type="submit"
+														name="submit"
+														class="jp-carousel-comment-form-button"
+														id="jp-carousel-comment-form-button-submit"
+														value="Post Comment" />
+												</div>
+											</form>
+																											</div>
+													</div>
+						<div class="jp-carousel-image-meta">
+							<div class="jp-carousel-title-and-caption">
+								<div class="jp-carousel-photo-info">
+									<div class="jp-carousel-caption" itemprop="caption description"></div>
+								</div>
+
+								<div class="jp-carousel-photo-description"></div>
+							</div>
+							<a class="jp-carousel-image-download" href="#" aria-label="Download image" target="_blank" style="display: none;">
+								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="3" y="3" width="19" height="18">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M5.84615 5V19H19.7775V12H21.7677V19C21.7677 20.1 20.8721 21 19.7775 21H5.84615C4.74159 21 3.85596 20.1 3.85596 19V5C3.85596 3.9 4.74159 3 5.84615 3H12.8118V5H5.84615ZM14.802 5V3H21.7677V10H19.7775V6.41L9.99569 16.24L8.59261 14.83L18.3744 5H14.802Z" fill="white"/>
+									</mask>
+									<g mask="url(#mask0)">
+										<rect x="0.870605" width="23.8823" height="24" fill="#FFFFFF"/>
+									</g>
+								</svg>
+								<span class="jp-carousel-download-text"></span>
+							</a>
+							<div class="jp-carousel-image-map" style="display: none;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		</div>
+		
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https://jonasr.app/setting-seed/":18375};
+	</script>
+							<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+						<script type="text/javascript">
+				( function () {
+					var currentScript = document.currentScript;
+
+					// Helper function to load an external script.
+					function loadScript( url, cb ) {
+						var script = document.createElement( 'script' );
+						var prev = currentScript || document.getElementsByTagName( 'script' )[ 0 ];
+						script.setAttribute( 'async', true );
+						script.setAttribute( 'src', url );
+						prev.parentNode.insertBefore( script, prev );
+						script.addEventListener( 'load', cb );
+					}
+
+					function init() {
+						loadScript( 'https://platform.linkedin.com/in.js?async=true', function () {
+							if ( typeof IN !== 'undefined' ) {
+								IN.init();
+							}
+						} );
+					}
+
+					if ( document.readyState === 'loading' ) {
+						document.addEventListener( 'DOMContentLoaded', init );
+					} else {
+						init();
+					}
+
+					document.body.addEventListener( 'is.post-load', function() {
+						if ( typeof IN !== 'undefined' ) {
+							IN.parse();
+						}
+					} );
+				} )();
+			</script>
+						<div id="fb-root"></div>
+			<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;appId=249643311490&version=v2.3'; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+			<script>
+			document.body.addEventListener( 'is.post-load', function() {
+				if ( 'undefined' !== typeof FB ) {
+					FB.XFBML.parse();
+				}
+			} );
+			</script>
+			<script id="penscratch-2-navigation-js" src="https://jonasr.app/wp-content/themes/penscratch-2-wpcom/js/navigation.js?ver=20120206"></script>
+<script id="penscratch-2-scripts-js" src="https://jonasr.app/wp-content/themes/penscratch-2-wpcom/js/penscratch-2.js?ver=20230518"></script>
+<script id="penscratch-2-skip-link-focus-fix-js" src="https://jonasr.app/wp-content/themes/penscratch-2-wpcom/js/skip-link-focus-fix.js?ver=20130115"></script>
+<script async data-wp-strategy="async" fetchpriority="low" id="comment-reply-js" src="https://jonasr.app/wp-includes/js/comment-reply.min.js?ver=7.1.1"></script>
+<script id="wp-dom-ready-js" src="https://jonasr.app/wp-includes/js/dist/dom-ready.min.js?ver=3fe927cab37bf38d6a23"></script>
+<script id="subscribe-modal-js-js-extra">
+var Jetpack_Subscriptions = {"modalLoadTime":"60000","modalScrollThreshold":"50","modalInterval":"86400000"};
+//# sourceURL=subscribe-modal-js-js-extra
+</script>
+<script id="subscribe-modal-js-js" src="https://jonasr.app/wp-content/plugins/jetpack/modules/subscriptions/subscribe-modal/subscribe-modal.js?ver=16.2"></script>
+<script id="grofiles-cards-js" src="https://secure.gravatar.com/js/gprofiles.js?ver=202638"></script>
+<script id="wpgroho-js-extra">
+var WPGroHo = {"my_hash":""};
+//# sourceURL=wpgroho-js-extra
+</script>
+<script id="wpgroho-js" src="https://jonasr.app/wp-content/plugins/jetpack/modules/wpgroho.js?ver=16.2"></script>
+<script id="jetpack_likes_queuehandler-js" src="https://jonasr.app/wp-content/plugins/jetpack/_inc/build/likes/queuehandler.min.js?ver=16.2"></script>
+<script id="jetpack-stats-js-before">
+_stq = window._stq || [];
+_stq.push([ "view", {"v":"ext","blog":"146866141","post":"18375","tz":"2","srv":"jonasr.app","j":"1:16.2"} ]);
+_stq.push([ "clickTrackerInit", "146866141", "18375" ]);
+//# sourceURL=jetpack-stats-js-before
+</script>
+<script data-wp-strategy="defer" defer fetchpriority="low" id="jetpack-stats-js" src="https://stats.wp.com/e-202638.js"></script>
+<script id="jetpack-carousel-js-extra">
+var jetpackSwiperLibraryPath = {"url":"https://jonasr.app/wp-content/plugins/jetpack/_inc/blocks/swiper.js"};
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https://jonasr.app/wp-admin/admin-ajax.php","nonce":"5760c4f428","display_exif":"1","display_comments":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"white","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","image_label":"Open image in full-screen.","download_original":"View full size \u003Cspan class=\"photo-size\"\u003E{0}\u003Cspan class=\"photo-size-times\"\u003E\u00d7\u003C/span\u003E{1}\u003C/span\u003E","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https://jonasr.app/wp-login.php?redirect_to=https%3A%2F%2Fjonasr.app%2Fsetting-seed%2F","blog_id":"1","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"]};
+//# sourceURL=jetpack-carousel-js-extra
+</script>
+<script id="jetpack-carousel-js" src="https://jonasr.app/wp-content/plugins/jetpack/_inc/build/carousel/jetpack-carousel.min.js?ver=16.2"></script>
+<script defer id="akismet-frontend-js" src="https://jonasr.app/wp-content/plugins/akismet/_inc/akismet-frontend.js?ver=1787211052"></script>
+<script id="eu-cookie-law-script-js" src="https://jonasr.app/wp-content/plugins/jetpack/_inc/build/widgets/eu-cookie-law/eu-cookie-law.min.js?ver=20180522"></script>
+<script id="jetpack-blocks-assets-base-url-js-before">
+var Jetpack_Block_Assets_Base_Url="https://jonasr.app/wp-content/plugins/jetpack/_inc/blocks/";
+//# sourceURL=jetpack-blocks-assets-base-url-js-before
+</script>
+<script id="wp-polyfill-js" src="https://jonasr.app/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0"></script>
+<script data-wp-strategy="defer" defer id="jetpack-block-subscriptions-js" src="https://jonasr.app/wp-content/plugins/jetpack/_inc/blocks/subscriptions/view.js?minify=false&#038;ver=16.2"></script>
+<script id="sharing-js-js-extra">
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+//# sourceURL=sharing-js-js-extra
+</script>
+<script id="sharing-js-js" src="https://jonasr.app/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=16.2"></script>
+<script id="sharing-js-js-after">
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "facebook" ] = "menubar=1,resizable=1,width=600,height=400";
+//# sourceURL=sharing-js-js-after
+</script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://jonasr.app/wp-includes/js/wp-emoji-release.min.js?ver=7.1.1"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://jonasr.app/wp-includes/js/wp-emoji-loader.min.js
+</script>
+	<iframe src='https://widgets.wp.com/likes/master.html?ver=20260920#ver=20260920' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+	<div id='likes-other-gravatars' role="dialog" aria-hidden="true" tabindex="-1"><div class="likes-text"><span>%d</span></div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+			<script type="text/javascript">
+			(function () {
+				const iframe = document.getElementById( 'jetpack_remote_comment' );
+								const watchReply = function() {
+					// Check addComment._Jetpack_moveForm to make sure we don't monkey-patch twice.
+					if ( 'undefined' !== typeof addComment && ! addComment._Jetpack_moveForm ) {
+						// Cache the Core function.
+						addComment._Jetpack_moveForm = addComment.moveForm;
+						const commentParent = document.getElementById( 'comment_parent' );
+						const cancel = document.getElementById( 'cancel-comment-reply-link' );
+
+						function tellFrameNewParent ( commentParentValue ) {
+							const url = new URL( iframe.src );
+							if ( commentParentValue ) {
+								url.searchParams.set( 'replytocom', commentParentValue )
+							} else {
+								url.searchParams.delete( 'replytocom' );
+							}
+							if( iframe.src !== url.href ) {
+								iframe.src = url.href;
+							}
+						};
+
+						cancel.addEventListener( 'click', function () {
+							tellFrameNewParent( false );
+						} );
+
+						addComment.moveForm = function ( _, parentId ) {
+							tellFrameNewParent( parentId );
+							return addComment._Jetpack_moveForm.apply( null, arguments );
+						};
+					}
+				}
+				document.addEventListener( 'DOMContentLoaded', watchReply );
+				// In WP 6.4+, the script is loaded asynchronously, so we need to wait for it to load before we monkey-patch the functions it introduces.
+				document.querySelector('#comment-reply-js')?.addEventListener( 'load', watchReply );
+
+								
+				const commentIframes = document.getElementsByClassName('jetpack_remote_comment');
+
+				window.addEventListener('message', function(event) {
+					if (event.origin !== 'https://jetpack.wordpress.com') {
+						return;
+					}
+
+					if (!event?.data?.iframeUniqueId && !event?.data?.height) {
+						return;
+					}
+
+					const eventDataUniqueId = event.data.iframeUniqueId;
+
+					// Change height for the matching comment iframe
+					for (let i = 0; i < commentIframes.length; i++) {
+						const iframe = commentIframes[i];
+						const url = new URL(iframe.src);
+						const iframeUniqueIdParam = url.searchParams.get('iframe_unique_id');
+						if (iframeUniqueIdParam == event.data.iframeUniqueId) {
+							iframe.style.height = event.data.height + 'px';
+							return;
+						}
+					}
+				});
+			})();
+		</script>
+		
+</body>
+</html>
